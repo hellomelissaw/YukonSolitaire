@@ -88,18 +88,17 @@ struct card* createDeck(char fileName[]) {
     return head;
 }
 
+// FUNCTION INTERWEAVE-SHUFFLE A DECK (BRIDGE SHUFFLE)
+int shuffleInterweave(int split, struct card* head) {
+    struct card* current = head;
+    struct card tempPile1[split];
+    struct card tempPile2[CARD_COUNT-split];
+    struct card shuffledDeck[CARD_COUNT];
 
-int shuffleInterweave(int split) {
-    // OPEN A FILE USING READ-MODE "r"
-    FILE * fpointer = fopen("newDeck2.txt", "r");
+   for(int i = 0 ; i < split ; i++) {
 
-    // STORE CONTENTS OF THE FILE IN A STRING
-    char cards[157];
+       current = current->next;
 
-    // READ CONTENTS OF FILE (1ST PARAM IS DEST, 2ND MAX DATA SIZE, POINTER TO FILE TO BE READ)
-    fgets(cards, 157, fpointer);
-
-    printf("%s",cards);
-
-    fclose(fpointer);
+   }
+   return 0;
 }
