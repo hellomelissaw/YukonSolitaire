@@ -14,6 +14,7 @@ struct card
 {
     char rank;
     char suit;
+    struct card *next;
 
 };
 
@@ -24,7 +25,7 @@ struct card
         "AS", "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "TS", "JS", "QS", "KS"
 };*/
 
-char** loadCardLabels(char fileName[]) {
+/*char** loadCardLabels(char fileName[]) {
     char** cardLabels = NULL;
     FILE* fpointer = fopen(fileName, "r"); // creates a pointer to the read file
 
@@ -39,7 +40,7 @@ char** loadCardLabels(char fileName[]) {
     fprintf("%s", cardLabels[0]);
 
    return cardLabels;
-}
+}*/
 
 // FUNCTION TO CREATE AND RETURN A NEW CARD (NODE IN LINKED LIST)
 struct card* createCard(char rank, char suit) {
@@ -50,121 +51,45 @@ struct card* createCard(char rank, char suit) {
 }
 
 // FUNCTION TO CREATE A DECK ONE CARD AT A TIME USING createCard()
-int createDeck(char fileName[]) {
+struct card* createDeck(char fileName[]) {
     /* Load card labels from file */
     FILE* fpointer = fopen(fileName, "r"); // creates a pointer to the read file
     char cardLabels[CARD_COUNT][LABEL_SIZE];
 
-   /* int i = 0;
-    while (fgets(cardLabels[i], LABEL_SIZE, fpointer) != NULL && i < CARD_COUNT){
-        i++;
-    }*/
-
     for (int i = 0 ; i < CARD_COUNT ; i++) {
-        fgets(cardLabels[i], LABEL_SIZE, fpointer);
+        fgets(cardLabels[i], LABEL_SIZE, fpointer); // gets line i of txt file and populates the char array in cardLabels[i]
     }
     fclose(fpointer);
 
 
-    for (int j = 0 ; j < CARD_COUNT ; j++) {
+   /* for (int j = 0 ; j < CARD_COUNT ; j++) {
         printf("For card #%d, rank is %c and its suit is %c\n", j, (char)cardLabels[j][0], (char)cardLabels[j][1]);
+    }*/
 
-        //printf("%s", cardLabels[j]);
-    }
+   /* Add values from the cardLabels array to the array of cards */
+    struct card* cards[CARD_COUNT]; // make a pointer to array of cards
 
-
-/*
-    struct card* cards[CARD_COUNT]; // make array of cards
-
-    for(int i = 0 ; i < CARD_COUNT ; i ++)
+    for(int i = 0 ; i < CARD_COUNT ; i ++) // get the rank and suit from line i of the file and pass as argument to createCard func
     {
         char rank = cardLabels[i][0];
         char suit = cardLabels[i][1];
         cards[i] = createCard(rank, suit);
 
+        if(i > 0) {
+            cards[i-1]->next = cards[i];
+        }
+
     }
 
+    /* Add the first card's next card and make it head of Linked List */
+    cards[0]->next = cards[1];
+    struct card *head = cards[0];
 
- for(int i = 0 ; i < CARD_COUNT ; i ++)
-    {
-        printf("Card #%d is %c%c\n", i, cards[i]->rank, cards[i]->suit);
-
-    }*/
-
-    return 0;
+    return head;
 }
 
 
-
-
-int saveDeck() {
-    FILE * fpointer = fopen("newDeck2.txt", "w");
-
-    fprintf(fpointer, "AC\n"
-                      "2C\n"
-                      "3C\n"
-                      "4C\n"
-                      "5C\n"
-                      "6C\n"
-                      "7C\n"
-                      "8C\n"
-                      "9C\n"
-                      "TC\n"
-                      "JC\n"
-                      "QC\n"
-                      "KC\n"
-                      "AD\n"
-                      "2D\n"
-                      "3D\n"
-                      "4D\n"
-                      "5D\n"
-                      "6D\n"
-                      "7D\n"
-                      "8D\n"
-                      "9D\n"
-                      "TD\n"
-                      "JD\n"
-                      "QD\n"
-                      "KD\n"
-                      "AH\n"
-                      "2H\n"
-                      "3H\n"
-                      "4H\n"
-                      "5H\n"
-                      "6H\n"
-                      "7H\n"
-                      "8H\n"
-                      "9H\n"
-                      "TH\n"
-                      "JH\n"
-                      "QH\n"
-                      "KH\n"
-                      "AS\n"
-                      "2S\n"
-                      "3S\n"
-                      "4S\n"
-                      "5S\n"
-                      "6S\n"
-                      "7S\n"
-                      "8S\n"
-                      "9S\n"
-                      "TS\n"
-                      "JS\n"
-                      "QS\n"
-                      "KS");
-    fclose(fpointer);
-    return 0;
-}
-
-/*int loadDeck() {
-    char card[2];
-    FILE * fpointer = fopen("newDeck2.txt", "r");
-    fgets(card, 2, fpointer);
-    fclose(fpointer);
-    return 0;
-}*/
-
-int shuffleInterweave() {
+int shuffleInterweave(int split) {
     // OPEN A FILE USING READ-MODE "r"
     FILE * fpointer = fopen("newDeck2.txt", "r");
 
