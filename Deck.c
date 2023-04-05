@@ -95,10 +95,19 @@ int shuffleInterweave(int split, struct card* head) {
     struct card tempPile2[CARD_COUNT-split];
     struct card shuffledDeck[CARD_COUNT];
 
-   for(int i = 0 ; i < split ; i++) {
+    /* splits the deck in two at given split */
+    for(int i = 0 ; i < CARD_COUNT ; i++){
+        if(i < split) {
+            tempPile1[i] = *current;
+            printf("Card #%d in pile1 is %c%c\n", i, current->rank, current->suit);
+            current = current->next;
+        } else {
+            tempPile2[i] = *current;
+            printf("Card #%d in pile2 is %c%c\n", i, current->rank, current->suit);
+            current = current->next;
+        }
+    }
 
-       current = current->next;
 
-   }
    return 0;
 }

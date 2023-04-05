@@ -4,6 +4,6 @@
 int main() {
 //saveDeck();
 //loadDeck();
-createDeck("cards.txt");
+    shuffleInterweave(20,createDeck("cards.txt"));
 
 }
