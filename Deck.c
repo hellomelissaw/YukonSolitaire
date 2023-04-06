@@ -103,40 +103,49 @@ struct card* createDeck(char fileName[]) {
 
 // FUNCTION INTERWEAVE-SHUFFLE A DECK (BRIDGE SHUFFLE)
 int shuffleInterweave(int split, struct card* head) {
+    /* create first card in temp card list1 the create all the rest up to split */
     struct card* tempHead1 = NULL;
     struct card* current = NULL;
-    tempHead1 = (struct card*) malloc(sizeof(struct card));
+    struct card* currentHead = NULL;
+
+    tempHead1 = malloc(sizeof(struct card));
     tempHead1->rank = head->rank;
     tempHead1->suit = head->suit;
 
     current = tempHead1;
+    currentHead = head;
     int i = 1;
-    while(i < split && head->next != NULL) {
-        current->next = createCard(head->next->rank, head->next->suit);
-        current = current->next;
-        head = head->next;
+    while(i < split) {
+        current->next = createCard(currentHead->next->rank, currentHead->next->suit);
+            current = current->next;
+            currentHead = currentHead->next;
+
         i++;
+
     }
 
+
     struct card* current1 = tempHead1;
-    while(current1 != NULL) {
+    //printf("Card in pile 1 is %c%c\n", tempHead1->rank, tempHead1->suit);
+   while(current1 != NULL) {
         printf("Card in pile 1 is %c%c\n", current1->rank, current1->suit);
         current1 = current1->next;
     }
 
-
+/*create first card in temp list2 then all the other cards until OG list head reaches NULL */
     struct card* tempHead2 = NULL;
-    head = head->next;
-    tempHead2 = (struct card*) malloc(sizeof(struct card));
-    tempHead2->rank = head->rank;
-    tempHead2->suit = head->suit;
 
+    tempHead2 = malloc(sizeof(struct card));
+    currentHead = currentHead->next;
+    tempHead2->rank = currentHead->rank;
+    tempHead2->suit = currentHead->suit;
     current = tempHead2;
+    currentHead = currentHead->next;
     i = 1;
-    while(head->next != NULL) {
-        current->next = createCard(head->next->rank, head->next->suit);
+    while(currentHead != NULL) {
+        current->next = createCard(currentHead->rank, currentHead->suit);
         current = current->next;
-        head = head->next;
+        currentHead = currentHead->next;
         i++;
     }
 
@@ -145,6 +154,64 @@ int shuffleInterweave(int split, struct card* head) {
         printf("Card in pile 2 is %c%c\n", current2->rank, current2->suit);
         current2 = current2->next;
     }
+
+    /*Initializing the two first cards in the shuffled deck*/
+    struct card* shuffledDeckHead = head;
+    struct card* currentTempHead1 = tempHead1;
+    struct card* currentTempHead2 = tempHead2;
+    printf("cth1 = %c%c, cth1->next = %c%c, cth1->next->next = %c%c\n",
+           currentTempHead1->rank,currentTempHead1->suit,
+           currentTempHead1->next->rank,currentTempHead1->next->suit,
+           currentTempHead1->next->next->rank,currentTempHead1->next->next->suit);
+
+    printf("cth2 = %c%c, cth2->next = %c%c, cth2->next->next = %c%c, cth2->next->next->next = c% , cth2->next->next->next-> = c% \n",
+           currentTempHead2->rank,currentTempHead2->suit,
+           currentTempHead2->next->rank,currentTempHead2->next->suit,
+           currentTempHead2->next->next->rank,currentTempHead2->next->next->suit,
+           currentTempHead2->next->next->next->rank,
+           currentTempHead2->next->next->next->next->suit
+           );
+
+    shuffledDeckHead->rank = currentTempHead1->rank;
+    shuffledDeckHead->suit = currentTempHead1->suit;
+    //shuffledDeckHead->next = head->next;
+    if(shuffledDeckHead->next == NULL) {
+        printf("IT'S NULL!");
+    } else {
+        shuffledDeckHead->next->rank = currentTempHead2->rank;
+        shuffledDeckHead->next->suit = currentTempHead2->suit;
+    }
+    printf("card #0 is %c%c\n", shuffledDeckHead->rank, shuffledDeckHead->suit);
+    printf("card #1 is %c%c\n", shuffledDeckHead->next->rank, shuffledDeckHead->next->suit);
+
+    current = shuffledDeckHead->next;
+    printf("current card after assigning it shuffledeck->next %c%c\n", current->rank, current->suit);
+
+    for(int k = 2; k < CARD_COUNT ; k++) {
+        current->next = currentTempHead1->next;
+        printf("card after assigning tempHead1->next is %c%c\n", current->next->rank, current->next->suit);
+        currentTempHead1 = currentTempHead1->next;
+        printf("currentTempHead1 after assigning currentTempHead1-> next is %c%c\n currentTempHead1->next end of iteration %c%c\n", currentTempHead1->rank, currentTempHead1->suit,currentTempHead1->next->rank, currentTempHead1->next->suit);
+
+        current->next->next = currentTempHead2->next;
+        printf("card after assigning tempHead2-> next is %c%c\n", current->next->next->rank, current->next->next->suit);
+        currentTempHead2 = currentTempHead2->next;
+        printf("currentTempHead2 after assigning currentTempHea21-> next is %c%c\n", currentTempHead2->rank, currentTempHead2->suit);
+        printf("loop is %d\n", k);
+
+        if(currentTempHead1 == NULL || currentTempHead2 == NULL){
+            break;
+        }
+
+        current = current->next->next;
+
+    }
+
+   /*struct card* current3 = shuffledDeckHead;
+   while(current3 != NULL) {
+       printf("Card in shuffled deck is %c%c\n", current3->rank, current3->suit);
+       current3 = current3->next;
+   }*/
 
     /*struct card* tempHead1 = head;
     struct card* current = tempHead1;
