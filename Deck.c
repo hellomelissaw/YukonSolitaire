@@ -203,6 +203,14 @@ struct card* shuffleInterweave(int split, struct card* head) {
 
     }
 
+    if(currentTempHead1 == NULL) {
+        current->next = currentTempHead2;
+        currentTempHead2 = currentTempHead2->next;
+    } else if (currentTempHead2 == NULL) {
+        current->next = currentTempHead1;
+        currentTempHead1 = currentTempHead1->next;
+    }
+
    return shuffledDeckHead;
 }
 
