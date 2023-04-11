@@ -109,22 +109,17 @@ struct card* shuffleInterweave(int split, struct card* head) {
     shuffledDeckHead->suit = currentTempHead1->suit;
 
     current = shuffledDeckHead;
+    currentTempHead1 = currentTempHead1->next;
 
-
-    for(int k = 2; k < CARD_COUNT ; k++) {
+    while(currentTempHead1 != NULL && currentTempHead2 != NULL) {
         current->next = currentTempHead2;
         currentTempHead2 = currentTempHead2->next;
 
         current->next->next = currentTempHead1;
         currentTempHead1 = currentTempHead1->next;
-
-        if(currentTempHead1 == NULL || currentTempHead2 == NULL){
-            break;
-        }
-
         current = current->next->next;
-
     }
+
 
     if(currentTempHead1 == NULL) {
         while(currentTempHead2 != NULL){
