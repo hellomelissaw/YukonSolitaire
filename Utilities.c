@@ -6,6 +6,9 @@
 #include <limits.h>
 #include <unistd.h>
 
+/// FUNCTION TO GET THE ABSOLUTE PATH TO ANY GIVEN FILE
+/// \param fileName char array of the name of the file to find the path to
+/// \return pointer
 char* getAbs_path(char fileName[]) {
     char cwd[PATH_MAX];
     getcwd(cwd, sizeof(cwd));

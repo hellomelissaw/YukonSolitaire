@@ -3,49 +3,61 @@
 //
 #include <stdio.h>
 
-void insertAtTail(Card** ptrShuffledHead, Card** ptrshuffledTail, Card** ptrUnshuffledHead) {
+/// INSERTS THE CURRENT HEAD OF ONE DECK AT THE TAIL OF ANOTHER DECK
+/// \param ptr_deck2Head pointer containing the mem adr of the pointer to head deck to be inserted TO
+/// \param ptr_deck2Tail pointer containing the mem adr of the pointer to tail of deck to be inserted TO
+/// \param ptr_deck1Head pointer containing the mem adr of the pointer to head deck to be inserted FROM
+void insertAtTail(Card** ptr_deck2Head, Card** ptr_deck2Tail, Card** ptr_deck1Head) {
 
-    if(*ptrShuffledHead == NULL) { // if the values at ptrShuffledHead are NULL
-        *ptrShuffledHead = *ptrUnshuffledHead;
+    if(*ptr_deck2Head == NULL) { // if the values at ptr_deck2Head are NULL
+        *ptr_deck2Head = *ptr_deck1Head;
 
 
-    } else {(*ptrshuffledTail)->next = *ptrUnshuffledHead;} // or else set the values for the next node after ptrshuffledTail
+    } else {(*ptr_deck2Tail)->next = *ptr_deck1Head;} // or else set the values for the next node after ptr_deck2Tail
 
-    *ptrshuffledTail = *ptrUnshuffledHead; // the address of ptrshuffledTail should now be ptrUnshuffledHead
-    *ptrUnshuffledHead = (*ptrUnshuffledHead)->next;
-    (*ptrshuffledTail)->next = NULL;
+    *ptr_deck2Tail = *ptr_deck1Head; // the address of ptr_deck2Tail should now be ptr_deck1Head
+    *ptr_deck1Head = (*ptr_deck1Head)->next;
+    (*ptr_deck2Tail)->next = NULL;
 }
 
-void insertAtHead(Card** ptrShuffledHead, Card** ptrUnshuffledHead) {
-    Card* tempPointer = (*ptrUnshuffledHead)->next;
+/// INSERTS THE CURRENT HEAD OF ONE DECK AT THE HEAD OF ANOTHER DECK
+/// \param ptr_deck2Head pointer containing the mem adr of the pointer to head deck to be inserted TO
+/// \param ptr_deck1Head pointer containing the mem adr of the pointer to head deck to be inserted FROM
+void insertAtHead(Card** ptr_deck2Head, Card** ptr_deck1Head) {
+    Card* tempPointer = (*ptr_deck1Head)->next;
 
-    if(*ptrShuffledHead == NULL) { // checks if the values at the address ptrShuffledHead is pointing to are NULL
-        *ptrShuffledHead = *ptrUnshuffledHead;
-        (*ptrShuffledHead)->next = NULL;
+    if(*ptr_deck2Head == NULL) { // checks if the values at the address ptr_deck2Head is pointing to are NULL
+        *ptr_deck2Head = *ptr_deck1Head;
+        (*ptr_deck2Head)->next = NULL;
 
     } else {
-        (*ptrUnshuffledHead)->next = *ptrShuffledHead;
-        *ptrShuffledHead = *ptrUnshuffledHead; // update the address of the pointer pointing to the head of the deck
+        (*ptr_deck1Head)->next = *ptr_deck2Head;
+        *ptr_deck2Head = *ptr_deck1Head; // update the address of the pointer pointing to the head of the deck
     }
-    *ptrUnshuffledHead = tempPointer;
+    *ptr_deck1Head = tempPointer;
 
 }
 
-void insertBetween(Card** ptrShuffledHead, Card** ptrshuffledTail, Card** ptrUnshuffledHead, int numNodesToTraverse) {
-    Card* tempPointer = (*ptrUnshuffledHead)->next;
-    Card* current = *ptrShuffledHead;
+/// INSERTS THE CURRENT HEAD OF ONE DECK AT A GIVEN SPOT BETWEEN THE HEAD AND THE TAIL OF ANOTHER DECK
+/// \param ptr_deck2Head pointer containing the mem adr of the pointer to head deck to be inserted TO
+/// \param ptr_deck2Tail pointer containing the mem adr of the pointer to tail of deck to be inserted TO
+/// \param ptr_deck1Head pointer containing the mem adr of the pointer to head deck to be inserted FROM
+/// \param numNodesToTraverse integer indicating how many Card nodes to traverse before inserting Card
+void insertBetween(Card** ptr_deck2Head, Card** ptr_deck2Tail, Card** ptr_deck1Head, int numNodesToTraverse) {
+    Card* tempPointer = (*ptr_deck1Head)->next;
+    Card* current = *ptr_deck2Head;
     for(int i = 0 ; i < numNodesToTraverse ; i++) {
         current = current->next;
     }
 
-    if (*ptrShuffledHead == NULL || current->next == NULL) {
-        insertAtTail(ptrShuffledHead, ptrshuffledTail, ptrUnshuffledHead);
+    if (*ptr_deck2Head == NULL || current->next == NULL) {
+        insertAtTail(ptr_deck2Head, ptr_deck2Tail, ptr_deck1Head);
 
     } else {
 
-        (*ptrUnshuffledHead)->next = current->next;
-        current->next = *ptrUnshuffledHead;
-        *ptrUnshuffledHead = tempPointer;
+        (*ptr_deck1Head)->next = current->next;
+        current->next = *ptr_deck1Head;
+        *ptr_deck1Head = tempPointer;
 
     }
 }

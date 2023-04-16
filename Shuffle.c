@@ -9,7 +9,10 @@
 #include "LinkedListManipulation.c"
 #define CARD_COUNT 52
 
-// FUNCTION INTERWEAVE-SHUFFLE A DECK (BRIDGE SHUFFLE)
+/// FUNCTION INTERWEAVE-SHUFFLE A DECK (BRIDGE SHUFFLE)
+/// \param split integer indicating how many cards should be in the first of two temporary piles used to shuffled
+/// \param head pointer to the Card which is at the head of the Linked List of Card structs to be shuffled
+/// \return pointer to the Card that is at the head of the Linked List of shuffled Cards
 Card* shuffleInterweave(int split, Card* head) {
     /* create first Card in temp Card list1 the create all the rest up to split */
     Card* tempHead1 = NULL;
@@ -46,12 +49,6 @@ Card* shuffleInterweave(int split, Card* head) {
         currentHead = currentHead->next;
         i++;
     }
-
-    /*struct Card* current2 = tempHead2;
-    while(current2 != NULL) {
-        printf("Card in pile 2 is %c%c\n", current2->rank, current2->suit);
-        current2 = current2->next;
-    }*/
 
     /*Initializing the two first cards in the shuffled deck*/
     Card* shuffledDeckHead = head;
@@ -92,6 +89,10 @@ Card* shuffleInterweave(int split, Card* head) {
     return shuffledDeckHead;
 }
 
+/// FUNCTION TO SHUFFLE A DECK BY RANDOMLY PLACING EACH CARD AT THE HEAD, TAIL
+/// OR SOMEWHERE IN THE MIDDLE OF THE SHUFFLED DECK
+/// \param head pointer to the Card which is at the head of the Linked List of Card structs to be shuffled
+/// \return  pointer to the Card that is at the head of the Linked List of shuffled Cards
 Card* shuffleRandom(Card* head) {
     Card* shuffledHead = NULL;
     Card* shuffledTail = NULL;
@@ -126,15 +127,6 @@ Card* shuffleRandom(Card* head) {
         i++;
     }
 
-   /* insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, 0);
-    insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, 0);
-    insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, 0);
-    for(int i = 3 ; i < CARD_COUNT ; i++){
-        //insertAtTail(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead);
-        //insertAtHead(ptrShuffledHead, ptrUnshuffledHead);
-        int numNodes = i/2;
-        insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, numNodes);
-    }*/
 
     return shuffledHead;
 }
