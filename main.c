@@ -3,8 +3,8 @@
 #include <string.h>
 int main() {
 
-    //createDeck("cards.txt");
-    printDeck(shuffleInterweave(13,createDeck("cards.txt")));
+    //createDeck("unshuffledCards.txt");
+    printDeck(shuffleInterweave(13,createDeck("unshuffledCards.txt")));
 
 
 }
