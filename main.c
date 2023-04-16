@@ -1,10 +1,11 @@
-#include "Deck.c"
+#include "Shuffle.c"
 #include <stdio.h>
 #include <string.h>
 int main() {
+    printDeck(shuffleRandom(createDeck("unshuffledCards.txt")));
+    //printDeck(createDeck("unshuffledCards.txt"));
+    //printDeck(shuffleInterweave(13,createDeck("unshuffledCards.txt")));
 
-    //createDeck("unshuffledCards.txt");
-    printDeck(shuffleInterweave(13,createDeck("unshuffledCards.txt")));
 
 
 }

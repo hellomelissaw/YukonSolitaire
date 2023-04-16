@@ -8,14 +8,6 @@
 #define CARD_COUNT 52
 #define LABEL_SIZE 4
 
-// FUNCTION TO CREATE AND RETURN A NEW CARD (NODE IN LINKED LIST)
-Card* createCard(char rank, char suit) {
-    Card* card_node = malloc(sizeof(Card));
-    card_node->rank = rank;
-    card_node->suit = suit;
-    return card_node;
-}
-
 // FUNCTION TO CREATE A DECK ONE CARD AT A TIME USING createCard()
 Card* createDeck(char fileName[]) {
     char* abs_path = getAbs_path(fileName);

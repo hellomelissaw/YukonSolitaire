@@ -22,7 +22,7 @@ struct linkedList{
 };
 
 // Struct to represent a card
-typedef struct {
+/*typedef struct {
     char rank[3];
     char suit[8];
     bool isVisible;
@@ -31,7 +31,7 @@ typedef struct {
 
 
 // Array to store the deck of cards
-Card deck[NUM_CARDS];
+Card deck[NUM_CARDS];*/
 
 // Function to check if a card is valid
 int is_valid_card(char* rank, char* suit) {

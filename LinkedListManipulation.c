@@ -2,7 +2,6 @@
 // Created by Watson on 2023-04-15.
 //
 #include <stdio.h>
-#include "include/Card.h"
 
 void insertAtTail(Card** ptrShuffledHead, Card** ptrshuffledTail, Card** ptrUnshuffledHead) {
 

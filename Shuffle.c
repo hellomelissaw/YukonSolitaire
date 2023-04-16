@@ -2,12 +2,12 @@
 // Created by Watson on 2023-04-15.
 // Ressources: https://stackoverflow.com/questions/16569239/how-to-use-function-srand-with-time-h
 //
-#include <time.h>
+#include <stdio.h>
 #include <stdlib.h>
-#include "include/Deck.h"
-#include "include/LinkedListManipulation.h"
+#include <time.h>
+#include "Deck.c"
+#include "LinkedListManipulation.c"
 #define CARD_COUNT 52
-#define LABEL_SIZE 4
 
 // FUNCTION INTERWEAVE-SHUFFLE A DECK (BRIDGE SHUFFLE)
 Card* shuffleInterweave(int split, Card* head) {
@@ -126,6 +126,15 @@ Card* shuffleRandom(Card* head) {
         i++;
     }
 
+   /* insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, 0);
+    insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, 0);
+    insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, 0);
+    for(int i = 3 ; i < CARD_COUNT ; i++){
+        //insertAtTail(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead);
+        //insertAtHead(ptrShuffledHead, ptrUnshuffledHead);
+        int numNodes = i/2;
+        insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, numNodes);
+    }*/
+
     return shuffledHead;
 }
-
