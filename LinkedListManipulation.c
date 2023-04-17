@@ -24,7 +24,7 @@ void insertAtTail(Card** ptr_deck2Head, Card** ptr_deck2Tail, Card** ptr_deck1He
 /// \param ptr_deck2Head pointer containing the mem adr of the pointer to head deck to be inserted TO
 /// \param ptr_deck1Head pointer containing the mem adr of the pointer to head deck to be inserted FROM
 void insertAtHead(Card** ptr_deck2Head, Card** ptr_deck1Head) {
-    Card* tempPointer = (*ptr_deck1Head)->next;
+    Card* tempPointer = (*ptr_deck1Head)->next; // saves the pointer to the pointer pointing to the next card after head1
 
     if(*ptr_deck2Head == NULL) { // checks if the values at the address ptr_deck2Head is pointing to are NULL
         *ptr_deck2Head = *ptr_deck1Head;
@@ -32,7 +32,7 @@ void insertAtHead(Card** ptr_deck2Head, Card** ptr_deck1Head) {
 
     } else {
         (*ptr_deck1Head)->next = *ptr_deck2Head;
-        *ptr_deck2Head = *ptr_deck1Head; // update the address of the pointer pointing to the head of the deck
+        *ptr_deck2Head = *ptr_deck1Head;
     }
     *ptr_deck1Head = tempPointer;
 

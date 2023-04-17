@@ -2,9 +2,29 @@
 #include <stdio.h>
 #include <string.h>
 int main() {
-    printDeck(shuffleRandom(createDeck("unshuffledCards.txt")));
+    //printDeck(shuffleRandom(createDeck("unshuffledCards.txt")));
     //printDeck(createDeck("unshuffledCards.txt"));
     //printDeck(shuffleInterweave(13,createDeck("unshuffledCards.txt")));
+
+    // EXAMPLE OF insertAtHead() function use
+    Card* card1 = createCard('A','C');
+    Card* card2 = createCard('2','C');
+    Card* card3 = createCard('3','C');
+    Card* card4 = createCard('4','C');
+    card1->next = card2;
+    card3->next = card4;
+
+    Card** ptrcard1 = &card1;
+    Card** ptrcard2 = &card2;
+    Card** ptrcard3 = &card3;
+    Card** ptrcard4 = &card4;
+    insertAtHead(ptrcard1, ptrcard3);
+
+    printf("%c%c\n", card1->rank, card1->suit);
+    printf("%c%c\n", card1->next->rank, card1->next->suit);
+    printf("%c%c\n", card1->next->next->rank, card1->next->next->suit);
+
+
 
 
 

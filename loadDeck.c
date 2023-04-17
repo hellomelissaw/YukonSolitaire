@@ -5,15 +5,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include "Card.c"
 
 #define NUM_SUITS 4
 #define NUM_CARDS_PER_SUIT 13
 #define NUM_CARDS 52
 
 // Arrays to store suit and rank names
-char* suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
+char* suits[] = {"C", "D", "H", "S"};
 char* ranks[] = {"A", "2", "3", "4", "5", "6", "7",
-                 "8", "9", "10", "J", "Q", "K"};
+                 "8", "9", "T", "J", "Q", "K"};
 
 
 //struct linkedList
@@ -28,10 +29,10 @@ struct linkedList{
     bool isVisible;
     struct card *next;
 } Card;
-
+*/
 
 // Array to store the deck of cards
-Card deck[NUM_CARDS];*/
+Card deck[NUM_CARDS];
 
 // Function to check if a card is valid
 int is_valid_card(char* rank, char* suit) {
