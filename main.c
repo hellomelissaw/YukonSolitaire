@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "Column.c"
-#include "Utilities.c"
-#include "Deck.c"
 int main() {
     //printDeck(shuffleRandom(createDeck("unshuffledCards.txt")));
     //printDeck(createDeck("unshuffledCards.txt"));
