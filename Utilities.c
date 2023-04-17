@@ -29,7 +29,6 @@ char* getAbs_path(char fileName[]) {
     char *abs_path = NULL;
     char *rel_path = fileName;
     abs_path = _fullpath(NULL, rel_path, 0);
-    free(abs_path);
 #else
     chdir(".."); // go to parent dir to get absolute file path from project's parent directory
     abs_path = realpath(fileName, NULL);
