@@ -1,5 +1,5 @@
 //
-// Created by Admin
+// Created by Sabirin
 //
 
 #include <stdio.h>
@@ -10,16 +10,12 @@
 #define NUM_CARDS_PER_SUIT 13
 #define NUM_CARDS 52
 
+
 // Arrays to store suit and rank names
 char* suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
 char* ranks[] = {"A", "2", "3", "4", "5", "6", "7",
                  "8", "9", "10", "J", "Q", "K"};
 
-
-//struct linkedList
-struct linkedList{
-    struct node *head;
-};
 
 // Struct to represent a card
 typedef struct {
@@ -30,8 +26,15 @@ typedef struct {
 } Card;
 
 
+//struct linkedList
+struct linkedList{
+    struct node *head;
+};
+
+
 // Array to store the deck of cards
 Card deck[NUM_CARDS];
+
 
 // Function to check if a card is valid
 int is_valid_card(char* rank, char* suit) {
@@ -44,7 +47,6 @@ int is_valid_card(char* rank, char* suit) {
             break;
         }
     }
-
     // Check if the suit is valid
     for (int i = 0; i < NUM_SUITS; i++) {
         if (strcmp(suit, suits[i]) == 0) {
@@ -56,10 +58,42 @@ int is_valid_card(char* rank, char* suit) {
     return (valid_rank && valid_suit);
 }
 
+int load_deckLDCommand(){
+    printf("inden i funk");
+
+    //tjek først om ld command er to char eller mere.
+
+
+    FILE *fp;
+    char str[60];
+
+    /* opening file for reading */
+    fp = fopen("tryout.txt", "r");
+    if(fp == NULL) {
+        perror("Error opening file");
+        return -1;
+    }
+
+    while(fgets(str, 60, fp) != NULL) {
+        printf("%s", str);
+    }
+
+    fclose(fp);
+    return 0;
+
+}
+
+/*
 // Function to load a deck of cards from a file or create a new unshuffled deck if no filename is given
 int load_deck(char* filename) {
+
+
     FILE *fp;
     char buffer[20];
+
+    //check if filename is entered.
+
+
     int card_count = 0, line_number = 0, error = 0;
 
     if (filename == NULL) {
@@ -118,36 +152,3 @@ int load_deck(char* filename) {
     }
 
 }
-
-
-//
-
-
-
-
-//
-// Just a test for me.
-//
-
-
-//int main(int argc, char* argv[]) {
-    //If argc is 1, it means no filename was given as input.
-    // So, we call the load_deck function with NULL parameter to create a new unshuffled deck of cards */
-//if (argc == 1) {
-//load_deck(NULL);
-//}
-
- //If argc is 2, it means a filename was given as input. So, we call the load_deck function with the filename provided as argument
-//else if (argc == 2) {
-//load_deck(argv[1]);
-//}
-
- //If argc is greater than 2,it means too many arguments were provided. So, we print an error message and return -1
-//else {
-//printf("Error: Too many arguments\n");
-//return -1;
-//}
- //return 0 to indicate successful completion of the program
-//return 0;
-//}
-

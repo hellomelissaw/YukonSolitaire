@@ -1,26 +1,22 @@
 #include "Deck.c"
 #include <stdio.h>
 #include <string.h>
-int main() {
+//#include "loadDeck.c"
+/*int main() {
 
     //createDeck("cards.txt");
     printDeck(shuffleInterweave(13,createDeck("cards.txt")));
 
 
 }
-
-//MAKE LAYOUT FOR PLAYING THE GAME IN TERMINAL.
-
+ */
 
 
-
-
-/*
-//struct newNode newNode;
 int main() {
     char input[2];
-    char load[] = "LD";
-
+    char str[100];
+    int length;
+    int newlength;
 
     while (1) {
 
@@ -32,24 +28,34 @@ int main() {
         printf("                                                           []  \tF4\n");
 
         printf("");
-        printf("LAST command; \n");
-        printf("Message \n");
+        printf("LAST command; \n"); //add func
+        printf("Message \n"); //add func
         printf("INPUT >");
 
         scanf("%s", &input);
 
-        //TJEK FOR OM ARG == 0,.
 
         if (!strcmp(input, "QQ")) {
-            printf("quitting the program");
+            printf("Quitting The Game");
             exit(0);
         }
-        if (strcmp(input, "LD")){
+        if (!strcmp(input, "LD")){
+            fgets(str, 100, stdin);
+            length = strlen(str);
 
+            printf("Length of |%s| is |%d|\n", str, length);
+
+            if(length == 1){
+                printf("LD is entered");
+            } else if(length > 1){
+                newlength = length-1;
+                printf("new string %d",newlength);
+            }
         }
-        if (strcmp(input, "Q") == 0) {
+        return 0;
+            //load_deck("defaultDeckofCards");
+        }
+        if (!strcmp(input, "Q")) {
             //Resetgame();
         }
     }
-}
- */
