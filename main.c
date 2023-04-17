@@ -6,8 +6,8 @@
 //#include "loadDeck.c"
 /*int main() {
 
-    //createDeck("cards.txt");
-    printDeck(shuffleInterweave(13,createDeck("cards.txt")));
+    //createDeck("unshuffledCards.txt");
+    printDeck(shuffleInterweave(13,createDeck("unshuffledCards.txt")));
 
 
 }
@@ -82,6 +82,7 @@ int load_SpecificFileIntoDeck(char *filename) {
 }
 
 
+// Hey girl hey
 int main() {
     char input[2];
     char str[100];
