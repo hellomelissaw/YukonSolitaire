@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include "Utilities.c"
 
 //#include "loadDeck.c"
 /*int main() {
@@ -19,7 +20,7 @@ int load_DefaultDeckLDCommand() {
     char str[100];
 
     /* opening file for reading */
-    fp = fopen("defaultDeckOfCards", "r");
+    fp = fopen("unshuffledCards.txt", "r");
     if (fp == NULL) {
         perror("Error opening file");
         return -1;
@@ -54,8 +55,8 @@ int load_SpecificFileIntoDeck(char *filename) {
     char count;
     char countFileLine;
     filename[strcspn(filename, "\n")] = '\0';
-
-    FILE *file = fopen(filename, "r"); // open file in read mode
+    char* abs_path = getAbs_path(filename);
+    FILE *file = fopen(abs_path, "r"); // open file in read mode
     if (file_exists(filename) || file != NULL) {
         //printf("File %s exists", filename);
         while ((c = fgetc(file)) != EOF) {
