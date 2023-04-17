@@ -11,7 +11,7 @@
 #define NUM_CARDS 52
 
 
-// Arrays to store suit and rank names
+// Arrays to store suit and rank names, to later on check if the filename is entered with these attributes.
 char* suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
 char* ranks[] = {"A", "2", "3", "4", "5", "6", "7",
                  "8", "9", "10", "J", "Q", "K"};
