@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 #define NUM_SUITS 4
 #define NUM_CARDS_PER_SUIT 13
@@ -12,18 +13,18 @@
 
 
 // Arrays to store suit and rank names, to later on check if the filename is entered with these attributes.
-char* suits[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
+char* suits[] = {"C", "D", "H", "S"};
 char* ranks[] = {"A", "2", "3", "4", "5", "6", "7",
-                 "8", "9", "10", "J", "Q", "K"};
+                 "8", "9", "T", "J", "Q", "K"};
 
 
 // Struct to represent a card
 typedef struct {
-    char rank[3];
-    char suit[8];
+    char rank;
+    char suit;
     bool isVisible;
     struct card *next;
-} Card;
+} Card1;
 
 
 //struct linkedList
@@ -33,8 +34,7 @@ struct linkedList{
 
 
 // Array to store the deck of cards
-Card deck[NUM_CARDS];
-
+Card1 deck[NUM_CARDS];
 
 // Function to check if a card is valid
 int is_valid_card(char* rank, char* suit) {
@@ -57,50 +57,25 @@ int is_valid_card(char* rank, char* suit) {
 
     return (valid_rank && valid_suit);
 }
-
-int load_deckLDCommand(){
-    printf("inden i funk");
-
-    //tjek først om ld command er to char eller mere.
-
-
-    FILE *fp;
-    char str[60];
-
-    /* opening file for reading */
-    fp = fopen("tryout.txt", "r");
-    if(fp == NULL) {
-        perror("Error opening file");
-        return -1;
-    }
-
-    while(fgets(str, 60, fp) != NULL) {
-        printf("%s", str);
-    }
-
-    fclose(fp);
-    return 0;
-
-}
-
 // Function to load a deck of cards from a file or create a new unshuffled deck if no filename is given
-int load_deck(char* filename) {
 
+
+
+int load_deck(char* filename) {
 
     FILE *fp;
     char buffer[20];
 
-    //check if filename is entered.
-
-
     int card_count = 0, line_number = 0, error = 0;
+
+
 
     if (filename == NULL) {
         // Create a new unshuffled deck of cards
         for (int i = 0; i < NUM_SUITS; i++) {
             for (int j = 0; j < NUM_CARDS_PER_SUIT; j++) {
-                strcpy(deck[card_count].rank, ranks[j]);
-                strcpy(deck[card_count].suit, suits[i]);
+                strcpy((char *) deck[card_count].rank, ranks[j]);
+                strcpy((char *) deck[card_count].suit, suits[i]);
                 card_count++;
             }
         }
@@ -133,8 +108,8 @@ int load_deck(char* filename) {
         }
 
         // Add the card to the deck
-        strcpy(deck[card_count].rank, rank);
-        strcpy(deck[card_count].suit, suit);
+        strcpy((char *) deck[card_count].rank, rank);
+        strcpy((char *) deck[card_count].suit, suit);
         card_count++;
     }
 
@@ -149,6 +124,31 @@ int load_deck(char* filename) {
         printf("Error: Incorrect number of cards in file\n");
         return -1;
     }
+    return 0;
+}
+
+
+int load_DefaultDeckLDCommand2(){
+    printf("inden i funk");
+
+    FILE *fp;
+    char str[60];
+
+    /* opening file for reading */
+    fp = fopen("defaultDeckOfCards", "r");
+    if(fp == NULL) {
+        perror("Error opening file");
+        return -1;
+    }
+
+    while(fgets(str, 60, fp) != NULL) {
+        printf("%s", str);
+        //STORE IN LINKEDLIST.
+    }
+    fclose(fp);
+    return 0;
 
 }
+
+
 

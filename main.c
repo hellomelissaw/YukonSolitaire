@@ -1,6 +1,10 @@
 #include "Deck.c"
 #include <stdio.h>
 #include <string.h>
+
+
+#include <stdbool.h>
+
 //#include "loadDeck.c"
 /*int main() {
 
@@ -10,13 +14,34 @@
 
 }
  */
+int load_DefaultDeckLDCommand(){
+    printf("inden i funk");
+
+    FILE *fp;
+    char str[60];
+
+    /* opening file for reading */
+    fp = fopen("defaultDeckOfCards", "r");
+    if(fp == NULL) {
+        perror("Error opening file");
+        return -1;
+    }
+
+    while(fgets(str, 60, fp) != NULL) {
+        printf("%s", str);
+        //STORE IN LINKEDLIST.
+    }
+    fclose(fp);
+    return 0;
+
+}
 
 
 int main() {
     char input[2];
     char str[100];
+    char result[100];
     int length;
-    int newlength;
 
     while (1) {
 
@@ -30,7 +55,7 @@ int main() {
         printf("");
         printf("LAST command; \n"); //add func
         printf("Message \n"); //add func
-        printf("INPUT >");
+        printf("INPUT >" );
 
         scanf("%s", &input);
 
@@ -46,16 +71,19 @@ int main() {
             printf("Length of |%s| is |%d|\n", str, length);
 
             if(length == 1){
-                printf("LD is entered");
+                load_DefaultDeckLDCommand();
 
             } else if(length > 1){
-                newlength = length-1;
-                printf("new string %d",newlength);
+
+                strcpy(result, str+1);
+
+                printf("Result: %s\n", result);
+                //load_deck(result);
             }
         }
         return 0;
-            //load_deck("defaultDeckofCards");
         }
+
         if (!strcmp(input, "Q")) {
             //Resetgame();
         }
