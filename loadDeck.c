@@ -37,7 +37,7 @@ struct linkedList{
 Card1 deck[NUM_CARDS];
 
 // Function to check if a card is valid
-int is_valid_card(char* rank, char* suit) {
+int isCardValid(char* rank, char* suit) {
     int valid_rank = 0, valid_suit = 0;
 
     // Check if the rank is valid
@@ -61,6 +61,29 @@ int is_valid_card(char* rank, char* suit) {
 
 
 
+/*
+// return true if the file specified by the filename exists
+bool file_exists(const char *filename)
+{
+    FILE *fp = fopen(filename, "r");
+    bool is_exist = false;
+    if (fp != NULL)
+    {
+        // check if we can read from the file
+        if (fgetc(fp) != EOF)
+        {
+            is_exist = true;
+        }
+        fclose(fp); // close the file
+    }
+    return is_exist;
+}
+
+ */
+
+
+
+/*
 int load_deck(char* filename) {
 
     FILE *fp;
@@ -126,6 +149,7 @@ int load_deck(char* filename) {
     }
     return 0;
 }
+ */
 
 
 int load_DefaultDeckLDCommand2(){
