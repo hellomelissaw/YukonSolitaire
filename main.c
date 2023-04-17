@@ -47,6 +47,7 @@ int main() {
 
             if(length == 1){
                 printf("LD is entered");
+
             } else if(length > 1){
                 newlength = length-1;
                 printf("new string %d",newlength);

@@ -83,7 +83,6 @@ int load_deckLDCommand(){
 
 }
 
-/*
 // Function to load a deck of cards from a file or create a new unshuffled deck if no filename is given
 int load_deck(char* filename) {
 
@@ -152,3 +151,4 @@ int load_deck(char* filename) {
     }
 
 }
+
