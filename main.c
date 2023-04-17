@@ -21,8 +21,8 @@ int load_DefaultDeckLDCommand() {
 
     /* opening file for reading */
 
-    char* try = getAbs_path("defaultDeckOfCards");
-    fp = fopen(try, "r");
+    char* abspath = getAbs_path("defaultDeckOfCards");
+    fp = fopen(abspath, "r");
     if (fp == NULL) {
         perror("Error opening file");
         return -1;
