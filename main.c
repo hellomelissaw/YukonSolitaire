@@ -25,7 +25,8 @@ int main() {
     printf("%c%c\n", card1->next->rank, card1->next->suit);
     printf("%c%c\n", card1->next->next->rank, card1->next->next->suit);*/
 
-    Card* testcard = createDeck("unshuffledCard.txt");
+    Card* testcard = createDeck("unshuffledCards.txt");
+    printDeck(testcard);
     Card** ptrTestCard = &testcard;
     Card* columnTest = ptrColumnHead(ptrTestCard);
     for (int i = 0 ; i < 7 ; i++){
