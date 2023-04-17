@@ -16,7 +16,7 @@
 
 int load_DefaultDeckLDCommand() {
     FILE *fp;
-    char str[60];
+    char str[100];
 
     /* opening file for reading */
     fp = fopen("defaultDeckOfCards", "r");
@@ -25,7 +25,8 @@ int load_DefaultDeckLDCommand() {
         return -1;
     }
 
-    while (fgets(str, 60, fp) != NULL) {
+
+    while (fgets(str, 100, fp) != NULL) {
         printf("%s", str);
         //STORE IN LINKEDLIST.
     }
@@ -44,7 +45,7 @@ bool file_exists(const char *filename) {
         }
         fclose(fp); // close the file
     }
-    return is_exist; //else not true, doesnt exist.
+    return is_exist; //else not true, does not exist.
 }
 
 
@@ -62,7 +63,7 @@ int load_SpecificFileIntoDeck(char *filename) {
                 count++;
             }
         }
-        fclose(file);
+
         if (countFileLine == 52) {
             char line[3]; // allocate space for each line
             while (fgets(line, sizeof(line), file)) {
@@ -70,7 +71,7 @@ int load_SpecificFileIntoDeck(char *filename) {
                     countFileLine++;
                 }
             }
-
+            fclose(file);
         } else {
             printf("The file does not have 52 lines.");
         }
@@ -116,10 +117,11 @@ int main() {
 
             printf("Length of |%s| is |%d|\n", str, length);
 
-            if (length == 2) {
+            if (length == 1) {
+                printf("vi er her");
                 load_DefaultDeckLDCommand();
 
-            } else if (length > 2) {
+            } else if (length > 1) {
 
                 strcpy(result, str + 1);
 
