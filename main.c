@@ -20,7 +20,9 @@ int load_DefaultDeckLDCommand() {
     char str[100];
 
     /* opening file for reading */
-    fp = fopen("unshuffledCards.txt", "r");
+
+    char* try = getAbs_path("defaultDeckOfCards");
+    fp = fopen(try, "r");
     if (fp == NULL) {
         perror("Error opening file");
         return -1;
