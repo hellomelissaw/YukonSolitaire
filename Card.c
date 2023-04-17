@@ -2,6 +2,7 @@
 // Created by Watson on 2023-04-15.
 //
 #include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct Card
 {
