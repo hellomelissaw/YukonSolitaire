@@ -29,9 +29,16 @@ int main() {
     //printDeck(testcard);
     Card** ptrTestCard = &testcard;
     Card* columnTest = ptrColumnHead(ptrTestCard);
+
+
+    printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
+    printf("\n");
     for (int i = 0 ; i < 7 ; i++){
-        printf("%c%c\n" , columnTest->rank , columnTest->suit);
+        printf("\t%c%c  " , (columnTest)->rank , columnTest->suit);
+        //columnTest = columnTest->next;
+
     }
+
 
 
 
