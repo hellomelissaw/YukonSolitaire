@@ -27,8 +27,8 @@ int main() {
 
     Card* testcard = createDeck("unshuffledCards.txt");
     //printDeck(testcard);
-    Card** ptrTestCard = &testcard;
-    Card* columnTest = ptrColumnHead(ptrTestCard);
+    //Card** ptrTestCard = &testcard;
+    //Card* columnTest = ptrColumnHead(ptrTestCard);
     //Card* columnTest = ptrColumnHead(&testcard);
 
 
@@ -38,8 +38,8 @@ int main() {
         for (int i = 0 ; i < 11 ; i++){
             printf("\n");
             for (int j = 0 ; j < 7 ; j++){
-                //Card** ptrTestCard = &testcard;
-                //Card* columnTest = ptrColumnHead(ptrTestCard);
+                Card** ptrTestCard = &testcard;
+                Card* columnTest = ptrColumnHead(ptrTestCard);
             printf("\t%c%c  " , (columnTest)->rank , columnTest->suit);
             //ptrTestCard++;
             //columnTest = columnTest->next;
