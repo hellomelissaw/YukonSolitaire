@@ -7,10 +7,17 @@
 #define  COLUMN_COUNT 7
 #define  ROW_COUNT 11
 
-
+struct  Card* cardList1 = NULL;
+struct  Card* cardList2 = NULL;
+struct  Card* cardList3 = NULL;
+struct  Card* cardList4 = NULL;
+struct  Card* cardList5 = NULL;
+struct  Card* cardList6 = NULL;
+struct  Card* cardList7 = NULL;
 
 Card* ptrColumnHead (Card** ptrHead) {
-    Card *columnPointers[7];
+    //Card *columnPointers[7];
+    Card* columnPointers[7] = {cardList1, cardList2, cardList3, cardList4, cardList5, cardList6, cardList7};
 
     int visibleCounter = 5;
     int visibleCards = 1;

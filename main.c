@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "Column.c"
-int main() {
+int main(void) {
     //printDeck(shuffleRandom(createDeck("unshuffledCards.txt")));
     //printDeck(createDeck("unshuffledCards.txt"));
     //printDeck(shuffleInterweave(13,createDeck("unshuffledCards.txt")));
@@ -32,20 +32,36 @@ int main() {
     //Card* columnTest = ptrColumnHead(&testcard);
 
 
-    printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
-    printf("\n");
+    //printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
+    //printf("\n");
 
         for (int i = 0 ; i < 11 ; i++){
             printf("\n");
             for (int j = 0 ; j < 7 ; j++){
-                Card** ptrTestCard = &testcard;
-                Card* columnTest = ptrColumnHead(ptrTestCard);
-            printf("\t%c%c  " , (columnTest)->rank , columnTest->suit);
+                //Card** ptrTestCard = &testcard;
+                //Card* columnTest = ptrColumnHead(ptrTestCard);
+            //printf("\t%c%c  " , (columnTest)->rank , columnTest->suit);
             //ptrTestCard++;
             //columnTest = columnTest->next;
 
         }
     }
+        Card* gameCollumn = ptrColumnHead(&testcard);
+        int printed[7] = {0,0,0,0,0,0,0};
+
+        for (int cardsPrintet = 0; cardsPrintet < 52; cardsPrintet++){
+            for(int i = 0; i < 7; i++){
+                Card* cardToPrint = gameCollumn;
+                for(int j = 0; j < printed[i]; j++){
+                    cardToPrint = cardToPrint->next;
+                    if(!cardToPrint) break;
+                }
+                if(!cardToPrint) break;
+                printed[i]++;
+                printf("%c%c", cardToPrint->rank, cardToPrint->suit);
+            }
+            printf("\n");
+        }
 
 
 
