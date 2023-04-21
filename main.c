@@ -34,19 +34,22 @@ int main(void) {
 
     printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
     printf("\n");
-
-       /* for (int i = 0 ; i < 11 ; i++){
+    Card* testcard = createDeck("unshuffledCards.txt");
+    Card** ptrTestCard = &testcard;
+    Card* columnTest = ptrColumnHead(ptrTestCard);
+    printf("columnTest: %c%c", columnTest->rank, columnTest->suit);
+       /* for (int i = 0 ; i < 1 ; i++){
             //printf("\n");
             for (int j = 0 ; j < 7 ; j++){
-                //Card** ptrTestCard = &testcard;
-                //Card* columnTest = ptrColumnHead(ptrTestCard);
-            //printf("\t%c%c  " , (columnTest)->rank , columnTest->suit);
+
+                printf("\t%c%c  " , columnTest->suit , columnTest->suit);
+           // printf("\t%c%c  " , (columnTest)->rank , columnTest->suit);
             //ptrTestCard++;
-            //columnTest = columnTest->next;
+            columnTest = columnTest->next;
 
         }
     }*/
-    Card* testcard = createDeck("unshuffledCards.txt");
+    /*Card* testcard = createDeck("unshuffledCards.txt");
         Card** ptrTestCard = &testcard;
         Card* gameCollumn = ptrColumnHead(ptrTestCard);
         int printed[7] = {0,0,0,0,0,0,0};
@@ -66,7 +69,7 @@ int main(void) {
             printf("\n");
         }
 
-
+*/
 
 
 

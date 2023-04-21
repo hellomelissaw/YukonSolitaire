@@ -19,7 +19,7 @@ struct  Card* cardList7 = NULL;
 Card* ptrColumnHead (Card** ptrHead) {
     //Card *columnPointers[7];
     Card* columnPointers[7] = {cardList1, cardList2, cardList3, cardList4, cardList5, cardList6, cardList7};
-
+    Card** ptr_columnPointers[7] = {&cardList1, &cardList2, &cardList3, &cardList4, &cardList5, &cardList6, &cardList7};
     int visibleCounter = 5;
     int visibleCards = 1;
     int columnCounter = 7;
@@ -27,11 +27,11 @@ Card* ptrColumnHead (Card** ptrHead) {
 
     //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
     //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
-    for (int i = 0; i < ROW_COUNT; i++) {
+    for (int i = 0; i < 1; i++) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
-            if (i == 0 && j == 0) { // sets all the cards in the first row
+            if (i == 0) { // sets all the cards in the first row
                // Card *card = createCard((*ptrHead)->rank, (*ptrHead)->suit);
-                columnPointers[i] = insertAtTail(ptrHead, cardList1, cardList1);
+                insertAtTail(ptrHead, ptr_columnPointers[i], ptr_columnPointers[i]);
                 //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
                 (*ptrHead) = (*ptrHead)->next; // move the head to the next card
 
@@ -44,8 +44,8 @@ Card* ptrColumnHead (Card** ptrHead) {
            }*/
         else{
             // while (visibleCounter < 6){
-                 columnPointers[i] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
-                 (*ptrHead) = (*ptrHead)->next; // move the head to the next card
+                 //columnPointers[i] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
+                 //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
                 // visibleCounter++ ;
              //}
 
