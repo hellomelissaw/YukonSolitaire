@@ -17,7 +17,7 @@ char* getAbs_path(char fileName[]) {
     char cwd[PATH_MAX];
     getcwd(cwd, sizeof(cwd));
 
-   // char* abs_path;
+
 #ifdef _WIN32
     /*char full_path[_MAX_PATH];
     if (_fullpath(full_path, fileName, _MAX_PATH) != NULL) {
@@ -30,6 +30,7 @@ char* getAbs_path(char fileName[]) {
     char *rel_path = fileName;
     abs_path = _fullpath(NULL, rel_path, 0);
 #else
+    char* abs_path;
     chdir(".."); // go to parent dir to get absolute file path from project's parent directory
     abs_path = realpath(fileName, NULL);
     chdir(cwd);
