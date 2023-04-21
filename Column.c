@@ -17,6 +17,7 @@ struct  Card* cardList6 = NULL;
 struct  Card* cardList7 = NULL*/
 
 Card** ptrColumnHead (char* fileName) {
+
 //Card** ptrColumnHead (Card** ptrHead, char* fileName) {
     char* abs_path = getAbs_path(fileName);
 
@@ -43,13 +44,25 @@ Card** ptrColumnHead (char* fileName) {
     //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
     //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
 
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < ROW_COUNT; i++) {
         //int columnCardCount[] = {1, 6, 7, 8, 9, 10, 11};
         //int counter = 0;
        for (int j = 0; j < COLUMN_COUNT; j++) {
-            columnPointers[j] = createCard(cardLabels[j][0], cardLabels[j][1]);
-            //Card* current = columnPointers[i];
-            /*for(int k = 1 ; k < CARD_COUNT ; k++) // get the rank and suit from line i of the file and pass as argument to createCard func
+
+           if (i == 0){
+               columnPointers[j] = createCard(cardLabels[j][0], cardLabels[j][1]);
+               columnPointers[j] = columnPointers[j]->next;
+
+           } else if (i < 6) {
+               (*columnPointers[j]).next = createCard(cardLabels[j][0], cardLabels[j][1]);
+               *columnPointers[j] = (*columnPointers[j]).next;
+           }
+
+
+
+
+           /* Card* current = columnPointers[j];
+            for(int k = 1 ; k < CARD_COUNT ; k++) // get the rank and suit from line i of the file and pass as argument to createCard func
             {
                 char rank = cardLabels[j][0];
                 char suit = cardLabels[j][1];
