@@ -32,11 +32,11 @@ int main(void) {
     //Card* columnTest = ptrColumnHead(&testcard);
 
 
-    //printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
-    //printf("\n");
+    printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
+    printf("\n");
 
-        for (int i = 0 ; i < 11 ; i++){
-            printf("\n");
+       /* for (int i = 0 ; i < 11 ; i++){
+            //printf("\n");
             for (int j = 0 ; j < 7 ; j++){
                 //Card** ptrTestCard = &testcard;
                 //Card* columnTest = ptrColumnHead(ptrTestCard);
@@ -45,7 +45,7 @@ int main(void) {
             //columnTest = columnTest->next;
 
         }
-    }
+    }*/
         Card* gameCollumn = ptrColumnHead(&testcard);
         int printed[7] = {0,0,0,0,0,0,0};
 
@@ -54,11 +54,12 @@ int main(void) {
                 Card* cardToPrint = gameCollumn;
                 for(int j = 0; j < printed[i]; j++){
                     cardToPrint = cardToPrint->next;
+                    *cardToPrint++;
                     if(!cardToPrint) break;
                 }
                 if(!cardToPrint) break;
                 printed[i]++;
-                printf("%c%c", cardToPrint->rank, cardToPrint->suit);
+                printf("\t%c%c ", cardToPrint->rank, cardToPrint->suit);
             }
             printf("\n");
         }

@@ -26,7 +26,6 @@ Card* ptrColumnHead (Card** ptrHead) {
 
     //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
     //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
-
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
             if (i == 0 && j == 0) {
@@ -42,17 +41,16 @@ Card* ptrColumnHead (Card** ptrHead) {
                //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
                (*ptrHead) = (*ptrHead)->next; // move the head to the next card
            }*/
-        }
-        /* else{
-             while (visibleCounter < 6){
+        else{
+            // while (visibleCounter < 6){
                  columnPointers[i] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
                  (*ptrHead) = (*ptrHead)->next; // move the head to the next card
-                 visibleCounter++ ;
-             }
+                // visibleCounter++ ;
+             //}
 
          }
 
- }*/
+ }
 
         // }
 
