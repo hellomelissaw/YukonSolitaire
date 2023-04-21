@@ -10,9 +10,9 @@ int main(void) {
     Card **ptrTestCard = &unshuffledDeck;
     Card **columnTest = ptrColumnHead("unshuffledCards.txt");
     //printf("\t%c%c\t " , (*columnTest[0]).rank , (*columnTest[0]).suit);
-    //printf("\t%c%c\t  " , (*columnTest[1]).rank , (*columnTest[1]).suit);
+    printf("\t%c%c\t  " , (*columnTest[1]).rank , (*columnTest[1]).suit);
     //printf("\t%c%c\t  " , (*columnTest[2]).rank , (*columnTest[2]).suit);
-    //("\t%c%c\t  ", (*columnTest[3]).rank, (*columnTest[3]).suit);
+   // printf("\t%c%c\t  ", (*columnTest[3]).rank, (*columnTest[3]).suit);
     //printf("\t%c%c\t  " , (*columnTest[4]).rank , (*columnTest[4]).suit);
     //printf("\t%c%c\t  " , (*columnTest[5]).rank , (*columnTest[5]).suit);
     //printf("\t%c%c\t  " , (*columnTest[6]).rank , (*columnTest[6]).suit);

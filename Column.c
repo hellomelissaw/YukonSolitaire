@@ -41,11 +41,10 @@ Card** ptrColumnHead (char* fileName) {
     //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
 
     for (int i = 0; i < 1; i++) {
-        int columnCardCount[] = {1, 6, 7, 8, 9, 10, 11};
-        int i = 0;
+        //int columnCardCount[] = {1, 6, 7, 8, 9, 10, 11};
         //int counter = 0;
        for (int j = 0; j < COLUMN_COUNT; j++) {
-            columnPointers[i] = createCard(cardLabels[j][0], cardLabels[j][1]);
+            columnPointers[j] = createCard(cardLabels[j][0], cardLabels[j][1]);
             //Card* current = columnPointers[i];
             /*for(int k = 1 ; k < CARD_COUNT ; k++) // get the rank and suit from line i of the file and pass as argument to createCard func
             {
