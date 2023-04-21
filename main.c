@@ -6,9 +6,9 @@ int main(void) {
 
     printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
     printf("\n");
-    //Card *unshuffledDeck = createDeck("unshuffledCards.txt");
-    //Card **ptrTestCard = &unshuffledDeck;
-    Card **columnTest = ptrColumnHead(createDeck("unshuffledCards.txt"));
+    Card *unshuffledDeck = createDeck("unshuffledCards.txt");
+    Card **ptrTestCard = &unshuffledDeck;
+    Card **columnTest = ptrColumnHead(ptrTestCard);
     //printf("\t%c%c\t " , (*columnTest[0]).rank , (*columnTest[0]).suit);
     printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t  " ,
            (*columnTest[0]).rank , (*columnTest[0]).suit,
