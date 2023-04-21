@@ -9,9 +9,14 @@ int main(void) {
     Card *unshuffledDeck = createDeck("unshuffledCards.txt");
     Card **ptrTestCard = &unshuffledDeck;
     Card **columnTest = ptrColumnHead(ptrTestCard);
+    for(int i = 0 ; i < ROW_COUNT ; i++){
+        printf("%c%c ->\n", columnTest[4]->rank, columnTest[4]->suit);
+        columnTest[4] = columnTest[4]->next;
+    }
+
     //printDeck(columnTest[1]);
     //printf("\t%c%c\t " , (*columnTest[0]).rank , (*columnTest[0]).suit);
-    printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \n " ,
+   /* printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \n " ,
            (*columnTest[0]).rank , (*columnTest[0]).suit,
            (*columnTest[1]).rank , (*columnTest[1]).suit,
            (*columnTest[2]).rank , (*columnTest[2]).suit,
@@ -34,7 +39,7 @@ int main(void) {
     //printf("\t%c%c\t  " , (*columnTest[4]).rank , (*columnTest[4]).suit);
     //printf("\t%c%c\t  " , (*columnTest[5]).rank , (*columnTest[5]).suit);
     //printf("\t%c%c\t  " , (*columnTest[6]).rank , (*columnTest[6]).suit);
-
+*/
     for (int i = 0; i < 1; i++) {
         //printf("\n");
         for (int j = 0; j < 7; j++) {
