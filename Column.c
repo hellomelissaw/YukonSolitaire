@@ -39,44 +39,15 @@ Card** ptrColumnHead (Card* ptrHead) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
             if (i == 0) { // sets all the cards in the first row
                 // Card *card = createCard((*ptrHead)->rank, (*ptrHead)->suit);
-                insertAtTail(ptrHead, &columnPointers[j], &columnPointers[j]);
+                insertAtTail(&ptrHead, &columnPointers[j], &columnPointers[j]);
                 //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
                 //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
 
             }
-            if (i > 0) {
-                Card *card = createCard((*ptrHead)->rank, (*ptrHead)->suit);
-                columnPointers[i] = &card[i];
-                //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
-                (*ptrHead) = (*ptrHead)->next; // move the head to the next card
-            } else {
-                // while (visibleCounter < 6){
-                //columnPointers[i] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
-                //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
-                // visibleCounter++ ;
-                //}
-
-            }
 
         }
-
-        // }
-
-        for (int i = 0; i < ROW_COUNT; i++) {
-            if (columnCounter > 1) {
-                //if (i == 0 && j == 0){
-                columnPointers[i] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
-                (*ptrHead) = (*ptrHead)->next; // move the head to the next card
-                columnCounter--;
-            }
-
-        }
-
-        for (int i = 0; i < COLUMN_COUNT; i++) {
-
-        }
-
     }
+
     return ptrHead;
 
 }
