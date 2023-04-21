@@ -14,7 +14,8 @@ void insertAtTail(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail) 
         *ptr_DestHead = *ptr_SrcHead;
 
 
-    } else {(*ptr_DestTail)->next = *ptr_SrcHead;} // or else set the values for tail->next (which is currently NULL) to src head
+    } else {(*ptr_DestTail)->next = *ptr_SrcHead;
+    } // or else set the values for tail->next (which is currently NULL) to src head
 
     *ptr_DestTail = *ptr_SrcHead; // the address of ptr_DestTail should now be ptr_SrcHead
     *ptr_SrcHead = (*ptr_SrcHead)->next;

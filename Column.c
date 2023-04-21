@@ -8,18 +8,30 @@
 #define  COLUMN_COUNT 7
 #define  ROW_COUNT 11
 
-struct  Card* cardList1 = NULL;
+/*struct  Card* cardList1 = NULL;
 struct  Card* cardList2 = NULL;
 struct  Card* cardList3 = NULL;
 struct  Card* cardList4 = NULL;
 struct  Card* cardList5 = NULL;
 struct  Card* cardList6 = NULL;
-struct  Card* cardList7 = NULL;
+struct  Card* cardList7 = NULL*/
 
-Card* ptrColumnHead (Card** ptrHead) {
+Card** ptrColumnHead (char* fileName) {
+//Card** ptrColumnHead (Card** ptrHead, char* fileName) {
+    char* abs_path = getAbs_path(fileName);
+
+    /* Load Card labels from file */
+    FILE* fpointer = fopen(abs_path, "rt"); // creates a pointer to the read file
+    char cardLabels[CARD_COUNT][LABEL_SIZE];
+
+    for (int i = 0 ; i < CARD_COUNT ; i++) {
+        fgets(cardLabels[i], LABEL_SIZE, fpointer); // gets line i of txt file and populates the char array in cardLabels[i]
+    }
+    fclose(fpointer);
+
     //Card *columnPointers[7];
-    Card* columnPointers[7] = {cardList1, cardList2, cardList3, cardList4, cardList5, cardList6, cardList7};
-    Card** ptr_columnPointers[7] = {&cardList1, &cardList2, &cardList3, &cardList4, &cardList5, &cardList6, &cardList7};
+    Card* columnPointers[7] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+    //Card** ptr_columnPointers[7] = {&cardList1, &cardList2, &cardList3, &cardList4, &cardList5, &cardList6, &cardList7};
     int visibleCounter = 5;
     int visibleCards = 1;
     int columnCounter = 7;
@@ -27,21 +39,50 @@ Card* ptrColumnHead (Card** ptrHead) {
 
     //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
     //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
+
     for (int i = 0; i < 1; i++) {
+        int columnCardCount[] = {1, 6, 7, 8, 9, 10, 11};
+        int i = 0;
+        //int counter = 0;
+       for (int j = 0; j < COLUMN_COUNT; j++) {
+            columnPointers[i] = createCard(cardLabels[j][0], cardLabels[j][1]);
+            //Card* current = columnPointers[i];
+            /*for(int k = 1 ; k < CARD_COUNT ; k++) // get the rank and suit from line i of the file and pass as argument to createCard func
+            {
+                char rank = cardLabels[j][0];
+                char suit = cardLabels[j][1];
+                current->next = createCard(rank, suit);
+                current = current->next;
+
+            }*/
+            //Card *card = createCard((*ptrHead)->rank, (*ptrHead)->suit);
+                //columnPointers[j] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
+                //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
+               // printf("card # %d is : %c%c\n", j, columnPointers[j]->rank, columnPointers[j]->suit);
+       // counter++;
+        }
+
+   // }
+    }
+    return columnPointers;
+
+    }
+
+    /*for (int i = 0; i < 1; i++) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
             if (i == 0) { // sets all the cards in the first row
                // Card *card = createCard((*ptrHead)->rank, (*ptrHead)->suit);
-                insertAtTail(ptrHead, ptr_columnPointers[i], ptr_columnPointers[i]);
+                insertAtTail(ptrHead, &columnPointers[j], &columnPointers[j]);
                 //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
-                (*ptrHead) = (*ptrHead)->next; // move the head to the next card
+                //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
 
             }
-            /*if (i > 0){
+            if (i > 0){
                Card *card = createCard((*ptrHead)->rank, (*ptrHead)->suit);
                columnPointers[i] = &card[i];
                //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
                (*ptrHead) = (*ptrHead)->next; // move the head to the next card
-           }*/
+           }
         else{
             // while (visibleCounter < 6){
                  //columnPointers[i] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
@@ -55,7 +96,7 @@ Card* ptrColumnHead (Card** ptrHead) {
 
         // }
 
-        /* for(int i = 0 ; i < ROW_COUNT ;  i++ ){
+         for(int i = 0 ; i < ROW_COUNT ;  i++ ){
              if (columnCounter > 1 ){
                  //if (i == 0 && j == 0){
                  columnPointers[i] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
@@ -63,13 +104,14 @@ Card* ptrColumnHead (Card** ptrHead) {
              columnCounter--;
              }
 
-             }*/
+             }
 
-        /*for (int i = 0; i < COLUMN_COUNT; i++) {
+        for (int i = 0; i < COLUMN_COUNT; i++) {
 
-        }*/
+        }
 
     }
-        return *columnPointers;
+
         //return *ptrHead;
-    }
+        */
+
