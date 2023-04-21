@@ -9,8 +9,9 @@ int main(void) {
     Card *unshuffledDeck = createDeck("unshuffledCards.txt");
     Card **ptrTestCard = &unshuffledDeck;
     Card **columnTest = ptrColumnHead(ptrTestCard);
+    //printDeck(columnTest[1]);
     //printf("\t%c%c\t " , (*columnTest[0]).rank , (*columnTest[0]).suit);
-    printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t  " ,
+    printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \n " ,
            (*columnTest[0]).rank , (*columnTest[0]).suit,
            (*columnTest[1]).rank , (*columnTest[1]).suit,
            (*columnTest[2]).rank , (*columnTest[2]).suit,
@@ -19,7 +20,7 @@ int main(void) {
            (*columnTest[5]).rank , (*columnTest[5]).suit,
            (*columnTest[6]).rank , (*columnTest[6]).suit
            );
-    /*printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t  " ,
+    printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t  " ,
            (*columnTest[0]).next->rank , (*columnTest[0]).next->suit,
            (*columnTest[1]).next->rank , (*columnTest[1]).next->suit,
            (*columnTest[2]).next->rank , (*columnTest[2]).next->suit,
@@ -27,7 +28,7 @@ int main(void) {
            (*columnTest[4]).next->rank , (*columnTest[4]).next->suit,
            (*columnTest[5]).next->rank , (*columnTest[5]).next->suit,
            (*columnTest[6]).next->rank , (*columnTest[6]).next->suit
-    );*/
+    );
     //printf("\t%c%c\t  " , (*columnTest[2]).rank , (*columnTest[2]).suit);
    // printf("\t%c%c\t  ", (*columnTest[3]).rank, (*columnTest[3]).suit);
     //printf("\t%c%c\t  " , (*columnTest[4]).rank , (*columnTest[4]).suit);

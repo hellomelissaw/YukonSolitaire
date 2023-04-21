@@ -31,10 +31,10 @@ Card** ptrColumnHead (Card** ptrHead) {
 
     //columnPointers[0] = createCard((*ptrHead)->rank, (*ptrHead)->suit);
     //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
-    int rowStart[] = {0, 1, 2, 3, 4, 5, 6};
+    int rowStart[] = {0, 1, 1, 1, 1,1 ,2, 3, 4, 5, 6};
     int rowStartCounter = 0;
-    for (int i = 0; i < ROW_COUNT; i++) {
-        for (int j = 0; j < COLUMN_COUNT; j++) {
+    for (int i = 0; i < 2; i++) {
+        for (int j = rowStart[rowStartCounter]; j < COLUMN_COUNT; j++) {
             if (i == 0) { // sets all the cards in the first row
                 // Card *card = createCard((*ptrHead)->rank, (*ptrHead)->suit);
                 insertAtTail(ptrHead, &columnPointers[j], &columnPointers[j]);
@@ -42,12 +42,12 @@ Card** ptrColumnHead (Card** ptrHead) {
                 //(*ptrHead) = (*ptrHead)->next; // move the head to the next card
 
             } else if(i == 1) {
-                insertAtTail(ptrHead, &columnPointers[rowStart[rowStartCounter]], &columnPointers[rowStart[rowStartCounter]]);
+                insertAtTail(ptrHead, &columnPointers[j], &columnPointers[j]);
 
-            } else if(i == 2) {
-            insertAtTail(ptrHead, &columnPointers[rowStart[rowStartCounter]], &columnPointers[rowStart[rowStartCounter]]);
+            } /*else if(i == 2) {
+            insertAtTail(ptrHead, &columnPointers[j], &columnPointers[j]);
 
-        }
+        }*/
 
         }
         rowStartCounter++;
@@ -57,5 +57,6 @@ Card** ptrColumnHead (Card** ptrHead) {
     return ptr;
 
 }
+
 
 
