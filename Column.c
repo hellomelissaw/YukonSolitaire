@@ -29,8 +29,11 @@ Card** ptrColumnHead (char* fileName) {
     }
     fclose(fpointer);
 
-    //Card *columnPointers[7];
-    Card* columnPointers[7] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+    Card** columnPointers = (Card**) malloc(7 * sizeof(Card*));
+    //columnPointers = (Card*) malloc(sizeof(Card) * 7);
+
+    //Card* columnPointers[7] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+
     //Card** ptr_columnPointers[7] = {&cardList1, &cardList2, &cardList3, &cardList4, &cardList5, &cardList6, &cardList7};
     int visibleCounter = 5;
     int visibleCards = 1;
