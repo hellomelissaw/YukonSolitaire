@@ -9,10 +9,19 @@ int main(void) {
     Card *unshuffledDeck = createDeck("unshuffledCards.txt");
     Card **ptrTestCard = &unshuffledDeck;
     Card **columnTest = ptrColumnHead(ptrTestCard);
-    for(int i = 0 ; i < ROW_COUNT ; i++){
-        printf("%c%c ->\n", columnTest[4]->rank, columnTest[4]->suit);
-        columnTest[4] = columnTest[4]->next;
-    }
+    //for(int i = 0 ; i < ROW_COUNT ; i++){
+        printf("%c%c ->\n", columnTest[0]->rank, columnTest[0]->suit);
+        columnTest[0] = columnTest[0]->next;
+
+    //}
+    //for(int i = 0 ; i < ROW_COUNT ; i++){
+        printf("%c%c ->\n", columnTest[1]->rank, columnTest[1]->suit);
+        columnTest[1] = columnTest[1]->next;
+   // }
+    //for(int i = 0 ; i < ROW_COUNT ; i++){
+        printf("%c%c ->\n", columnTest[2]->rank, columnTest[2]->suit);
+        columnTest[2] = columnTest[2]->next;
+    //}
 
     //printDeck(columnTest[1]);
     //printf("\t%c%c\t " , (*columnTest[0]).rank , (*columnTest[0]).suit);
