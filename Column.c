@@ -49,6 +49,13 @@ Card** ptrColumnHead (Card* head) {
 
 }
 
-
+void printList(Card *head) {
+    Card *current = head;
+    while (current != NULL) {
+        printf("%c%c ", current->rank , current->suit);
+        current = current->next;
+    }
+    printf("\n");
+}
 
 
