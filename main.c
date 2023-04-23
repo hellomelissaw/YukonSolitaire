@@ -6,12 +6,15 @@ int main(void) {
 
     printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
     printf("\n");
-    Card *unshuffledDeck = createDeck("unshuffledCards.txt");
-    Card **ptrTestCard = &unshuffledDeck;
-    Card **columnTest = ptrColumnHead(ptrTestCard);
+    //Card *unshuffledDeck = createDeck("unshuffledCards.txt");
+    //Card **ptrTestCard = &unshuffledDeck;
+    Card **columnTest = ptrColumnHead(createDeck("unshuffledCards.txt"));
+    Card* currentColumn = columnTest[6];
     for(int i = 0 ; i < ROW_COUNT ; i++){
-        printf("%c%c ->\n", columnTest[4]->rank, columnTest[4]->suit);
-        columnTest[4] = columnTest[4]->next;
+      //  printf("%c%c ->\n", columnTest[2]->rank, columnTest[2]->suit);
+     //   columnTest[2] = columnTest[2]->next;
+        printf("%c%c ->\n", currentColumn->rank, currentColumn->suit);
+         currentColumn = currentColumn->next;
     }
 
     //printDeck(columnTest[1]);

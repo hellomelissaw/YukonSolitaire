@@ -16,14 +16,25 @@ struct  Card* cardList5 = NULL;
 struct  Card* cardList6 = NULL;
 struct  Card* cardList7 = NULL*/
 
-Card** ptrColumnHead (Card** ptrHead) {
+Card** ptrColumnHead (Card* head) {
 
-    //Card **columnPointers = (Card **) malloc(7 * sizeof(Card *));
-    //columnPointers = (Card*) malloc(sizeof(Card) * 7);
+    Card** ptrHead = &head;
+    Card **columnHeads = (Card **) malloc(7 * sizeof(Card *));
+    if (columnHeads == NULL) {
+        printf("Failure to allocate memory to column heads x__x");
+        return NULL;
+    }
 
-    Card* columnHeads[7] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL};
-    Card* columnTails[7] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL};
-    //Card** ptr_columnPointers[7] = {&cardList1, &cardList2, &cardList3, &cardList4, &cardList5, &cardList6, &cardList7};
+    Card **columnTails = (Card **) malloc(7 * sizeof(Card *));
+    if (columnTails == NULL) {
+        printf("Failure to allocate memory to column tails x__x");
+        return NULL;
+    }
+
+    columnHeads = (Card *[]) {NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+
+    columnTails = (Card *[]) {NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+
     int visibleCounter = 5;
     int visibleCards = 1;
     int columnCounter = 7;
@@ -44,9 +55,15 @@ Card** ptrColumnHead (Card** ptrHead) {
         }
         rowStartCounter++;
     }
-    Card** ptr = &columnHeads[0];
+    for(int i = 0 ; i < ROW_COUNT ; i++){
+        //("%c%c ->\n", columnTest[3]->rank, columnTest[3]->suit);
+        //columnTest[3] = columnTest[3]->next;
+        //printf("%c%c ->\n", columnHeads[4]->rank, columnHeads[4]->suit);
+        //columnHeads[4] = columnHeads[4]->next;
+    }
+   // Card** ptr = &columnHeads[0];
 
-    return ptr;
+    return columnHeads;
 
 }
 
