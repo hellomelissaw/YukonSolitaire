@@ -1,22 +1,31 @@
 //#include "Shuffle.c"
 #include <stdio.h>
 #include <string.h>
-#include "Column.c"
+#include "Board.c"
 int main(void) {
 
-    printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
-    printf("\n");
-
-    Card **columnTest = ptrColumnHead(createDeck("unshuffledCards.txt"));
-    Card* currentColumn = columnTest[6];
+    //Card **columnTest = setColumnLists(createDeck("unshuffledCards.txt"));
+    printBoard(createDeck("unshuffledCards.txt"));
+    /*Card* currentColumn = columnTest[6];
     for(int i = 0 ; i < ROW_COUNT ; i++){
         printf("%c%c ->\n", currentColumn->rank, currentColumn->suit);
          currentColumn = currentColumn->next;
-    }
+    }*/
 
+   /* printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
+    printf("\n");
+    printf("                                                           []  \tF1\n");
+    printf("                                                           []  \tF2\n");
+    printf("                                                           []  \tF3\n");
+    printf("                                                           []  \tF4\n");
+
+    printf("");
+    printf("LAST command; \n"); //add func
+    printf("Message \n"); //add func
+    printf("INPUT >");
     //printDeck(columnTest[1]);
     //printf("\t%c%c\t " , (*columnTest[0]).rank , (*columnTest[0]).suit);
-   /* printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \n " ,
+    printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \n " ,
            (*columnTest[0]).rank , (*columnTest[0]).suit,
            (*columnTest[1]).rank , (*columnTest[1]).suit,
            (*columnTest[2]).rank , (*columnTest[2]).suit,

@@ -8,7 +8,7 @@
 #define  COLUMN_COUNT 7
 #define  ROW_COUNT 11
 
-Card** ptrColumnHead (Card* head) {
+Card** setColumnLists (Card* head) {
 
     Card** ptrHead = &head;
     Card **columnHeads = (Card **) malloc(7 * sizeof(Card *));
@@ -49,6 +49,24 @@ Card** ptrColumnHead (Card* head) {
 
 }
 
+void printBoard(Card* deckHead) {
+    Card** columns = setColumnLists(deckHead);
+    printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7\n");
+    for(int i = 0 ; i < ROW_COUNT ; i++){
+        Card* currentColumn = columns[i];
+        printf("                                                           []  \tF1\n");
+        //printf("\t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \t%c%c\t \n " ,);
+    }
+
+    printf("                                                           []  \tF2\n");
+    printf("                                                           []  \tF3\n");
+    printf("                                                           []  \tF4\n");
+
+    printf("");
+    printf("LAST command; \n"); //add func
+    printf("Message \n"); //add func
+    printf("INPUT >");
+}
 
 
 
