@@ -76,5 +76,10 @@ void insertBetween(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail,
     }
 }
 
+void moveToFoundation(Card* cardToBeMoved, Card* headOfFoundationPile) {
+
+
+}
+
 
 

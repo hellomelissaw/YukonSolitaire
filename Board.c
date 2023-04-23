@@ -49,6 +49,28 @@ Card** setColumnLists (Card* head) {
 
 }
 
+Card** setFoundationLists() {
+    Card* blankCard = createCard( '[', ']');
+    Card **foundationHeads = (Card **) malloc(4 * sizeof(Card *));
+    if (foundationHeads == NULL) {
+        printf("Failure to allocate memory to foundation heads x__x");
+        return NULL;
+    }
+
+    Card **foundationTails = (Card **) malloc(4 * sizeof(Card *));
+    if (foundationTails == NULL) {
+        printf("Failure to allocate memory to foundation tails x__x");
+        return NULL;
+    }
+
+    foundationHeads = (Card *[]) {blankCard, blankCard, blankCard, blankCard};
+
+    foundationTails = (Card *[]) {NULL, NULL, NULL, NULL};
+
+    return foundationHeads;
+
+}
+
 void printBoard(char fileName[]) {
     Card **columnTest = setColumnLists(createDeck(fileName));
     Card* currentColumns[COLUMN_COUNT];
