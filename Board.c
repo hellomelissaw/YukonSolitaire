@@ -7,6 +7,7 @@
 
 #define  COLUMN_COUNT 7
 #define  ROW_COUNT 11
+#define FOUNDATION_COUNT 4
 
 Card** setColumnLists (Card* head) {
 
@@ -50,7 +51,7 @@ Card** setColumnLists (Card* head) {
 }
 
 Card** setFoundationLists() {
-    Card* blankCard = createCard( '[', ']');
+
     Card **foundationHeads = (Card **) malloc(4 * sizeof(Card *));
     if (foundationHeads == NULL) {
         printf("Failure to allocate memory to foundation heads x__x");
@@ -63,9 +64,16 @@ Card** setFoundationLists() {
         return NULL;
     }
 
-    foundationHeads = (Card *[]) {blankCard, blankCard, blankCard, blankCard};
+    for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
 
-    foundationTails = (Card *[]) {NULL, NULL, NULL, NULL};
+        foundationHeads[i] = NULL;
+        foundationTails[i] = NULL;
+
+        Card* blankCard = createCard('[',']');
+        Card** ptrBlankCard = &blankCard;
+        insertAtTail(ptrBlankCard, &foundationHeads[i], &foundationTails[i]);
+
+    }
 
     return foundationHeads;
 

@@ -5,5 +5,9 @@
 int main(void) {
     //printBoard("unshuffledCards.txt");
     Card** foundationPiles = setFoundationLists();
-    printf("%c%c", foundationPiles[0]->rank, foundationPiles[0]->suit);
+
+    for(int i = 0 ; i < 4 ; i++){
+        printf("%c%c\n", foundationPiles[i]->rank, foundationPiles[i]->suit);
+    }
+
 }
