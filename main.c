@@ -23,22 +23,49 @@ int main(void) {
     Card* currentColumn_6 = columnTest[6];
     Card* currentColumn_7 = columnTest[7];
 
+    // Print columns horizontally
     Card* head = NULL;
-    Card* current = NULL;
+    Card* currentCard = NULL;
     for (int i = 0 ; i < 7 ; i++) {
-        Card *newNode = malloc(sizeof(Card));
-        current->rank;
-        current->suit;
+        Card *card = malloc(sizeof(Card));
+        currentCard->rank;
+        currentCard->suit;
 
+        // Insert the new card into the linked list
         if (head == NULL) {
-            head = newNode;
-            current = head;
+            head = card;
+            currentCard = head;
         } else {
-            current->next = newNode;
-            current = current->next;
+            currentCard->next = card;
+            currentCard = currentCard->next;
         }
 
     }
+
+    //Print columns Vertically
+    //Card* head = malloc(sizeof (Card));
+   /* Card* heads[7];
+    //Card* currentCard = head;
+    for(int i = 0 ; i < 7 ; i++){
+        Card* currentCard = malloc(sizeof (Card));
+        currentCard->rank;
+        currentCard->suit;
+        heads[i] = currentCard;
+        for (int j = 1 ; j < 7 ; j++){
+            currentCard->next = malloc(sizeof (Card));
+            currentCard = currentCard->next;
+            currentCard->rank;
+            currentCard->suit;
+        }
+        currentCard->next = NULL;
+    }
+    for (int i = 0; i < 7; i++) {
+
+        //printList(heads[i]);
+
+    }
+    //currentCard->next = NULL;
+    //printList(heads[i]);
     printList(currentColumn_0);
     printList(currentColumn_1);
     printList(currentColumn_2);

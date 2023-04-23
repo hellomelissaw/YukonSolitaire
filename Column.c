@@ -50,12 +50,12 @@ Card** ptrColumnHead (Card* head) {
 }
 
 void printList(Card *head) {
-    Card *current = head;
-    while (current != NULL) {
-        printf("%c%c ", current->rank , current->suit);
-        current = current->next;
+    Card *currentCard = head;
+    while (currentCard != NULL) {
+        printf("\t%c%c ", currentCard->rank , currentCard->suit);
+        currentCard = currentCard->next;
     }
-    printf("\n");
+    //printf("\n");
 }
 
 
