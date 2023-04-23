@@ -8,7 +8,7 @@
 #define  COLUMN_COUNT 7
 #define  ROW_COUNT 11
 
-Card** ptrColumnHead (Card* head) {
+Card** setColumnLists (Card* head) {
 
     Card** ptrHead = &head;
     Card **columnHeads = (Card **) malloc(7 * sizeof(Card *));
@@ -49,13 +49,34 @@ Card** ptrColumnHead (Card* head) {
 
 }
 
-void printList(Card *head) {
-    Card *currentCard = head;
-    while (currentCard != NULL) {
-        printf("\t%c%c ", currentCard->rank , currentCard->suit);
-        currentCard = currentCard->next;
+void printBoard(char fileName[]) {
+    Card **columnTest = setColumnLists(createDeck(fileName));
+    Card* currentColumns[COLUMN_COUNT];
+
+
+    for (int i = 0; i < COLUMN_COUNT; i++) { // creates an array of pointers to the head card of each of the 7 linked lists representing the columns
+        currentColumns[i] = columnTest[i];
     }
-    //printf("\n");
+
+    printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7\n");
+    for (int i = 0; i < ROW_COUNT; i++) {
+        for (int j = 0; j < COLUMN_COUNT; j++) {
+            Card *currentColumn = currentColumns[j];
+            if (currentColumn == NULL) {
+                printf("\t\t"); // if there is no card in the current column, make a tab space
+            } else {
+                printf("\t%c%c\t", currentColumn->rank, currentColumn->suit);
+                currentColumns[j] = currentColumn->next; // the current columns pointer should point to the next card in the pågældende linked list
+            }
+        }
+        printf("\n");
+    }
+
+    printf("");
+    printf("LAST command; \n"); //add func
+    printf("Message \n"); //add func
+    printf("INPUT >");
 }
+
 
 
