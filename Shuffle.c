@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "Deck.c"
+//#include "Deck.c"
 #include "LinkedListManipulation.c"
 #define CARD_COUNT 52
 
@@ -110,18 +110,18 @@ Card* shuffleRandom(Card* head) {
         picker = (rand() % 3) + 1;
 
         if(picker == 1) {
-            insertAtTail(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead);
+            insertAtTail(ptrUnshuffledHead, ptrShuffledHead, ptrShuffledTail);
 
         } else if(picker == 2) {
-            insertAtHead(ptrShuffledHead, ptrUnshuffledHead);
+            insertAtHead(ptrUnshuffledHead, ptrShuffledHead);
 
         } else if (picker == 3) {
             if(i < 3) {
-                insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, 0);
+                insertBetween(ptrUnshuffledHead, ptrShuffledHead, ptrShuffledTail, 0);
 
             } else {
                 int numNodesToTraverse = (rand() % (i-1) + 1);
-                insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, numNodesToTraverse);
+                insertBetween(ptrUnshuffledHead, ptrShuffledHead, ptrShuffledTail, numNodesToTraverse);
             }
         }
         i++;

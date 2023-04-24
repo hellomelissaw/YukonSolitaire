@@ -2,6 +2,7 @@
 // Created by Watson on 2023-04-15.
 //
 #include <stdio.h>
+#include "Pile.c"
 //#include "Card.c"
 
 /// INSERTS THE CURRENT HEAD OF ONE DECK AT THE TAIL OF ANOTHER DECK

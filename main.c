@@ -1,8 +1,8 @@
-//#include "Shuffle.c"
+#include "Shuffle.c"
 #include <stdio.h>
 #include <string.h>
 //#include "Board.c"
-#include "moveTests.c"
+//#include "moveTests.c"
 //#include "pileTest.c"
 int main(void) {
     // TEST CREATION OF COLUMNS
@@ -16,12 +16,13 @@ int main(void) {
 
  // move3CToFoundatationTest();
 
- testMove2Cn3CToColumnWithAS();
+ //testMove2Cn3CToColumnWithAS();
 
   //  testAccessingNextCard();
 
-
-
+    Card* testDeck = createDeck("unshuffledCards.txt");
+    shuffleRandom(testDeck);
+    printDeck(testDeck);
 
 
 }

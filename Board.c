@@ -2,7 +2,6 @@
 // Created by Bruger on 4/17/2023.
 //
 //#include "Deck.c"
-#include "Pile.c"
 #include "LinkedListManipulation.c"
 #include <stdio.h>
 
