@@ -5,14 +5,15 @@
 //#include "moveTests.c"
 //#include "pileTest.c"
 int main(void) {
-    Card* testDeck = createDeck("unshuffledcards.txt");
+    // TEST CREATION OF COLUMNS
+    /*Card* testDeck = createDeck("unshuffledcards.txt");
     Pile** firstColumn = setColumnLists(testDeck);
-    printBoard(firstColumn);
-    //Card** foundationPiles = setFoundationLists();
+    printBoard(firstColumn);*/
 
-    /*for(int i = 0 ; i < 4 ; i++){
-        printf("%c%c\n", foundationPiles[i]->rank, foundationPiles[i]->suit);
-    }*/
+    //TEST CREATION OF FOUNDATION PILES
+    Pile** foundationPiles = setFoundationLists();
+
+    printFoundationLists(foundationPiles);
 
    // moveToFoundatationTest();
 

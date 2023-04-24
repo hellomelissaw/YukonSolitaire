@@ -29,9 +29,9 @@ Pile** setColumnLists (Card* head) {
 
 }
 
-Card** setFoundationLists() {
-
-    Card **foundationHeads = (Card **) malloc(4 * sizeof(Card *));
+Pile** setFoundationLists() {
+    Pile** foundations = (Pile* [])  {createPile(NULL), createPile(NULL), createPile(NULL), createPile(NULL)};
+   /* Card **foundationHeads = (Card **) malloc(4 * sizeof(Card *));
     if (foundationHeads == NULL) {
         printf("Failure to allocate memory to foundation heads x__x");
         return NULL;
@@ -41,20 +41,17 @@ Card** setFoundationLists() {
     if (foundationTails == NULL) {
         printf("Failure to allocate memory to foundation tails x__x");
         return NULL;
-    }
+    }*/
 
     for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
 
-        foundationHeads[i] = NULL;
-        foundationTails[i] = NULL;
-
         Card* blankCard = createCard('[',']');
         Card** ptrBlankCard = &blankCard;
-        insertAtTail(ptrBlankCard, &foundationHeads[i], &foundationTails[i]);
+        insertAtTail(ptrBlankCard, &foundations[i]->head, &foundations[i]->tail);
 
     }
 
-    return foundationHeads;
+    return foundations;
 
 }
 
@@ -85,6 +82,28 @@ void printBoard(Pile** columnTest) {
     printf("LAST command; \n"); //add func
     printf("Message \n"); //add func
     printf("INPUT >");
+}
+
+void printFoundationLists(Pile** foundations) {
+    //Pile** columnTest = setColumnLists(firstColumn);
+    Pile* currentFoundation[COLUMN_COUNT];
+
+
+    for (int i = 0; i < COLUMN_COUNT; i++) { // creates an array of pointers to the head card of each of the 7 linked lists representing the columns
+        currentFoundation[i] = foundations[i];
+    }
+
+        for (int j = 0; j < FOUNDATION_COUNT; j++) {
+            Card *currentFoundationCard = currentFoundation[j]->head;
+            if (currentFoundationCard == NULL) {
+                printf("\t\t"); // if there is no card in the current column, make a tab space
+            } else {
+                printf("\t%c%c\t\n", currentFoundationCard->rank, currentFoundationCard->suit);
+                currentFoundation[j]->head = currentFoundationCard->next; // the current columns pointer should point to the next card in the pågældende linked list
+            }
+        }
+        printf("\n");
+
 }
 
 
