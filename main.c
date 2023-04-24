@@ -14,7 +14,9 @@ int main(void) {
 
   // move2CToFoundatationTest();
 
-  move3CToFoundatationTest();
+ // move3CToFoundatationTest();
+
+ testMove2Cn3CToColumnWithAS();
 
   //  testAccessingNextCard();
 

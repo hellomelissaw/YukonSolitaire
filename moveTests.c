@@ -65,6 +65,23 @@ void move3CToFoundatationTest() {
 
 }
 
+void testMove2Cn3CToColumnWithAS(){
+    Card* as = createCard('A', 'S');
+    Card* ac = createCard('A', 'C');
+    Card* twoc = createCard('2', 'C');
+    Card* threec = createCard('3', 'C');
+    Pile* testColumn1 = createPile(as);
+    Pile* testColumn2 = createPile(ac);
+    insertAtTail(&twoc, &testColumn2->head, &testColumn2->tail);
+    insertAtTail(&threec, &testColumn2->head, &testColumn2->tail);
+    printf("testColumn2 tail before move expected 3C, actual : %c%c\n", testColumn2->tail->rank, testColumn2->tail->suit);
+
+    moveToColumn(&testColumn2, &testColumn1, '2');
+    printf("column1 new tail expected: 3C, actual: %c%c\n", testColumn1->tail->rank, testColumn1->tail->suit);
+    printf("testColumn1 tail after move expected AC, actual : %c%c\n", testColumn1->tail->rank, testColumn1->tail->suit);
+
+}
+
 
 
 

@@ -82,12 +82,13 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
         char requiredRank;
         if((*foundationTail)->rank == '[') {
             requiredRank = 'A';
-        } else if ((*foundationTail)->rank >= 50 && (*foundationTail)->rank <= 57) { // using ascii values of char to check condition
-            requiredRank = ((*foundationTail)->rank) + 1;
-            printf("requiredRank: %c\n", requiredRank);
 
         } else if ((*foundationTail)->rank == 'A') {
             requiredRank = '2';
+
+        } else if ((*foundationTail)->rank >= 50 && (*foundationTail)->rank <= 57) { // using ascii values of char to check condition
+            requiredRank = ((*foundationTail)->rank) + 1;
+            printf("requiredRank: %c\n", requiredRank);
 
         } else if ((*foundationTail)->rank == 'T') {
             requiredRank = 'J';
@@ -117,6 +118,56 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
         printf("Card to be moved does not have the correct suit!\n");
         return false;
     }
+
+}
+
+bool validateMoveToColumn(Card* src, Pile** destColumn) {
+    char expectedRank;
+    if((*destColumn)->tail->rank == 'A'){
+        expectedRank = '2';
+
+    } else if((*destColumn)->tail->rank >= 50 && (*destColumn)->tail->rank <= 57) { // using ascii values of char to check condition
+        expectedRank = (*destColumn)->tail->rank+1;
+
+    } else if ((*destColumn)->tail->rank == 'T') {
+        expectedRank = 'J';
+
+    } else if ((*destColumn)->tail->rank == 'J') {
+        expectedRank = 'Q';
+
+    } else if ((*destColumn)->tail->rank == 'Q') {
+        expectedRank = 'K';
+
+    } else {
+        printf("Invalid rank at foundation tail.\n");
+        return false;
+    }
+
+
+    if(src->rank == expectedRank){
+        return true;
+
+    } else {
+        printf("The card %c%c is not the right value to be moved.\n",src->rank, src->suit);
+        return false;
+    }
+
+}
+
+void moveToColumn(Pile** src, Pile** destColumn, char cardToBeMovedRank){
+    Pile* pileToBeMoved = (*src);
+    while(pileToBeMoved->head->rank != cardToBeMovedRank) {
+        pileToBeMoved->head = pileToBeMoved->head->next;
+    }
+    if(validateMoveToColumn(pileToBeMoved->head, destColumn)) {
+        while(pileToBeMoved->head != NULL) {
+            insertAtTail(&pileToBeMoved->head, &(*destColumn)->head, &(*destColumn)->tail);
+        }
+
+    } else {
+        printf("Could not move card %c%c.\n", pileToBeMoved->head->rank, pileToBeMoved->head->suit);
+    }
+    //printf("current card is: %c%c", pileToBeMoved->head->rank, pileToBeMoved->head->suit);
 
 }
 
