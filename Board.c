@@ -34,7 +34,7 @@ Pile** setFoundationLists() {
 
 
     for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
-        foundations[i] = createPile(NULL);
+        foundations[i] = createPile();
         Card* blankCard = createCard('[',']');
         Card** ptrBlankCard = &blankCard;
         insertAtTail(ptrBlankCard, &foundations[i]->head, &foundations[i]->tail);

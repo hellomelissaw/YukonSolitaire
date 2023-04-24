@@ -11,10 +11,10 @@ typedef struct Pile
 
 } Pile;
 
-Pile* createPile(Card* head) {
+Pile* createPile() {
     Pile* pile = malloc(sizeof(Pile));
-    pile->head = head;
-    pile->tail = head;
+    pile->head = NULL;
+    pile->tail = NULL;
 
     return pile;
 }

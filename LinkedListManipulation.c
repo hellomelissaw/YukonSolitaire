@@ -76,6 +76,11 @@ void insertBetween(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail,
     }
 }
 
+void setNewTail(Pile** columnToModify, Card* newTail) {
+    (*columnToModify)->tail = newTail;
+    (*columnToModify)->tail->next = NULL;
+}
+
 bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
     char requiredSuit = (*foundationTail)->suit;
     if((*cardToBeMoved)->suit == requiredSuit || requiredSuit == ']') {
@@ -156,13 +161,18 @@ bool validateMoveToColumn(Card* src, Pile** destColumn) {
 
 void moveToColumn(Pile** src, Pile** destColumn, char cardToBeMovedRank){
     Pile* pileToBeMoved = (*src);
+    Card* newTail = NULL;
     while(pileToBeMoved->head->rank != cardToBeMovedRank) {
+        newTail = pileToBeMoved->head;
         pileToBeMoved->head = pileToBeMoved->head->next;
+
     }
     if(validateMoveToColumn(pileToBeMoved->head, destColumn)) {
         while(pileToBeMoved->head != NULL) {
             insertAtTail(&pileToBeMoved->head, &(*destColumn)->head, &(*destColumn)->tail);
         }
+
+        setNewTail(src, newTail);
 
     } else {
         printf("Could not move card %c%c.\n", pileToBeMoved->head->rank, pileToBeMoved->head->suit);
