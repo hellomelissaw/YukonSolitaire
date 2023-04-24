@@ -14,7 +14,9 @@ int main(void) {
 
    // moveToFoundatationTest();
 
-    testAddingAtTailOfPile();
+   // testAddingAtTailOfPile();
+
+   testAccessingNextCard();
 
 
 }
