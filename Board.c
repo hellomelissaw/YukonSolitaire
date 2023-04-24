@@ -10,7 +10,6 @@
 #define FOUNDATION_COUNT 4
 
 Card** setColumnLists (Card* head) {
-
     Card** ptrHead = &head;
     Card **columnHeads = (Card **) malloc(7 * sizeof(Card *));
     if (columnHeads == NULL) {

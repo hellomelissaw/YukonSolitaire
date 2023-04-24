@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 //#include "Board.c"
-#include "moveTests.c"
+//#include "moveTests.c"
+#include "pileTest.c"
 int main(void) {
     //printBoard("unshuffledCards.txt");
     //Card** foundationPiles = setFoundationLists();
@@ -11,9 +12,9 @@ int main(void) {
         printf("%c%c\n", foundationPiles[i]->rank, foundationPiles[i]->suit);
     }*/
 
-    moveToFoundatationTest();
+   // moveToFoundatationTest();
 
-
+    testAddingAtTailOfPile();
 
 
 }
