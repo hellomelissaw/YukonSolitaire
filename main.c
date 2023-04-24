@@ -11,9 +11,16 @@ int main(void) {
     printBoard(firstColumn);*/
 
     //TEST CREATION OF FOUNDATION PILES
+
     Pile** foundationPiles = setFoundationLists();
+    printFoundationLists(foundationPiles);
+    Card* ac = createCard('A', 'C');
+    if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail)) {
+        insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
+    }
 
     printFoundationLists(foundationPiles);
+
 
    // moveToFoundatationTest();
 
