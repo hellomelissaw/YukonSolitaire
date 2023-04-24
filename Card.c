@@ -1,6 +1,7 @@
 //
 // Created by Watson on 2023-04-15.
 //
+
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -24,4 +25,5 @@ Card* createCard(char rank, char suit) {
     card_node->suit = suit;
     return card_node;
 }
+
 

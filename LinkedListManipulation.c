@@ -76,10 +76,37 @@ void insertBetween(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail,
     }
 }
 
-void moveToFoundation(Card* cardToBeMoved, Card* headOfFoundationPile) {
+bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
+    char requiredSuit = (*foundationTail)->suit;
+    if((*cardToBeMoved)->suit == requiredSuit || requiredSuit == ']') {
+        char requiredRank;
+        if((*foundationTail)->rank == '[') {
+            requiredRank = 'A';
+        } else if ((*foundationTail)->rank > 1 && (*foundationTail)->rank < 10) {
+            requiredRank = ((*foundationTail)->rank) + 1;
+        } else if ((*foundationTail)->rank == 'T') {
+            requiredRank = 'J';
+        } else if ((*foundationTail)->rank == 'J') {
+            requiredRank = 'Q';
+        } else if ((*foundationTail)->rank == 'Q') {
+            requiredRank = 'K';
+        } else { printf("Invalid rank at foundation tail.");}
 
+        if((*cardToBeMoved)->rank == requiredRank) {
+
+            return true;
+
+        } else {
+            printf("Card to be moved does not have the correct rank!");
+            return false;
+
+        }
+
+    } else {
+        printf("Card to be moved does not have the correct suit!");
+        return false;
+    }
 
 }
-
 
 
