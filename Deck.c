@@ -3,7 +3,8 @@
 //
 #include <stdlib.h>
 #include <stdio.h>
-#include "Card.c"
+//#include "Card.c"
+#include "LinkedListManipulation.c"
 #include "Utilities.c"
 #define CARD_COUNT 52
 #define LABEL_SIZE 4
@@ -26,18 +27,19 @@ Card* createDeck(char fileName[]) {
 
 
     /* Add values from the cardLabels array to the array of cards */
-    Card* head = createCard(cardLabels[0][0], cardLabels[0][1]);
-    Card* current = head;
-    for(int i = 1 ; i < CARD_COUNT ; i ++) // get the rank and suit from line i of the file and pass as argument to createCard func
+    Pile* newDeck = createPile();
+
+    for(int i = 0 ; i < CARD_COUNT ; i ++) // get the rank and suit from line i of the file and pass as argument to createCard func
     {
         char rank = cardLabels[i][0];
         char suit = cardLabels[i][1];
-        current->next = createCard(rank, suit);
-        current = current->next;
+        Card* newCard = createCard(rank, suit);
+        insertAtTail(&newCard, &newDeck->head, &newDeck->tail);
+
 
     }
 
-    return head;
+    return newDeck->head;
 }
 
 /// FUNCTION TO PRINT DECK IN CONSOLE

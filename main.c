@@ -21,8 +21,10 @@ int main(void) {
   //  testAccessingNextCard();
 
     Card* testDeck = createDeck("unshuffledCards.txt");
-    shuffleRandom(testDeck);
+    //shuffleRandom(testDeck);
+    shuffleInterweave(45, testDeck);
     printDeck(testDeck);
+
 
 
 }

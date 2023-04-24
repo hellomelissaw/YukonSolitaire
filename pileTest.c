@@ -15,7 +15,8 @@ void testCreatingPile() {
 
 void testAccessingNextCard() {
     Card* head = createCard('A','C');
-    Pile* testPile = createPile(head);
+    Pile* testPile = createPile();
+    testPile->head = head;
     Card* secondCard = createCard('2', 'C');
 
     insertAtTail(&secondCard, &testPile->head, &testPile->tail);
