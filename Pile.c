@@ -2,7 +2,7 @@
 // Created by Watson on 2023-04-24.
 //
 #include <stdlib.h>
-#include "Card.c"
+#include "Deck.c"
 
 typedef struct Pile
 {
