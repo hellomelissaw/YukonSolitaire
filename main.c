@@ -1,8 +1,8 @@
 //#include "Shuffle.c"
 #include <stdio.h>
 #include <string.h>
-#include "Board.c"
-//#include "moveTests.c"
+//#include "Board.c"
+#include "moveTests.c"
 //#include "pileTest.c"
 int main(void) {
     // TEST CREATION OF COLUMNS
@@ -10,23 +10,13 @@ int main(void) {
     Pile** firstColumn = setColumnLists(testDeck);
     printBoard(firstColumn);*/
 
-    //TEST CREATION OF FOUNDATION PILES
+  // moveFirstCardToFoundatationTest();
 
-    Pile** foundationPiles = setFoundationLists();
-    printFoundationLists(foundationPiles);
-    Card* ac = createCard('A', 'C');
-    if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail)) {
-        insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
-    }
+  // move2CToFoundatationTest();
 
-    printFoundationLists(foundationPiles);
+  move3CToFoundatationTest();
 
-
-   // moveToFoundatationTest();
-
-   // testAddingAtTailOfPile();
-
-   // testAccessingNextCard();
+  //  testAccessingNextCard();
 
 
 

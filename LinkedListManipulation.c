@@ -82,28 +82,39 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
         char requiredRank;
         if((*foundationTail)->rank == '[') {
             requiredRank = 'A';
-        } else if ((*foundationTail)->rank > 1 && (*foundationTail)->rank < 10) {
+        } else if ((*foundationTail)->rank >= 50 && (*foundationTail)->rank <= 57) { // using ascii values of char to check condition
             requiredRank = ((*foundationTail)->rank) + 1;
+            printf("requiredRank: %c\n", requiredRank);
+
+        } else if ((*foundationTail)->rank == 'A') {
+            requiredRank = '2';
+
         } else if ((*foundationTail)->rank == 'T') {
             requiredRank = 'J';
+
         } else if ((*foundationTail)->rank == 'J') {
             requiredRank = 'Q';
+
         } else if ((*foundationTail)->rank == 'Q') {
             requiredRank = 'K';
-        } else { printf("Invalid rank at foundation tail.");}
+
+        } else {
+            printf("Invalid rank at foundation tail.\n");
+            return false;
+        }
 
         if((*cardToBeMoved)->rank == requiredRank) {
 
             return true;
 
         } else {
-            printf("Card to be moved does not have the correct rank!");
+            printf("Card to be moved does not have the correct rank!\n");
             return false;
 
         }
 
     } else {
-        printf("Card to be moved does not have the correct suit!");
+        printf("Card to be moved does not have the correct suit!\n");
         return false;
     }
 

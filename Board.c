@@ -31,7 +31,7 @@ Pile** setColumnLists (Card* head) {
 
 Pile** setFoundationLists() {
     Pile** foundations = malloc(4 * sizeof(Pile*));
-    //foundations = (Pile* [])  {createPile(NULL), createPile(NULL), createPile(NULL), createPile(NULL)};
+
 
     for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
         foundations[i] = createPile(NULL);
