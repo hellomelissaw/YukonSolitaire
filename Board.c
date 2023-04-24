@@ -12,7 +12,7 @@
 
 Pile** setColumnLists (Card* head) {
     Card** ptrHead = &head;
-    Pile** columns = (Pile* []) {createPile(NULL), createPile(NULL), createPile(NULL), createPile(NULL), createPile(NULL), createPile(NULL), createPile(NULL)};
+    Pile** columns = (Pile* []) {createPile(), createPile(), createPile(), createPile(), createPile(), createPile(), createPile()};
 
     int rowStart[] = {0, 1, 1, 1, 1,1 ,2, 3, 4, 5, 6};
     int rowStartCounter = 0;

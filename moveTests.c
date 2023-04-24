@@ -82,7 +82,7 @@ void testMove2Cn3CToColumnWithAS(){
     moveToColumn(&testColumn1, &testColumn2, '2');
 
     printf("testColumn1 new tail expected: AC, actual: %c%c\n", testColumn1->tail->rank, testColumn1->tail->suit);
-    printf("testColumn1 head expected: AC, actual: %c%c\n", testColumn1->head->rank, testColumn1->head->suit);
+    printf("testColumn1 head expected after move: AC, actual: %c%c\n", testColumn1->head->rank, testColumn1->head->suit);
 
     printf("testColumn2 tail after move expected 3C, actual : %c%c\n", testColumn2->tail->rank, testColumn2->tail->suit);
 

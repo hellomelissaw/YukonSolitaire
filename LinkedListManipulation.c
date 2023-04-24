@@ -160,22 +160,33 @@ bool validateMoveToColumn(Card* src, Pile** destColumn) {
 }
 
 void moveToColumn(Pile** src, Pile** destColumn, char cardToBeMovedRank){
-    Pile* pileToBeMoved = (*src);
+    //Pile* pileToBeMoved = (*src);
+    Card* tempHead = (*src)->head;
     Card* newTail = NULL;
-    while(pileToBeMoved->head->rank != cardToBeMovedRank) {
+    while(tempHead->rank != cardToBeMovedRank) {
+        newTail = tempHead;
+        tempHead = tempHead->next;
+    }
+
+
+   /* while(pileToBeMoved->head->rank != cardToBeMovedRank) {
         newTail = pileToBeMoved->head;
         pileToBeMoved->head = pileToBeMoved->head->next;
 
-    }
-    if(validateMoveToColumn(pileToBeMoved->head, destColumn)) {
+    }*/
+    if(validateMoveToColumn(tempHead, destColumn)) {
+        while(tempHead != NULL) {
+            insertAtTail(&tempHead,&(*destColumn)->head, &(*destColumn)->tail);
+        }
+   /* if(validateMoveToColumn(pileToBeMoved->head, destColumn)) {
         while(pileToBeMoved->head != NULL) {
             insertAtTail(&pileToBeMoved->head, &(*destColumn)->head, &(*destColumn)->tail);
-        }
+        }*/
 
         setNewTail(src, newTail);
 
     } else {
-        printf("Could not move card %c%c.\n", pileToBeMoved->head->rank, pileToBeMoved->head->suit);
+        printf("Could not move card %c%c.\n", tempHead->rank, tempHead->suit);
     }
     //printf("current card is: %c%c", pileToBeMoved->head->rank, pileToBeMoved->head->suit);
 
