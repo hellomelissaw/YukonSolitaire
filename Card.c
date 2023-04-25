@@ -8,7 +8,7 @@ typedef struct Card
 {
     char rank;
     char suit;
-    char view[2]; // if the card is unvisible showes [], if visible showes rank and suit
+    char view[3]; // if the card is unvisible showes [], if visible showes rank and suit
     struct Card *next;
     bool isVisible;
    /* if(isVisible){
@@ -33,26 +33,27 @@ void visibility(Card** cardView, bool visibility){
 
 }
 
-void setVisibility(Card** currentCards , bool visibility){
-    Card* currentCard;
-    if (visibility) {
-        // If visibility is true, assign the rank and suit pointers to the currentCards array
+void setVisibility(Card** currentCards , bool visible){
+   // Card* currentCard;
+    if (visible) {
+        // If visible is true, assign the rank and suit pointers to the currentCards array
        // currentCards[0] = &(currentCard->rank);
         //currentCards[1] = &(currentCard->suit);
-        (*currentCards)->view[0] = (currentCard->rank);
-        (*currentCards)->view[1] = (currentCard->suit);
-
+        (*currentCards)->view[0] = (*currentCards)->rank;
+        (*currentCards)->view[1] = (*currentCards)->suit;
+        (*currentCards)->view[2] = '\0'; // this says that the string has no more chars
 
 
     }else{
-        // If visibility is false, assign null pointers to the currentCards array
+        // If visible is false, assign null pointers to the currentCards array
         //currentCards[0] = "[";
         //currentCards[1] = "]";
         //currentCards[0] = &(currentCard->rank);
         //currentCards[1] = &(currentCard->suit);
-        (*currentCards)->view[0] = (currentCard->rank);
-        (*currentCards)->view[1] = (currentCard->suit);
-        printf("\t[]\t");
+        (*currentCards)->view[0] = '[';
+        (*currentCards)->view[1] = ']';
+        (*currentCards)->view[2] = '\0';
+
     }
 
 }

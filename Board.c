@@ -56,6 +56,7 @@ void printBoard(char fileName[]) {
         currentColumns[i] = columnTest[i];
     }
     printf("\tC1   \t\tC2 \t\tC3  \t\tC4  \t\tC5  \t\tC6  \t\tC7\n");
+    int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
             Card *currentColumn = currentColumns[j];
@@ -65,11 +66,21 @@ void printBoard(char fileName[]) {
             }
             else {
                 //if (i == 0 && j == 0){
-                    printf("\t%c%c\t", currentColumn->rank, currentColumn->suit);
-                    currentColumns[j] = currentColumn->next; // the current columns pointer should point to the next card in the pågældende linked list
+                if(j < hiddenCounter) { // checks whether card should be visible or not
+                    setVisibility(&currentColumn, true);
+                } else {
+                    setVisibility(&currentColumn, false);
+                }
+                printf("\t%s\t", currentColumn->view);
+                currentColumns[j] = currentColumn->next;
+
+                //printf("\t%c%c\t", currentColumn->rank, currentColumn->suit);
+                    //currentColumns[j] = currentColumn->next; // the current columns pointer should point to the next card in the pågældende linked list
+
                     //currentColumns[0]->next = NULL;
-                    for ( j = 1 ; j < COLUMN_COUNT ; j++)
+                   /* for ( j = 1 ; j < COLUMN_COUNT ; j++)
                     {
+                        //setVisibility(&currentColumns[j], false);
                         currentColumns[j]->rank = currentColumn->rank;
                         currentColumns[j]->suit = currentColumn->suit;
                         //setVisibility(currentColumns[j], false);
@@ -77,14 +88,14 @@ void printBoard(char fileName[]) {
                         //currentColumn->suit;
                         //printf("\t[]\t");
                         currentColumns[j] = currentColumn->next;
-                        printf("\t[]\t");
+                        //printf("\t[]\t");
 
                     }
 
 
                 //}
 
-               /* else {
+                else {
                     setVisibility(currentColumns[1], false);
                     if ( i == 0 && currentColumn != NULL){
                         for ( j = 1 ; j < COLUMN_COUNT ; j++)
@@ -98,7 +109,7 @@ void printBoard(char fileName[]) {
                 if (i == 1 && j == 1){
                     printf("\t%c%c\t", currentColumn->rank, currentColumn->suit);
                     currentColumns[j] = currentColumn->next;
-                } /*else{
+                } else{
                     setVisibility(currentColumns[2], false);
                     if ( i == 1 ){
                         for ( j = 2 ; j < COLUMN_COUNT ; j++)
@@ -111,7 +122,7 @@ void printBoard(char fileName[]) {
 
 
         }
-
+        hiddenCounter++;
         printf("\n");
     }
 
