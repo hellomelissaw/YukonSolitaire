@@ -13,10 +13,10 @@ void insertAtTail(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail) 
     if(*ptr_DestHead == NULL) { // if the values at ptr_DestHead are NULL
         *ptr_DestHead = *ptr_SrcHead;
 
-    } else {(*ptr_DestTail)->next = *ptr_SrcHead;
-    } // or else set the values for tail->next (which is currently NULL) to src head
+    } else {(*ptr_DestTail)->next = *ptr_SrcHead; // or else set the pointer, pointing to destination tail, to point to the pointer to the source's head card
+    }
 
-    *ptr_DestTail = *ptr_SrcHead;// the address of ptr_DestTail should now be ptr_SrcHead
+    *ptr_DestTail = *ptr_SrcHead;// the pointer ptr_DestTail should now be pointing to the same as ptr_SrcHead
     if((*ptr_SrcHead)->next != NULL){
         *ptr_SrcHead = (*ptr_SrcHead)->next;
     } else {
@@ -33,7 +33,7 @@ void insertAtTail(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail) 
 void insertAtHead(Card **ptr_SrcHead, Card **ptr_DestHead) {
     Card* tempPointer = (*ptr_SrcHead)->next; // saves the pointer to the pointer pointing to the next card after head1
 
-    if(*ptr_DestHead == NULL) { // checks if the values at the address ptr_DestHead is pointing to are NULL
+    if(*ptr_DestHead == NULL) { // checks if the pointer pointing to the destination head card is NULL
         *ptr_DestHead = *ptr_SrcHead;
         (*ptr_DestHead)->next = NULL;
 
@@ -69,11 +69,18 @@ void insertBetween(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail,
     }
 }
 
+/// FUNCTION TO MODIFY THE TAIL OF A GIVEN COLUMN (mainly used for moving cards away from a column)
+/// \param columnToModify pointer to the pointer, which points to the Pile struct of the column to modify
+/// \param newTail pointer to the card which should be the new tail of the pile
 void setNewTail(Pile** columnToModify, Card* newTail) {
     (*columnToModify)->tail = newTail;
     (*columnToModify)->tail->next = NULL;
 }
 
+/// FUNCTION TO VALIDATE, THAT MOVING A CARD A FOUNDATION PILE FOLLOWS THE RULES OF THE GAME
+/// \param cardToBeMoved pointer to a pointer, which points to the card that should be moved
+/// \param foundationTail pointer to a pointer, which points to the card sitting at the top of the foundation pile
+/// \return true if valid, false if invalid
 bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
     char requiredSuit = (*foundationTail)->suit;
     if((*cardToBeMoved)->suit == requiredSuit || requiredSuit == ']') {
@@ -119,6 +126,10 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
 
 }
 
+/// FUNCTION TO VALIDATE THAT MOVING A/MANY CARDS TO ANOTHER COLUMN FOLLOWS THE RULES
+/// \param src pointer pointing to the card to be moved
+/// \param destColumn pointer to a pointer, pointing to the Pile that the card should be moved to
+/// \return true if valid, false if invalid
 bool validateMoveToColumn(Card* src, Pile** destColumn) {
     char expectedRank;
     if((*destColumn)->tail->rank == 'A'){
@@ -152,6 +163,10 @@ bool validateMoveToColumn(Card* src, Pile** destColumn) {
 
 }
 
+/// FUNCTION TO MOVE A/MANY CARD TO A COLUMN
+/// \param src pointer to a pointer, pointing to Pile of cards to be moved
+/// \param destColumn pointer to a pointer, pointing to the destination Pile (column)
+/// \param cardToBeMovedRank rank of the card to be moved
 void moveToColumn(Pile** src, Pile** destColumn, char cardToBeMovedRank){
     Card* tempHead = (*src)->head;
     Card* newTail = NULL;
