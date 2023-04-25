@@ -8,6 +8,9 @@
 #define  ROW_COUNT 11
 #define FOUNDATION_COUNT 4
 
+/// SETS THE LINKED LISTS REPRESENTING THE 7 COLUMNS AT THE START OF THE GAME
+/// \param head pointer to the head of the deck to load onto the board
+/// \return pointer to the array of Pile pointers
 Pile** setColumnLists (Card* head) {
     Card** ptrHead = &head;
     Pile** columns = (Pile* []) {createPile(), createPile(), createPile(), createPile(), createPile(), createPile(), createPile()};
@@ -27,6 +30,8 @@ Pile** setColumnLists (Card* head) {
 
 }
 
+/// SETS UP THE FOUR PILES REPRESENTING THE FOUNDATION PILES
+/// \return pointer to the Pile array
 Pile** setFoundationLists() {
     Pile** foundations = malloc(4 * sizeof(Pile*));
 
@@ -43,6 +48,8 @@ Pile** setFoundationLists() {
 
 }
 
+/// PRINTS THE BOARD WITH LINKED LISTS FOR COLUMNS (WIP, to do: print foundation piles)
+/// \param columnTest
 void printBoard(Pile** columnTest) {
     Pile* currentColumns[COLUMN_COUNT];
 
@@ -70,6 +77,8 @@ void printBoard(Pile** columnTest) {
     printf("INPUT >");
 }
 
+/// FUNCTION USED IN TESTING FOUNDATION PILE CREATION
+/// \param foundations pointer to a pointer, pointing to array of piles representing the foundation piles
 void printFoundationLists(Pile** foundations) {
     Pile* currentFoundation[FOUNDATION_COUNT];
 

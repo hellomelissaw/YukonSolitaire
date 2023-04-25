@@ -163,7 +163,7 @@ bool validateMoveToColumn(Card* src, Pile** destColumn) {
 
 }
 
-/// FUNCTION TO MOVE A/MANY CARD TO A COLUMN
+/// FUNCTION TO MOVE A/MANY CARD(S) TO A COLUMN
 /// \param src pointer to a pointer, pointing to Pile of cards to be moved
 /// \param destColumn pointer to a pointer, pointing to the destination Pile (column)
 /// \param cardToBeMovedRank rank of the card to be moved
