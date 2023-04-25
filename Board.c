@@ -12,6 +12,8 @@ Card** setColumnLists (Card* head) {
 
     Card** ptrHead = &head;
     Card **columnHeads = (Card **) malloc(7 * sizeof(Card *));
+    bool visible;
+
     if (columnHeads == NULL) {
         printf("Failure to allocate memory to column heads x__x");
         return NULL;
@@ -39,14 +41,10 @@ Card** setColumnLists (Card* head) {
         for (int j = rowStart[rowStartCounter]; j < COLUMN_COUNT; j++) {
 
                 insertAtTail(ptrHead, &columnHeads[j], &columnTails[j]);
-
-
         }
         rowStartCounter++;
     }
-
     return columnHeads;
-
 }
 
 void printBoard(char fileName[]) {
@@ -57,18 +55,36 @@ void printBoard(char fileName[]) {
     for (int i = 0; i < COLUMN_COUNT; i++) { // creates an array of pointers to the head card of each of the 7 linked lists representing the columns
         currentColumns[i] = columnTest[i];
     }
-
-    printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7\n");
+    printf("\tC1   \t\tC2 \t\tC3  \t\tC4  \t\tC5  \t\tC6  \t\tC7\n");
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
             Card *currentColumn = currentColumns[j];
+            //currentColumn[1].isVisible = true;
             if (currentColumn == NULL) {
                 printf("\t\t"); // if there is no card in the current column, make a tab space
-            } else {
-                printf("\t%c%c\t", currentColumn->rank, currentColumn->suit);
-                currentColumns[j] = currentColumn->next; // the current columns pointer should point to the next card in the pågældende linked list
             }
+            else {
+                if (i == 0 && j == 0){
+                    printf("\t%c%c\t", currentColumn->rank, currentColumn->suit);
+                    currentColumns[j] = currentColumn->next; // the current columns pointer should point to the next card in the pågældende linked list
+                    //currentColumns[0]->next = NULL;
+                }
+
+                else {
+                    setVisibility(currentColumns[1], false);
+                    if ( i == 0){
+                        for ( j = 1 ; j < COLUMN_COUNT ; j++)
+                            printf("\t[]\t");
+                        //currentColumns[j] = currentColumn->next;
+                    }
+
+                }
+
+            }
+
+
         }
+
         printf("\n");
     }
 
@@ -78,5 +94,14 @@ void printBoard(char fileName[]) {
     printf("INPUT >");
 }
 
+void isVisible (bool isVisible){
+    if (isVisible == true){
+        printf("[]");
+    }
+}
 
-
+/*
+ * if (currentColumn[i].rank == '2' && currentColumn[i].suit == 'c'){
+                    printf("[]");
+                }
+ */

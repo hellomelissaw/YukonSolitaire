@@ -8,8 +8,12 @@ typedef struct Card
 {
     char rank;
     char suit;
+    char view[2]; // if the card is unvisible showes [], if visible shoes rank and suit
     struct Card *next;
     bool isVisible;
+   /* if(isVisible){
+        view = 'rank suit'
+    } else { view = []}*/
 
 } Card;
 
@@ -23,5 +27,22 @@ Card* createCard(char rank, char suit) {
     card_node->rank = rank;
     card_node->suit = suit;
     return card_node;
+}
+void visibility(Card** cardView, bool visibility){
+    (*cardView)->isVisible = visibility;
+
+}
+
+void setVisibility(Card** cardView[] ,bool visibility){
+    Card* currentCard;
+    if (visibility) {
+        // If visibility is true, assign the rank and suit pointers to the cardView array
+        cardView[0] = &(currentCard->rank);
+        cardView[1] = &(currentCard->suit);
+    }else{
+        // If visibility is false, assign null pointers to the cardView array
+        cardView[0] = NULL;
+        cardView[1] = NULL;
+    }
 }
 
