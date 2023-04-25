@@ -2,8 +2,8 @@
 // Created by Watson on 2023-04-24.
 //
 #include <stdlib.h>
-//#include "Deck.c"
 #include "Card.c"
+
 typedef struct Pile
 {
     Card* head;

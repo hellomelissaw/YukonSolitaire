@@ -5,20 +5,30 @@
 #include "moveTests.c"
 //#include "pileTest.c"
 int main(void) {
-    // TEST CREATION OF COLUMNS
+    ///////////////////////////////////////////////////////////////////////////////
+    // TEST CREATION OF COLUMNS (need to get headers to work before it works again)
+    ///////////////////////////////////////////////////////////////////////////////
+
     /*Card* testDeck = createDeck("unshuffledcards.txt");
     Pile** firstColumn = setColumnLists(testDeck);
     printBoard(firstColumn);*/
 
-  // moveFirstCardToFoundatationTest();
+    //////////////////////
+    // TEST MOVING CARDS
+    //////////////////////
+     //  moveFirstCardToFoundatationTest();
 
-  // move2CToFoundatationTest();
+     // move2CToFoundatationTest();
 
- // move3CToFoundatationTest();
+     // move3CToFoundatationTest();
 
- testMove2Cn3CToColumnWithAS();
+     // testMove2Cn3CToColumnWithAS();
 
-  //  testAccessingNextCard();
+     // testAccessingNextCard();
+
+    ///////////////////
+    // TEST SHUFFLE
+    ///////////////////
 
     /*Card* testDeck = createDeck("unshuffledCards.txt");
     //shuffleRandom(testDeck);
