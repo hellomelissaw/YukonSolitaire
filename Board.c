@@ -83,7 +83,7 @@ void printFoundationLists(Pile** foundations) {
                 printf("\t\t"); // if there is no card in the current column, make a tab space
             } else {
                 printf("\t%c%c\t\n", currentFoundationCard->rank, currentFoundationCard->suit);
-                //currentFoundation[j]->head = currentFoundationCard->next; // the current columns pointer should point to the next card in the pågældende linked list
+
             }
         }
         printf("\n");

@@ -24,20 +24,7 @@ void insertAtTail(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail) 
     }
 
     (*ptr_DestTail)->next = NULL;
-   /* if(*ptr_DestHead == NULL) { // if the values at ptr_DestHead are NULL
-        *ptr_DestHead = *ptr_SrcHead;
 
-    } else if((*ptr_DestHead)->next == NULL){
-        *ptr_DestTail = *ptr_SrcHead;
-        (*ptr_SrcHead)->next = *ptr_DestTail;
-
-    } else {(*ptr_DestTail)->next = *ptr_SrcHead;
-        *ptr_DestTail = *ptr_SrcHead;
-    } // or else set the values for tail->next (which is currently NULL) to src head
-
-    // the address of ptr_DestTail should now be ptr_SrcHead
-    *ptr_SrcHead = (*ptr_SrcHead)->next;
-    (*ptr_DestTail)->next = NULL;*/
 }
 
 /// INSERTS THE CURRENT HEAD OF ONE DECK AT THE HEAD OF ANOTHER DECK

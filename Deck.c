@@ -8,7 +8,6 @@
 #include "Utilities.c"
 #define CARD_COUNT 52
 #define LABEL_SIZE 4
-#define PRINT_CHAR(decimal_value) printf("%c", (char)(decimal_value))
 
 ///  FUNCTION TO CREATE A DECK ONE CARD AT A TIME USING createCard()
 /// \param fileName name of the file which contains the card labels
@@ -49,7 +48,6 @@ int printDeck(Card* head) {
     Card* current = head;
     int i = 0;
     while (current != NULL){
-        //printf("Card #%d: %c%c\n", i, current->rank, current->suit);
         printf("Card #%d: %c%c\n", i, current->rank, current->suit);
         current = current->next;
         i++;
