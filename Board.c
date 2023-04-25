@@ -70,9 +70,9 @@ void printBoard(char fileName[]) {
                     //currentColumns[0]->next = NULL;
                     for ( j = 1 ; j < COLUMN_COUNT ; j++)
                     {
-                        currentColumns[j]->rank = currentColumn->rank;
-                        currentColumns[j]->suit = currentColumn->suit;
-                        //setVisibility(currentColumns[j], false);
+                        //currentColumns[j]->rank = currentColumn->rank;
+                        //currentColumns[j]->suit = currentColumn->suit;
+                        setVisibility(currentColumns[j], false);
                         //currentColumn->rank;
                         //currentColumn->suit;
                         //printf("\t[]\t");
