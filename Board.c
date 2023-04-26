@@ -60,7 +60,7 @@ void printBoard(char fileName[]) {
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
             Card *currentColumn = currentColumns[j];
-            //currentColumn[1].isVisible = true;
+
             if (currentColumn == NULL) {
                 printf("\t\t"); // if there is no card in the current column, make a tab space
             }
@@ -132,11 +132,6 @@ void printBoard(char fileName[]) {
     printf("INPUT >");
 }
 
-void isVisible (bool isVisible){
-    if (isVisible == true){
-        printf("[]");
-    }
-}
 
 /*
  * if (currentColumn[i].rank == '2' && currentColumn[i].suit == 'c'){
