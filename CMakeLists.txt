@@ -3,4 +3,4 @@ project(YukonSolitaire C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(YukonSolitaire main.c loadDeck.c headers/Utilities.h)
+add_executable(YukonSolitaire main.c loadDeck.c )
