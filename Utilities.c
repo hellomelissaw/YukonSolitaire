@@ -41,9 +41,20 @@ char* getAbs_path(char fileName[]) {
 }
 
 
-void setMessage(char** ptrMessage, char message[]) {
-    (*ptrMessage) = message;
+void PrintMessage() {
+    char *message = "First message";
+    char **messagePtr = &message;
+    printf("%s", message);
+
+    char *newMessage = malloc(100);
+
+    strcpy(newMessage, "Second message");
+    setMessage(messagePtr, newMessage);
+    printf("%s", message);
 }
+
+
+
 
 /*
 /// FUNCTION TO GET THE ABSOLUTE PATH TO ANY GIVEN FILE
