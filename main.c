@@ -75,9 +75,20 @@ int load_SpecificFileIntoDeck(char *filename) {
 
 
 
+void startPlayPhase(Card *head) {
+
+    Pile** columns = setColumnLists(head);
+    Pile** foundations = setFoundationLists();
+    printFoundationLists(foundations);
+    printBoard(columns, foundations);
+}
+
 // Hey girl hey
 int main() {
+    //printDeck(createDeck("defaultDeckOfFile.txt"));
 
+    startPlayPhase(  createDeck("defaultDeckOfFile.txt"));
+    /*
     char input[2];
     char str[100];
     char result[100];
@@ -94,9 +105,9 @@ int main() {
 
     printf("");
     printf("LAST command; \n"); //add func
-    /*char *message = " ";
+    char *message = " ";
     char **messagePtr = &message;
-    printf("Message: %s\n", message); *///add func
+    printf("Message: %s\n", message); //add func
     printf("INPUT >");
 
     //scanf("%s", &input);
@@ -138,9 +149,10 @@ int main() {
     // TEST CREATION OF COLUMNS (need to get headers to work before it works again)
     ///////////////////////////////////////////////////////////////////////////////
 
-    /*Card* testDeck = createDeck("unshuffledcards.txt");
+    Card* testDeck = createDeck("unshuffledcards.txt");
     Pile** firstColumn = setColumnLists(testDeck);
-    printBoard(firstColumn);*/
+    Pile** foundations = setFoundationLists();
+    printBoard(firstColumn,foundations);
 
     //////////////////////
     // TEST MOVING CARDS
@@ -159,7 +171,7 @@ int main() {
     // TEST SHUFFLE
     ///////////////////
 
-    /*Card* testDeck = createDeck("unshuffledCards.txt");
+    Card* testDeck = createDeck("unshuffledCards.txt");
     //shuffleRandom(testDeck);
     shuffleInterweave(45, testDeck);
     printDeck(testDeck);*/

@@ -186,6 +186,7 @@ void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char **
         }
 
         setNewTail(src, newTail);
+        printBoard(NULL, 0);
 
     } else {
         setMessage(ptrMessage, "Could not move card.");

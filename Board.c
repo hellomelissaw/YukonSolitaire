@@ -51,7 +51,7 @@ Pile** setFoundationLists() {
 
 /// PRINTS THE BOARD WITH LINKED LISTS FOR COLUMNS (WIP, to do: print foundation piles)
 /// \param ptrColumn
-void printBoard(Pile** ptrColumn) {
+void printBoard(Pile **ptrColumn, Pile **ptrFoundation) {
     Pile *currentColumns[COLUMN_COUNT];
 
     for (int i = 0; i < COLUMN_COUNT; i++) { // creates an array of pointers to the head card of each of the 7 linked lists representing the columns
