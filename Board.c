@@ -61,22 +61,19 @@ void printBoard(Pile** ptrColumn) {
     int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
-            Card *currentColumn = currentColumns[j]->head;
-            //currentColumn[1].isVisible = true;
+            Pile *currentColumn = currentColumns[j]->head;
             if (currentColumn == NULL) {
-                printf("\t\t"); // if there is no card in the current ptrColumn, make a tab space
+                printf("\t\t"); // if there is no card in the current column, make a tab space
             } else {
-                printf("\t%c%c\t", currentColumn->rank, currentColumn->suit);
-                currentColumns[j]->head = currentColumn->next; // the current columns pointer should point to the next card in the pågældende linked list
-           // } else {
+                // } else {
                 //if (i == 0 && j == 0){
                 if (j < hiddenCounter) { // checks whether card should be visible or not
                     setVisibility(&currentColumn, true);
                 } else {
                     setVisibility(&currentColumn, false);
                 }
-                printf("\t%s\t", currentColumn->view);
-                currentColumns[j] = currentColumn->next;
+                printf("\t%s\t", currentColumn->head->view);
+                currentColumns[j]->head = currentColumn->head->next;
 
             }
 
@@ -85,7 +82,6 @@ void printBoard(Pile** ptrColumn) {
         printf("\n");
     }
 }
-
 
 void isVisible (bool isVisible){
     if (isVisible == true){
