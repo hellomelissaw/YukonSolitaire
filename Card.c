@@ -27,10 +27,10 @@ Card* createCard(char rank, char suit) {
     card_node->suit = suit;
     return card_node;
 }
-void visibility(Card** cardView, bool visibility){
+/*void visibility(Card** cardView, bool visibility){
     (*cardView)->isVisible = visibility;
 
-}
+}*/
 
 void setVisibility(Card** currentCards , bool visible){
    // Card* currentCard;

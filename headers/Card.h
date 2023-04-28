@@ -16,7 +16,6 @@ typedef struct Card
 } Card;
 
 Card* createCard(char rank, char suit);
-void visibility(Card** cardView, bool visibility);
 void setVisibility(Card** currentCards , bool visible);
 
 #endif //YUKONSOLITAIRE_CARD_H

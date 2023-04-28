@@ -75,11 +75,17 @@ int load_SpecificFileIntoDeck(char *filename) {
 
 
 
-void startPlayPhase(Card *head) {
-
+void startPlayPhase() {
+    Card* head = createDeck("defaultDeckOfFile.txt");
     Pile** columns = setColumnLists(head);
+    /*Card* current = columns[1]->head;
+    for(int i = 0 ; i < 6; i++){
+        setVisibility(&current, true);
+        printf("c2 card %d is %s\n", i, current->view);
+        current = current->next;
+    }*/
     Pile** foundations = setFoundationLists();
-    printFoundationLists(foundations);
+   // printFoundationLists(foundations);
     printBoard(columns, foundations);
 }
 
@@ -87,7 +93,7 @@ void startPlayPhase(Card *head) {
 int main() {
     //printDeck(createDeck("defaultDeckOfFile.txt"));
 
-    startPlayPhase(  createDeck("defaultDeckOfFile.txt"));
+    startPlayPhase();
     /*
     char input[2];
     char str[100];
