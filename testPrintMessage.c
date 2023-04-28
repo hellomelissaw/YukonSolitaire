@@ -11,9 +11,7 @@ void testPrintMessage() {
     char **messagePtr = &message;
     printf("%s", message);
 
-    char *newMessage = malloc(100);
-
-    strcpy(newMessage, "Second message");
-    setMessage(messagePtr, newMessage);
+    char *message2 = "Second message";
+    setMessage(messagePtr, message2);
     printf("%s", message);
 }

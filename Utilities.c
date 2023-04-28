@@ -16,7 +16,7 @@
 
 char* getAbs_path(char fileName[]) {
     char cwd[PATH_MAX];
-    getcwd(cwd, sizeof(cwd));
+
 
 
 #ifdef _WIN32
@@ -27,10 +27,12 @@ char* getAbs_path(char fileName[]) {
         // handle error case
         abs_path = NULL;
     }*/
+    _getcwd(cwd, sizeof(cwd));
     char *abs_path = NULL;
     char *rel_path = fileName;
     abs_path = _fullpath(NULL, rel_path, 0);
 #else
+    getcwd(cwd, sizeof(cwd));
     char* abs_path;
     chdir(".."); // go to parent dir to get absolute file path from project's parent directory
     abs_path = realpath(fileName, NULL);
@@ -51,6 +53,12 @@ void PrintMessage() {
     strcpy(newMessage, "Second message");
     setMessage(messagePtr, newMessage);
     printf("%s", message);
+}
+
+void setMessage(char** messagePtr, char* message) {
+    char *newMessage = malloc(100);
+    strcpy(newMessage, message);
+    (*messagePtr) = newMessage;
 }
 
 

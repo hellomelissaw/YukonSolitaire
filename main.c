@@ -77,8 +77,6 @@ int load_SpecificFileIntoDeck(char *filename) {
 
 // Hey girl hey
 int main() {
-testPrintMessage();
-
 
     char input[2];
     char str[100];
@@ -96,9 +94,9 @@ testPrintMessage();
 
     printf("");
     printf("LAST command; \n"); //add func
-    //char message[50] = " ";
-    //char** ptrMessage = &message;
-    printf("Message: \n"); //add func
+    /*char *message = " ";
+    char **messagePtr = &message;
+    printf("Message: %s\n", message); *///add func
     printf("INPUT >");
 
     //scanf("%s", &input);

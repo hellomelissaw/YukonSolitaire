@@ -6,11 +6,12 @@
 #include "Board.c"
 
 void moveFirstCardToFoundatationTest() {
-
+    char *message = " ";
+    char **messagePtr = &message;
     Pile** foundationPiles = setFoundationLists();
     printFoundationLists(foundationPiles);
     Card* ac = createCard('A', 'C');
-    if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail)) {
+    if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail, messagePtr)) {
         insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
     }
 

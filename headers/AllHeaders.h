@@ -15,5 +15,5 @@
 #include "Shuffle.h"
 #include "Utilities.h"
 #include "Pile.h"
-//#include "TestHeaders/testPrintMessage.h"
+#include "TestHeaders/testPrintMessage.h"
 #endif //YUKONSOLITAIRE_ALLHEADERS_H
