@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "Utilities.c"
-
+#include "Board.c"
+#include "headers/Utilities.h"
 //#include "loadDeck.c"
 /*int main() {
 
@@ -32,10 +32,7 @@ int load_DefaultDeckLDCommand() {
     }
 
 
-    while (fgets(str, 100, fp) != NULL) {
-        printf("%s", str);
-        //STORE IN LINKEDLIST.
-    }
+    printBoard(abspath);
     fclose(fp);
     return 0;
 

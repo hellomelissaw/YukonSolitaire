@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "Card.c"
+#include "headers/Utilities.h"
 #include <unistd.h>
 
 #define NUM_SUITS 4
