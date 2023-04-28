@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "Board.c"
+#include "headers/Board.h"
 //#include "Utilities.c"
 #include "headers/Card.h"
 //#include "loadDeck.c"
