@@ -124,6 +124,7 @@ int main() {
                 printf("vi er her");
                 load_DefaultDeckLDCommand();
 
+
             } else if (length > 1) {
 
                 strcpy(result, str + 1);
@@ -132,5 +133,7 @@ int main() {
                 load_SpecificFileIntoDeck(result);
             }
         }
+
+        // FUNC here
     }
 }
