@@ -125,11 +125,6 @@ void printBoard(char fileName[]) {
         hiddenCounter++;
         printf("\n");
     }
-
-    printf("");
-    printf("LAST command; \n"); //add func
-    printf("Message \n"); //add func
-    printf("INPUT >");
 }
 
 void isVisible (bool isVisible){
