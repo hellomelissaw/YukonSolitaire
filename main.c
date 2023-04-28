@@ -74,60 +74,67 @@ int load_SpecificFileIntoDeck(char *filename) {
 }
 
 
+
 // Hey girl hey
 int main() {
+testPrintMessage();
+
+
     char input[2];
     char str[100];
     char result[100];
     int length;
 
-  //  while (1) {
+    //  while (1) {
 
-        printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
-        printf("\n");
-        printf("                                                           []  \tF1\n");
-        printf("                                                           []  \tF2\n");
-        printf("                                                           []  \tF3\n");
-        printf("                                                           []  \tF4\n");
+    printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
+    printf("\n");
+    printf("                                                           []  \tF1\n");
+    printf("                                                           []  \tF2\n");
+    printf("                                                           []  \tF3\n");
+    printf("                                                           []  \tF4\n");
 
-        printf("");
-        printf("LAST command; \n"); //add func
-        printf("Message: \n"); //add func
-        printf("INPUT >");
+    printf("");
+    printf("LAST command; \n"); //add func
+    //char message[50] = " ";
+    //char** ptrMessage = &message;
+    printf("Message: \n"); //add func
+    printf("INPUT >");
 
-        //scanf("%s", &input);
+    //scanf("%s", &input);
 
 
-        if (!strcmp(input, "QQ")) {
-           // setPrintMessage("Quitting the Game");
-            //printf("Quitting The Game");
-            exit(0); //return
+    if (!strcmp(input, "QQ")) {
+        // setPrintMessage("Quitting the Game");
+        //printf("Quitting The Game");
+        exit(0); //return
+    }
+    if (!strcmp(input, "LD")) {
+        fgets(str, 100, stdin);
+        length = strlen(str);
+
+        printf("Length of |%s| is |%d|\n", str, length);
+
+        if (length == 1) {
+            printf("vi er her");
+            load_DefaultDeckLDCommand();
+
+
+        } else if (length > 1) {
+
+            strcpy(result, str + 1);
+
+            printf("Result: %s\n", result);
+            load_SpecificFileIntoDeck(result);
         }
-        if (!strcmp(input, "LD")) {
-            fgets(str, 100, stdin);
-            length = strlen(str);
-
-            printf("Length of |%s| is |%d|\n", str, length);
-
-            if (length == 1) {
-                printf("vi er her");
-                load_DefaultDeckLDCommand();
-
-
-            } else if (length > 1) {
-
-                strcpy(result, str + 1);
-
-                printf("Result: %s\n", result);
-                load_SpecificFileIntoDeck(result);
-            }
-        }
+    }
 
         // FUNC here
   //  }
 
+
     //createDeck("unshuffledCards.txt");
-    printDeck(shuffleInterweave(13, createDeck("unshuffledCards.txt")));
+    //printDeck(shuffleInterweave(13, createDeck("unshuffledCards.txt")));
 
     ///////////////////////////////////////////////////////////////////////////////
     // TEST CREATION OF COLUMNS (need to get headers to work before it works again)
@@ -159,3 +166,4 @@ int main() {
     shuffleInterweave(45, testDeck);
     printDeck(testDeck);*/
 }
+

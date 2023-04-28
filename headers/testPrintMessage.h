@@ -1,0 +1,8 @@
+//
+// Created by Watson on 2023-04-28.
+//
+
+#ifndef YUKONSOLITAIRE_TESTPRINTMESSAGE_H
+#define YUKONSOLITAIRE_TESTPRINTMESSAGE_H
+void testPrintMessage();
+#endif //YUKONSOLITAIRE_TESTPRINTMESSAGE_H

@@ -39,6 +39,12 @@ char* getAbs_path(char fileName[]) {
 
     return abs_path;
 }
+
+
+void setMessage(char** ptrMessage, char message[]) {
+    (*ptrMessage) = message;
+}
+
 /*
 /// FUNCTION TO GET THE ABSOLUTE PATH TO ANY GIVEN FILE
 /// \param fileName char array of the name of the file to find the path to

@@ -80,7 +80,7 @@ void setNewTail(Pile** columnToModify, Card* newTail) {
 /// \param cardToBeMoved pointer to a pointer, which points to the card that should be moved
 /// \param foundationTail pointer to a pointer, which points to the card sitting at the top of the foundation pile
 /// \return true if valid, false if invalid
-bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
+bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char** ptrMessage) {
     char requiredSuit = (*foundationTail)->suit;
     if((*cardToBeMoved)->suit == requiredSuit || requiredSuit == ']') {
         char requiredRank;
@@ -104,7 +104,8 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
             requiredRank = 'K';
 
         } else {
-            printf("Invalid rank at foundation tail.\n");
+            setMessage(ptrMessage, "Invalid rank at foundation tail.\n");
+            //printf("Invalid rank at foundation tail.\n");
             return false;
         }
 
@@ -113,6 +114,7 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail) {
             return true;
 
         } else {
+
             printf("Card to be moved does not have the correct rank!\n");
             return false;
 

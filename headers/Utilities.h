@@ -6,5 +6,6 @@
 #define YUKONSOLITAIRE_UTILITIES_H
 
 char* getAbs_path(char fileName[]);
+void setMessage(char** ptrMessage, char message[]);
 
 #endif //YUKONSOLITAIRE_UTILITIES_H

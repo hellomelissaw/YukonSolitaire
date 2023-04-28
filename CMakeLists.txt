@@ -3,4 +3,4 @@ project(YukonSolitaire C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(YukonSolitaire main.c loadDeck.c Card.c LinkedListManipulation.c Deck.c Board.c Shuffle.c Utilities.c Pile.c)
+add_executable(YukonSolitaire main.c loadDeck.c Card.c LinkedListManipulation.c Deck.c Board.c Shuffle.c Utilities.c Pile.c testPrintMessage.c)
