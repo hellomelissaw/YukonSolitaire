@@ -5,18 +5,6 @@
 #include <stdlib.h>
 #include "headers/AllHeaders.h"
 //#include "loadDeck.c"
-/*int main() {
-
-    //createDeck("unshuffledCards.txt");
-    printDeck(shuffleInterweave(13,createDeck("unshuffledCards.txt")));
-
-#include "Board.c"
-int main(void) {
-    printBoard("unshuffledCards.txt");
-
-}
- */
-
 
 int load_DefaultDeckLDCommand() {
     FILE *fp;
@@ -137,4 +125,37 @@ int main() {
 
         // FUNC here
     }
+
+    //createDeck("unshuffledCards.txt");
+    printDeck(shuffleInterweave(13, createDeck("unshuffledCards.txt")));
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // TEST CREATION OF COLUMNS (need to get headers to work before it works again)
+    ///////////////////////////////////////////////////////////////////////////////
+
+    /*Card* testDeck = createDeck("unshuffledcards.txt");
+    Pile** firstColumn = setColumnLists(testDeck);
+    printBoard(firstColumn);*/
+
+    //////////////////////
+    // TEST MOVING CARDS
+    //////////////////////
+    //  moveFirstCardToFoundatationTest();
+
+    // move2CToFoundatationTest();
+
+    // move3CToFoundatationTest();
+
+    // testMove2Cn3CToColumnWithAS();
+
+    // testAccessingNextCard();
+
+    ///////////////////
+    // TEST SHUFFLE
+    ///////////////////
+
+    /*Card* testDeck = createDeck("unshuffledCards.txt");
+    //shuffleRandom(testDeck);
+    shuffleInterweave(45, testDeck);
+    printDeck(testDeck);*/
 }

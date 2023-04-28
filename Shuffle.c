@@ -12,7 +12,7 @@
 /// \param split integer indicating how many cards should be in the first of two temporary piles used to shuffled
 /// \param head pointer to the Card which is at the head of the Linked List of Card structs to be shuffled
 /// \return pointer to the Card that is at the head of the Linked List of shuffled Cards
-Card* shuffleInterweave(int split, Card* head) {
+Card* shuffleInterweave(int split, Card* head) { // IF TIME, REFACTOR USING insertAtTail FUNCTION
     /* create first Card in temp Card list1 the create all the rest up to split */
     Card* tempHead1 = NULL;
     Card* current = NULL;
@@ -109,18 +109,18 @@ Card* shuffleRandom(Card* head) {
         picker = (rand() % 3) + 1;
 
         if(picker == 1) {
-            insertAtTail(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead);
+            insertAtTail(ptrUnshuffledHead, ptrShuffledHead, ptrShuffledTail);
 
         } else if(picker == 2) {
-            insertAtHead(ptrShuffledHead, ptrUnshuffledHead);
+            insertAtHead(ptrUnshuffledHead, ptrShuffledHead);
 
         } else if (picker == 3) {
             if(i < 3) {
-                insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, 0);
+                insertBetween(ptrUnshuffledHead, ptrShuffledHead, ptrShuffledTail, 0);
 
             } else {
                 int numNodesToTraverse = (rand() % (i-1) + 1);
-                insertBetween(ptrShuffledHead, ptrShuffledTail, ptrUnshuffledHead, numNodesToTraverse);
+                insertBetween(ptrUnshuffledHead, ptrShuffledHead, ptrShuffledTail, numNodesToTraverse);
             }
         }
         i++;
@@ -129,3 +129,30 @@ Card* shuffleRandom(Card* head) {
 
     return shuffledHead;
 }
+
+/*Card* newShuffleInterweave(int split, Card* head) { // WIP
+    Card* current = head;
+
+
+    Pile* pile1 = createPile();
+    for(int i = 0 ; i < split ; i++) {
+        insertAtTail(&current, &pile1->head, &pile1->tail);
+
+    }
+
+    Pile* pile2 = createPile();
+    while(current != NULL) {
+        insertAtTail(&current, &pile2->head, &pile2->tail);
+    }
+
+    Pile* shuffledPile = createPile();
+    shuffledPile->head = pile1->head;
+    while(pile1->head->next != NULL && pile2->head->next != NULL) {
+        insertAtTail(&pile2->head, &shuffledPile->head, &shuffledPile->tail);
+        pile2->head = pile2->head->next;
+        insertAtTail(&pile1->head, &shuffledPile->head, &shuffledPile->tail);
+        pile1->head = pile1->head->next;
+    }
+    return shuffledPile->head;
+
+}*/

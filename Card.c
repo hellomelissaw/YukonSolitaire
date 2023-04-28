@@ -1,6 +1,7 @@
 //
 // Created by Watson on 2023-04-15.
 //
+
 #include <stdbool.h>
 #include <stdlib.h>
 #include "headers/AllHeaders.h"
@@ -55,4 +56,5 @@ void setVisibility(Card** currentCards , bool visible){
     }
 
 }
+
 
