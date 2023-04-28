@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "headers/Card.h"
-#include "Utilities.c"
+#include "headers/Utilities.h"
 #define CARD_COUNT 52
 #define LABEL_SIZE 4
 #define PRINT_CHAR(decimal_value) printf("%c", (char)(decimal_value))
