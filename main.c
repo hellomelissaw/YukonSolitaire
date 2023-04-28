@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "stdlib.h"
+#include <stdlib.h>
 #include "headers/AllHeaders.h"
 //#include "loadDeck.c"
 /*int main() {
@@ -104,14 +104,15 @@ int main() {
 
         printf("");
         printf("LAST command; \n"); //add func
-        printf("Message \n"); //add func
+        printf("Message: \n"); //add func
         printf("INPUT >");
 
         //scanf("%s", &input);
 
 
         if (!strcmp(input, "QQ")) {
-            printf("Quitting The Game");
+           // setPrintMessage("Quitting the Game");
+            //printf("Quitting The Game");
             exit(0); //return
         }
         if (!strcmp(input, "LD")) {
