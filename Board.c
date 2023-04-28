@@ -61,7 +61,7 @@ void printBoard(Pile** ptrColumn) {
     int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
-            Pile *currentColumn = currentColumns[j]->head;
+            Card *currentColumn = currentColumns[j]->head;
             if (currentColumn == NULL) {
                 printf("\t\t"); // if there is no card in the current column, make a tab space
             } else {
@@ -72,8 +72,8 @@ void printBoard(Pile** ptrColumn) {
                 } else {
                     setVisibility(&currentColumn, false);
                 }
-                printf("\t%s\t", currentColumn->head->view);
-                currentColumns[j]->head = currentColumn->head->next;
+                printf("\t%s\t", currentColumn->view);
+                currentColumns[j]->head = currentColumn->next; // the current columns pointer should point to the next card in the pågældende linked list
 
             }
 
@@ -83,11 +83,6 @@ void printBoard(Pile** ptrColumn) {
     }
 }
 
-void isVisible (bool isVisible){
-    if (isVisible == true){
-        printf("[]");
-    }
-}
 
 /// FUNCTION USED IN TESTING FOUNDATION PILE CREATION
 /// \param foundations pointer to a pointer, pointing to array of piles representing the foundation piles

@@ -81,7 +81,7 @@ int main() {
     char result[100];
     int length;
 
-    while (1) {
+  //  while (1) {
 
         printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
         printf("\n");
@@ -124,7 +124,7 @@ int main() {
         }
 
         // FUNC here
-    }
+  //  }
 
     //createDeck("unshuffledCards.txt");
     printDeck(shuffleInterweave(13, createDeck("unshuffledCards.txt")));
