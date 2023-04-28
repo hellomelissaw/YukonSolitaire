@@ -132,7 +132,7 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
 /// \param src pointer pointing to the card to be moved
 /// \param destColumn pointer to a pointer, pointing to the Pile that the card should be moved to
 /// \return true if valid, false if invalid
-bool validateMoveToColumn(Card* src, Pile** destColumn) {
+bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
     char expectedRank;
     if((*destColumn)->tail->rank == 'A'){
         expectedRank = '2';
@@ -150,8 +150,8 @@ bool validateMoveToColumn(Card* src, Pile** destColumn) {
         expectedRank = 'K';
 
     } else {
-
-        printf("Invalid rank at foundation tail.\n");
+        setMessage(ptrMessage, "Invalid rank at foundation tail.\n");
+        //printf("Invalid rank at foundation tail.\n");
         return false;
     }
 
@@ -160,7 +160,8 @@ bool validateMoveToColumn(Card* src, Pile** destColumn) {
         return true;
 
     } else {
-        printf("The card %c%c is not the right value to be moved.\n",src->rank, src->suit);
+        setMessage(ptrMessage, "The card is not the right value to be moved.\n");
+       // printf("The card %c%c is not the right value to be moved.\n",src->rank, src->suit);
         return false;
     }
 
@@ -170,7 +171,7 @@ bool validateMoveToColumn(Card* src, Pile** destColumn) {
 /// \param src pointer to a pointer, pointing to Pile of cards to be moved
 /// \param destColumn pointer to a pointer, pointing to the destination Pile (column)
 /// \param cardToBeMovedRank rank of the card to be moved
-void moveToColumn(Pile** src, Pile** destColumn, char cardToBeMovedRank){
+void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char **ptrMessage) {
     Card* tempHead = (*src)->head;
     Card* newTail = NULL;
     while(tempHead->rank != cardToBeMovedRank) {
@@ -179,7 +180,7 @@ void moveToColumn(Pile** src, Pile** destColumn, char cardToBeMovedRank){
     }
 
 
-    if(validateMoveToColumn(tempHead, destColumn)) {
+    if(validateMoveToColumn(tempHead, destColumn, ptrMessage)) {
         while(tempHead != NULL) {
             insertAtTail(&tempHead,&(*destColumn)->head, &(*destColumn)->tail);
         }
@@ -187,7 +188,8 @@ void moveToColumn(Pile** src, Pile** destColumn, char cardToBeMovedRank){
         setNewTail(src, newTail);
 
     } else {
-        printf("Could not move card %c%c.\n", tempHead->rank, tempHead->suit);
+        setMessage(ptrMessage, "Could not move card.");
+        //printf("Could not move card %c%c.\n", tempHead->rank, tempHead->suit);
     }
 
 }
