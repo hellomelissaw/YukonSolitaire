@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "headers/Board.h"
-//#include "Utilities.c"
-#include "headers/Card.h"
+#include "stdlib.h"
+#include "headers/AllHeaders.h"
 //#include "loadDeck.c"
 /*int main() {
 
@@ -113,7 +112,7 @@ int main() {
 
         if (!strcmp(input, "QQ")) {
             printf("Quitting The Game");
-            exit(0);
+            exit(0); //return
         }
         if (!strcmp(input, "LD")) {
             fgets(str, 100, stdin);

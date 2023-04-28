@@ -3,7 +3,7 @@
 //
 #include <stdbool.h>
 #include <stdlib.h>
-#include "headers/Card.h"
+#include "headers/AllHeaders.h"
 
 /*typedef struct Card
 {

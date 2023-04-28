@@ -3,8 +3,7 @@
 //
 #include <stdlib.h>
 #include <stdio.h>
-#include "headers/Card.h"
-#include "headers/Utilities.h"
+#include "headers/AllHeaders.h"
 #define CARD_COUNT 52
 #define LABEL_SIZE 4
 #define PRINT_CHAR(decimal_value) printf("%c", (char)(decimal_value))

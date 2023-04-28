@@ -5,8 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "headers/Deck.h"
-#include "headers/LinkedListManipulation.h"
+#include "headers/AllHeaders.h"
 #define CARD_COUNT 52
 
 /// FUNCTION INTERWEAVE-SHUFFLE A DECK (BRIDGE SHUFFLE)

@@ -2,7 +2,7 @@
 // Created by Watson on 2023-04-15.
 //
 #include <stdio.h>
-#include "headers/Card.h"
+#include "headers/AllHeaders.h"
 
 /// INSERTS THE CURRENT HEAD OF ONE DECK AT THE TAIL OF ANOTHER DECK
 /// \param ptr_DestHead pointer containing the mem adr of the pointer to head deck to be inserted TO
