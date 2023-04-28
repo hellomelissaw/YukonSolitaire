@@ -12,5 +12,5 @@
 #include "LoadDeck.c.h"
 #include "Shuffle.h"
 #include "Utilities.h"
-
+#include "Pile.h"
 #endif //YUKONSOLITAIRE_ALLHEADERS_H
