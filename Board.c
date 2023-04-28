@@ -52,28 +52,30 @@ Pile** setFoundationLists() {
 /// PRINTS THE BOARD WITH LINKED LISTS FOR COLUMNS (WIP, to do: print foundation piles)
 /// \param ptrColumn
 void printBoard(Pile **ptrColumn, Pile **ptrFoundation) {
-    Pile *currentColumns[COLUMN_COUNT];
+    Card *currentCardInColumn[COLUMN_COUNT]; // array of Cards that are column heads
 
-    for (int i = 0; i < COLUMN_COUNT; i++) { // creates an array of pointers to the head card of each of the 7 linked lists representing the columns
-        currentColumns[i] = ptrColumn[i];
+    for (int i = 0; i < COLUMN_COUNT; i++) { // Sets each card of array to be the head of their respective column piles
+        //setVisibility(&ptrColumn[i]->head, true);
+        printf("pointer to pointer #%d is %p \n", i, ptrColumn[i]->head);
+        currentCardInColumn[i] = ptrColumn[i]->head;
     }
     printf("\tC1  \t\tC2 \t\tC3  \t\tC4  \t\tC5  \t\tC6  \t\tC7\n");
     int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = 0; j < COLUMN_COUNT; j++) {
-            Card *currentColumn = currentColumns[j]->head;
-            if (currentColumn == NULL) {
+            Card *currentCard = currentCardInColumn[j];
+            if (currentCard == NULL) {
                 printf("\t\t"); // if there is no card in the current column, make a tab space
             } else {
                 // } else {
                 //if (i == 0 && j == 0){
                 if (j < hiddenCounter) { // checks whether card should be visible or not
-                    setVisibility(&currentColumn, true);
+                    setVisibility(&currentCard, true);
                 } else {
-                    setVisibility(&currentColumn, false);
+                    setVisibility(&currentCard, false);
                 }
-                printf("\t%s\t", currentColumn->view);
-                currentColumns[j]->head = currentColumn->next; // the current columns pointer should point to the next card in the pågældende linked list
+                printf("\t%s\t", currentCard->view);
+                currentCardInColumn[j] = currentCard->next; // the current columns pointer should point to the next card in the pågældende linked list
 
             }
 

@@ -4,6 +4,9 @@
 
 #ifndef YUKONSOLITAIRE_ALLHEADERS_H
 #define YUKONSOLITAIRE_ALLHEADERS_H
+#define COLUMN_COUNT 7
+#define ROW_COUNT 11
+#define FOUNDATION_COUNT 4
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>

@@ -25,6 +25,9 @@ Card* createCard(char rank, char suit) {
     Card* card_node = malloc(sizeof(Card)); // card_node is a pointer containing the mem adr to new Card struct
     card_node->rank = rank;
     card_node->suit = suit;
+    card_node->view[0] = rank;
+    card_node->view[1] = suit;
+    card_node->view[2] = '\0';
     return card_node;
 }
 /*void visibility(Card** cardView, bool visibility){
