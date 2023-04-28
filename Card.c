@@ -3,19 +3,17 @@
 //
 #include <stdbool.h>
 #include <stdlib.h>
+#include "headers/Card.h"
 
-typedef struct Card
+/*typedef struct Card
 {
     char rank;
     char suit;
     char view[3]; // if the card is unvisible showes [], if visible showes rank and suit
     struct Card *next;
     bool isVisible;
-   /* if(isVisible){
-        view = 'rank suit'
-    } else { view = []}*/
 
-} Card;
+} Card;*/
 
 
 /// FUNCTION TO CREATE AND RETURN A NEW CARD (NODE IN LINKED LIST)

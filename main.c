@@ -3,7 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 #include "Board.c"
-#include "headers/Utilities.h"
+//#include "Utilities.c"
+#include "headers/Card.h"
 //#include "loadDeck.c"
 /*int main() {
 
@@ -32,7 +33,7 @@ int load_DefaultDeckLDCommand() {
     }
 
 
-    printBoard(abspath);
+   // printBoard(abspath);
     fclose(fp);
     return 0;
 
@@ -107,7 +108,7 @@ int main() {
         printf("Message \n"); //add func
         printf("INPUT >");
 
-        scanf("%s", &input);
+        //scanf("%s", &input);
 
 
         if (!strcmp(input, "QQ")) {

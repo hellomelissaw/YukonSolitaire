@@ -5,8 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "Card.c"
-#include "headers/Utilities.h"
+#include "headers/Card.h"
 #include <unistd.h>
 
 #define NUM_SUITS 4

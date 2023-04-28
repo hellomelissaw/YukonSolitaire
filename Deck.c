@@ -3,7 +3,7 @@
 //
 #include <stdlib.h>
 #include <stdio.h>
-#include "Card.c"
+#include "headers/Card.h"
 #include "Utilities.c"
 #define CARD_COUNT 52
 #define LABEL_SIZE 4
@@ -13,8 +13,8 @@
 /// \param fileName name of the file which contains the card labels
 /// \return pointer to the head of the newly created Linked List of Card structs
 Card* createDeck(char fileName[]) {
-    char* abs_path = getAbs_path(fileName);
-
+    //char* abs_path = getAbs_path(fileName);
+    char* abs_path = "/Users/watson/Documents/MACHINE ORIENTED PROGRAMMING/YukonSolitaire/defaultDeckOfFile.txt";
     /* Load Card labels from file */
     FILE* fpointer = fopen(abs_path, "rt"); // creates a pointer to the read file
     char cardLabels[CARD_COUNT][LABEL_SIZE];
