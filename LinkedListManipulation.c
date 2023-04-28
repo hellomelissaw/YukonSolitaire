@@ -114,14 +114,15 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
             return true;
 
         } else {
-
-            printf("Card to be moved does not have the correct rank!\n");
+            setMessage(ptrMessage, "Card to be moved does not have the correct rank!\n");
+            //printf("Card to be moved does not have the correct rank!\n");
             return false;
 
         }
 
     } else {
-        printf("Card to be moved does not have the correct suit!\n");
+        setMessage(ptrMessage, "Card to be moved does not have the correct suit!\n");
+        //printf("Card to be moved does not have the correct suit!\n");
         return false;
     }
 
@@ -149,6 +150,7 @@ bool validateMoveToColumn(Card* src, Pile** destColumn) {
         expectedRank = 'K';
 
     } else {
+
         printf("Invalid rank at foundation tail.\n");
         return false;
     }

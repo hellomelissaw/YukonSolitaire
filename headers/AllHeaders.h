@@ -16,4 +16,5 @@
 #include "Utilities.h"
 #include "Pile.h"
 #include "TestHeaders/testPrintMessage.h"
+#include "TestHeaders/moveTests.h"
 #endif //YUKONSOLITAIRE_ALLHEADERS_H

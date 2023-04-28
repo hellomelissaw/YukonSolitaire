@@ -3,7 +3,7 @@
 //
 //#include <ctest.h>
 #include <stdio.h>
-#include "Board.c"
+#include "headers/AllHeaders.h"
 
 void moveFirstCardToFoundatationTest() {
     char *message = " ";
@@ -16,23 +16,25 @@ void moveFirstCardToFoundatationTest() {
     }
 
     printFoundationLists(foundationPiles);
+    printf("%s", message);
 
-    printf("The new tail after testing insertion of AC at the start of Foundation pile should be AC. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
+   // printf("The new tail after testing insertion of AC at the start of Foundation pile should be AC. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
 
 
 }
 
 
 void move2CToFoundatationTest() {
-
+    char *message = " ";
+    char **messagePtr = &message;
     Pile** foundationPiles = setFoundationLists();
     printFoundationLists(foundationPiles);
     Card* ac = createCard('A', 'C');
     Card* twoc = createCard('2', 'C');
-    if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail)) {
+    if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail, messagePtr)) {
         insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
     }
-    if(validateMoveToFoundation(&twoc, &foundationPiles[0]->tail)) {
+    if(validateMoveToFoundation(&twoc, &foundationPiles[0]->tail,messagePtr)) {
         insertAtTail(&twoc, &foundationPiles[0]->head, &foundationPiles[0]->tail);
     }
 
@@ -43,19 +45,20 @@ void move2CToFoundatationTest() {
 }
 
 void move3CToFoundatationTest() {
-
+    char *message = " ";
+    char **messagePtr = &message;
     Pile** foundationPiles = setFoundationLists();
     printFoundationLists(foundationPiles);
     Card* ac = createCard('A', 'C');
     Card* twoc = createCard('2', 'C');
     Card* threec = createCard('3', 'C');
-    if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail)) {
+    if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail,messagePtr)) {
         insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
     }
-    if(validateMoveToFoundation(&twoc, &foundationPiles[0]->tail)) {
+    if(validateMoveToFoundation(&twoc, &foundationPiles[0]->tail,messagePtr)) {
         insertAtTail(&twoc, &foundationPiles[0]->head, &foundationPiles[0]->tail);
     }
-    if(validateMoveToFoundation(&threec, &foundationPiles[0]->tail)) {
+    if(validateMoveToFoundation(&threec, &foundationPiles[0]->tail,messagePtr)) {
         insertAtTail(&threec, &foundationPiles[0]->head, &foundationPiles[0]->tail);
     }
 
@@ -67,6 +70,8 @@ void move3CToFoundatationTest() {
 }
 
 void testMove2Cn3CToColumnWithAS(){
+    char *message = " ";
+    char **messagePtr = &message;
     Card* as = createCard('A', 'S');
     Card* ac = createCard('A', 'C');
     Card* twoc = createCard('2', 'C');

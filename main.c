@@ -145,7 +145,7 @@ int main() {
     //////////////////////
     // TEST MOVING CARDS
     //////////////////////
-    //  moveFirstCardToFoundatationTest();
+    moveFirstCardToFoundatationTest();
 
     // move2CToFoundatationTest();
 

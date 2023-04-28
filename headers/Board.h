@@ -8,7 +8,9 @@
 #include "Deck.h"
 #include "Pile.h"
 Pile** setColumnLists (Card* head);
+Pile** setFoundationLists();
 void printBoard(Pile** ptrColumn);
+void printFoundationLists(Pile** foundations);
 void isVisible (bool isVisible);
 
 
