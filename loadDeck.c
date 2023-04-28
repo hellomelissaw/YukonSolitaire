@@ -5,39 +5,33 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include "Card.c"
 #include <unistd.h>
 
 #define NUM_SUITS 4
 #define NUM_CARDS_PER_SUIT 13
 #define NUM_CARDS 52
 
-
-// Arrays to store suit and rank names, to later on check if the filename is entered with these attributes.
+// Arrays to store suit and rank names
 char* suits[] = {"C", "D", "H", "S"};
 char* ranks[] = {"A", "2", "3", "4", "5", "6", "7",
                  "8", "9", "T", "J", "Q", "K"};
 
 
 // Struct to represent a card
-typedef struct {
-    char rank;
-    char suit;
+/*typedef struct {
+    char rank[3];
+    char suit[8];
     bool isVisible;
     struct card *next;
-} Card1;
-
-
-//struct linkedList
-struct linkedList{
-    struct node *head;
-};
-
+} Card;
+*/
 
 // Array to store the deck of cards
-Card1 deck[NUM_CARDS];
+Card deck[NUM_CARDS];
 
 // Function to check if a card is valid
-int isCardValid(char* rank, char* suit) {
+int is_valid_card(char* rank, char* suit) {
     int valid_rank = 0, valid_suit = 0;
 
     // Check if the rank is valid

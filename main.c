@@ -1,4 +1,4 @@
-#include "Deck.c"
+//#include "Shuffle.c"
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -10,6 +10,9 @@
     //createDeck("unshuffledCards.txt");
     printDeck(shuffleInterweave(13,createDeck("unshuffledCards.txt")));
 
+#include "Board.c"
+int main(void) {
+    printBoard("unshuffledCards.txt");
 
 }
  */
