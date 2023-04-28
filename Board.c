@@ -2,7 +2,7 @@
 // Created by Bruger on 4/17/2023.
 //
 #include <stdlib.h>
-#include "headers/AllHeaders.h"
+#include "headers/Card.h"
 #include <stdio.h>
 
 #define  COLUMN_COUNT 7
