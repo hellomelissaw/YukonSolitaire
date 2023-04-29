@@ -33,83 +33,63 @@ Pile** setColumnLists (Card* head) {
 
 }
 
+void printBoard(char fileName[]) {
+    Card **columnTest = setColumnLists(createDeck(fileName));
+    Card* currentColumns[COLUMN_COUNT];
+    int counterFaundation = 1;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/// SETS UP THE FOUR PILES REPRESENTING THE FOUNDATION PILES
-/// \return pointer to the Pile array
-Pile** setFoundationLists() {
-    Pile** foundations = malloc(4 * sizeof(Pile*));
-
-
-    for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
-        foundations[i] = createPile();
-        Card* blankCard = createCard('[',']');
-        Card** ptrBlankCard = &blankCard;
-        insertAtTail(ptrBlankCard, &foundations[i]->head, &foundations[i]->tail);
-
+    for (int i = 0; i < COLUMN_COUNT; i++) { // creates an array of pointers to the head card of each of the 7 linked lists representing the columns
+        currentColumns[i] = columnTest[i];
+    }
+    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    int hiddenCounter = 1;
+    int offset;
+    for (int i = 0; i < ROW_COUNT; i++) {
+        switch (i) {
+            case 0:
+                offset = 1;
+                break;
+            case 2:
+                offset = 1;
+                break;
+            case 4:
+                offset = 1;
+                break;
+            case 6:
+                offset = 1;
+                break;
+            default:
+                offset = 0;
+                break;
+        }
+        for (int j = 0; j < COLUMN_COUNT + offset; j++) {
+            if (j > COLUMN_COUNT-1) {
+                printf("\t[]\tF%d",counterFaundation);
+                //currentColumns[j] = currentColumn->next
+                counterFaundation++;
+            } else {
+                Card *currentColumn = currentColumns[j];
+                if (currentColumn == NULL) {
+                    printf("\t"); // if there is no card in the current column, make a tab space
+                } else {
+                    if (j < hiddenCounter) { // checks whether card should be visible or not
+                        setVisibility(&currentColumn, true);
+                    } else {
+                        setVisibility(&currentColumn, false);
+                    }
+                    printf("%s\t", currentColumn->view);
+                    currentColumns[j] = currentColumn->next;
+                }
+            }
+        }
+        hiddenCounter++;
+        printf("\n");
     }
 
-    return foundations;
-
+    printf("");
+    printf("LAST command; \n"); //add func
+    printf("Message \n"); //add func
+    printf("INPUT >");
 }
 
 
-/// PRINTS THE BOARD WITH LINKED LISTS FOR COLUMNS (WIP, to do: print foundation piles)
-/// \param ptrColumn
-/*void printBoard(Pile** columnsFilled){
-    Pile** columns = columnsFilled;
-    Card *currentCards[COLUMN_COUNT];
-
-    // creates an array of Card pointers out of each column Pile head Card
-    // in order to keep track of which row we're printing
-    for (int i = 0; i < COLUMN_COUNT; i++)
-        currentCards[i] = columns[i]->head;
-
-         printf("\tC1 \t\tC2 \t\tC3 \t\tC4 \t\tC5 \t\tC6 \t\tC7\n");
-         int hiddenCounter = 1;
-         for (int i = 0; i < ROW_COUNT; i++) {
-             for (int j = 0; j < COLUMN_COUNT; j++) {
-                 Card *current = currentCards[j];
-                 if (current == NULL) {
-                     printf("\t\t"); // if there is no card in the current column, for the current row, make a tab space
-                 }
-                 else {
-                    if(j >= hiddenCounter)
-                        setVisibility(&currentCards[j], false);
-
-                     printf("\t%s\t", current->view);
-                     currentCards[j] = current->next;
-
-                 }
-
-             }
-             hiddenCounter++;
-             printf("\n");
-         }
-
-     }
-*/

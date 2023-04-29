@@ -36,11 +36,9 @@ Card* createCard(char rank, char suit) {
 }*/
 
 void setVisibility(Card** currentCards , bool visible){
-   // Card* currentCard;
+
     if (visible) {
-        // If visible is true, assign the rank and suit pointers to the currentCards array
-       // currentCards[0] = &(currentCard->rank);
-        //currentCards[1] = &(currentCard->suit);
+
         (*currentCards)->view[0] = (*currentCards)->rank;
         (*currentCards)->view[1] = (*currentCards)->suit;
         (*currentCards)->view[2] = '\0'; // this says that the string has no more chars
@@ -48,10 +46,7 @@ void setVisibility(Card** currentCards , bool visible){
 
     }else{
         // If visible is false, assign null pointers to the currentCards array
-        //currentCards[0] = "[";
-        //currentCards[1] = "]";
-        //currentCards[0] = &(currentCard->rank);
-        //currentCards[1] = &(currentCard->suit);
+
         (*currentCards)->view[0] = '[';
         (*currentCards)->view[1] = ']';
         (*currentCards)->view[2] = '\0';
