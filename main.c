@@ -153,7 +153,11 @@ int main() {
 
     if(input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'C'){
         if(validInputFromTailToTail(input)){
-            moveToColumn(&columnsFilled[input[1]-48], &columnsFilled[input[5]-48], columnsFilled[input[1]-48]->tail->rank, messagePtr);
+            int srcColumnIndex = input[1]-49;
+            int destColumnIndex = input[5]-49;
+            char srcCardRank = columnsFilled[srcColumnIndex]->tail->rank;
+            moveTailToTail(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], messagePtr);
+            //moveToColumn(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], srcCardRank, 0, messagePtr);
         }
     }
 

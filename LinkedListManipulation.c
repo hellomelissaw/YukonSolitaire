@@ -5,9 +5,10 @@
 #include "headers/AllHeaders.h"
 
 /// INSERTS THE CURRENT HEAD OF ONE DECK AT THE TAIL OF ANOTHER DECK
+/// \param ptr_SrcHead pointer containing the mem adr of the pointer to head deck to be inserted FROM
 /// \param ptr_DestHead pointer containing the mem adr of the pointer to head deck to be inserted TO
 /// \param ptr_DestTail pointer containing the mem adr of the pointer to tail of deck to be inserted TO
-/// \param ptr_SrcHead pointer containing the mem adr of the pointer to head deck to be inserted FROM
+
 void insertAtTail(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail) {
     if(*ptr_DestHead == NULL) { // if the values at ptr_DestHead are NULL
         *ptr_DestHead = *ptr_SrcHead;
@@ -167,31 +168,46 @@ bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
 
 }
 
-/// FUNCTION TO MOVE A/MANY CARD(S) TO A COLUMN
+void moveTailToTail(Pile** src, Pile** dest, char **ptrMessage) {
+    if(validateMoveToColumn((*src)->tail, dest, ptrMessage)) {
+        insertAtTail(&(*src)->head, &(*dest)->head, &(*dest)->tail);
+        setNewTail(src, (*src)->tail);
+    } else {
+        setMessage(ptrMessage, "Invalid move to chosen column.");
+        printf("Invalid move to chosen column.");
+    }
+}
+
+/// FUNCTION TO MOVE MANY CARD(S) TO A COLUMN
 /// \param src pointer to a pointer, pointing to Pile of cards to be moved
 /// \param destColumn pointer to a pointer, pointing to the destination Pile (column)
 /// \param cardToBeMovedRank rank of the card to be moved
-void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char **ptrMessage) {
+void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char cardToBeMovedSuit, char **ptrMessage) {
     Card* tempHead = (*src)->head;
     Card* newTail = NULL;
-    while(tempHead->rank != cardToBeMovedRank) {
+    while(tempHead->rank != cardToBeMovedRank && tempHead->suit != cardToBeMovedSuit) {
         newTail = tempHead;
         tempHead = tempHead->next;
     }
+     if(newTail != NULL){
+         if(validateMoveToColumn(tempHead, destColumn, ptrMessage)) {
+             while(tempHead != NULL) {
+                 insertAtTail(&tempHead,&(*destColumn)->head, &(*destColumn)->tail);
+             }
+
+             setNewTail(src, newTail);
+             //printBoard(NULL, NULL);
+
+         } else {
+             setMessage(ptrMessage, "Could not move card.");
+             printf("Could not move card %c%c.\n", tempHead->rank, tempHead->suit);
+         }
+     } else {
+         setMessage(ptrMessage, "Card not found in given column.");
+         printf("Card not found in given column.");
+     }
 
 
-    if(validateMoveToColumn(tempHead, destColumn, ptrMessage)) {
-        while(tempHead != NULL) {
-            insertAtTail(&tempHead,&(*destColumn)->head, &(*destColumn)->tail);
-        }
-
-        setNewTail(src, newTail);
-        printBoard(NULL, NULL);
-
-    } else {
-        setMessage(ptrMessage, "Could not move card.");
-        //printf("Could not move card %c%c.\n", tempHead->rank, tempHead->suit);
-    }
 
 }
 
