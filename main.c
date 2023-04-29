@@ -94,62 +94,63 @@ int load_SpecificFileIntoDeck(char *filename) {
 // Hey girl hey
 int main() {
     //printDeck(createDeck("defaultDeckOfFile.txt"));
-
-    Card* head = createDeck("defaultDeckOfFile.txt");
-    Pile** columnsFilled = setColumnLists(head);
-    Pile** foundationsBlank = setFoundationLists();
+    Card *head = createDeck("defaultDeckOfFile.txt");
+    Pile **columnsFilled = setColumnLists(head);
+    Pile **foundationsBlank = setFoundationLists();
     char *message = " ";
     char **ptrMessage = &message;
-    printBoard(columnsFilled, foundationsBlank);
-    printUserConsole(ptrMessage);
+
+    while (1) {
+        printBoard(columnsFilled, foundationsBlank);
+        printUserConsole(ptrMessage);
 
 
-    char input[9];
-    char str[100];
-    char result[100];
-    int length;
+        char input[9];
+        char str[100];
+        char result[100];
+        int length;
 
-    scanf("%s", input);
-
-
-    if (!strcmp(input, "QQ")) {
-        // setPrintMessage("Quitting the Game");
-        //printf("Quitting The Game");
-        exit(0); //return
-    }
-    if (!strcmp(input, "LD")) {
-        fgets(str, 100, stdin);
-        length = strlen(str);
-
-        printf("Length of |%s| is |%d|\n", str, length);
-
-        if (length == 1) {
-            printf("vi er her");
-            load_DefaultDeckLDCommand();
+        scanf("%s", input);
 
 
-        } else if (length > 1) {
+        if (!strcmp(input, "QQ")) {
+            // setPrintMessage("Quitting the Game");
+            //printf("Quitting The Game");
+            exit(0); //return
+        }
+        if (!strcmp(input, "LD")) {
+            fgets(str, 100, stdin);
+            length = strlen(str);
 
-            strcpy(result, str + 1);
+            printf("Length of |%s| is |%d|\n", str, length);
 
-            printf("Result: %s\n", result);
-            load_SpecificFileIntoDeck(result);
+            if (length == 1) {
+                printf("vi er her");
+                load_DefaultDeckLDCommand();
+
+
+            } else if (length > 1) {
+
+                strcpy(result, str + 1);
+
+                printf("Result: %s\n", result);
+                load_SpecificFileIntoDeck(result);
+            }
+        }
+
+        if (input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] ==
+                                                                     'C') { // Checks if the input has the syntax of moving a bottom card to the bottom of another column
+            if (validInputFromTailToTail(input)) {
+                int srcColumnIndex = input[1] - 49; // column number from ascii to decimal - 1
+                int destColumnIndex = input[5] - 49;
+                char srcCardRank = columnsFilled[srcColumnIndex]->tail->rank;
+                char srcCardSuit = columnsFilled[srcColumnIndex]->tail->suit;
+                moveToColumn(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], srcCardRank, srcCardSuit,
+                             ptrMessage);
+
+            }
         }
     }
-
-    if(input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'C'){ // Checks if the input has the syntax of moving a bottom card to the bottom of another column
-        if(validInputFromTailToTail(input)){
-            int srcColumnIndex = input[1]-49; // column number from ascii to decimal - 1
-            int destColumnIndex = input[5]-49;
-            char srcCardRank = columnsFilled[srcColumnIndex]->tail->rank;
-            char srcCardSuit = columnsFilled[srcColumnIndex]->tail->suit;
-            moveToColumn(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], srcCardRank, srcCardSuit, ptrMessage);
-            printBoard(columnsFilled, foundationsBlank);
-            printUserConsole(ptrMessage);
-
-        }
-    }
-
 }
 
 void printUserConsole(char** ptrCurrentMsg) {
