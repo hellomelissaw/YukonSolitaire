@@ -60,13 +60,13 @@ void printBoard(Card *head) {
     for (int i = 0; i < COLUMN_COUNT; i++)
         currentCards[i] = columns[i]->head;
 
-    printf("current card column %d is %s \n", 1, currentCards[0]->view);
+    /*printf("current card column %d is %s \n", 1, currentCards[0]->view);
     printf("current card column %d is %s \n", 2, currentCards[1]->view);
     printf("current card column %d is %s \n", 3, currentCards[2]->view);
     printf("current card column %d is %s \n", 4, currentCards[3]->view);
     printf("current card column %d is %s \n", 5, currentCards[4]->view);
     printf("current card column %d is %s \n", 6, currentCards[5]->view);
-    printf("current card column %d is %s \n", 7, currentCards[6]->view);
+    printf("current card column %d is %s \n", 7, currentCards[6]->view);*/
 
          printf("\tC1 \t\tC2 \t\tC3 \t\tC4 \t\tC5 \t\tC6 \t\tC7\n");
          int hiddenCounter = 1;
