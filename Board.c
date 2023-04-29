@@ -12,9 +12,10 @@
 
 /// SETS UP THE FOUR PILES REPRESENTING THE FOUNDATION PILES
 /// \return pointer to the Pile array
+/// SETS UP THE FOUR PILES REPRESENTING THE FOUNDATION PILES
+/// \return pointer to the Pile array
 Pile** setFoundationLists() {
     Pile** foundations = malloc(4 * sizeof(Pile*));
-
 
     for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
         foundations[i] = createPile();
@@ -33,9 +34,13 @@ Pile** setFoundationLists() {
 /// \return pointer to the array of Pile pointers
 Pile** setColumnLists (Card* head) {
     Card** ptrHead = &head;
+    Pile** columns = malloc(7 * sizeof(Pile*));
+
+    for (int i = 0 ; i < COLUMN_COUNT ; i++)
+        columns[i] = createPile();
 
     // creating an array of pointers, each pointing to the pointer to a Pile in the array of Piles
-    Pile** columns = (Pile* []) {createPile(), createPile(), createPile(), createPile(), createPile(), createPile(), createPile()};
+    //Pile** columns = (Pile* []) {createPile(), createPile(), createPile(), createPile(), createPile(), createPile(), createPile()};
 
     int rowStart[] = {0, 1, 1, 1, 1,1 ,2, 3, 4, 5, 6};
     int rowStartCounter = 0;
@@ -52,16 +57,24 @@ Pile** setColumnLists (Card* head) {
 
 }
 
-void printBoard(Pile** columnsFilled){
+void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
     Pile** columns = columnsFilled;
     Card *currentCards[COLUMN_COUNT];
+
+    Pile** foundations = foundationsBlank;
+    Card *foundationTop[FOUNDATION_COUNT];
     int counterFoundation = 1;
+
     // creates an array of Card pointers out of each column Pile head Card
     // in order to keep track of which row we're printing
-    for (int i = 0; i < COLUMN_COUNT; i++)
+    for (int i = 0; i < COLUMN_COUNT; i++){
         currentCards[i] = columns[i]->head;
+        if(i < FOUNDATION_COUNT)
+            foundationTop[i] = foundations[i]->head;
 
-    printf("C1\t\tC2\t\tC3\t\tC4\t\tC5\t\tC6\t\tC7\n");
+    }
+
+    printf("\tC1\t\tC2\t\tC3\t\tC4\t\tC5\t\tC6\t\tC7\n");
 
     int offset;
     int hiddenCounter = 1;
@@ -84,10 +97,12 @@ void printBoard(Pile** columnsFilled){
                 break;
         }
 
-        for (int j = 0; j < COLUMN_COUNT + offset; j++) {
+        for (int j = 0; j < COLUMN_COUNT; j++) {
+        //for (int j = 0; j < COLUMN_COUNT + offset; j++) {
             Card *current = currentCards[j];
-            if (j > COLUMN_COUNT-1) {
-                printf("\t[]\tF%d", counterFoundation);
+            if (i%2 == 0 && counterFoundation < FOUNDATION_COUNT ) {
+            //if (j > COLUMN_COUNT-1) {
+                printf("\t%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation);
                 counterFoundation++;
 
             } else {

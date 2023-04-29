@@ -9,7 +9,7 @@
 #include "Pile.h"
 Pile** setColumnLists (Card* head);
 Pile** setFoundationLists();
-void printBoard(Pile** columnsFilled);
+void printBoard(Pile **columnsFilled, Pile **foundationsBlank);
 void printFoundationLists(Pile** foundations);
 void isVisible (bool isVisible);
 

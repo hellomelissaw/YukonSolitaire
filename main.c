@@ -78,9 +78,9 @@ int load_SpecificFileIntoDeck(char *filename) {
 void startPlayPhase() {
     Card* head = createDeck("defaultDeckOfFile.txt");
     Pile** columnsFilled = setColumnLists(head);
-    //Pile** foundations = setFoundationLists();
+    Pile** foundationsBlank = setFoundationLists();
 
-    printBoard(columnsFilled);
+    printBoard(columnsFilled, foundationsBlank);
 }
 
 // Hey girl hey
