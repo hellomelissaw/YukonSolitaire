@@ -33,6 +33,32 @@ Pile** setColumnLists (Card* head) {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /// SETS UP THE FOUR PILES REPRESENTING THE FOUNDATION PILES
 /// \return pointer to the Pile array
 Pile** setFoundationLists() {
@@ -51,9 +77,10 @@ Pile** setFoundationLists() {
 
 }
 
+
 /// PRINTS THE BOARD WITH LINKED LISTS FOR COLUMNS (WIP, to do: print foundation piles)
 /// \param ptrColumn
-void printBoard(Pile** columnsFilled){
+/*void printBoard(Pile** columnsFilled){
     Pile** columns = columnsFilled;
     Card *currentCards[COLUMN_COUNT];
 
@@ -83,4 +110,6 @@ void printBoard(Pile** columnsFilled){
              hiddenCounter++;
              printf("\n");
          }
+
      }
+*/
