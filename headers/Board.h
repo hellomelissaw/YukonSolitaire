@@ -10,12 +10,7 @@
 Pile** setColumnLists (Card* head);
 Pile** setFoundationLists();
 void printBoard(Pile** columnsFilled);
-//void printBoard(Card *head);
 void printFoundationLists(Pile** foundations);
 void isVisible (bool isVisible);
-
-
-
-
 
 #endif //YUKONSOLITAIRE_BOARD_H
