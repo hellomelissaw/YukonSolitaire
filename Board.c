@@ -120,8 +120,8 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
                 printf("\t%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation+1);
             }
 
-            counterFoundation++;
         }
+        counterFoundation++;
         hiddenCounter++;
         printf("\n");
     }

@@ -179,8 +179,12 @@ bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
     } else if ((*destColumn)->tail->rank == 'Q') {
         expectedRank = 'K';
 
+    } else if ((*destColumn)->tail->rank == 'K'){
+        setMessage(ptrMessage, "Cannot add card after the King.");
+        return false;
+
     } else {
-        setMessage(ptrMessage, "Invalid rank at foundation tail.\n");
+        setMessage(ptrMessage, "Invalid rank.\n");
 
         return false;
     }
@@ -209,29 +213,57 @@ void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMov
         tempHead = tempHead->next;
     }
 
-     if(newTail != NULL || (tempHead->rank == cardToBeMovedRank && tempHead->suit == cardToBeMovedSuit)){
-         if((*dest)->type == COLUMN){
-             if(validateMoveToColumn(tempHead, dest, ptrMessage)) {
+     if(newTail != NULL || (tempHead->rank == cardToBeMovedRank && tempHead->suit == cardToBeMovedSuit)) {
+         switch((*dest)->type){
+             case COLUMN:
+                 if (validateMoveToColumn(tempHead, dest, ptrMessage)) {
+                     while (tempHead != NULL) {
+                         insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
+                     }
+                     setNewTail(src, newTail);
+                     setMessage(ptrMessage, "Move successful.");
+
+                 } else {setMessage(ptrMessage, "Could not move card.");}
+                 break;
+
+             case FOUNDATION:
+                 if (validateMoveToFoundation(&tempHead, &(*dest)->head, ptrMessage)) {
+                     insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
+                     setNewTail(src, newTail);
+                     setMessage(ptrMessage, "Move successful.");
+
+                 } else {
+                     setMessage(ptrMessage, "Could not move card.");
+                 }
+                 break;
+             default:  setMessage(ptrMessage, "Invalid Pile type.");
+
+         }
+         /*
+         if ((*dest)->type == COLUMN) {
+             if (validateMoveToColumn(tempHead, dest, ptrMessage)) {
                  while (tempHead != NULL) {
                      insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
                  }
              }
 
-         } else if ((*dest)->type == FOUNDATION){
-             if(validateMoveToFoundation(&tempHead, &(*dest)->head, ptrMessage)) {
-                     insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
+         } else if ((*dest)->type == FOUNDATION) {
+             if (validateMoveToFoundation(&tempHead, &(*dest)->head, ptrMessage)) {
+                 insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
+                 setNewTail(src, newTail);
+                 setMessage(ptrMessage, "Move successful.");
 
+             } else {
+                 setMessage(ptrMessage, "Could not move card.");
              }
+
          } else {
-             setMessage(ptrMessage, "Could not move card.");
-            }
+             setMessage(ptrMessage, "Invalid Pile type.");
 
-         setNewTail(src, newTail);
-         setMessage(ptrMessage, "Move successful.");
-
+         }
+          */
      } else {
          setMessage(ptrMessage, "Card not found in given column.");
-
      }
 
 }
