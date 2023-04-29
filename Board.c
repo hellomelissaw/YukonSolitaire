@@ -9,6 +9,25 @@
 #define  ROW_COUNT 11
 #define FOUNDATION_COUNT 4
 
+
+/// SETS UP THE FOUR PILES REPRESENTING THE FOUNDATION PILES
+/// \return pointer to the Pile array
+Pile** setFoundationLists() {
+    Pile** foundations = malloc(4 * sizeof(Pile*));
+
+
+    for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
+        foundations[i] = createPile();
+        Card* blankCard = createCard('[',']');
+        Card** ptrBlankCard = &blankCard;
+        insertAtTail(ptrBlankCard, &foundations[i]->head, &foundations[i]->tail);
+
+    }
+
+    return foundations;
+
+}
+
 /// SETS THE LINKED LISTS REPRESENTING THE 7 COLUMNS AT THE START OF THE GAME
 /// \param head pointer to the head of the deck to load onto the board
 /// \return pointer to the array of Pile pointers
