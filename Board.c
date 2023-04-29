@@ -33,15 +33,16 @@ Pile** setColumnLists (Card* head) {
 
 }
 
-void printBoard(char fileName[]) {
-    Card **columnTest = setColumnLists(createDeck(fileName));
-    Card* currentColumns[COLUMN_COUNT];
-    int counterFaundation = 1;
+    void printBoard(Pile** columnsFilled){
+        Pile** columns = columnsFilled;
+        Card *currentCards[COLUMN_COUNT];
+        int counterFoundation = 1;
+        // creates an array of Card pointers out of each column Pile head Card
+        // in order to keep track of which row we're printing
+        for (int i = 0; i < COLUMN_COUNT; i++)
+            currentCards[i] = columns[i]->head;
 
-    for (int i = 0; i < COLUMN_COUNT; i++) { // creates an array of pointers to the head card of each of the 7 linked lists representing the columns
-        currentColumns[i] = columnTest[i];
-    }
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+        printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
     int hiddenCounter = 1;
     int offset;
     for (int i = 0; i < ROW_COUNT; i++) {
@@ -62,23 +63,23 @@ void printBoard(char fileName[]) {
                 offset = 0;
                 break;
         }
+        int hiddenCounter = 1;
         for (int j = 0; j < COLUMN_COUNT + offset; j++) {
+            Card *current = currentCards[j];
             if (j > COLUMN_COUNT-1) {
-                printf("\t[]\tF%d",counterFaundation);
-                //currentColumns[j] = currentColumn->next
-                counterFaundation++;
+                printf("\t[]\tF%d", counterFoundation);
+                counterFoundation++;
             } else {
-                Card *currentColumn = currentColumns[j];
-                if (currentColumn == NULL) {
-                    printf("\t"); // if there is no card in the current column, make a tab space
-                } else {
-                    if (j < hiddenCounter) { // checks whether card should be visible or not
-                        setVisibility(&currentColumn, true);
-                    } else {
-                        setVisibility(&currentColumn, false);
-                    }
-                    printf("%s\t", currentColumn->view);
-                    currentColumns[j] = currentColumn->next;
+                if (current == NULL) {
+                    printf("\t\t"); // if there is no card in the current column, for the current row, make a tab space
+                }
+                else {
+                    if(j >= hiddenCounter)
+                        setVisibility(&currentCards[j], false);
+
+                    printf("\t%s\t", current->view);
+                    currentCards[j] = current->next;
+
                 }
             }
         }
