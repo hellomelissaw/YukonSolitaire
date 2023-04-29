@@ -70,7 +70,7 @@ void insertBetween(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail,
 }
 
 /// FUNCTION TO MODIFY THE TAIL OF A GIVEN COLUMN (mainly used for moving cards away from a column)
-/// \param columnToModify pointer to the pointer, which points to the Pile struct of the column to modify
+/// \param columnToModify pointer to the pointer that points to the Pile struct of the column to modify
 /// \param newTail pointer to the card which should be the new tail of the pile
 void setNewTail(Pile** columnToModify, Card* newTail) {
     (*columnToModify)->tail = newTail;
@@ -78,8 +78,8 @@ void setNewTail(Pile** columnToModify, Card* newTail) {
 }
 
 /// FUNCTION TO VALIDATE, THAT MOVING A CARD A FOUNDATION PILE FOLLOWS THE RULES OF THE GAME
-/// \param cardToBeMoved pointer to a pointer, which points to the card that should be moved
-/// \param foundationTail pointer to a pointer, which points to the card sitting at the top of the foundation pile
+/// \param cardToBeMoved pointer to a pointer that points to the card that should be moved
+/// \param foundationTail pointer to a pointer that points to the card sitting at the top of the foundation pile
 /// \return true if valid, false if invalid
 bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char** ptrMessage) {
     char requiredSuit = (*foundationTail)->suit;
@@ -106,7 +106,6 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
 
         } else {
             setMessage(ptrMessage, "Invalid rank at foundation tail.\n");
-            //printf("Invalid rank at foundation tail.\n");
             return false;
         }
 
@@ -116,14 +115,12 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
 
         } else {
             setMessage(ptrMessage, "Card to be moved does not have the correct rank!\n");
-            //printf("Card to be moved does not have the correct rank!\n");
             return false;
 
         }
 
     } else {
         setMessage(ptrMessage, "Card to be moved does not have the correct suit!\n");
-        //printf("Card to be moved does not have the correct suit!\n");
         return false;
     }
 
@@ -131,7 +128,7 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
 
 /// FUNCTION TO VALIDATE THAT MOVING A/MANY CARDS TO ANOTHER COLUMN FOLLOWS THE RULES
 /// \param src pointer pointing to the card to be moved
-/// \param destColumn pointer to a pointer, pointing to the Pile that the card should be moved to
+/// \param destColumn pointer to a pointer that points to the Pile that the card should be moved to
 /// \return true if valid, false if invalid
 bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
     char expectedRank;
@@ -152,7 +149,7 @@ bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
 
     } else {
         setMessage(ptrMessage, "Invalid rank at foundation tail.\n");
-        //printf("Invalid rank at foundation tail.\n");
+
         return false;
     }
 
@@ -162,14 +159,14 @@ bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
 
     } else {
         setMessage(ptrMessage, "The card is not the right value to be moved.\n");
-       // printf("The card %c%c is not the right value to be moved.\n",src->rank, src->suit);
+
         return false;
     }
 
 }
 
 /// FUNCTION TO MOVE MANY CARD(S) TO A COLUMN
-/// \param src pointer to a pointer, pointing to Pile of cards to be moved
+/// \param src pointer to a pointer that points to Pile of cards to be moved
 /// \param destColumn pointer to a pointer, pointing to the destination Pile (column)
 /// \param cardToBeMovedRank rank of the card to be moved
 void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char cardToBeMovedSuit, char **ptrMessage) {
@@ -190,11 +187,11 @@ void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char ca
 
          } else {
              setMessage(ptrMessage, "Could not move card.");
-             printf("Could not move card %c%c.\n", tempHead->rank, tempHead->suit);
+
          }
      } else {
          setMessage(ptrMessage, "Card not found in given column.");
-         printf("Card not found in given column.");
+
      }
 
 
