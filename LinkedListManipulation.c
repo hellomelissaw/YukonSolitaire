@@ -74,7 +74,11 @@ void insertBetween(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail,
 /// \param newTail pointer to the card which should be the new tail of the pile
 void setNewTail(Pile** columnToModify, Card* newTail) {
     (*columnToModify)->tail = newTail;
-    (*columnToModify)->tail->next = NULL;
+    if(newTail != NULL) {
+        (*columnToModify)->tail->next = NULL;
+    } else {
+        (*columnToModify)->head = NULL;
+    }
 }
 
 /// FUNCTION TO VALIDATE, THAT MOVING A CARD A FOUNDATION PILE FOLLOWS THE RULES OF THE GAME
@@ -167,28 +171,36 @@ bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
 
 /// FUNCTION TO MOVE MANY CARD(S) TO A COLUMN
 /// \param src pointer to a pointer that points to Pile of cards to be moved
-/// \param destColumn pointer to a pointer, pointing to the destination Pile (column)
+/// \param dest pointer to a pointer, pointing to the destination Pile (column)
 /// \param cardToBeMovedRank rank of the card to be moved
-void moveCards(Pile **src, Pile **destColumn, char cardToBeMovedRank, char cardToBeMovedSuit, char **ptrMessage) {
+void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMovedSuit, char **ptrMessage) {
     Card* tempHead = (*src)->head;
     Card* newTail = NULL;
     while(tempHead->rank != cardToBeMovedRank || tempHead->suit != cardToBeMovedSuit) {
         newTail = tempHead;
         tempHead = tempHead->next;
     }
+
      if(newTail != NULL || (tempHead->rank == cardToBeMovedRank && tempHead->suit == cardToBeMovedSuit)){
-         if(validateMoveToColumn(tempHead, destColumn, ptrMessage)) {
-             while(tempHead != NULL) {
-                 insertAtTail(&tempHead,&(*destColumn)->head, &(*destColumn)->tail);
+         if((*dest)->type == COLUMN){
+             if(validateMoveToColumn(tempHead, dest, ptrMessage)) {
+                 while (tempHead != NULL) {
+                     insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
+                 }
              }
 
-             setNewTail(src, newTail);
-             setMessage(ptrMessage, "Move successful.");
+         } else if ((*dest)->type == FOUNDATION){
+             if(validateMoveToFoundation(&tempHead, &(*dest)->head, ptrMessage)) {
+                     insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
 
+             }
          } else {
              setMessage(ptrMessage, "Could not move card.");
+            }
 
-         }
+         setNewTail(src, newTail);
+         setMessage(ptrMessage, "Move successful.");
+
      } else {
          setMessage(ptrMessage, "Card not found in given column.");
 
