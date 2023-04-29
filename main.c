@@ -5,8 +5,15 @@
 #include <stdlib.h>
 #include "headers/AllHeaders.h"
 //#include "loadDeck.c"
+bool validColumnRange(char in);
+bool validFoundationRange(char in);
+bool validRank(char in);
+bool validSuit(char in);
+bool validInputFromTailToFoundation(char* in);
+bool validInputFromTailToTail(char* in);
+bool validInputFromColumnPileToTail(char* in);
 
-int load_DefaultDeckLDCommand() {
+        int load_DefaultDeckLDCommand() {
     FILE *fp;
     char str[100];
 
@@ -75,25 +82,29 @@ int load_SpecificFileIntoDeck(char *filename) {
 
 
 
-void startPlayPhase() {
+/*void startPlayPhase() {
     Card* head = createDeck("defaultDeckOfFile.txt");
     Pile** columnsFilled = setColumnLists(head);
     Pile** foundationsBlank = setFoundationLists();
-
     printBoard(columnsFilled, foundationsBlank);
-}
+
+}*/
 
 // Hey girl hey
 int main() {
     //printDeck(createDeck("defaultDeckOfFile.txt"));
 
-    startPlayPhase();
-    /*
-    char input[2];
+    Card* head = createDeck("defaultDeckOfFile.txt");
+    Pile** columnsFilled = setColumnLists(head);
+    Pile** foundationsBlank = setFoundationLists();
+    printBoard(columnsFilled, foundationsBlank);
+
+
+    char input[9];
     char str[100];
     char result[100];
     int length;
-
+/*
     //  while (1) {
 
     printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
@@ -104,13 +115,15 @@ int main() {
     printf("                                                           []  \tF4\n");
 
     printf("");
+     */
     printf("LAST command; \n"); //add func
     char *message = " ";
     char **messagePtr = &message;
     printf("Message: %s\n", message); //add func
+    //printf("Message: \n"); //add func
     printf("INPUT >");
 
-    //scanf("%s", &input);
+    scanf("%s", input);
 
 
     if (!strcmp(input, "QQ")) {
@@ -138,9 +151,85 @@ int main() {
         }
     }
 
-        // FUNC here
-  //  }
+    if(input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'C'){
+        if(validInputFromTailToTail(input)){
+            moveToColumn(&columnsFilled[input[1]-48], &columnsFilled[input[5]-48], columnsFilled[input[1]-48]->tail->rank, messagePtr);
+        }
+    }
 
+}
+bool validInputFromTailToTail(char* input) {
+    if(validColumnRange(input[1])){
+        if(validColumnRange(input[5]))
+            return true;
+        else
+            return false; // invalid destination column range, if time set message
+    } else {
+        return false; // invalid source column range, if time set message
+    }
+
+}
+
+bool validInputFromTailToFoundation(char* input) {
+    if(validColumnRange(input[1])){
+        if(validFoundationRange(input[5]))
+            return true;
+        else
+            return false; // invalid destination foundation range, if time set message
+    } else {
+        return false; // invalid source column range, if time set message
+    }
+}
+
+
+bool validInputFromColumnPileToTail(char* in) {
+    if(validColumnRange(in[1])){
+        if(validRank(in[3])){
+            if(validSuit(in[4])){
+                if(validColumnRange(in[8]))
+                    return true;
+                else return false; // invalid destination column range
+
+            } else {
+                return false; // invalid source card suit
+            }
+        } else {
+            return false; // invalid source card rank,, if time set message
+        }
+    } else {
+        return false; // invalid source column range, if time set message
+    }
+}
+
+bool validColumnRange(char in) {
+    if(in >= '1' && in <= '7')
+        return true;
+    else
+        return false;
+}
+
+bool validRank(char in) {
+    if((in >= 2 && in <= 9) || in == 'A' || in == 'T' || in == 'J' || in == 'Q' || in == 'K')
+        return true;
+    else
+        return false;
+}
+
+bool validSuit(char in) {
+    if(in == 'C' || in == 'D' || in == 'S' || in == 'H')
+        return true;
+    else
+        return false; // invalid suit, set message if time
+
+}
+
+bool validFoundationRange(char in) {
+    if(in >= '1' && in <= '4')
+        return true;
+    else
+        return false;
+}
+/*
 
     //createDeck("unshuffledCards.txt");
     //printDeck(shuffleInterweave(13, createDeck("unshuffledCards.txt")));
@@ -174,6 +263,6 @@ int main() {
     Card* testDeck = createDeck("unshuffledCards.txt");
     //shuffleRandom(testDeck);
     shuffleInterweave(45, testDeck);
-    printDeck(testDeck);*/
+    printDeck(testDeck);*
 }
-
+*/

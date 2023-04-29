@@ -121,10 +121,6 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
         printf("\n");
     }
 
-    printf("");
-    printf("LAST command; \n"); //add func
-    printf("Message \n"); //add func
-    printf("INPUT >");
 }
 
 
