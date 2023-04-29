@@ -99,9 +99,10 @@ void printBoard(Card *head) {
                      currentCards[j] = current->next;
 
                  }
-                 hiddenCounter++;
-                 printf("\n");
+
              }
+             hiddenCounter++;
+             printf("\n");
          }
      }
 
