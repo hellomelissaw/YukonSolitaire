@@ -75,8 +75,8 @@ void testMove2Cn3CToColumnWithAS(){
     Card* ac = createCard('A', 'C');
     Card* twoc = createCard('2', 'C');
     Card* threec = createCard('3', 'C');
-    Pile* testColumn1 = createPile();
-    Pile* testColumn2 = createPile();
+    Pile* testColumn1 = createPile(COLUMN);
+    Pile* testColumn2 = createPile(COLUMN);
     insertAtTail(&ac, &testColumn1->head, &testColumn1->tail);
     insertAtTail(&twoc, &testColumn1->head, &testColumn1->tail);
     insertAtTail(&threec, &testColumn1->head, &testColumn1->tail);

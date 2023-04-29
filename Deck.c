@@ -24,7 +24,7 @@ Card* createDeck(char fileName[]) {
 
 
     /* Add values from the cardLabels array to the array of cards */
-    Pile* newDeck = createPile();
+    Pile* newDeck = createPile(DECK);
 
     for(int i = 0 ; i < CARD_COUNT ; i ++) // get the rank and suit from line i of the file and pass as argument to createCard func
     {

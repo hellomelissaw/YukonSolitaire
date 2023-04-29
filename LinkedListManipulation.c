@@ -194,8 +194,6 @@ void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char ca
 
      }
 
-
-
 }
 
 

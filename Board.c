@@ -18,7 +18,7 @@ Pile** setFoundationLists() {
     Pile** foundations = malloc(4 * sizeof(Pile*));
 
     for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
-        foundations[i] = createPile();
+        foundations[i] = createPile(FOUNDATION);
         Card* blankCard = createCard('[',']');
         Card** ptrBlankCard = &blankCard;
         insertAtTail(ptrBlankCard, &foundations[i]->head, &foundations[i]->tail);
@@ -37,7 +37,7 @@ Pile** setColumnLists (Card* head) {
     Pile** columns = malloc(7 * sizeof(Pile*));
 
     for (int i = 0 ; i < COLUMN_COUNT ; i++)
-        columns[i] = createPile();
+        columns[i] = createPile(COLUMN);
 
     // creating an array of pointers, each pointing to the pointer to a Pile in the array of Piles
     //Pile** columns = (Pile* []) {createPile(), createPile(), createPile(), createPile(), createPile(), createPile(), createPile()};

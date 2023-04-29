@@ -5,10 +5,10 @@
 #include "headers/AllHeaders.h"
 
 
-Pile* createPile() {
+Pile* createPile(enum pileType pt) {
     Pile* pile = malloc(sizeof(Pile));
     pile->head = NULL;
     pile->tail = NULL;
-
+    pile->type = pt;
     return pile;
 }
