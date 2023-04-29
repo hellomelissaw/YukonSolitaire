@@ -52,18 +52,19 @@ Pile** setColumnLists (Card* head) {
 
 }
 
-    void printBoard(Pile** columnsFilled){
-        Pile** columns = columnsFilled;
-        Card *currentCards[COLUMN_COUNT];
-        int counterFoundation = 1;
-        // creates an array of Card pointers out of each column Pile head Card
-        // in order to keep track of which row we're printing
-        for (int i = 0; i < COLUMN_COUNT; i++)
-            currentCards[i] = columns[i]->head;
+void printBoard(Pile** columnsFilled){
+    Pile** columns = columnsFilled;
+    Card *currentCards[COLUMN_COUNT];
+    int counterFoundation = 1;
+    // creates an array of Card pointers out of each column Pile head Card
+    // in order to keep track of which row we're printing
+    for (int i = 0; i < COLUMN_COUNT; i++)
+        currentCards[i] = columns[i]->head;
 
-        printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
-    int hiddenCounter = 1;
+    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+
     int offset;
+    int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
         switch (i) {
             case 0:
@@ -82,17 +83,18 @@ Pile** setColumnLists (Card* head) {
                 offset = 0;
                 break;
         }
-        int hiddenCounter = 1;
+
         for (int j = 0; j < COLUMN_COUNT + offset; j++) {
             Card *current = currentCards[j];
             if (j > COLUMN_COUNT-1) {
                 printf("\t[]\tF%d", counterFoundation);
                 counterFoundation++;
+
             } else {
                 if (current == NULL) {
                     printf("\t\t"); // if there is no card in the current column, for the current row, make a tab space
-                }
-                else {
+
+                } else {
                     if(j >= hiddenCounter)
                         setVisibility(&currentCards[j], false);
 
