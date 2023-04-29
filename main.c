@@ -156,8 +156,9 @@ int main() {
             int srcColumnIndex = input[1]-49;
             int destColumnIndex = input[5]-49;
             char srcCardRank = columnsFilled[srcColumnIndex]->tail->rank;
-            moveTailToTail(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], messagePtr);
-            //moveToColumn(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], srcCardRank, 0, messagePtr);
+            char srcCardSuit = columnsFilled[srcColumnIndex]->tail->suit;
+            moveToColumn(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], srcCardRank, srcCardSuit, messagePtr);
+            printBoard(columnsFilled, foundationsBlank);
         }
     }
 

@@ -185,7 +185,7 @@ void moveTailToTail(Pile** src, Pile** dest, char **ptrMessage) {
 void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char cardToBeMovedSuit, char **ptrMessage) {
     Card* tempHead = (*src)->head;
     Card* newTail = NULL;
-    while(tempHead->rank != cardToBeMovedRank && tempHead->suit != cardToBeMovedSuit) {
+    while(tempHead->rank != cardToBeMovedRank || tempHead->suit != cardToBeMovedSuit) {
         newTail = tempHead;
         tempHead = tempHead->next;
     }
@@ -196,7 +196,6 @@ void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char ca
              }
 
              setNewTail(src, newTail);
-             //printBoard(NULL, NULL);
 
          } else {
              setMessage(ptrMessage, "Could not move card.");
