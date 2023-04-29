@@ -12,6 +12,7 @@ bool validSuit(char in);
 bool validInputFromTailToFoundation(char* in);
 bool validInputFromTailToTail(char* in);
 bool validInputFromColumnPileToTail(char* in);
+void printUserConsole(char** ptrCurrentMsg);
 
         int load_DefaultDeckLDCommand() {
     FILE *fp;
@@ -97,31 +98,16 @@ int main() {
     Card* head = createDeck("defaultDeckOfFile.txt");
     Pile** columnsFilled = setColumnLists(head);
     Pile** foundationsBlank = setFoundationLists();
+    char *message = " ";
+    char **ptrMessage = &message;
     printBoard(columnsFilled, foundationsBlank);
+    printUserConsole(ptrMessage);
 
 
     char input[9];
     char str[100];
     char result[100];
     int length;
-/*
-    //  while (1) {
-
-    printf("\tC1   \tC2  \tC3  \tC4  \tC5  \tC6  \tC7");
-    printf("\n");
-    printf("                                                           []  \tF1\n");
-    printf("                                                           []  \tF2\n");
-    printf("                                                           []  \tF3\n");
-    printf("                                                           []  \tF4\n");
-
-    printf("");
-     */
-    printf("LAST command; \n"); //add func
-    char *message = " ";
-    char **messagePtr = &message;
-    printf("Message: %s\n", message); //add func
-    //printf("Message: \n"); //add func
-    printf("INPUT >");
 
     scanf("%s", input);
 
@@ -151,16 +137,26 @@ int main() {
         }
     }
 
-    if(input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'C'){
+    if(input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'C'){ // Checks if the input has the syntax of moving a bottom card to the bottom of another column
         if(validInputFromTailToTail(input)){
-            int srcColumnIndex = input[1]-49;
+            int srcColumnIndex = input[1]-49; // column number from ascii to decimal - 1
             int destColumnIndex = input[5]-49;
             char srcCardRank = columnsFilled[srcColumnIndex]->tail->rank;
             char srcCardSuit = columnsFilled[srcColumnIndex]->tail->suit;
-            moveToColumn(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], srcCardRank, srcCardSuit, messagePtr);
+            moveToColumn(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], srcCardRank, srcCardSuit, ptrMessage);
             printBoard(columnsFilled, foundationsBlank);
+            printUserConsole(ptrMessage);
+
         }
     }
+
+}
+
+void printUserConsole(char** ptrCurrentMsg) {
+    printf("LAST command; \n"); //add func
+    printf("Message: %s\n", *ptrCurrentMsg); //add func
+    //printf("Message: \n"); //add func
+    printf("INPUT >");
 
 }
 bool validInputFromTailToTail(char* input) {
