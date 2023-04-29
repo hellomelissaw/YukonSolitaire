@@ -168,16 +168,6 @@ bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
 
 }
 
-void moveTailToTail(Pile** src, Pile** dest, char **ptrMessage) {
-    if(validateMoveToColumn((*src)->tail, dest, ptrMessage)) {
-        insertAtTail(&(*src)->head, &(*dest)->head, &(*dest)->tail);
-        setNewTail(src, (*src)->tail);
-    } else {
-        setMessage(ptrMessage, "Invalid move to chosen column.");
-        printf("Invalid move to chosen column.");
-    }
-}
-
 /// FUNCTION TO MOVE MANY CARD(S) TO A COLUMN
 /// \param src pointer to a pointer, pointing to Pile of cards to be moved
 /// \param destColumn pointer to a pointer, pointing to the destination Pile (column)
