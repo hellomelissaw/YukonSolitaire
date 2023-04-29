@@ -105,14 +105,12 @@ int main() {
         printBoard(columnsFilled, foundationsBlank);
         printUserConsole(ptrMessage);
 
-
         char input[9];
         char str[100];
         char result[100];
         int length;
 
         scanf("%s", input);
-
 
         if (!strcmp(input, "QQ")) {
             // setPrintMessage("Quitting the Game");

@@ -19,9 +19,9 @@ Pile** setFoundationLists() {
 
     for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
         foundations[i] = createPile(FOUNDATION);
-        Card* blankCard = createCard('[',']');
-        Card** ptrBlankCard = &blankCard;
-        insertAtTail(ptrBlankCard, &foundations[i]->head, &foundations[i]->tail);
+        //Card* blankCard = createCard('[',']');
+        //Card** ptrBlankCard = &blankCard;
+        //insertAtTail(ptrBlankCard, &foundations[i]->head, &foundations[i]->tail);
 
     }
 
@@ -70,7 +70,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
     for (int i = 0; i < COLUMN_COUNT; i++){
         currentCards[i] = columns[i]->head;
         if(i < FOUNDATION_COUNT)
-            foundationTop[i] = foundations[i]->head;
+            foundationTop[i] = foundations[i]->tail;
 
     }
 
@@ -114,7 +114,12 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
         }
         if (i%2 == 0 && counterFoundation < FOUNDATION_COUNT) {
-            printf("\t%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation+1);
+            if(foundationTop[i] == NULL) {
+                printf("\t[]\tF%d", counterFoundation+1);
+            } else {
+                printf("\t%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation+1);
+            }
+
             counterFoundation++;
         }
         hiddenCounter++;

@@ -81,51 +81,79 @@ void setNewTail(Pile** columnToModify, Card* newTail) {
     }
 }
 
+
+
 /// FUNCTION TO VALIDATE, THAT MOVING A CARD A FOUNDATION PILE FOLLOWS THE RULES OF THE GAME
 /// \param cardToBeMoved pointer to a pointer that points to the card that should be moved
 /// \param foundationTail pointer to a pointer that points to the card sitting at the top of the foundation pile
 /// \return true if valid, false if invalid
 bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char** ptrMessage) {
-    char requiredSuit = (*foundationTail)->suit;
-    if((*cardToBeMoved)->suit == requiredSuit || requiredSuit == ']') {
-        char requiredRank;
-        if((*foundationTail)->rank == '[') {
-            requiredRank = 'A';
 
-        } else if ((*foundationTail)->rank == 'A') {
-            requiredRank = '2';
-
-        } else if ((*foundationTail)->rank >= 50 && (*foundationTail)->rank <= 57) { // using ascii values of char to check condition
-            requiredRank = ((*foundationTail)->rank) + 1;
-            printf("requiredRank: %c\n", requiredRank);
-
-        } else if ((*foundationTail)->rank == 'T') {
-            requiredRank = 'J';
-
-        } else if ((*foundationTail)->rank == 'J') {
-            requiredRank = 'Q';
-
-        } else if ((*foundationTail)->rank == 'Q') {
-            requiredRank = 'K';
-
-        } else {
-            setMessage(ptrMessage, "Invalid rank at foundation tail.\n");
-            return false;
-        }
-
-        if((*cardToBeMoved)->rank == requiredRank) {
-
+    if(*foundationTail == NULL) {
+        if((*cardToBeMoved)->rank == 'A') {
             return true;
-
         } else {
-            setMessage(ptrMessage, "Card to be moved does not have the correct rank!\n");
             return false;
-
         }
 
     } else {
-        setMessage(ptrMessage, "Card to be moved does not have the correct suit!\n");
-        return false;
+        char rankOrder[] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'};
+
+        if((*cardToBeMoved)->suit != (*foundationTail)->suit) {
+            setMessage(ptrMessage, "Card to be moved does not have the correct suit!\n");
+            return false;
+        } else {
+            int i = 0;
+
+            while((*foundationTail)->rank != rankOrder[i] || i < 13) {
+                i++;
+            }
+
+            char requiredRank = rankOrder[i];
+
+            if((*foundationTail)->rank == requiredRank){
+                return true;
+
+            } else {
+                setMessage(ptrMessage, "Card to be moved does not have the correct rank!\n");
+                return false;
+            }
+
+           /* if ((*foundationTail)->rank == 'A') {
+                requiredRank = '2';
+
+            } else if ((*foundationTail)->rank >= 50 && (*foundationTail)->rank <= 57) { // using ascii values of char to check condition
+                requiredRank = ((*foundationTail)->rank) + 1;
+                printf("requiredRank: %c\n", requiredRank);
+
+            } else if ((*foundationTail)->rank == 'T') {
+                requiredRank = 'J';
+
+            } else if ((*foundationTail)->rank == 'J') {
+                requiredRank = 'Q';
+
+            } else if ((*foundationTail)->rank == 'Q') {
+                requiredRank = 'K';
+
+            } else {
+                setMessage(ptrMessage, "Invalid rank at foundation tail.\n");
+                return false;
+            }
+
+
+            if ((*cardToBeMoved)->rank == requiredRank) {
+
+                return true;
+
+            } else {
+                setMessage(ptrMessage, "Card to be moved does not have the correct rank!\n");
+                return false;
+
+            }
+            */
+
+        }
+
     }
 
 }
