@@ -14,6 +14,8 @@
 /// \return pointer to the array of Pile pointers
 Pile** setColumnLists (Card* head) {
     Card** ptrHead = &head;
+
+    // creating an array of pointers, each pointing to the pointer to a Pile in the array of Piles
     Pile** columns = (Pile* []) {createPile(), createPile(), createPile(), createPile(), createPile(), createPile(), createPile()};
 
     int rowStart[] = {0, 1, 1, 1, 1,1 ,2, 3, 4, 5, 6};
@@ -51,8 +53,9 @@ Pile** setFoundationLists() {
 
 /// PRINTS THE BOARD WITH LINKED LISTS FOR COLUMNS (WIP, to do: print foundation piles)
 /// \param ptrColumn
-void printBoard(Card *head) {
-    Pile** columns = setColumnLists(head);
+void printBoard(Pile*** ptrColumns){
+//void printBoard(Card *head) {
+    Pile** columns = *ptrColumns;
     Card *currentCards[COLUMN_COUNT];
 
     // creates an array of Card pointers out of each column Pile head Card
