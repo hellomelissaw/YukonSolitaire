@@ -77,18 +77,12 @@ int load_SpecificFileIntoDeck(char *filename) {
 
 void startPlayPhase() {
     Card* head = createDeck("defaultDeckOfFile.txt");
-    Pile** columns = setColumnLists(head);
-    Pile*** ptrColumns = &columns;
-    Card* current = (*columns + 6)->head;
-   /* int i = 0;
-    while(current != NULL){
-        printf("c2 card %d is %s\n", i, current->view);
-        current = current->next;
-        i++;
-    }*/
+    Pile** columnsFilled = setColumnLists(head);
+    Pile*** ptrColumns = &columnsFilled;
+
     //Pile** foundations = setFoundationLists();
 
-    printBoard(ptrColumns);
+    printBoard(columnsFilled);
 }
 
 // Hey girl hey

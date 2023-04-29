@@ -53,9 +53,9 @@ Pile** setFoundationLists() {
 
 /// PRINTS THE BOARD WITH LINKED LISTS FOR COLUMNS (WIP, to do: print foundation piles)
 /// \param ptrColumn
-void printBoard(Pile*** ptrColumns){
+void printBoard(Pile** columnsFilled){
 //void printBoard(Card *head) {
-    Pile** columns = *ptrColumns;
+    Pile** columns = columnsFilled;
     Card *currentCards[COLUMN_COUNT];
 
     // creates an array of Card pointers out of each column Pile head Card
@@ -63,13 +63,13 @@ void printBoard(Pile*** ptrColumns){
     for (int i = 0; i < COLUMN_COUNT; i++)
         currentCards[i] = columns[i]->head;
 
-    /*printf("current card column %d is %s \n", 1, currentCards[0]->view);
+    printf("current card column %d is %s \n", 1, currentCards[0]->view);
     printf("current card column %d is %s \n", 2, currentCards[1]->view);
     printf("current card column %d is %s \n", 3, currentCards[2]->view);
     printf("current card column %d is %s \n", 4, currentCards[3]->view);
     printf("current card column %d is %s \n", 5, currentCards[4]->view);
     printf("current card column %d is %s \n", 6, currentCards[5]->view);
-    printf("current card column %d is %s \n", 7, currentCards[6]->view);*/
+    printf("current card column %d is %s \n", 7, currentCards[6]->view);
 
          printf("\tC1 \t\tC2 \t\tC3 \t\tC4 \t\tC5 \t\tC6 \t\tC7\n");
          int hiddenCounter = 1;
