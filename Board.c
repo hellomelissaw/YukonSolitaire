@@ -63,7 +63,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
     Pile** foundations = foundationsBlank;
     Card *foundationTop[FOUNDATION_COUNT];
-    int counterFoundation = 1;
+    int counterFoundation = 0;
 
     // creates an array of Card pointers out of each column Pile head Card
     // in order to keep track of which row we're printing
@@ -79,33 +79,27 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
     int offset;
     int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
-        switch (i) {
-            case 0:
-                offset = 1;
-                break;
-            case 2:
-                offset = 1;
-                break;
-            case 4:
-                offset = 1;
-                break;
-            case 6:
-                offset = 1;
-                break;
-            default:
-                offset = 0;
-                break;
-        }
+        /*    switch (i) {
+                case 0:
+                    offset = 1;
+                    break;
+                case 2:
+                    offset = 1;
+                    break;
+                case 4:
+                    offset = 1;
+                    break;
+                case 6:
+                    offset = 1;
+                    break;
+                default:
+                    offset = 0;
+                    break;
+            }*/
 
         for (int j = 0; j < COLUMN_COUNT; j++) {
         //for (int j = 0; j < COLUMN_COUNT + offset; j++) {
             Card *current = currentCards[j];
-            if (i%2 == 0 && counterFoundation < FOUNDATION_COUNT ) {
-            //if (j > COLUMN_COUNT-1) {
-                printf("\t%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation);
-                counterFoundation++;
-
-            } else {
                 if (current == NULL) {
                     printf("\t\t"); // if there is no card in the current column, for the current row, make a tab space
 
@@ -117,7 +111,11 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
                     currentCards[j] = current->next;
 
                 }
-            }
+
+        }
+        if (i%2 == 0 && counterFoundation < FOUNDATION_COUNT) {
+            printf("\t%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation+1);
+            counterFoundation++;
         }
         hiddenCounter++;
         printf("\n");
