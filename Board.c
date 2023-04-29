@@ -55,35 +55,48 @@ void printBoard(Card *head) {
     //void printBoardOLD(char fileName[]) {
     Pile** columns = setColumnLists(head);
     Card *currentCards[COLUMN_COUNT];
+    /*currentCards[0] = columns[0]->head;
     currentCards[1] = columns[1]->head;
+    currentCards[2] = columns[2]->head;
+    currentCards[3] = columns[3]->head;
+    currentCards[4] = columns[4]->head;
+    currentCards[5] = columns[5]->head;
+    currentCards[6] = columns[6]->head;*/
 
-    printf("current card %d is %s \n", 1, currentCards[1]->view);
 
-
-   /* for (int i = 0; i < COLUMN_COUNT; i++) { // creates an array of pointers to the head card of each of the 7 linked lists representing the columns
-
+    // creates an array of Card pointers out of each column Pile head Card
+    // in order to keep track of which row we're printing
+    for (int i = 0; i < COLUMN_COUNT; i++)
         currentCards[i] = columns[i]->head;
-          printf("current card %d is %s \n", i, currentCards[i]->view);
-      }
+
+    printf("current card column %d is %s \n", 1, currentCards[0]->view);
+    printf("current card column %d is %s \n", 2, currentCards[1]->view);
+    printf("current card column %d is %s \n", 3, currentCards[2]->view);
+    printf("current card column %d is %s \n", 4, currentCards[3]->view);
+    printf("current card column %d is %s \n", 5, currentCards[4]->view);
+    printf("current card column %d is %s \n", 6, currentCards[5]->view);
+    printf("current card column %d is %s \n", 7, currentCards[6]->view);
 
          printf("\tC1   \t\tC2 \t\tC3  \t\tC4  \t\tC5  \t\tC6  \t\tC7\n");
          int hiddenCounter = 1;
          for (int i = 0; i < ROW_COUNT; i++) {
              for (int j = 0; j < COLUMN_COUNT; j++) {
-                 Card *currentColumn = currentColumns[j];
+                 Card *current = currentCards[j];
                  //currentColumn[1].isVisible = true;
-                 if (currentColumn == NULL) {
+                 if (current == NULL) {
+                 //if (currentColumn == NULL) {
                      printf("\t\t"); // if there is no card in the current column, make a tab space
                  }
                  else {
-                     //if (i == 0 && j == 0){
+
                      if(j < hiddenCounter) { // checks whether card should be visible or not
-                         setVisibility(&currentColumn, true);
+                         setVisibility(&current, true);
                      } else {
-                         setVisibility(&currentColumn, false);
+                         setVisibility(&current, false);
                      }
-                     printf("\t%s\t", currentColumn->view);
-                     currentColumns[j] = currentColumn->next;
+                    // setVisibility(&currentCards[j], false);
+                     printf("\t%s\t", current->view);
+                     currentCards[j] = current->next;
 
                  }
                  hiddenCounter++;
@@ -91,8 +104,7 @@ void printBoard(Card *head) {
              }
          }
      }
-   */
-}
+
     /*Card *currentCardInColumn[COLUMN_COUNT]; // array of Cards that are column heads
 
     for (int i = 0; i < COLUMN_COUNT; i++) { // Sets each card of array to be the head of their respective column piles
