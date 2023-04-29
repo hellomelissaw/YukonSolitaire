@@ -61,7 +61,7 @@ void printBoard(Pile** columnsFilled){
     for (int i = 0; i < COLUMN_COUNT; i++)
         currentCards[i] = columns[i]->head;
 
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    printf("C1\t\tC2\t\tC3\t\tC4\t\tC5\t\tC6\t\tC7\n");
 
     int offset;
     int hiddenCounter = 1;
