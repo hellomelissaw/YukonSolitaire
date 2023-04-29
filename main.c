@@ -13,6 +13,7 @@ bool validInputFromTailToFoundation(char* in);
 bool validInputFromTailToTail(char* in);
 bool validInputFromColumnPileToTail(char* in);
 void printUserConsole(char** ptrCurrentMsg);
+bool validMoveSyntax(char* input);
 
         int load_DefaultDeckLDCommand() {
     FILE *fp;
@@ -138,15 +139,50 @@ int main() {
             }
         }
 
-        if (input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] ==
-                                                                     'C') { // Checks if the input has the syntax of moving a bottom card to the bottom of another column
-            if (validInputFromTailToTail(input)) {
-                int srcColumnIndex = input[1] - 49; // column number from ascii to decimal - 1
-                int destColumnIndex = input[5] - 49;
-                char srcCardRank = columnsFilled[srcColumnIndex]->tail->rank;
-                char srcCardSuit = columnsFilled[srcColumnIndex]->tail->suit;
-                moveToColumn(&columnsFilled[srcColumnIndex], &columnsFilled[destColumnIndex], srcCardRank, srcCardSuit,
-                             ptrMessage);
+        if (validMoveSyntax(input)) { // checks if the syntax of the input is valid for moving a/many card(s)
+            int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
+            int destIndex = input[5] - 49;
+            char srcCardRank;
+            char srcCardSuit;
+
+            bool validCards = false;
+            if(input[2] == ':') // move a specific card in a column
+                validCards = validInputFromColumnPileToTail(input);
+            else if (input[2] == '-') { // move the tail of a column or foundation
+                if ((input[0] == 'C' && input[4] == 'C') || (input[0] == 'F' && input[4] == 'C')) {
+                    validCards = validInputFromTailToTail(input);
+
+                } else if (input[0] == 'C' && input[4] == 'F') {
+                    validCards = validInputFromTailToFoundation(input);
+                } else {
+                    setMessage(ptrMessage, "Invalid syntax.");
+                }
+            }
+
+            if (validCards) {
+                Pile** ptrSrc;
+                Pile** ptrDest;
+
+                if(input[0] == 'C'){
+                    ptrSrc = &columnsFilled[srcIndex];
+                    srcCardRank = columnsFilled[srcIndex]->tail->rank;
+                    srcCardSuit = columnsFilled[srcIndex]->tail->suit;
+                    if(input[4] == 'C'){
+                        ptrDest = &columnsFilled[destIndex];
+
+                    } else if (input[4] == 'F') {
+                       ptrDest = &foundationsBlank[destIndex];
+                    }
+
+
+                } else if (input[0] == 'F') {
+                    ptrSrc = &foundationsBlank[srcIndex];
+                    ptrDest = &columnsFilled[destIndex];
+                    srcCardRank = foundationsBlank[srcIndex]->tail->rank;
+                    srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
+                }
+
+                moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
 
             }
         }
@@ -160,6 +196,20 @@ void printUserConsole(char** ptrCurrentMsg) {
     printf("INPUT >");
 
 }
+
+bool validMoveSyntax(char* input) {
+    if((input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'C')// moving a bottom card to the bottom of another column
+    || (input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'F') // moving a bottom card to a foundation pile
+    || (input[0] == 'F' && input[2] == '-' && input[3] == '>' && input[4] == 'C') // moving a top foundation card to bottom of a column
+    || (input[0] == 'C' && input[2] == ':' && input[5] == '-' && input[6] == '>' && input[7] == 'C') // moving a stack of cards from one column to another
+    )  {
+        return true;
+    } else {
+        return false;
+    }
+
+    }
+
 bool validInputFromTailToTail(char* input) {
     if(validColumnRange(input[1])){
         if(validColumnRange(input[5]))
@@ -184,11 +234,11 @@ bool validInputFromTailToFoundation(char* input) {
 }
 
 
-bool validInputFromColumnPileToTail(char* in) {
-    if(validColumnRange(in[1])){
-        if(validRank(in[3])){
-            if(validSuit(in[4])){
-                if(validColumnRange(in[8]))
+bool validInputFromColumnPileToTail(char* input) {
+    if(validColumnRange(input[1])){
+        if(validRank(input[3])){
+            if(validSuit(input[4])){
+                if(validColumnRange(input[8]))
                     return true;
                 else return false; // invalid destination column range
 

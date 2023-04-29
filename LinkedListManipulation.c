@@ -169,14 +169,14 @@ bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
 /// \param src pointer to a pointer that points to Pile of cards to be moved
 /// \param destColumn pointer to a pointer, pointing to the destination Pile (column)
 /// \param cardToBeMovedRank rank of the card to be moved
-void moveToColumn(Pile **src, Pile **destColumn, char cardToBeMovedRank, char cardToBeMovedSuit, char **ptrMessage) {
+void moveCards(Pile **src, Pile **destColumn, char cardToBeMovedRank, char cardToBeMovedSuit, char **ptrMessage) {
     Card* tempHead = (*src)->head;
     Card* newTail = NULL;
     while(tempHead->rank != cardToBeMovedRank || tempHead->suit != cardToBeMovedSuit) {
         newTail = tempHead;
         tempHead = tempHead->next;
     }
-     if(newTail != NULL){
+     if(newTail != NULL || (tempHead->rank == cardToBeMovedRank && tempHead->suit == cardToBeMovedSuit)){
          if(validateMoveToColumn(tempHead, destColumn, ptrMessage)) {
              while(tempHead != NULL) {
                  insertAtTail(&tempHead,&(*destColumn)->head, &(*destColumn)->tail);
