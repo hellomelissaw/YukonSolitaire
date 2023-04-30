@@ -4,16 +4,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "headers/AllHeaders.h"
-//#include "loadDeck.c"
-bool validColumnRange(char in);
-bool validFoundationRange(char in);
-bool validRank(char in);
-bool validSuit(char in);
-bool validInputFromTailToFoundation(char* in);
-bool validInputFromTailToTail(char* in);
-bool validInputFromColumnPileToTail(char* in);
-void printUserConsole(char** ptrCurrentMsg);
-bool validMoveSyntax(char* input);
 
         int load_DefaultDeckLDCommand() {
     FILE *fp;
