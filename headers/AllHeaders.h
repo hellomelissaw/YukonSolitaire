@@ -20,4 +20,5 @@
 #include "Pile.h"
 #include "TestHeaders/testPrintMessage.h"
 #include "TestHeaders/moveTests.h"
+#include "main.c"
 #endif //YUKONSOLITAIRE_ALLHEADERS_H
