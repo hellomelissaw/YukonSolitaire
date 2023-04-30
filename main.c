@@ -128,6 +128,8 @@ int main() {
         }
 
         if (validMoveSyntax(input)) { // checks if the syntax of the input is valid for moving a/many card(s)
+            enum moveType mt;
+            enum moveType *ptrMt = &mt;
             int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
             int destIndex = input[5] - 49;
             char srcCardRank;
@@ -185,16 +187,24 @@ void printUserConsole(char** ptrCurrentMsg) {
 
 }
 
-bool validMoveSyntax(char* input) {
-    if((input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'C')// moving a bottom card to the bottom of another column
-    || (input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'F') // moving a bottom card to a foundation pile
-    || (input[0] == 'F' && input[2] == '-' && input[3] == '>' && input[4] == 'C') // moving a top foundation card to bottom of a column
-    || (input[0] == 'C' && input[2] == ':' && input[5] == '-' && input[6] == '>' && input[7] == 'C') // moving a stack of cards from one column to another
-    )  {
+bool validMoveSyntax(char* input, enum moveType *ptr) {
+    if(input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'C'){
+        *ptr = COL_TO_COL;
         return true;
-    } else {
-        return false;
-    }
+
+    } else if(input[0] == 'C' && input[2] == '-' && input[3] == '>' && input[4] == 'F') {
+        *ptr = COL_TO_FOUND;
+        return true;
+
+    } else if(input[0] == 'F' && input[2] == '-' && input[3] == '>' && input[4] == 'C') {
+        *ptr = FOUND_TO_COL;
+        return true;
+
+    } else if(input[0] == 'C' && input[2] == ':' && input[5] == '-' && input[6] == '>' && input[7] == 'C'){ // moving a stack of cards from one column to another
+        *ptr = PILE_TO_COL;
+        return true;
+
+    } else { return false; }
 
     }
 
