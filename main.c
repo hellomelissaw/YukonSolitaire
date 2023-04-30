@@ -127,56 +127,76 @@ int main() {
             }
         }
 
-        if (validMoveSyntax(input)) { // checks if the syntax of the input is valid for moving a/many card(s)
+        if (input[0] == 'C' || input[0] == 'F') { // checks if the syntax of the input is valid for moving a/many card(s)
             enum moveType mt;
             enum moveType *ptrMt = &mt;
-            int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
-            int destIndex = input[5] - 49;
-            char srcCardRank;
-            char srcCardSuit;
 
-            bool validCards = false;
-            if(input[2] == ':') // move a specific card in a column
-                validCards = validInputFromColumnPileToTail(input);
-            else if (input[2] == '-') { // move the tail of a column or foundation
-                if ((input[0] == 'C' && input[4] == 'C') || (input[0] == 'F' && input[4] == 'C')) {
-                    validCards = validInputFromTailToTail(input);
-
-                } else if (input[0] == 'C' && input[4] == 'F') {
-                    validCards = validInputFromTailToFoundation(input);
-                } else {
-                    setMessage(ptrMessage, "Invalid syntax.");
-                }
-            }
-
-            if (validCards) {
+            if(validMoveSyntax(input, ptrMt)) {
+                bool validInput = true;
+                int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
+                int destIndex;
+                char srcCardRank;
+                char srcCardSuit;
                 Pile** ptrSrc;
                 Pile** ptrDest;
 
-                if(input[0] == 'C'){
-                    ptrSrc = &columnsFilled[srcIndex];
-                    srcCardRank = columnsFilled[srcIndex]->tail->rank;
-                    srcCardSuit = columnsFilled[srcIndex]->tail->suit;
-                    if(input[4] == 'C'){
-                        ptrDest = &columnsFilled[destIndex];
+                switch(mt){
+                    case PILE_TO_COL:
+                        if(validInputFromColumnPileToTail(input)){
+                            destIndex = input[8] - 49;
+                            srcCardRank = input[3];
+                            srcCardSuit = input[4];
+                            ptrSrc = &columnsFilled[srcIndex];
+                            ptrDest = &columnsFilled[destIndex];
 
-                    } else if (input[4] == 'F') {
-                       ptrDest = &foundationsBlank[destIndex];
-                    }
+                        }
+                        break;
 
+                    case COL_TO_COL:
+                        if(validInputFromTailToTail(input)){
+                            destIndex = input[5] - 49;
+                            srcCardRank = columnsFilled[srcIndex]->tail->rank;
+                            srcCardSuit = columnsFilled[srcIndex]->tail->suit;
+                            ptrSrc = &columnsFilled[srcIndex];
+                            ptrDest = &columnsFilled[destIndex];
 
-                } else if (input[0] == 'F') {
-                    ptrSrc = &foundationsBlank[srcIndex];
-                    ptrDest = &columnsFilled[destIndex];
-                    srcCardRank = foundationsBlank[srcIndex]->tail->rank;
-                    srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
-                }
+                        }
+                        break;
 
-                moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
+                    case COL_TO_FOUND:
+                        if(validInputFromTailToFoundation(input)){
+                            destIndex = input[5] - 49;
+                            srcCardRank = columnsFilled[srcIndex]->tail->rank;
+                            srcCardSuit = columnsFilled[srcIndex]->tail->suit;
+                            ptrSrc = &columnsFilled[srcIndex];
+                            ptrDest = &foundationsBlank[destIndex];
 
+                        }
+                        break;
+
+                    case FOUND_TO_COL:
+                        if(validInputFromTailToFoundation(input)){
+                            destIndex = input[5] - 49;
+                            srcCardRank = foundationsBlank[srcIndex]->tail->rank;
+                            srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
+                            ptrSrc = &foundationsBlank[srcIndex];
+                            ptrDest = &columnsFilled[destIndex];
+                        }
+                        break;
+
+                    default:
+                        validInput = false;
             }
+                if(validInput){
+                    moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
+
+                } else {
+                    setMessage(ptrMessage, "This move is not allowed.");
+                }
+            } else { setMessage(ptrMessage, "Invalid syntax."); }
         }
-    }
+
+    } // end while loop
 }
 
 void printUserConsole(char** ptrCurrentMsg) {
