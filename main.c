@@ -90,12 +90,12 @@ int main() {
     Pile **foundationsBlank = setFoundationLists();
     char *message = " ";
     char **ptrMessage = &message;
-
+    char* input = malloc(sizeof (char) * 9);
     while (1) {
         printBoard(columnsFilled, foundationsBlank);
         printUserConsole(ptrMessage);
 
-        char input[9];
+        //char input[9];
         char str[100];
         char result[100];
         int length;
@@ -195,7 +195,7 @@ int main() {
                 }
             } else { setMessage(ptrMessage, "Invalid syntax."); }
         }
-
+   free(input);
     } // end while loop
 }
 
