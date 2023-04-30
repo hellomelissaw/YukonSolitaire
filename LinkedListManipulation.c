@@ -72,10 +72,13 @@ void insertBetween(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail,
 /// FUNCTION TO MODIFY THE TAIL OF A GIVEN COLUMN (mainly used for moving cards away from a column)
 /// \param columnToModify pointer to the pointer that points to the Pile struct of the column to modify
 /// \param newTail pointer to the card which should be the new tail of the pile
-void setNewTail(Pile** columnToModify, Card* newTail) {
-    (*columnToModify)->tail = newTail;
-    if(newTail != NULL) {
+void setNewTail(Pile** columnToModify, Card** newTail) {
+    (*columnToModify)->tail = (*newTail);
+    if((*newTail) != NULL) {
         (*columnToModify)->tail->next = NULL;
+        if((*newTail)->isVisible == false){
+            setVisibility(newTail, true);
+        }
     } else {
         (*columnToModify)->head = NULL;
     }
@@ -220,7 +223,7 @@ void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMov
                      while (tempHead != NULL) {
                          insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
                      }
-                     setNewTail(src, newTail);
+                     setNewTail(src, &newTail);
                      setMessage(ptrMessage, "Move successful.");
 
                  } else {setMessage(ptrMessage, "Could not move card.");}
@@ -229,7 +232,7 @@ void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMov
              case FOUNDATION:
                  if (validateMoveToFoundation(&tempHead, &(*dest)->head, ptrMessage)) {
                      insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
-                     setNewTail(src, newTail);
+                     setNewTail(src, &newTail);
                      setMessage(ptrMessage, "Move successful.");
 
                  } else {

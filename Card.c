@@ -23,15 +23,14 @@ Card* createCard(char rank, char suit) {
 void setVisibility(Card** currentCards , bool visible){
 
     if (visible) {
-
+        (*currentCards)->isVisible = true;
         (*currentCards)->view[0] = (*currentCards)->rank;
         (*currentCards)->view[1] = (*currentCards)->suit;
         (*currentCards)->view[2] = '\0'; // this says that the string has no more chars
 
 
     }else{
-        // If visible is false, assign null pointers to the currentCards array
-
+        (*currentCards)->isVisible = false;
         (*currentCards)->view[0] = '[';
         (*currentCards)->view[1] = ']';
         (*currentCards)->view[2] = '\0';
