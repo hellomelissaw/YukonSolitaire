@@ -6,17 +6,6 @@
 #include <stdlib.h>
 #include "headers/AllHeaders.h"
 
-/*typedef struct Card
-{
-    char rank;
-    char suit;
-    char view[3]; // if the card is unvisible showes [], if visible showes rank and suit
-    struct Card *next;
-    bool isVisible;
-
-} Card;*/
-
-
 /// FUNCTION TO CREATE AND RETURN A NEW CARD (NODE IN LINKED LIST)
 /// \param rank is the rank of the card in the range of 2-9 and T, J, Q, K
 /// \param suit is the suit of the card represented by C (Clubs) D (Diamonds) H (Hearts) and S (Spades)
@@ -30,10 +19,6 @@ Card* createCard(char rank, char suit) {
     card_node->view[2] = '\0';
     return card_node;
 }
-/*void visibility(Card** cardView, bool visibility){
-    (*cardView)->isVisible = visibility;
-
-}*/
 
 void setVisibility(Card** currentCards , bool visible){
 
