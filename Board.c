@@ -115,12 +115,12 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
         }
         //int rowNumber = i%2;
         if (i%2 == 0 && counterFoundation < FOUNDATION_COUNT) {
-            counterFoundation++;
-            if(foundationTop[i] == NULL) {
-                printf("\t[]\tF%d", counterFoundation);
+            if(foundationTop[counterFoundation] == NULL) {
+                printf("\t[]\tF%d", counterFoundation+1);
             } else {
-                printf("\t%s\tF%d", foundationTop[counterFoundation-1]->view, counterFoundation);
+                printf("\t%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation+1);
             }
+            counterFoundation++;
 
         }
 
