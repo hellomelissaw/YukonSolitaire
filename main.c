@@ -195,7 +195,7 @@ int main() {
                 }
             } else { setMessage(ptrMessage, "Invalid syntax."); }
         }
-   free(input);
+
     } // end while loop
 }
 

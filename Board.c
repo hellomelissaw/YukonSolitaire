@@ -119,7 +119,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
             if(foundationTop[i] == NULL) {
                 printf("\t[]\tF%d", counterFoundation);
             } else {
-                printf("\t%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation);
+                printf("\t%s\tF%d", foundationTop[counterFoundation-1]->view, counterFoundation);
             }
 
         }
