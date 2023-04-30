@@ -279,7 +279,7 @@ bool validColumnRange(char in) {
 }
 
 bool validRank(char in) {
-    if((in >= 2 && in <= 9) || in == 'A' || in == 'T' || in == 'J' || in == 'Q' || in == 'K')
+    if((in >= '2' && in <= '9') || in == 'A' || in == 'T' || in == 'J' || in == 'Q' || in == 'K')
         return true;
     else
         return false;
