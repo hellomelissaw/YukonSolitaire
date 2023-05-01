@@ -4,8 +4,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "headers/AllHeaders.h"
-
-        int load_DefaultDeckLDCommand() {
+int load_DefaultDeckLDCommand() {
     FILE *fp;
     char str[100];
 
@@ -99,103 +98,102 @@ int main() {
         char str[100];
         char result[100];
         int length;
+        enum moveType mt;
+        enum moveType *ptrMt = &mt;
 
         scanf("%s", input);
 
-        if (!strcmp(input, "QQ")) {
-            // setPrintMessage("Quitting the Game");
-            //printf("Quitting The Game");
-            exit(0); //return
-        }
-        if (!strcmp(input, "LD")) {
-            fgets(str, 100, stdin);
-            length = strlen(str);
-
-            printf("Length of |%s| is |%d|\n", str, length);
-
-            if (length == 1) {
-                printf("vi er her");
-                load_DefaultDeckLDCommand();
-
-
-            } else if (length > 1) {
-
-                strcpy(result, str + 1);
-
-                printf("Result: %s\n", result);
-                load_SpecificFileIntoDeck(result);
-            }
-        }
-
-        if (input[0] == 'C' || input[0] == 'F') { // checks if the syntax of the input is valid for moving a/many card(s)
-            enum moveType mt;
-            enum moveType *ptrMt = &mt;
-
-            if(validMoveSyntax(input, ptrMt)) {
-                bool validInput = true;
-                int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
-                int destIndex;
-                char srcCardRank;
-                char srcCardSuit;
-                Pile** ptrSrc;
-                Pile** ptrDest;
-
-                switch(mt){
-                    case PILE_TO_COL:
-                        if(validInputFromColumnPileToTail(input)){
-                            destIndex = input[8] - 49;
-                            srcCardRank = input[3];
-                            srcCardSuit = input[4];
-                            ptrSrc = &columnsFilled[srcIndex];
-                            ptrDest = &columnsFilled[destIndex];
-
-                        }
-                        break;
-
-                    case COL_TO_COL:
-                        if(validInputFromTailToTail(input)){
-                            destIndex = input[5] - 49;
-                            srcCardRank = columnsFilled[srcIndex]->tail->rank;
-                            srcCardSuit = columnsFilled[srcIndex]->tail->suit;
-                            ptrSrc = &columnsFilled[srcIndex];
-                            ptrDest = &columnsFilled[destIndex];
-
-                        }
-                        break;
-
-                    case COL_TO_FOUND:
-                        if(validInputFromTailToFoundation(input)){
-                            destIndex = input[5] - 49;
-                            srcCardRank = columnsFilled[srcIndex]->tail->rank;
-                            srcCardSuit = columnsFilled[srcIndex]->tail->suit;
-                            ptrSrc = &columnsFilled[srcIndex];
-                            ptrDest = &foundationsBlank[destIndex];
-
-                        }
-                        break;
-
-                    case FOUND_TO_COL:
-                        if(validInputFromTailToFoundation(input)){
-                            destIndex = input[5] - 49;
-                            srcCardRank = foundationsBlank[srcIndex]->tail->rank;
-                            srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
-                            ptrSrc = &foundationsBlank[srcIndex];
-                            ptrDest = &columnsFilled[destIndex];
-                        }
-                        break;
-
-                    default:
-                        validInput = false;
-            }
-                if(validInput){
-                    moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
-
-                } else {
-                    setMessage(ptrMessage, "This move is not allowed.");
+        switch (input[0]) {
+            case 'Q':
+                if (!strcmp(input, "QQ")) {
+                    exit(0); //return
                 }
-            } else { setMessage(ptrMessage, "Invalid syntax."); }
-        }
+                break;
 
+            case 'L':
+                if (!strcmp(input, "LD")) {
+                    fgets(str, 100, stdin);
+                    length = strlen(str);
+
+                    if (length == 1) {
+                        printf("vi er her");
+                        load_DefaultDeckLDCommand();
+
+                    } else if (length > 1) {
+                        strcpy(result, str + 1);
+                        printf("Result: %s\n", result);
+                        load_SpecificFileIntoDeck(result);
+                    }
+                }
+                break;
+                // checks if the syntax of the input is valid for moving a/many card(s)
+            case 'C':
+            case 'F':
+
+                if(validMoveSyntax(input, ptrMt)) {
+                    bool validInput = true;
+                    int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
+                    int destIndex;
+                    char srcCardRank;
+                    char srcCardSuit;
+                    Pile** ptrSrc;
+                    Pile** ptrDest;
+
+                    switch(mt){
+                        case PILE_TO_COL:
+                            if(validInputFromColumnPileToTail(input)){
+                                destIndex = input[8] - 49;
+                                srcCardRank = input[3];
+                                srcCardSuit = input[4];
+                                ptrSrc = &columnsFilled[srcIndex];
+                                ptrDest = &columnsFilled[destIndex];
+
+                            }
+                            break;
+
+                        case COL_TO_COL:
+                            if(validInputFromTailToTail(input)){
+                                destIndex = input[5] - 49;
+                                srcCardRank = columnsFilled[srcIndex]->tail->rank;
+                                srcCardSuit = columnsFilled[srcIndex]->tail->suit;
+                                ptrSrc = &columnsFilled[srcIndex];
+                                ptrDest = &columnsFilled[destIndex];
+
+                            }
+                            break;
+
+                        case COL_TO_FOUND:
+                            if(validInputFromTailToFoundation(input)){
+                                destIndex = input[5] - 49;
+                                srcCardRank = columnsFilled[srcIndex]->tail->rank;
+                                srcCardSuit = columnsFilled[srcIndex]->tail->suit;
+                                ptrSrc = &columnsFilled[srcIndex];
+                                ptrDest = &foundationsBlank[destIndex];
+
+                            }
+                            break;
+
+                        case FOUND_TO_COL:
+                            if(validInputFromTailToFoundation(input)){
+                                destIndex = input[5] - 49;
+                                srcCardRank = foundationsBlank[srcIndex]->tail->rank;
+                                srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
+                                ptrSrc = &foundationsBlank[srcIndex];
+                                ptrDest = &columnsFilled[destIndex];
+                            }
+                            break;
+
+                        default:
+                            validInput = false;
+                    }
+                    if(validInput){
+                        moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
+
+                    } else {
+                        setMessage(ptrMessage, "This move is not allowed.");
+                    }
+                } else { setMessage(ptrMessage, "Invalid syntax."); }
+        }
     } // end while loop
 }
 
