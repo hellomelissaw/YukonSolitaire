@@ -132,4 +132,3 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
         }
 
     }
-

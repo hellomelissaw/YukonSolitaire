@@ -11,10 +11,11 @@
 /// \param fileName name of the file which contains the card labels
 /// \return pointer to the head of the newly created Linked List of Card structs
 Card* createDeck(char fileName[]) {
-    char* abs_path = getAbs_path(fileName);
+    //char* abs_path1 = getAbs_path(fileName);
+   // char* abs_path = getAbs_path(fileName);
 
     /* Load Card labels from file */
-    FILE* fpointer = fopen("\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt", "rt"); // creates a pointer to the read file
+    FILE* fpointer = fopen(fileName, "rt"); // creates a pointer to the read file
     char cardLabels[CARD_COUNT][LABEL_SIZE];
 
     for (int i = 0 ; i < CARD_COUNT ; i++) {

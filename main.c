@@ -79,7 +79,7 @@ int load_SpecificFileIntoDeck(char *filename) {
 // Hey girl hey
 int main() {
     //printDeck(createDeck("defaultDeckOfFile.txt"));
-    Card *head = createDeck("defaultDeckOfFile.txt");
+    Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
     Pile **columnsFilled = setColumnLists(head);
     Pile **foundationsBlank = setFoundationLists();
     char *message = " ";

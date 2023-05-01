@@ -14,9 +14,12 @@
 #define GetCurrentDir getcwd
 #endif
 
+
+
+
+
 char* getAbs_path(char fileName[]) {
     char cwd[PATH_MAX];
-
 
 
 #ifdef _WIN32
@@ -26,14 +29,18 @@ char* getAbs_path(char fileName[]) {
     } else {
         // handle error case
         abs_path = NULL;
-    }*/
+    }
     _getcwd(cwd, sizeof(cwd));
     char *abs_path = NULL;
-    char *rel_path = fileName;
-    abs_path = _fullpath(NULL, rel_path, 0);
+
+    char *rel_path = fileName;*/
+    char* abs_path = malloc(_MAX_PATH);
+    _fullpath(abs_path, fileName, _MAX_PATH);
+    printf("%s", abs_path);
+
 #else
     getcwd(cwd, sizeof(cwd));
-    char* abs_path;
+    char* abs_path = malloc(MAX_PATH);
     chdir(".."); // go to parent dir to get absolute file path from project's parent directory
     abs_path = realpath(fileName, NULL);
     chdir(cwd);
