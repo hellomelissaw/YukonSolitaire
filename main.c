@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "headers/AllHeaders.h"
+//#include "loadDeck.c"
 
         int load_DefaultDeckLDCommand() {
     FILE *fp;
@@ -11,8 +12,8 @@
 
     /* opening file for reading */
 
-    char* abspath = getAbs_path("defaultDeckOfCards");
-    fp = fopen(abspath, "r");
+    //char* abspath = getAbs_path("defaultDeckOfCards");
+    fp = fopen("defaultDeckOfCards", "r");
     if (fp == NULL) {
         perror("Error opening file");
         return -1;
@@ -43,10 +44,11 @@ int load_SpecificFileIntoDeck(char *filename) {
     char c;
     char count;
     char countFileLine;
-    filename[strcspn(filename, "\n")] = '\0';
-    char* abs_path = getAbs_path(filename);
-    FILE *file = fopen(abs_path, "r"); // open file in read mode
-    if (file_exists(filename) || file != NULL) {
+    filename[strcspn("defaultDeckOfCards", "\n")] = '\0';
+    //char* abs_path = getAbs_path(filename);
+
+    FILE *file = fopen("defaultDeckOfCards", "r"); // open file in read mode
+    if (file_exists("defaultDeckOfCards") || file != NULL) {
         //printf("File %s exists", filename);
         while ((c = fgetc(file)) != EOF) {
             if (c == '\n') {
@@ -67,20 +69,12 @@ int load_SpecificFileIntoDeck(char *filename) {
         }
 
     } else
-        printf("File %s doesn't exist.", filename);
+        printf("File %s doesn't exist.", "defaultDeckOfFile");
 
     return 0;
 }
 
 
-
-/*void startPlayPhase() {
-    Card* head = createDeck("defaultDeckOfFile.txt");
-    Pile** columnsFilled = setColumnLists(head);
-    Pile** foundationsBlank = setFoundationLists();
-    printBoard(columnsFilled, foundationsBlank);
-
-}*/
 
 // Hey girl hey
 int main() {
@@ -299,6 +293,7 @@ bool validFoundationRange(char in) {
     else
         return false;
 }
+
 /*
 
     //createDeck("unshuffledCards.txt");
@@ -308,15 +303,14 @@ bool validFoundationRange(char in) {
     // TEST CREATION OF COLUMNS (need to get headers to work before it works again)
     ///////////////////////////////////////////////////////////////////////////////
 
-    Card* testDeck = createDeck("unshuffledcards.txt");
+    /*Card* testDeck = createDeck("unshuffledcards.txt");
     Pile** firstColumn = setColumnLists(testDeck);
-    Pile** foundations = setFoundationLists();
-    printBoard(firstColumn,foundations);
+    printBoard(firstColumn);*/
 
     //////////////////////
     // TEST MOVING CARDS
     //////////////////////
-    moveFirstCardToFoundatationTest();
+    //  moveFirstCardToFoundatationTest();
 
     // move2CToFoundatationTest();
 
@@ -330,9 +324,9 @@ bool validFoundationRange(char in) {
     // TEST SHUFFLE
     ///////////////////
 
-    Card* testDeck = createDeck("unshuffledCards.txt");
+    /*Card* testDeck = createDeck("unshuffledCards.txt");
     //shuffleRandom(testDeck);
     shuffleInterweave(45, testDeck);
-    printDeck(testDeck);*
-}
-*/
+    printDeck(testDeck);*/
+
+
