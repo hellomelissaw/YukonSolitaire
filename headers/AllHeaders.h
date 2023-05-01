@@ -10,11 +10,13 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "Board.h"
 #include "Card.h"
 #include "Deck.h"
 #include "LinkedListManipulation.h"
 #include "LoadDeck.h"
+#include "GameMove.h"
 #include "Shuffle.h"
 #include "Utilities.h"
 #include "Pile.h"
