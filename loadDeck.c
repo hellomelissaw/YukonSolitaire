@@ -41,8 +41,7 @@ int is_valid_card(char* rank, char* suit) {
 }
 // Function to load a deck of cards from a file or create a new unshuffled deck if no filename is given
 
-
-int load_DefaultDeckLDCommand() {
+int load_DefaultDeckLDCommand(char** ptrMessage) {
     FILE *fp;
     char str[100];
 
@@ -51,10 +50,9 @@ int load_DefaultDeckLDCommand() {
     char* abspath = getAbs_path("defaultDeckOfCards");
     fp = fopen(abspath, "r");
     if (fp == NULL) {
-        perror("Error opening file");
+        setMessage(ptrMessage, "Error opening file");
         return -1;
     }
-
 
     // printBoard(abspath);
     fclose(fp);
@@ -76,7 +74,7 @@ bool file_exists(const char *filename) {
 }
 
 
-int load_SpecificFileIntoDeck(char *filename) {
+int load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
     char c;
     char count;
     char countFileLine;
@@ -90,7 +88,6 @@ int load_SpecificFileIntoDeck(char *filename) {
                 count++;
             }
         }
-
         if (countFileLine == 52) {
             char line[3]; // allocate space for each line
             while (fgets(line, sizeof(line), file)) {
@@ -100,11 +97,10 @@ int load_SpecificFileIntoDeck(char *filename) {
             }
             fclose(file);
         } else {
-            printf("The file does not have 52 lines.");
+            setMessage(ptrMessage, "The file does not have 52 cards");
         }
 
     } else
-        printf("File %s doesn't exist.", filename);
-
+        setMessage(ptrMessage, "The file doesnt exist");
     return 0;
 }

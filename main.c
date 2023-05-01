@@ -41,13 +41,12 @@ int main() {
                     length = strlen(str);
 
                     if (length == 1) {
-                        printf("vi er her");
-                        load_DefaultDeckLDCommand();
+                        load_DefaultDeckLDCommand(ptrMessage);
 
                     } else if (length > 1) {
-                        strcpy(result, str + 1);
-                        printf("Result: %s\n", result);
-                        load_SpecificFileIntoDeck(result);
+                        //strcpy(result, str + 1);
+                        //printf("Result: %s\n", result);
+                        load_SpecificFileIntoDeck(result, ptrMessage);
                     }
                 }
                 break;
