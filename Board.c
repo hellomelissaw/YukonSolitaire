@@ -32,7 +32,7 @@ Pile** setFoundationLists() {
 Pile** setColumnLists (Card* head) {
     Card** ptrHead = &head;
     Pile** columns = malloc(7 * sizeof(Pile*));
-
+    int hiddenCounter = 1;
     for (int i = 0 ; i < COLUMN_COUNT ; i++)
         columns[i] = createPile(COLUMN);
 
@@ -40,11 +40,14 @@ Pile** setColumnLists (Card* head) {
     int rowStartCounter = 0;
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = rowStart[rowStartCounter]; j < COLUMN_COUNT; j++) {
+            if(j >= hiddenCounter)
+                setVisibility(ptrHead, false);
 
                 insertAtTail(ptrHead, &columns[j]->head, &columns[j]->tail);
 
         }
         rowStartCounter++;
+        hiddenCounter++;
     }
 
     return columns;
@@ -71,7 +74,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
     printf("\tC1\t\tC2\t\tC3\t\tC4\t\tC5\t\tC6\t\tC7\n");
 
     int offset;
-    int hiddenCounter = 1;
+    //int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
         /*    switch (i) {
                 case 0:
@@ -98,8 +101,8 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
                     printf("\t\t"); // if there is no card in the current column, for the current row, make a tab space
 
                 } else {
-                    if(j >= hiddenCounter)
-                        setVisibility(&currentCards[j], false);
+                  /*  if(j >= hiddenCounter)
+                        setVisibility(&currentCards[j], false);*/
 
                     printf("\t%s\t", current->view);
                     currentCards[j] = current->next;
@@ -118,7 +121,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
         }
 
-        hiddenCounter++;
+       // hiddenCounter++;
         printf("\n");
     }
 
