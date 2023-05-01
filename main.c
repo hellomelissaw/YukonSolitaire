@@ -91,7 +91,9 @@ int main() {
     char *message = " ";
     char **ptrMessage = &message;
     char* input = malloc(sizeof (char) * 9);
+
     while (1) {
+
         printBoard(columnsFilled, foundationsBlank);
         printUserConsole(ptrMessage);
 
