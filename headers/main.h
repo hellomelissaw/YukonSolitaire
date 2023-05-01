@@ -18,6 +18,7 @@ bool validColumnRange(char in);
 bool validFoundationRange(char in);
 bool validRank(char in);
 bool validSuit(char in);
+int main();
 bool validInputFromTailToFoundation(char* in);
 bool validInputFromTailToTail(char* in);
 bool validInputFromColumnPileToTail(char* in);
