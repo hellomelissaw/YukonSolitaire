@@ -127,12 +127,15 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
 }
 
-bool gameFinished(Pile** foundationArray) {
-    bool pilesAreFilled = false;
-    for(int i = 0 ; i < FOUNDATION_COUNT ; i++){
-        if(foundationArray[i]->tail
+bool foundationsAreComplete(Pile ** foundations) {
+    for(int f = 0 ; f < FOUNDATION_COUNT ; f++) {
+        if(!(foundations[f]->tail->rank == 'K')){
+            return false;
+        }
+    }
+    return true;
+
     }
 
-}
 
 

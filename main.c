@@ -191,16 +191,8 @@ int main() {
             }
                 if(validInput){
                     moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
-                    bool foundationsAreComplete = false;
-                    for(int f = 0 ; f < FOUNDATION_COUNT ; f++) {
-                        if (foundationsBlank[f]->tail->rank == 'K') {
-                            foundationsAreComplete = true;
-                        } else {
-                            foundationsAreComplete = false;
-                            break;
-                        }
-
-                        if(foundationsAreComplete){
+                        bool complete = foundationsAreComplete(foundationsBlank);
+                        if(complete){
                             setMessage(ptrMessage, "You beat the game! Type 'QQ' to exit.");
                             printBoard(columnsFilled, foundationsBlank);
                         }
@@ -209,7 +201,6 @@ int main() {
                     setMessage(ptrMessage, "This move is not allowed.");
                 }
             } else { setMessage(ptrMessage, "Invalid syntax."); }
-        }
 
     } // end while loop
 }
