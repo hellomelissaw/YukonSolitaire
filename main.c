@@ -191,7 +191,20 @@ int main() {
             }
                 if(validInput){
                     moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
+                    bool foundationsAreComplete = false;
+                    for(int f = 0 ; f < FOUNDATION_COUNT ; f++) {
+                        if (foundationsBlank[f]->tail->rank == 'K') {
+                            foundationsAreComplete = true;
+                        } else {
+                            foundationsAreComplete = false;
+                            break;
+                        }
 
+                        if(foundationsAreComplete){
+                            setMessage(ptrMessage, "You beat the game! Type 'QQ' to exit.");
+                            printBoard(columnsFilled, foundationsBlank);
+                        }
+                    }
                 } else {
                     setMessage(ptrMessage, "This move is not allowed.");
                 }
