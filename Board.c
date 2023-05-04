@@ -158,7 +158,7 @@ Pile** setTestFoundations() {
     insertAtTail(&KD, &foundations[2]->head, &foundations[2]->tail);
     insertAtTail(&JS, &foundations[3]->head, &foundations[3]->tail);
     insertAtTail(&QS, &foundations[3]->head, &foundations[3]->tail);
-    printf("Fourth foundation pile head: %c%c and tail: %c%c",foundations[3]->head->view, foundations[3]->tail->view);
+    //printf("Fourth foundation pile head: %s and tail: %s",foundations[3]->head->view, foundations[3]->tail->view);
     return foundations;
 
 }
