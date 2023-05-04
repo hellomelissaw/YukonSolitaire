@@ -64,6 +64,7 @@ void setMessage(char** messagePtr, char* message) {
 
 
 
+
 /*
 /// FUNCTION TO GET THE ABSOLUTE PATH TO ANY GIVEN FILE
 /// \param fileName char array of the name of the file to find the path to

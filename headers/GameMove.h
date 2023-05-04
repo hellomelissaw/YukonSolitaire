@@ -22,7 +22,6 @@ bool validSuit(char in);
 bool validInputFromTailToFoundation(char* in);
 bool validInputFromTailToTail(char* in);
 bool validInputFromColumnPileToTail(char* in);
-void printUserConsole(char** ptrCurrentMsg);
 bool validMoveSyntax(char* input, enum moveType *ptr);
 
 #endif //YUKONSOLITAIRE_GAMEMOVE_H
