@@ -6,6 +6,7 @@
 #include <limits.h>
 #include "headers/AllHeaders.h"
 
+
 #ifdef _WIN32 // If on Windows
 #include <direct.h>
     #define GetCurrentDir _getcwd
@@ -14,16 +15,11 @@
 #define GetCurrentDir getcwd
 #endif
 
-
-
-
-
 char* getAbs_path(char fileName[]) {
     char cwd[PATH_MAX];
-
-
 #ifdef _WIN32
     /*char full_path[_MAX_PATH];
+     * char* abs_path = malloc(_MAX_PATH);
     if (_fullpath(full_path, fileName, _MAX_PATH) != NULL) {
         abs_path = full_path;
     } else {
@@ -36,7 +32,18 @@ char* getAbs_path(char fileName[]) {
     char *rel_path = fileName;*/
     char* abs_path = malloc(_MAX_PATH);
     _fullpath(abs_path, fileName, _MAX_PATH);
-    printf("%s", abs_path);
+    //printf("fullpath string: %s\n", abs_path);
+    return abs_path;
+    char fixed_path[_MAX_PATH];
+    strncpy(fixed_path, abs_path, sizeof(fixed_path));
+    char* ptrFixedPath = fixed_path;
+    for (size_t i = 0; i < strlen(fixed_path); i++) {
+        //if (fixed_path[i] == "\\") {
+        //    fixed_path[i] = "\\\\";
+        //   }
+     }
+    printf("%s\n", fixed_path);
+    //free(abs_path);
 
 #else
     getcwd(cwd, sizeof(cwd));
@@ -45,8 +52,10 @@ char* getAbs_path(char fileName[]) {
     abs_path = realpath(fileName, NULL);
     chdir(cwd);
 #endif
+    //free(abs_path);
+    //return abs_path;
+   return ptrFixedPath;
 
-    return abs_path;
 }
 
 

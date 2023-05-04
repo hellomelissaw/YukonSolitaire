@@ -6,6 +6,7 @@
 #include "headers/AllHeaders.h"
 //#include "loadDeck.c"
 
+
         int load_DefaultDeckLDCommand() {
     FILE *fp;
     char str[100];
@@ -79,7 +80,10 @@ int load_SpecificFileIntoDeck(char *filename) {
 // Hey girl hey
 int main() {
     //printDeck(createDeck("defaultDeckOfFile.txt"));
-    Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
+    //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
+    //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\YukonSolitaire\\defaultDeckOfFile.txt");
+    Card *head = createDeck("..\\defaultDeckOfFile.txt");
+    //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
     Pile **columnsFilled = setColumnLists(head);
     Pile **foundationsBlank = setFoundationLists();
     char *message = " ";

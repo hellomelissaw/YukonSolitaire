@@ -4,7 +4,9 @@
 #include <stdlib.h>
 #include "headers/AllHeaders.h"
 #include <stdio.h>
-
+#ifdef _WIN32 // for Windows
+#define CHAR_FORMAT_SPECIFIER "%d"
+#endif
 #define  COLUMN_COUNT 7
 #define  ROW_COUNT 11
 #define FOUNDATION_COUNT 4
@@ -70,8 +72,8 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
     printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
 
-    int offset;
-    int currentFoundation = 1;
+    //int offset;
+    //int currentFoundation = 1;
     int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
         /*
@@ -111,6 +113,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
                         setVisibility(&currentCards[j], false);
 
                     printf("%s\t", current->view);
+
                     currentCards[j] = current->next;
 
                 }
