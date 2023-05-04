@@ -7,7 +7,11 @@
 //#include "loadDeck.c"
 
 
-        int load_DefaultDeckLDCommand() {
+typedef struct AddMove newMove;
+
+typedef struct Move Move;
+
+int load_DefaultDeckLDCommand() {
     FILE *fp;
     char str[100];
 
@@ -89,6 +93,9 @@ int main() {
     char *message = " ";
     char **ptrMessage = &message;
     char* input = malloc(sizeof (char) * 9);
+    int newMove;
+    Move *moveList = NULL;
+
     while (1) {
         printBoard(columnsFilled, foundationsBlank);
         printUserConsole(ptrMessage);
@@ -104,6 +111,9 @@ int main() {
             // setPrintMessage("Quitting the Game");
             //printf("Quitting The Game");
             exit(0); //return
+        }
+        if(!strcmp(input , "U")){
+            undoLastMove(moveList);
         }
         if (!strcmp(input, "LD")) {
             fgets(str, 100, stdin);
@@ -187,6 +197,8 @@ int main() {
             }
                 if(validInput){
                     moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
+                    newMove =  createMove(&ptrSrc, &ptrDest, srcCardRank, srcCardSuit);
+                    struct AddMove(newMove,&moveList);
 
                 } else {
                     setMessage(ptrMessage, "This move is not allowed.");

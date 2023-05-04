@@ -3,6 +3,7 @@
 //
 #include <stdio.h>
 #include "headers/AllHeaders.h"
+#include <stdlib.h>
 
 /// INSERTS THE CURRENT HEAD OF ONE DECK AT THE TAIL OF ANOTHER DECK
 /// \param ptr_SrcHead pointer containing the mem adr of the pointer to head deck to be inserted FROM
@@ -270,5 +271,83 @@ void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMov
      }
 
 }
+//// a single move
+typedef struct Move{
+    Pile *src;
+    Pile *dest;
+    char rank;
+    char suit;
+    struct Move* prev;
+    struct Move* next;
+}Move;
+
+//// The linkesd list of moves
+typedef struct MoveList{
+    Move *head; //head
+    Move *tail; //tail
+}MoveList;
+
+Move  *createMove(Pile *src , Pile *dest , char rank , char suit){
+    Move *newMove = (Move*) malloc(sizeof (Move));
+    //Move **head = &moveList;
+    newMove->src = src;
+    newMove->dest = dest;
+    newMove->rank = rank;
+    newMove->suit = suit;
+    //newMove->prev = moveList->tail;
+    newMove->next = NULL;
+    return newMove;
+}
+void AddMove (Move *newMove , Move **moveList){
+    //Move *prev = NULL;
+    Move *current = *moveList;
+    // if the list is empty, add the new move before current
+    if (current == NULL)
+        *moveList = newMove;
+    else
+        (*moveList)->next = newMove;
+}
+void undoLastMove(MoveList *moveList){
+    if(moveList->tail == NULL) {
+        printf("Nothing to undo! ");
+        return;
+    }
+    // to traverse the list backwards to undo moves
+    Move *lastMove = moveList->tail;
+    moveList->tail = lastMove->prev;
+    if (moveList->tail != NULL) {
+        moveList->tail->next = NULL;
+    } else {
+        moveList->head = NULL;
+    }
+
+    Pile* src = lastMove->src;
+    Pile* dest = lastMove->dest;
+    char rank = lastMove->rank;
+    char suit = lastMove->suit;
+
+    moveCards(&dest, &src, rank, suit, NULL);
+
+}
+ /*void *AddMove( MoveList* moveList , Pile *src , Pile *dest , char rank , char suit){
+   Move *newMove = (Move*) malloc(sizeof (Move));
+   //Move **head = &moveList;
+     newMove->src = src;
+     newMove->dest = dest;
+     newMove->rank = rank;
+     newMove->suit = suit;
+     newMove->prev = moveList->tail;
+     newMove->next = NULL;
+
+     // if the list is empty
+     if(moveList->head == NULL)
+         moveList->head = newMove;
+     while((*moveList).tail != NULL){
+         moveList->tail->next = newMove;
+     }
+     moveList->tail = newMove;
+}*/
+
+
 
 
