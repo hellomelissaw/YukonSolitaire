@@ -9,8 +9,8 @@
 int main() {
     Card *head = createDeck("defaultDeckOfFile.txt");
     Pile **columnsFilled = setColumnLists(head);
-    Pile **foundationsBlank = setFoundationLists();
-    //Pile **foundationsBlank = setTestFoundations();
+    //Pile **foundationsBlank = setFoundationLists();
+    Pile **foundationsBlank = setTestFoundations();
     char *message = " ";
     char **ptrMessage = &message;
     char* input = malloc(sizeof (char) * 9);
@@ -55,18 +55,18 @@ int main() {
             case 'C':
             case 'F':
 
-                if(validMoveSyntax(input, ptrMt)) {
+                if (validMoveSyntax(input, ptrMt)) {
                     bool validInput = true;
                     int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
                     int destIndex;
                     char srcCardRank;
                     char srcCardSuit;
-                    Pile** ptrSrc;
-                    Pile** ptrDest;
+                    Pile **ptrSrc;
+                    Pile **ptrDest;
 
-                    switch(mt){
+                    switch (mt) {
                         case PILE_TO_COL:
-                            if(validInputFromColumnPileToTail(input)){
+                            if (validInputFromColumnPileToTail(input)) {
                                 destIndex = input[8] - 49;
                                 srcCardRank = input[3];
                                 srcCardSuit = input[4];
@@ -77,7 +77,7 @@ int main() {
                             break;
 
                         case COL_TO_COL:
-                            if(validInputFromTailToTail(input)){
+                            if (validInputFromTailToTail(input)) {
                                 destIndex = input[5] - 49;
                                 srcCardRank = columnsFilled[srcIndex]->tail->rank;
                                 srcCardSuit = columnsFilled[srcIndex]->tail->suit;
@@ -88,7 +88,7 @@ int main() {
                             break;
 
                         case COL_TO_FOUND:
-                            if(validInputFromTailToFoundation(input)){
+                            if (validInputFromTailToFoundation(input)) {
                                 destIndex = input[5] - 49;
                                 srcCardRank = columnsFilled[srcIndex]->tail->rank;
                                 srcCardSuit = columnsFilled[srcIndex]->tail->suit;
@@ -99,7 +99,7 @@ int main() {
                             break;
 
                         case FOUND_TO_COL:
-                            if(validInputFromTailToFoundation(input)){
+                            if (validInputFromTailToFoundation(input)) {
                                 destIndex = input[5] - 49;
                                 srcCardRank = foundationsBlank[srcIndex]->tail->rank;
                                 srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
@@ -108,31 +108,34 @@ int main() {
                             }
                             break;
 
-                    default:
-                        validInput = false;
-            }
-                if(validInput){
-                    moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
+                        default:
+                            validInput = false;
                     }
-                if(foundationsBlank[0]->head != NULL && foundationsBlank[1]->head != NULL && foundationsBlank[2]->head != NULL && foundationsBlank[3]->head != NULL) {
-                    bool foundationsComplete = (foundationsBlank[0]->tail->rank == 'K' &&
-                                                foundationsBlank[1]->tail->rank == 'K' &&
-                                                foundationsBlank[2]->tail->rank == 'K' &&
-                                                foundationsBlank[3]->tail->rank == 'K');
-                    if (foundationsComplete) {
-                        setMessage(ptrMessage, "You beat the game!");
-                        printf("\n");
-                        printBoard(columnsFilled, foundationsBlank);
+                    if (validInput) {
+                        moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
                     }
-                }
+                    if (foundationsBlank[0]->head != NULL && foundationsBlank[1]->head != NULL &&
+                        foundationsBlank[2]->head != NULL && foundationsBlank[3]->head != NULL) {
+                        bool foundationsComplete = (foundationsBlank[0]->tail->rank == 'K' &&
+                                                    foundationsBlank[1]->tail->rank == 'K' &&
+                                                    foundationsBlank[2]->tail->rank == 'K' &&
+                                                    foundationsBlank[3]->tail->rank == 'K');
+                        if (foundationsComplete) {
+                            setMessage(ptrMessage, "You beat the game!");
+                            printf("\n");
+                            printBoard(columnsFilled, foundationsBlank);
+                        }
+                    }
                     /*if(foundationsAreComplete(foundationsBlank)){
                         setMessage(ptrMessage, "You beat the game!");
                         printBoard(columnsFilled, foundationsBlank);
                     }*/
                 } else {
-                    setMessage(ptrMessage, "This move is not allowed.");
+                    setMessage(ptrMessage, "Invalid syntax.");
                 }
-            } else { setMessage(ptrMessage, "Invalid syntax."); }
+        }
+
+
 
     } // end while loop
 }
