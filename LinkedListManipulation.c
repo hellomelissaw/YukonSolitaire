@@ -3,6 +3,7 @@
 //
 #include <stdio.h>
 #include "headers/AllHeaders.h"
+#include <stdlib.h>
 
 /// INSERTS THE CURRENT HEAD OF ONE DECK AT THE TAIL OF ANOTHER DECK
 /// \param ptr_SrcHead pointer containing the mem adr of the pointer to head deck to be inserted FROM
@@ -137,41 +138,46 @@ bool validateMoveToFoundation(char srcRank, char srcSuit, Card** foundationTail,
 /// \return true if valid, false if invalid
 bool validateMoveToColumn(char srcRank, Pile **destColumn, char **ptrMessage) {
     char expectedRank;
-    if((*destColumn)->tail->rank == 'A'){
-        expectedRank = '2';
-
-    } else if((*destColumn)->tail->rank >= 50 && (*destColumn)->tail->rank <= 57) { // using ascii values of char to check condition
-        expectedRank = (*destColumn)->tail->rank+1;
-
-    } else if ((*destColumn)->tail->rank == 'T') {
-        expectedRank = 'J';
-
-    } else if ((*destColumn)->tail->rank == 'J') {
-        expectedRank = 'Q';
-
-    } else if ((*destColumn)->tail->rank == 'Q') {
-        expectedRank = 'K';
-
-    } else if ((*destColumn)->tail->rank == 'K'){
-        setMessage(ptrMessage, "Cannot add card after the King.");
-        return false;
-
-    } else {
-        setMessage(ptrMessage, "Invalid rank.\n");
-
-        return false;
-    }
-
-
-    if(srcRank == expectedRank){
+    if ((*destColumn)->head == NULL) {
         return true;
-
     } else {
-        setMessage(ptrMessage, "The card is not the right value to be moved.\n");
+        if ((*destColumn)->tail->rank == 'A') {
+            expectedRank = '2';
 
-        return false;
+        } else if ((*destColumn)->tail->rank >= 50 &&
+                   (*destColumn)->tail->rank <= 57) { // using ascii values of char to check condition
+            expectedRank = (*destColumn)->tail->rank + 1;
+
+        } else if ((*destColumn)->tail->rank == 'T') {
+            expectedRank = 'J';
+
+        } else if ((*destColumn)->tail->rank == 'J') {
+            expectedRank = 'Q';
+
+        } else if ((*destColumn)->tail->rank == 'Q') {
+            expectedRank = 'K';
+
+        } else if ((*destColumn)->tail->rank == 'K') {
+            setMessage(ptrMessage, "Cannot add card after the King.");
+            return false;
+
+        } else {
+            setMessage(ptrMessage, "Invalid rank.\n");
+
+            return false;
+        }
+
+
+        if (srcRank == expectedRank) {
+            return true;
+
+        } else {
+            setMessage(ptrMessage, "The card is not the right value to be moved.\n");
+
+            return false;
+        }
+
     }
-
 }
 
 /// FUNCTION TO MOVE MANY CARD(S) TO A COLUMN
@@ -240,5 +246,95 @@ void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMov
      }
 
 }
+Move  *createMove(Pile **src , Pile **dest , char rank , char suit)
+{
+    Move *newMove = (Move*) malloc(sizeof (Move));
+    //Move **head = &moveList;
+    newMove->src = *src;
+    newMove->dest = *dest;
+    newMove->rank = rank;
+    newMove->suit = suit;
+    //newMove->prev = moveList->tail;
+    newMove->prev = NULL;
+    newMove->next = NULL;
+    return newMove;
+}
+
+MoveList *createMoveList (Move** head){
+    MoveList *newMoveList = (MoveList*) malloc(sizeof(MoveList));
+    newMoveList->head = *head;
+    newMoveList->tail = NULL;
+    return newMoveList;
+}
+void AddMove (Pile **src , Pile **dest , char rank , char suit, MoveList **moveList){
+    Move *newMove = createMove(src, dest, rank, suit);
+    if((*moveList) == NULL) { // if the values at ptr_DestHead are NULL
+        (*moveList) = createMoveList(&newMove);
+
+    } else {(*moveList)->tail->next = newMove; // or else set the pointer, pointing to destination tail, to point to the pointer to the source's head card
+
+    }
+
+    (*moveList)->tail = newMove;// the pointer ptr_DestTail should now be pointing to the same as ptr_SrcHead
+
+    (*moveList)->tail->next = NULL;
+    /*if((*moveList)->head == NULL){
+        (*moveList)->head = newMove;
+
+    } else {
+
+    }
+    //Move *prev = NULL;
+    //Move *current = (*moveList)->tail; // a pointer to the first move in the list
+    // if the list is empty, add the new move before current
+    if (current == NULL)
+        (*moveList)->tail = newMove;
+    else{
+        (*moveList)->tail->next = newMove;
+    }
+    newMove->next = NULL;*/
+
+}
+void undoLastMove(MoveList **moveList, char** ptrMessage){
+    if((*moveList) == NULL) {
+        setMessage(ptrMessage, "Nothing to undo! ");
+    } else {
+        // to traverse the list backwards to undo moves
+        Move *lastMove = (*moveList)->tail;
+        (*moveList)->tail = lastMove->prev;
+        if ((*moveList)->tail != NULL) {
+            (*moveList)->tail->next = NULL;
+        } else {
+            (*moveList)->head = NULL;
+        }
+
+        Pile *src = lastMove->src;
+        Pile *dest = lastMove->dest;
+        char rank = lastMove->rank;
+        char suit = lastMove->suit;
+
+        moveCards(&dest, &src, rank, suit, ptrMessage);
+    }
+}
+ /*void *AddMove( MoveList* moveList , Pile *src , Pile *dest , char rank , char suit){
+   Move *newMove = (Move*) malloc(sizeof (Move));
+   //Move **head = &moveList;
+     newMove->src = src;
+     newMove->dest = dest;
+     newMove->rank = rank;
+     newMove->suit = suit;
+     newMove->prev = moveList->tail;
+     newMove->next = NULL;
+
+     // if the list is empty
+     if(moveList->head == NULL)
+         moveList->head = newMove;
+     while((*moveList).tail != NULL){
+         moveList->tail->next = newMove;
+     }
+     moveList->tail = newMove;
+}*/
+
+
 
 

@@ -7,16 +7,27 @@
 
 // Hey girl hey
 int main() {
+    //printDeck(createDeck("defaultDeckOfFile.txt"));
+    //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
+    //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\YukonSolitaire\\defaultDeckOfFile.txt");
+#ifdef _WIN32
+    Card *head = createDeck("..\\defaultDeckOfFile.txt");
+#else
     Card *head = createDeck("defaultDeckOfFile.txt");
+#endif
+
+    //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
     Pile **columnsFilled = setColumnLists(head);
     Pile **foundationsBlank = setFoundationLists();
     //Pile **foundationsBlank = setTestFoundations();
     char *message = " ";
     char **ptrMessage = &message;
     char* input = malloc(sizeof (char) * 9);
+    MoveList *moveList = NULL;
+    MoveList **ptrMoveList = &moveList;
+
 
     while (1) {
-
         printBoard(columnsFilled, foundationsBlank);
         printUserConsole(ptrMessage);
 
@@ -127,12 +138,21 @@ int main() {
                             }
                             break;
 
-                        default:
-                            validInput = false;
-                    }
-                    if (validInput && moveIsAllowed) {
+                    default:
+                        validInput = false;
+            }
+                if(validInput && moveIsAllowed){
                         moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
+                        AddMove(ptrSrc, ptrDest, srcCardRank, srcCardSuit,ptrMoveList);
+                        /*Move *current = moveList->head;
+                        while(current != NULL){
+                            printf("%c %c ->\n",current->rank, current->suit);
+                            current=current->next;
+
+                        }*/
+
                     }
+
                     if (foundationsBlank[0]->head != NULL && foundationsBlank[1]->head != NULL &&
                         foundationsBlank[2]->head != NULL && foundationsBlank[3]->head != NULL) {
                         bool foundationsComplete = (foundationsBlank[0]->tail->rank == 'K' &&
@@ -166,6 +186,7 @@ void printUserConsole(char** ptrCurrentMsg) {
     printf("INPUT >");
 
 }
+
 /*
 
     //createDeck("unshuffledCards.txt");

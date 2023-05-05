@@ -11,12 +11,17 @@
 /// \param fileName name of the file which contains the card labels
 /// \return pointer to the head of the newly created Linked List of Card structs
 Card* createDeck(char fileName[]) {
+    //char* abs_path1 = getAbs_path(fileName);
     char* abs_path = getAbs_path(fileName);
+    //char* abs_path = fileName;
 
     /* Load Card labels from file */
     FILE* fpointer = fopen(abs_path, "rt"); // creates a pointer to the read file
+    //FILE* fpointer = fopen(abs_path, "rt"); // creates a pointer to the read file
     char cardLabels[CARD_COUNT][LABEL_SIZE];
 
+
+    //printf("%s",fileName);
     for (int i = 0 ; i < CARD_COUNT ; i++) {
         fgets(cardLabels[i], LABEL_SIZE, fpointer); // gets line i of txt file and populates the char array in cardLabels[i]
     }

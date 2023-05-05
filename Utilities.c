@@ -6,6 +6,7 @@
 #include <limits.h>
 #include "headers/AllHeaders.h"
 
+
 #ifdef _WIN32 // If on Windows
 #include <direct.h>
     #define GetCurrentDir _getcwd
@@ -16,30 +17,46 @@
 
 char* getAbs_path(char fileName[]) {
     char cwd[PATH_MAX];
-
-
-
 #ifdef _WIN32
     /*char full_path[_MAX_PATH];
+     * char* abs_path = malloc(_MAX_PATH);
     if (_fullpath(full_path, fileName, _MAX_PATH) != NULL) {
         abs_path = full_path;
     } else {
         // handle error case
         abs_path = NULL;
-    }*/
+    }
     _getcwd(cwd, sizeof(cwd));
     char *abs_path = NULL;
-    char *rel_path = fileName;
-    abs_path = _fullpath(NULL, rel_path, 0);
+
+    char *rel_path = fileName;*/
+    char* abs_path = malloc(_MAX_PATH);
+    _fullpath(abs_path, fileName, _MAX_PATH);
+    //printf("fullpath string: %s\n", abs_path);
+    return abs_path;
+    char fixed_path[_MAX_PATH];
+    strncpy(fixed_path, abs_path, sizeof(fixed_path));
+    char* ptrFixedPath = fixed_path;
+    for (size_t i = 0; i < strlen(fixed_path); i++) {
+        //if (fixed_path[i] == "\\") {
+        //    fixed_path[i] = "\\\\";
+        //   }
+     }
+    printf("%s\n", fixed_path);
+    return ptrFixedPath;
+
 #else
     getcwd(cwd, sizeof(cwd));
-    char* abs_path;
+    char* abs_path = malloc(PATH_MAX);
     chdir(".."); // go to parent dir to get absolute file path from project's parent directory
     abs_path = realpath(fileName, NULL);
     chdir(cwd);
-#endif
-
     return abs_path;
+#endif
+    //free(abs_path);
+    //return abs_path;
+
+
 }
 
 

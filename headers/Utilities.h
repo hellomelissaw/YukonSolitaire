@@ -7,5 +7,6 @@
 
 char* getAbs_path(char fileName[]);
 void setMessage(char** ptrMessage, char message[]);
+char* printPath(char *filename);
 
 #endif //YUKONSOLITAIRE_UTILITIES_H

@@ -32,7 +32,7 @@ Pile** setFoundationLists() {
 Pile** setColumnLists (Card* head) {
     Card** ptrHead = &head;
     Pile** columns = malloc(7 * sizeof(Pile*));
-    int hiddenCounter = 1;
+
     for (int i = 0 ; i < COLUMN_COUNT ; i++)
         columns[i] = createPile(COLUMN);
 
@@ -40,14 +40,11 @@ Pile** setColumnLists (Card* head) {
     int rowStartCounter = 0;
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = rowStart[rowStartCounter]; j < COLUMN_COUNT; j++) {
-            if(j >= hiddenCounter)
-                setVisibility(ptrHead, false);
 
                 insertAtTail(ptrHead, &columns[j]->head, &columns[j]->tail);
 
         }
         rowStartCounter++;
-        hiddenCounter++;
     }
 
     return columns;
@@ -71,7 +68,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
     }
 
-    printf("\tC1\t\tC2\t\tC3\t\tC4\t\tC5\t\tC6\t\tC7\n");
+    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
 
     int offset;
     //int hiddenCounter = 1;
@@ -98,34 +95,35 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
         //for (int j = 0; j < COLUMN_COUNT + offset; j++) {
             Card *current = currentCards[j];
                 if (current == NULL) {
-                    printf("\t\t"); // if there is no card in the current column, for the current row, make a tab space
+                    printf("\t"); // if there is no card in the current column, for the current row, make a tab space
 
                 } else {
                   /*  if(j >= hiddenCounter)
                         setVisibility(&currentCards[j], false);*/
 
-                    printf("\t%s\t", current->view);
+                    printf("%s\t", current->view);
+
                     currentCards[j] = current->next;
 
                 }
 
-        }
-        //int rowNumber = i%2;
-        if (i%2 == 0 && counterFoundation < FOUNDATION_COUNT) {
-            if(foundationTop[counterFoundation] == NULL) {
-                printf("\t[]\tF%d", counterFoundation+1);
-            } else {
-                printf("\t%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation+1);
             }
-            counterFoundation++;
+            //int rowNumber = i%2;
+            if (i % 2 == 0 && counterFoundation < FOUNDATION_COUNT) {
+                if (foundationTop[counterFoundation] == NULL) {
+                    printf("[]\tF%d", counterFoundation + 1);
+                } else {
+                    printf("%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation + 1);
+                }
+                counterFoundation++;
 
-        }
+            }
 
        // hiddenCounter++;
         printf("\n");
     }
 
-}
+    }
 
 bool foundationsAreComplete(Pile ** foundations) {
     for(int f = 0 ; f < FOUNDATION_COUNT ; f++) {

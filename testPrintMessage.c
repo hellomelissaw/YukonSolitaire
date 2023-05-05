@@ -6,7 +6,7 @@
 #include "headers/AllHeaders.h"
 
 
-void testPrintMessage() {
+/*void testPrintMessage() {
     char *message = "First message";
     char **messagePtr = &message;
     printf("%s", message);
@@ -15,3 +15,4 @@ void testPrintMessage() {
     setMessage(messagePtr, message2);
     printf("%s", message);
 }
+*/
