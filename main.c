@@ -200,7 +200,12 @@ int main() {
                 if(validInput){
                         moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
                         AddMove(ptrSrc, ptrDest, srcCardRank, srcCardSuit,ptrMoveList);
+                        /*Move *current = moveList->head;
+                        while(current != NULL){
+                            printf("%c %c ->\n",current->rank, current->suit);
+                            current=current->next;
 
+                        }*/
                 } else {
                     setMessage(ptrMessage, "This move is not allowed.");
                 }
