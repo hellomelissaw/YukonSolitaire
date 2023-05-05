@@ -271,54 +271,43 @@ void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMov
      }
 
 }
-//// a single move
-typedef struct Move{
-    Pile *src;
-    Pile *dest;
-    char rank;
-    char suit;
-    struct Move* prev;
-    struct Move* next;
-}Move;
-
-//// The linkesd list of moves
-typedef struct MoveList{
-    Move *head; //head
-    Move *tail; //tail
-}MoveList;
-
-Move  *createMove(Pile *src , Pile *dest , char rank , char suit){
+Move  *createMove(Pile **src , Pile **dest , char rank , char suit)
+{
     Move *newMove = (Move*) malloc(sizeof (Move));
     //Move **head = &moveList;
-    newMove->src = src;
-    newMove->dest = dest;
+    newMove->src = *src;
+    newMove->dest = *dest;
     newMove->rank = rank;
     newMove->suit = suit;
     //newMove->prev = moveList->tail;
+    newMove->prev = NULL;
     newMove->next = NULL;
     return newMove;
 }
-void AddMove (Move *newMove , Move **moveList){
+void AddMove (Move *newMove , MoveList **moveList){
     //Move *prev = NULL;
-    Move *current = *moveList;
+    Move *current = (*moveList)->tail; // a pointer to the first move in the list
     // if the list is empty, add the new move before current
     if (current == NULL)
-        *moveList = newMove;
-    else
-        (*moveList)->next = newMove;
+        (*moveList)->tail = newMove;
+    else{
+        (*moveList)->tail->next = newMove;
+    }
+    newMove->next = NULL;
+
 }
-void undoLastMove(MoveList *moveList){
-    if(moveList->tail == NULL) {
+void undoLastMove(MoveList **moveList){
+    if((*moveList)->tail == NULL) {
         printf("Nothing to undo! ");
         return;
     }
     // to traverse the list backwards to undo moves
-    Move *lastMove = moveList->tail;
-    moveList->tail = lastMove->prev;
-    if (moveList->tail != NULL) {
-        moveList->tail->next = NULL;
+    Move *lastMove = (*moveList)->tail;
+    (*moveList)->tail = lastMove->prev;
+    if ((*moveList)->tail != NULL) {
+        (*moveList)->tail->next = NULL;
     } else {
-        moveList->head = NULL;
+        (*moveList)->head = NULL;
     }
 
     Pile* src = lastMove->src;

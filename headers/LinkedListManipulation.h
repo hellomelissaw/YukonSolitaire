@@ -13,4 +13,24 @@ void setNewTail(Pile** columnToModify, Card** newTail);
 bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char** ptrMessage);
 bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage);
 void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMovedSuit, char **ptrMessage);
+//// a single move
+typedef struct Move{
+    Pile *src;
+    Pile *dest;
+    char rank;
+    char suit;
+    struct Move* prev;
+    struct Move* next;
+}Move;
+
+//// The linkesd list of moves
+typedef struct MoveList{
+    Move *head; // points to the first move in the list
+    Move *tail; // points to the last move in the list
+}MoveList;
+
+
+Move  *createMove(Pile **src , Pile **dest , char rank , char suit);
+void AddMove (Move *newMove , MoveList **moveList);
+void undoLastMove(MoveList **moveList);
 #endif //YUKONSOLITAIRE_LINKEDLISTMANIPULATION_H
