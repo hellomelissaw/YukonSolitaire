@@ -284,16 +284,23 @@ Move  *createMove(Pile **src , Pile **dest , char rank , char suit)
     newMove->next = NULL;
     return newMove;
 }
+
+MoveList *createMoveList (Move** head){
+    MoveList *newMoveList = (MoveList*) malloc(sizeof(MoveList));
+    newMoveList->head = *head;
+    newMoveList->tail = NULL;
+    return newMoveList;
+}
 void AddMove (Pile **src , Pile **dest , char rank , char suit, MoveList **moveList){
     Move *newMove = createMove(src, dest, rank, suit);
-    if((*moveList)->head == NULL) { // if the values at ptr_DestHead are NULL
-        (*moveList)->head = newMove;
+    if((*moveList) == NULL) { // if the values at ptr_DestHead are NULL
+        moveList = createMoveList(&newMove);
 
     } else {(*moveList)->tail->next = newMove; // or else set the pointer, pointing to destination tail, to point to the pointer to the source's head card
+
     }
 
     (*moveList)->tail = newMove;// the pointer ptr_DestTail should now be pointing to the same as ptr_SrcHead
-
 
     (*moveList)->tail->next = NULL;
     /*if((*moveList)->head == NULL){
