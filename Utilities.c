@@ -43,18 +43,19 @@ char* getAbs_path(char fileName[]) {
         //   }
      }
     printf("%s\n", fixed_path);
-    //free(abs_path);
+    return ptrFixedPath;
 
 #else
     getcwd(cwd, sizeof(cwd));
-    char* abs_path = malloc(MAX_PATH);
+    char* abs_path = malloc(PATH_MAX);
     chdir(".."); // go to parent dir to get absolute file path from project's parent directory
     abs_path = realpath(fileName, NULL);
     chdir(cwd);
+    return abs_path;
 #endif
     //free(abs_path);
     //return abs_path;
-   return ptrFixedPath;
+
 
 }
 
