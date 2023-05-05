@@ -77,12 +77,8 @@ int main() {
                             #ifdef _WIN32
                             head = createDeck("..\\defaultDeckOfFile.txt");
                             #else
-                            head = createDeck("defaultDeckOfFile.txt");
+                            head = load_DefaultDeckLDCommand(ptrMessage);
                             #endif
-                            setMessage(ptrMessage, "Deck loaded successfully.");
-
-                            //load_DefaultDeckLDCommand(ptrMessage);
-
                             /* } else if (length > 1) {
                                  //strcpy(result, str + 1);
                                  //printf("Result: %s\n", result);

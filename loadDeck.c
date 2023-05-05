@@ -41,23 +41,26 @@ int is_valid_card(char* rank, char* suit) {
 }
 // Function to load a deck of cards from a file or create a new unshuffled deck if no filename is given
 
-int load_DefaultDeckLDCommand(char** ptrMessage) {
+Card* load_DefaultDeckLDCommand(char** ptrMessage) {
     FILE *fp;
     char str[100];
-
+    Card* head = NULL;
     /* opening file for reading */
 
-    char* abspath = getAbs_path("defaultDeckOfCards");
+    char* abspath = getAbs_path("defaultDeckOfFile.txt");
     fp = fopen(abspath, "r");
     if (fp == NULL) {
         setMessage(ptrMessage, "Error opening file");
-        return -1;
+
+    } else {
+        setMessage(ptrMessage, "Deck loaded successfully.");
+        head = createDeck("defaultDeckOfFile.txt");
     }
 
 
     // printBoard(abspath);
     fclose(fp);
-    return 0;
+    return head;
 
 }
 // return true if the file specified by the filename exists
