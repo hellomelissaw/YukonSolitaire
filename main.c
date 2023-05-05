@@ -316,9 +316,9 @@ bool validFoundationRange(char in) {
     // TEST CREATION OF COLUMNS (need to get headers to work before it works again)
     ///////////////////////////////////////////////////////////////////////////////
 
-    /*Card* testDeck = createDeck("unshuffledcards.txt");
+    Card* testDeck = createDeck("unshuffledcards.txt");
     Pile** firstColumn = setColumnLists(testDeck);
-    printBoard(firstColumn);*/
+    printBoard(firstColumn);
 
     //////////////////////
     // TEST MOVING CARDS
@@ -337,7 +337,7 @@ bool validFoundationRange(char in) {
     // TEST SHUFFLE
     ///////////////////
 
-    /*Card* testDeck = createDeck("unshuffledCards.txt");
+    Card* testDeck = createDeck("unshuffledCards.txt");
     //shuffleRandom(testDeck);
     shuffleInterweave(45, testDeck);
     printDeck(testDeck);*/
