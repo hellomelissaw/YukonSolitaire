@@ -17,7 +17,7 @@ int main() {
     //Pile **foundationsBlank = setTestFoundations();
     char *message = "Welcome to Yukon Solitaire. You are in the STARTUP phase. Type CMD to get a list of commands";
     char **ptrMessage = &message;
-    char* input = malloc(sizeof (char) * 9);
+    char* input = malloc(sizeof(char) * 100);
     MoveList *moveList = NULL;
     MoveList **ptrMoveList = &moveList;
 
@@ -45,13 +45,21 @@ int main() {
         int length;
         enum moveType mt;
         enum moveType *ptrMt = &mt;
+        char command[10];
+        char option[90];
 
-        scanf("%s", input);
+        fgets(input, 100, stdin);
+        //scanf("%s", input);
+        sscanf(input,  "%s %s", command, option);
+        printf("Command is: %s\n", command);
+        printf("Option is: %s\n", option);
+        fflush(stdin);
+
         switch (phase) {
             case SETUP:
-                switch (input[0]) {
+                switch (command[0]) {
                     case 'Q':
-                        if (!strcmp(input, "QQ")) {
+                        if (command[1] == 'Q') {
                             exit(0); //return
                         }
                         break;
@@ -69,28 +77,32 @@ int main() {
                         break;
 
                     case 'L':
-                        if (!strcmp(input, "LD")) {
+                        if (command[1] == 'D' && command[2] == '\0') {
                             //fgets(str, 100, stdin);
-                            length = strlen(str);
-
-                            // if (length == 1) {
+                            length = strlen(input);
                             #ifdef _WIN32
                             head = createDeck("..\\defaultDeckOfFile.txt");
                             #else
                             head = load_DefaultDeckLDCommand(ptrMessage);
                             #endif
-                            /* } else if (length > 1) {
+                             } else if (option[0] != '\0') {
+
                                  //strcpy(result, str + 1);
                                  //printf("Result: %s\n", result);
-                                 load_SpecificFileIntoDeck(result, ptrMessage);
-                             }*/
-                        }
+                                 load_SpecificFileIntoDeck(input, ptrMessage);
+
+                             } else { setMessage(ptrMessage, "Invalid syntax.");}
                         break;
 
                     case 'S':
                         if (input[1] == 'W'){
-                            isHidden = false;
-                            setMessage(ptrMessage, "Here is the deck you've loaded.");
+                            if(head != NULL){
+                                isHidden = false;
+                                setMessage(ptrMessage, "Here is the deck you've loaded.");
+                            } else {
+                                setMessage(ptrMessage, "Please load a deck first with command LD.");
+                            }
+
 
                         } else if (input[1] == 'I'){
                             if (head != NULL) {
