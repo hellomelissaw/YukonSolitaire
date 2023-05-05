@@ -10,15 +10,10 @@ int main() {
     //printDeck(createDeck("defaultDeckOfFile.txt"));
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\YukonSolitaire\\defaultDeckOfFile.txt");
-#ifdef _WIN32
-    Card *head = createDeck("..\\defaultDeckOfFile.txt");
-#else
-    Card *head = createDeck("defaultDeckOfFile.txt");
-#endif
-
+    Card* head = NULL;
+    Pile **columnsFilled = NULL;
+    Pile **foundationsBlank = NULL;
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
-    Pile **columnsFilled = setColumnLists(head);
-    Pile **foundationsBlank = setFoundationLists();
     //Pile **foundationsBlank = setTestFoundations();
     char *message = " ";
     char **ptrMessage = &message;
@@ -28,8 +23,13 @@ int main() {
 
 
     while (1) {
-        printBoard(columnsFilled, foundationsBlank);
-        printUserConsole(ptrMessage);
+        if(head == NULL) {
+            printEmptyBoard();
+            printUserConsole(ptrMessage);
+        } else {
+            printBoard(columnsFilled, foundationsBlank);
+            printUserConsole(ptrMessage);
+        }
 
         //char input[9];
         char str[100];
@@ -49,17 +49,24 @@ int main() {
 
             case 'L':
                 if (!strcmp(input, "LD")) {
-                    fgets(str, 100, stdin);
+                    //fgets(str, 100, stdin);
                     length = strlen(str);
 
-                    if (length == 1) {
-                        load_DefaultDeckLDCommand(ptrMessage);
+                   // if (length == 1) {
+                        #ifdef _WIN32
+                        head = createDeck("..\\defaultDeckOfFile.txt");
+                        #else
+                        head = createDeck("defaultDeckOfFile.txt");
+                        #endif
+                        columnsFilled = setColumnLists(head);
+                        foundationsBlank = setFoundationLists();
+                        //load_DefaultDeckLDCommand(ptrMessage);
 
-                    } else if (length > 1) {
+                   /* } else if (length > 1) {
                         //strcpy(result, str + 1);
                         //printf("Result: %s\n", result);
                         load_SpecificFileIntoDeck(result, ptrMessage);
-                    }
+                    }*/
                 }
                 break;
                 // checks if the syntax of the input is valid for moving a/many card(s)

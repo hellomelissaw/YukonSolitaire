@@ -123,8 +123,19 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
         printf("\n");
     }
 
-    }
+}
 
+void printEmptyBoard() {
+    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    printf("\t\t\t\t\t\t\t [] F1\n");
+    printf("\t\t\t\t\t\t\t\t\t\t\n");
+    printf("\t\t\t\t\t\t\t [] F2\n");
+    printf("\t\t\t\t\t\t\t\t\t\t\n");
+    printf("\t\t\t\t\t\t\t [] F3\n");
+    printf("\t\t\t\t\t\t\t\t\t\t\n");
+    printf("\t\t\t\t\t\t\t [] F4\n");
+
+}
 bool foundationsAreComplete(Pile ** foundations) {
     for(int f = 0 ; f < FOUNDATION_COUNT ; f++) {
         if(!(foundations[f]->tail->rank == 'K')){
@@ -160,6 +171,8 @@ Pile** setTestFoundations() {
     return foundations;
 
 }
+
+
 
 
 
