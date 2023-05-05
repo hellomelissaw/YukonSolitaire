@@ -22,15 +22,22 @@ int main() {
     MoveList **ptrMoveList = &moveList;
 
     enum phase phase = SETUP;
+    bool isHidden = true;
 
     while (1) {
         if (head == NULL) {
             printEmptyBoard();
-            printUserConsole(ptrMessage);
+
+        } else if(head != NULL && phase == SETUP){
+            displayLoadedDeck(isHidden, head);
+
         } else {
             printBoard(columnsFilled, foundationsBlank);
-            printUserConsole(ptrMessage);
+
         }
+
+        printUserConsole(ptrMessage);
+
 
         //char input[9];
         char str[100];
@@ -54,8 +61,10 @@ int main() {
                         if(head == NULL) {
                             setMessage(ptrMessage, "Please load a deck before starting the game.");
                         } else {
-                        phase = PLAY;
-                        setMessage(ptrMessage, "PLAY phase started. TYPE CMD for a list of available commands.");
+                            columnsFilled = setColumnLists(head);
+                            foundationsBlank = setFoundationLists();
+                            phase = PLAY;
+                            setMessage(ptrMessage, "PLAY phase started. TYPE CMD for a list of available commands.");
                         }
                         break;
 
@@ -70,9 +79,8 @@ int main() {
                             #else
                             head = createDeck("defaultDeckOfFile.txt");
                             #endif
-                            columnsFilled = setColumnLists(head);
-                            foundationsBlank = setFoundationLists();
                             setMessage(ptrMessage, "Deck loaded successfully.");
+
                             //load_DefaultDeckLDCommand(ptrMessage);
 
                             /* } else if (length > 1) {
@@ -85,9 +93,10 @@ int main() {
 
                     case 'S':
                         if (input[1] == 'W'){
-                        // INDSÆT KODE FOR SHOW CARDS 'SW' HER
-                        }
-                        else if (input[1] == 'I'){
+                            isHidden = false;
+                            setMessage(ptrMessage, "Here is the deck you've loaded.");
+
+                        } else if (input[1] == 'I'){
                             if (head != NULL) {
                                 shuffleInterweave(13, head);
                             } else {

@@ -73,36 +73,14 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
     printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
 
-    int offset;
-    //int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
-        /*    switch (i) {
-                case 0:
-                    offset = 1;
-                    break;
-                case 2:
-                    offset = 1;
-                    break;
-                case 4:
-                    offset = 1;
-                    break;
-                case 6:
-                    offset = 1;
-                    break;
-                default:
-                    offset = 0;
-                    break;
-            }*/
 
         for (int j = 0; j < COLUMN_COUNT; j++) {
-        //for (int j = 0; j < COLUMN_COUNT + offset; j++) {
             Card *current = currentCards[j];
                 if (current == NULL) {
                     printf("\t"); // if there is no card in the current column, for the current row, make a tab space
 
                 } else {
-                  /*  if(j >= hiddenCounter)
-                        setVisibility(&currentCards[j], false);*/
 
                     printf("%s\t", current->view);
 
@@ -138,6 +116,31 @@ void printEmptyBoard() {
     printf("\t\t\t\t\t\t\t\t\t\t\n");
     printf("\t\t\t\t\t\t\t [] F4\n");
 
+}
+
+void displayLoadedDeck(bool hidden, Card* head) {
+    Card* current = head;
+    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    for(int i = 0 ; i < ROW_COUNT; i++) {
+        for(int j = 0 ; j < COLUMN_COUNT ; j++){
+            if(current == NULL){
+                break;
+            } else {
+                if(hidden)
+                    setVisibility(&current, false);
+                else
+                    setVisibility(&current, true);
+
+                printf("%s\t", current->view);
+                current = current->next;
+
+            }
+        }
+
+        printf("\n");
+        if(current == NULL) break;
+
+    }
 }
 bool foundationsAreComplete(Pile ** foundations) {
     for(int f = 0 ; f < FOUNDATION_COUNT ; f++) {

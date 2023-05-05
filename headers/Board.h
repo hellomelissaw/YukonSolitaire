@@ -11,6 +11,7 @@ Pile** setColumnLists (Card* head);
 Pile** setFoundationLists();
 void printBoard(Pile **columnsFilled, Pile **foundationsBlank);
 void printEmptyBoard();
+void displayLoadedDeck(bool hidden, Card* head);
 void printFoundationLists(Pile** foundations);
 void isVisible (bool isVisible);
 bool foundationsAreComplete(Pile** foundations);
