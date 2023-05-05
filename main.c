@@ -9,8 +9,8 @@
 int main() {
     Card *head = createDeck("defaultDeckOfFile.txt");
     Pile **columnsFilled = setColumnLists(head);
-    //Pile **foundationsBlank = setFoundationLists();
-    Pile **foundationsBlank = setTestFoundations();
+    Pile **foundationsBlank = setFoundationLists();
+    //Pile **foundationsBlank = setTestFoundations();
     char *message = " ";
     char **ptrMessage = &message;
     char* input = malloc(sizeof (char) * 9);
@@ -63,6 +63,7 @@ int main() {
                     char srcCardSuit;
                     Pile **ptrSrc;
                     Pile **ptrDest;
+                    bool moveIsAllowed = false;
 
                     switch (mt) {
                         case PILE_TO_COL:
@@ -72,6 +73,11 @@ int main() {
                                 srcCardSuit = input[4];
                                 ptrSrc = &columnsFilled[srcIndex];
                                 ptrDest = &columnsFilled[destIndex];
+                                if(validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)) {
+                                    moveIsAllowed = true;
+                                } else {
+                                    setMessage(ptrMessage, "Move is not allowed.");
+                                }
 
                             }
                             break;
@@ -83,6 +89,11 @@ int main() {
                                 srcCardSuit = columnsFilled[srcIndex]->tail->suit;
                                 ptrSrc = &columnsFilled[srcIndex];
                                 ptrDest = &columnsFilled[destIndex];
+                                if(validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)) {
+                                    moveIsAllowed = true;
+                                } else {
+                                    setMessage(ptrMessage, "Move is not allowed.");
+                                }
 
                             }
                             break;
@@ -94,6 +105,11 @@ int main() {
                                 srcCardSuit = columnsFilled[srcIndex]->tail->suit;
                                 ptrSrc = &columnsFilled[srcIndex];
                                 ptrDest = &foundationsBlank[destIndex];
+                                Card *destTail = foundationsBlank[destIndex]->tail;
+
+                                if(validateMoveToFoundation(srcCardRank, srcCardSuit, &destTail, ptrMessage)){
+                                    moveIsAllowed = true;
+                                } else {setMessage(ptrMessage, "Move is not allowed.");}
 
                             }
                             break;
@@ -105,13 +121,16 @@ int main() {
                                 srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
                                 ptrSrc = &foundationsBlank[srcIndex];
                                 ptrDest = &columnsFilled[destIndex];
+                                if(validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)){
+                                    moveIsAllowed = true;
+                                } else {   setMessage(ptrMessage, "Move is not allowed.");}
                             }
                             break;
 
                         default:
                             validInput = false;
                     }
-                    if (validInput) {
+                    if (validInput && moveIsAllowed) {
                         moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
                     }
                     if (foundationsBlank[0]->head != NULL && foundationsBlank[1]->head != NULL &&

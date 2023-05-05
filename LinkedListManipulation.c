@@ -90,10 +90,10 @@ void setNewTail(Pile** columnToModify, Card** newTail) {
 /// \param cardToBeMoved pointer to a pointer that points to the card that should be moved
 /// \param foundationTail pointer to a pointer that points to the card sitting at the top of the foundation pile
 /// \return true if valid, false if invalid
-bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char** ptrMessage) {
+bool validateMoveToFoundation(char srcRank, char srcSuit, Card** foundationTail, char** ptrMessage) {
 
     if(*foundationTail == NULL) {
-        if((*cardToBeMoved)->rank == 'A') {
+        if(srcRank == 'A') {
             return true;
         } else {
             return false;
@@ -102,7 +102,7 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
     } else {
         char rankOrder[] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'};
 
-        if((*cardToBeMoved)->suit != (*foundationTail)->suit) {
+        if(srcSuit != (*foundationTail)->suit) {
             setMessage(ptrMessage, "Card to be moved does not have the correct suit!\n");
             return false;
         } else {
@@ -117,46 +117,13 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
 
             }
 
-            if((*cardToBeMoved)->rank == requiredRank){
+            if(srcRank == requiredRank){
                 return true;
 
             } else {
                 setMessage(ptrMessage, "Card to be moved does not have the correct rank!\n");
                 return false;
             }
-
-           /* if ((*foundationTail)->rank == 'A') {
-                requiredRank = '2';
-
-            } else if ((*foundationTail)->rank >= 50 && (*foundationTail)->rank <= 57) { // using ascii values of char to check condition
-                requiredRank = ((*foundationTail)->rank) + 1;
-                printf("requiredRank: %c\n", requiredRank);
-
-            } else if ((*foundationTail)->rank == 'T') {
-                requiredRank = 'J';
-
-            } else if ((*foundationTail)->rank == 'J') {
-                requiredRank = 'Q';
-
-            } else if ((*foundationTail)->rank == 'Q') {
-                requiredRank = 'K';
-
-            } else {
-                setMessage(ptrMessage, "Invalid rank at foundation tail.\n");
-                return false;
-            }
-
-
-            if ((*cardToBeMoved)->rank == requiredRank) {
-
-                return true;
-
-            } else {
-                setMessage(ptrMessage, "Card to be moved does not have the correct rank!\n");
-                return false;
-
-            }
-            */
 
         }
 
@@ -168,7 +135,7 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
 /// \param src pointer pointing to the card to be moved
 /// \param destColumn pointer to a pointer that points to the Pile that the card should be moved to
 /// \return true if valid, false if invalid
-bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
+bool validateMoveToColumn(char srcRank, Pile **destColumn, char **ptrMessage) {
     char expectedRank;
     if((*destColumn)->tail->rank == 'A'){
         expectedRank = '2';
@@ -196,7 +163,7 @@ bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
     }
 
 
-    if(src->rank == expectedRank){
+    if(srcRank == expectedRank){
         return true;
 
     } else {
@@ -222,25 +189,25 @@ void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMov
      if(newTail != NULL || (tempHead->rank == cardToBeMovedRank && tempHead->suit == cardToBeMovedSuit)) {
          switch((*dest)->type){
              case COLUMN:
-                 if (validateMoveToColumn(tempHead, dest, ptrMessage)) {
+                 //if (validateMoveToColumn(tempHead, dest, ptrMessage)) {
                      while (tempHead != NULL) {
                          insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
                      }
                      setNewTail(src, &newTail);
                      setMessage(ptrMessage, "Move successful.");
 
-                 } else {setMessage(ptrMessage, "Could not move card.");}
+                // } else {setMessage(ptrMessage, "Could not move card.");}
                  break;
 
              case FOUNDATION:
-                 if (validateMoveToFoundation(&tempHead, &(*dest)->tail, ptrMessage)) {
+                // if (validateMoveToFoundation(&tempHead, &(*dest)->tail, ptrMessage)) {
                      insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
                      setNewTail(src, &newTail);
                      setMessage(ptrMessage, "Move successful.");
 
-                 } else {
-                     setMessage(ptrMessage, "Could not move card.");
-                 }
+                // } else {
+                 //    setMessage(ptrMessage, "Could not move card.");
+               //  }
                  break;
              default:  setMessage(ptrMessage, "Invalid Pile type.");
 
