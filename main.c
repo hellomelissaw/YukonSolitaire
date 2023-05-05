@@ -83,7 +83,10 @@ int main() {
                         break;
 
                     case 'S':
-                        if (input[1] == 'I'){
+                        if (input[1] == 'W'){
+
+                        }
+                        else if (input[1] == 'I'){
                             if (head != NULL) {
                                 shuffleInterweave(13, head);
                             } else {
