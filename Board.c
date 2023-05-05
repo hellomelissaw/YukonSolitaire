@@ -42,6 +42,8 @@ Pile** setColumnLists (Card* head) {
         for (int j = rowStart[rowStartCounter]; j < COLUMN_COUNT; j++) {
             if(j >= hiddenCounter)
                 setVisibility(ptrHead, false);
+            else
+                setVisibility(ptrHead, true);
 
             insertAtTail(ptrHead, &columns[j]->head, &columns[j]->tail);
 

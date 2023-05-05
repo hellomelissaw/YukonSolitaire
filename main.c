@@ -51,8 +51,8 @@ int main() {
         fgets(input, 100, stdin);
         //scanf("%s", input);
         sscanf(input,  "%s %s", command, option);
-        printf("Command is: %s\n", command);
-        printf("Option is: %s\n", option);
+       // printf("Command is: %s\n", command);
+       // printf("Option is: %s\n", option);
         fflush(stdin);
 
         switch (phase) {
@@ -98,7 +98,7 @@ int main() {
                         break;
 
                     case 'S':
-                        if (input[1] == 'W'){
+                        if (command[1] == 'W'){
                             if(head != NULL){
                                 isHidden = false;
                                 setMessage(ptrMessage, "Here is the deck you've loaded.");
@@ -107,13 +107,13 @@ int main() {
                             }
 
 
-                        } else if (input[1] == 'I'){
+                        } else if (command[1] == 'I'){
                             if (head != NULL) {
                                 shuffleInterweave(13, head);
                             } else {
                                 setMessage(ptrMessage, "Please load a deck first with command LD.");
                             }
-                         } else if (input[1] == 'R'){
+                         } else if (command[1] == 'R'){
                             if (head != NULL) {
                                 shuffleRandom(head);
                             } else {
@@ -123,7 +123,7 @@ int main() {
                         break;
 
                     case 'C':
-                        if(input[1] == 'M' && input[2] == 'D'){
+                        if(command[1] == 'M' && command[2] == 'D'){
                             printCommands(phase, ptrMessage);
                             break;
                         }
@@ -135,9 +135,9 @@ int main() {
 
 
             case PLAY:
-                switch (input[0]) {
+                switch (command[0]) {
                     case 'Q':
-                        if(input[1] == 'Q'){
+                        if(command[1] == 'Q'){
                             exit(0);
                         } else {
                             phase = SETUP;
@@ -146,7 +146,7 @@ int main() {
                         }
                         break;
                     case 'C':
-                        if(input[1] == 'M' && input[2] == 'D'){
+                        if(command[1] == 'M' && command[2] == 'D'){
                             printCommands(phase, ptrMessage);
                             break;
                         }
@@ -154,7 +154,7 @@ int main() {
                      //   if (head != NULL) {
                             if (validMoveSyntax(input, ptrMt)) {
                                 bool validInput = true;
-                                int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
+                                int srcIndex = command[1] - 49; // column number from ascii to decimal - 1
                                 int destIndex;
                                 char srcCardRank;
                                 char srcCardSuit;
@@ -165,9 +165,9 @@ int main() {
                                 switch (mt) {
                                     case PILE_TO_COL:
                                         if (validInputFromColumnPileToTail(input)) {
-                                            destIndex = input[8] - 49;
-                                            srcCardRank = input[3];
-                                            srcCardSuit = input[4];
+                                            destIndex = command[8] - 49;
+                                            srcCardRank = command[3];
+                                            srcCardSuit = command[4];
                                             ptrSrc = &columnsFilled[srcIndex];
                                             ptrDest = &columnsFilled[destIndex];
                                             if (validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)) {
@@ -181,7 +181,7 @@ int main() {
 
                                     case COL_TO_COL:
                                         if (validInputFromTailToTail(input)) {
-                                            destIndex = input[5] - 49;
+                                            destIndex = command[5] - 49;
                                             srcCardRank = columnsFilled[srcIndex]->tail->rank;
                                             srcCardSuit = columnsFilled[srcIndex]->tail->suit;
                                             ptrSrc = &columnsFilled[srcIndex];
@@ -196,8 +196,8 @@ int main() {
                                         break;
 
                                     case COL_TO_FOUND:
-                                        if (validInputFromTailToFoundation(input)) {
-                                            destIndex = input[5] - 49;
+                                        if (validInputFromTailToFoundation(command)) {
+                                            destIndex = command[5] - 49;
                                             srcCardRank = columnsFilled[srcIndex]->tail->rank;
                                             srcCardSuit = columnsFilled[srcIndex]->tail->suit;
                                             ptrSrc = &columnsFilled[srcIndex];
@@ -213,8 +213,8 @@ int main() {
                                         break;
 
                                     case FOUND_TO_COL:
-                                        if (validInputFromTailToFoundation(input)) {
-                                            destIndex = input[5] - 49;
+                                        if (validInputFromTailToFoundation(command)) {
+                                            destIndex = command[5] - 49;
                                             srcCardRank = foundationsBlank[srcIndex]->tail->rank;
                                             srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
                                             ptrSrc = &foundationsBlank[srcIndex];
@@ -262,8 +262,9 @@ int main() {
                         setMessage(ptrMessage, "Unknown command.");
                         break; // break play phase
                 }
+
             default:
-                printf("Invalid phase.");
+                printf("default");
 
         } // end phase switch case
 
