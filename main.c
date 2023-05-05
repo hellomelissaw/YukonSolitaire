@@ -72,6 +72,7 @@ int main() {
                             #endif
                             columnsFilled = setColumnLists(head);
                             foundationsBlank = setFoundationLists();
+                            setMessage(ptrMessage, "Deck loaded successfully.");
                             //load_DefaultDeckLDCommand(ptrMessage);
 
                             /* } else if (length > 1) {
@@ -101,6 +102,12 @@ int main() {
                         }
                         break;
 
+                    case 'C':
+                        if(input[1] == 'M' && input[2] == 'D'){
+                            printCommands(phase, ptrMessage);
+                            break;
+                        }
+
                     default:
                         setMessage(ptrMessage, "Command not found.");
                 }
@@ -119,6 +126,10 @@ int main() {
                         }
                         break;
                     case 'C':
+                        if(input[1] == 'M' && input[2] == 'D'){
+                            printCommands(phase, ptrMessage);
+                            break;
+                        }
                     case 'F':
                      //   if (head != NULL) {
                             if (validMoveSyntax(input, ptrMt)) {

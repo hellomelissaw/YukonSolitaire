@@ -63,3 +63,22 @@ void setMessage(char** messagePtr, char* message) {
     (*messagePtr) = newMessage;
 }
 
+void printCommands(enum phase currentPhase, char **ptrMessage) {
+    if(currentPhase == SETUP) {
+        setMessage(ptrMessage,"The available commands in SETUP are:\n- LD to load default deck\n- SR to randomly shuffle loaded deck\n- SI to bridge-shuffle loaded deck\n- P to start the game\n- QQ to quit the game\n"
+        );
+
+    } else if (currentPhase == PLAY) {
+        char commands[600];
+        char* intro = "The available commands in PLAY are: \n";
+        char* CtoC = "- Cx->Cy to move a card from the bottom of a column to another column, where x is source column number and y is destination number (fx C7->C3)\n";
+        char* CtoF = "- Cx->Fy to move a card from the bottom of a column to a foundation pile, where x is source column number and y is foundation number (fx C1->F1)\n";
+        char* PtoC = "- Cx:RS->Cy to move a set of card to another column, where x is the column number, R is the rank and S the suit of the card to be moved and y the destination number (fx C3:7H->C2)\n";
+        char* quit = "- Q to quit the game and return to the SETUP page\n";
+        char* quitquit = "- QQ to quit the game completely.\n";
+        snprintf(commands, sizeof(commands), "%s%s%s%s%s%s", intro, CtoC, CtoF, PtoC, quit, quitquit);
+        setMessage(ptrMessage, commands);
+    } else {
+        setMessage(ptrMessage, "Invalid phase.");
+    }
+}
