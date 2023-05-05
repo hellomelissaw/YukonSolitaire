@@ -16,14 +16,10 @@
 /// \return pointer to the Pile array
 Pile** setFoundationLists() {
     Pile** foundations = malloc(4 * sizeof(Pile*));
-
     for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
         foundations[i] = createPile(FOUNDATION);
-
     }
-
     return foundations;
-
 }
 
 /// SETS THE LINKED LISTS REPRESENTING THE 7 COLUMNS AT THE START OF THE GAME
@@ -73,40 +69,14 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
     int offset;
     //int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
-        /*    switch (i) {
-                case 0:
-                    offset = 1;
-                    break;
-                case 2:
-                    offset = 1;
-                    break;
-                case 4:
-                    offset = 1;
-                    break;
-                case 6:
-                    offset = 1;
-                    break;
-                default:
-                    offset = 0;
-                    break;
-            }*/
-
         for (int j = 0; j < COLUMN_COUNT; j++) {
-        //for (int j = 0; j < COLUMN_COUNT + offset; j++) {
             Card *current = currentCards[j];
                 if (current == NULL) {
                     printf("\t"); // if there is no card in the current column, for the current row, make a tab space
-
                 } else {
-                  /*  if(j >= hiddenCounter)
-                        setVisibility(&currentCards[j], false);*/
-
                     printf("%s\t", current->view);
-
                     currentCards[j] = current->next;
-
                 }
-
             }
             //int rowNumber = i%2;
             if (i % 2 == 0 && counterFoundation < FOUNDATION_COUNT) {
@@ -116,7 +86,6 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
                     printf("%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation + 1);
                 }
                 counterFoundation++;
-
             }
 
        // hiddenCounter++;

@@ -8,5 +8,5 @@
 #include "Pile.h"
 Card* createDeck(char fileName[]);
 int printDeck(Card* head);
-void saveDeck(Pile **columnsFilled);
+void saveDeck(Pile **columnsFilled , Pile **foundationsBlank);
 #endif //YUKONSOLITAIRE_DECK_H
