@@ -31,6 +31,6 @@ typedef struct MoveList{
 
 
 Move  *createMove(Pile **src , Pile **dest , char rank , char suit);
-void AddMove (Move *newMove , MoveList **moveList);
+void AddMove (Pile **src , Pile **dest , char rank , char suit, MoveList **moveList);
 void undoLastMove(MoveList **moveList);
 #endif //YUKONSOLITAIRE_LINKEDLISTMANIPULATION_H

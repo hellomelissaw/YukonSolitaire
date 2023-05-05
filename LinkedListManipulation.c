@@ -284,16 +284,33 @@ Move  *createMove(Pile **src , Pile **dest , char rank , char suit)
     newMove->next = NULL;
     return newMove;
 }
-void AddMove (Move *newMove , MoveList **moveList){
+void AddMove (Pile **src , Pile **dest , char rank , char suit, MoveList **moveList){
+    Move *newMove = createMove(src, dest, rank, suit);
+    if((*moveList)->head == NULL) { // if the values at ptr_DestHead are NULL
+        (*moveList)->head = newMove;
+
+    } else {(*moveList)->tail->next = newMove; // or else set the pointer, pointing to destination tail, to point to the pointer to the source's head card
+    }
+
+    (*moveList)->tail = newMove;// the pointer ptr_DestTail should now be pointing to the same as ptr_SrcHead
+
+
+    (*moveList)->tail->next = NULL;
+    /*if((*moveList)->head == NULL){
+        (*moveList)->head = newMove;
+
+    } else {
+
+    }
     //Move *prev = NULL;
-    Move *current = (*moveList)->tail; // a pointer to the first move in the list
+    //Move *current = (*moveList)->tail; // a pointer to the first move in the list
     // if the list is empty, add the new move before current
     if (current == NULL)
         (*moveList)->tail = newMove;
     else{
         (*moveList)->tail->next = newMove;
     }
-    newMove->next = NULL;
+    newMove->next = NULL;*/
 
 }
 void undoLastMove(MoveList **moveList){

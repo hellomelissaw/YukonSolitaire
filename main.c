@@ -199,8 +199,7 @@ int main() {
             }
                 if(validInput){
                         moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
-                        Move *newMove=  createMove(ptrSrc, ptrDest, srcCardRank, srcCardSuit);
-                        AddMove(newMove,ptrMoveList);
+                        AddMove(ptrSrc, ptrDest, srcCardRank, srcCardSuit,ptrMoveList);
 
                 } else {
                     setMessage(ptrMessage, "This move is not allowed.");
