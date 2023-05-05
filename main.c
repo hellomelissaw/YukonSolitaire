@@ -115,7 +115,7 @@ int main() {
             exit(0); //return
         }
         if(!strcmp(input , "U")){
-            undoLastMove(ptrMoveList);
+            undoLastMove(ptrMoveList, ptrMessage);
         }
         if (!strcmp(input, "LD")) {
             fgets(str, 100, stdin);

@@ -294,7 +294,7 @@ MoveList *createMoveList (Move** head){
 void AddMove (Pile **src , Pile **dest , char rank , char suit, MoveList **moveList){
     Move *newMove = createMove(src, dest, rank, suit);
     if((*moveList) == NULL) { // if the values at ptr_DestHead are NULL
-        moveList = createMoveList(&newMove);
+        (*moveList) = createMoveList(&newMove);
 
     } else {(*moveList)->tail->next = newMove; // or else set the pointer, pointing to destination tail, to point to the pointer to the source's head card
 
@@ -320,27 +320,26 @@ void AddMove (Pile **src , Pile **dest , char rank , char suit, MoveList **moveL
     newMove->next = NULL;*/
 
 }
-void undoLastMove(MoveList **moveList){
-    if((*moveList)->tail == NULL) {
-        printf("Nothing to undo! ");
-        return;
-    }
-    // to traverse the list backwards to undo moves
-    Move *lastMove = (*moveList)->tail;
-    (*moveList)->tail = lastMove->prev;
-    if ((*moveList)->tail != NULL) {
-        (*moveList)->tail->next = NULL;
+void undoLastMove(MoveList **moveList, char** ptrMessage){
+    if((*moveList) == NULL) {
+        setMessage(ptrMessage, "Nothing to undo! ");
     } else {
-        (*moveList)->head = NULL;
+        // to traverse the list backwards to undo moves
+        Move *lastMove = (*moveList)->tail;
+        (*moveList)->tail = lastMove->prev;
+        if ((*moveList)->tail != NULL) {
+            (*moveList)->tail->next = NULL;
+        } else {
+            (*moveList)->head = NULL;
+        }
+
+        Pile *src = lastMove->src;
+        Pile *dest = lastMove->dest;
+        char rank = lastMove->rank;
+        char suit = lastMove->suit;
+
+        moveCards(&dest, &src, rank, suit, NULL);
     }
-
-    Pile* src = lastMove->src;
-    Pile* dest = lastMove->dest;
-    char rank = lastMove->rank;
-    char suit = lastMove->suit;
-
-    moveCards(&dest, &src, rank, suit, NULL);
-
 }
  /*void *AddMove( MoveList* moveList , Pile *src , Pile *dest , char rank , char suit){
    Move *newMove = (Move*) malloc(sizeof (Move));
