@@ -51,8 +51,12 @@ int main() {
 
 
                     case 'P':
+                        if(head == NULL) {
+                            setMessage(ptrMessage, "Please load a deck before starting the game.");
+                        } else {
                         phase = PLAY;
                         setMessage(ptrMessage, "PLAY phase started. TYPE CMD for a list of available commands.");
+                        }
                         break;
 
                     case 'L':
@@ -113,7 +117,7 @@ int main() {
                         break;
                     case 'C':
                     case 'F':
-                        if (head != NULL) {
+                     //   if (head != NULL) {
                             if (validMoveSyntax(input, ptrMt)) {
                                 bool validInput = true;
                                 int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
@@ -213,7 +217,7 @@ int main() {
                             } else {
                                 setMessage(ptrMessage, "Invalid syntax.");
                             }
-                        } else { setMessage(ptrMessage, "Please load a deck first with command LD."); }
+                      //  } else { setMessage(ptrMessage, "Please load a deck first with command LD."); }
                         break;
 
                     case 'U' :
