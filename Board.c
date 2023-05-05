@@ -71,7 +71,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
     }
 
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
 
     for (int i = 0; i < ROW_COUNT; i++) {
 
@@ -107,7 +107,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 }
 
 void printEmptyBoard() {
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
     printf("\t\t\t\t\t\t\t [] F1\n");
     printf("\t\t\t\t\t\t\t\t\t\t\n");
     printf("\t\t\t\t\t\t\t [] F2\n");
@@ -120,7 +120,7 @@ void printEmptyBoard() {
 
 void displayLoadedDeck(bool hidden, Card* head) {
     Card* current = head;
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
     for(int i = 0 ; i < ROW_COUNT; i++) {
         for(int j = 0 ; j < COLUMN_COUNT ; j++){
             if(current == NULL){
