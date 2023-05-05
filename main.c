@@ -40,7 +40,14 @@ int main() {
 
         scanf("%s", input);
 
+
+
+
         switch (input[0]) {
+            case 'S':
+                if(!strcmp(input , "S")){
+                    saveDeck(columnsFilled);
+                }
             case 'Q':
                 if (!strcmp(input, "QQ")) {
                     exit(0); //return
