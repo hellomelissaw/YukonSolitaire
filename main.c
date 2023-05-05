@@ -172,6 +172,14 @@ int main() {
                 } else {
                     setMessage(ptrMessage, "Invalid syntax.");
                 }
+                break;
+
+            case 'U' :
+                undoLastMove(ptrMoveList, ptrMessage);
+                break;
+
+            default:
+                setMessage(ptrMessage, "Unknown command.");
         }
 
 
