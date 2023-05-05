@@ -168,39 +168,44 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
 /// \return true if valid, false if invalid
 bool validateMoveToColumn(Card *src, Pile **destColumn, char **ptrMessage) {
     char expectedRank;
-    if((*destColumn)->tail->rank == 'A'){
-        expectedRank = '2';
-
-    } else if((*destColumn)->tail->rank >= 50 && (*destColumn)->tail->rank <= 57) { // using ascii values of char to check condition
-        expectedRank = (*destColumn)->tail->rank+1;
-
-    } else if ((*destColumn)->tail->rank == 'T') {
-        expectedRank = 'J';
-
-    } else if ((*destColumn)->tail->rank == 'J') {
-        expectedRank = 'Q';
-
-    } else if ((*destColumn)->tail->rank == 'Q') {
-        expectedRank = 'K';
-
-    } else if ((*destColumn)->tail->rank == 'K'){
-        setMessage(ptrMessage, "Cannot add card after the King.");
-        return false;
-
-    } else {
-        setMessage(ptrMessage, "Invalid rank.\n");
-
-        return false;
-    }
-
-
-    if(src->rank == expectedRank){
+    if((*destColumn)->head == NULL) {
         return true;
-
     } else {
-        setMessage(ptrMessage, "The card is not the right value to be moved.\n");
+        if ((*destColumn)->tail->rank == 'A') {
+            expectedRank = '2';
 
-        return false;
+        } else if ((*destColumn)->tail->rank >= 50 &&
+                   (*destColumn)->tail->rank <= 57) { // using ascii values of char to check condition
+            expectedRank = (*destColumn)->tail->rank + 1;
+
+        } else if ((*destColumn)->tail->rank == 'T') {
+            expectedRank = 'J';
+
+        } else if ((*destColumn)->tail->rank == 'J') {
+            expectedRank = 'Q';
+
+        } else if ((*destColumn)->tail->rank == 'Q') {
+            expectedRank = 'K';
+
+        } else if ((*destColumn)->tail->rank == 'K') {
+            setMessage(ptrMessage, "Cannot add card after the King.");
+            return false;
+
+        } else {
+            setMessage(ptrMessage, "Invalid rank.\n");
+
+            return false;
+        }
+
+
+        if (src->rank == expectedRank) {
+            return true;
+
+        } else {
+            setMessage(ptrMessage, "The card is not the right value to be moved.\n");
+
+            return false;
+        }
     }
 
 }
@@ -338,7 +343,7 @@ void undoLastMove(MoveList **moveList, char** ptrMessage){
         char rank = lastMove->rank;
         char suit = lastMove->suit;
 
-        moveCards(&dest, &src, rank, suit, NULL);
+        moveCards(&dest, &src, rank, suit, ptrMessage);
     }
 }
  /*void *AddMove( MoveList* moveList , Pile *src , Pile *dest , char rank , char suit){
