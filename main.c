@@ -46,7 +46,7 @@ int main() {
         switch (input[0]) {
             case 'S':
                 if(!strcmp(input , "S")){
-                    saveDeck(columnsFilled);
+                    saveDeck(columnsFilled , foundationsBlank);
                     setMessage(ptrMessage , "Game is saved.");
                 }
             case 'Q':
