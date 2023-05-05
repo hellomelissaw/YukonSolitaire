@@ -57,3 +57,18 @@ int printDeck(Card* head) {
     }
     return 0;
 }
+void saveDeck(Pile **columnsFilled) {
+    FILE *fpointer = fopen("savedGame.txt", "w");
+    for (int j = 0; j < COLUMN_COUNT ; j++) {
+        if (columnsFilled[j] != NULL) {
+            Card *current = columnsFilled[j]->head;
+            while (current != NULL) {
+                fprintf(fpointer, "%c%c\n", current->rank, current->suit);
+                current = current->next;
+            }
+        }
+    }
+    fclose(fpointer);
+        }
+
+

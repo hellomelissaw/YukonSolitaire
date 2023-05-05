@@ -117,6 +117,10 @@ int main() {
         if(!strcmp(input , "U")){
             undoLastMove(ptrMoveList, ptrMessage);
         }
+        if(!strcmp(input , "S")){
+            saveDeck(columnsFilled);
+            exit(0);
+        }
         if (!strcmp(input, "LD")) {
             fgets(str, 100, stdin);
             length = strlen(str);
