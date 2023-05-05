@@ -106,15 +106,18 @@ bool validateMoveToFoundation(Card** cardToBeMoved, Card** foundationTail, char*
             setMessage(ptrMessage, "Card to be moved does not have the correct suit!\n");
             return false;
         } else {
-            int i = 0;
 
-            while((*foundationTail)->rank != rankOrder[i] || i < 13) {
-                i++;
+            char requiredRank = rankOrder[12];
+            printf("required rank before for loop: %c", requiredRank);
+            for(int i = 0 ; i < 12 ; i++) {
+                if((*foundationTail)->rank == rankOrder[i]){
+                    requiredRank = rankOrder[i+1];
+                    break;
+                }
+
             }
 
-            char requiredRank = rankOrder[i];
-
-            if((*foundationTail)->rank == requiredRank){
+            if((*cardToBeMoved)->rank == requiredRank){
                 return true;
 
             } else {
@@ -230,7 +233,7 @@ void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMov
                  break;
 
              case FOUNDATION:
-                 if (validateMoveToFoundation(&tempHead, &(*dest)->head, ptrMessage)) {
+                 if (validateMoveToFoundation(&tempHead, &(*dest)->tail, ptrMessage)) {
                      insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
                      setNewTail(src, &newTail);
                      setMessage(ptrMessage, "Move successful.");

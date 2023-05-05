@@ -127,4 +127,42 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
 }
 
+bool foundationsAreComplete(Pile ** foundations) {
+    for(int f = 0 ; f < FOUNDATION_COUNT ; f++) {
+        if(!(foundations[f]->tail->rank == 'K')){
+            return false;
+        }
+    }
+    return true;
+
+}
+
+Pile** setTestFoundations() {
+    Pile** foundations = malloc(4 * sizeof(Pile*));
+
+    for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
+        foundations[i] = createPile(FOUNDATION);
+
+    }
+
+
+    Card * JS = createCard('J', 'S');
+    Card * QS = createCard('Q', 'S');
+
+    Card * KC = createCard('K', 'C');
+    Card * KD = createCard('K', 'D');
+    Card * KH = createCard('K', 'H');
+
+    insertAtTail(&KH, &foundations[0]->head, &foundations[0]->tail);
+    insertAtTail(&KC, &foundations[1]->head, &foundations[1]->tail);
+    insertAtTail(&KD, &foundations[2]->head, &foundations[2]->tail);
+    insertAtTail(&JS, &foundations[3]->head, &foundations[3]->tail);
+    insertAtTail(&QS, &foundations[3]->head, &foundations[3]->tail);
+    //printf("Fourth foundation pile head: %s and tail: %s",foundations[3]->head->view, foundations[3]->tail->view);
+    return foundations;
+
+}
+
+
+
 

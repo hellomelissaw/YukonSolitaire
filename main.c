@@ -10,6 +10,7 @@ int main() {
     Card *head = createDeck("defaultDeckOfFile.txt");
     Pile **columnsFilled = setColumnLists(head);
     Pile **foundationsBlank = setFoundationLists();
+    //Pile **foundationsBlank = setTestFoundations();
     char *message = " ";
     char **ptrMessage = &message;
     char* input = malloc(sizeof (char) * 9);
@@ -107,17 +108,32 @@ int main() {
                             }
                             break;
 
-                        default:
-                            validInput = false;
+                    default:
+                        validInput = false;
+            }
+                if(validInput){
+                    moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
                     }
-                    if(validInput){
-                        moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
+                if(foundationsBlank[0]->head != NULL && foundationsBlank[1]->head != NULL && foundationsBlank[2]->head != NULL && foundationsBlank[3]->head != NULL) {
+                    bool foundationsComplete = (foundationsBlank[0]->tail->rank == 'K' &&
+                                                foundationsBlank[1]->tail->rank == 'K' &&
+                                                foundationsBlank[2]->tail->rank == 'K' &&
+                                                foundationsBlank[3]->tail->rank == 'K');
+                    if (foundationsComplete) {
+                        setMessage(ptrMessage, "You beat the game!");
+                        printf("\n");
+                        printBoard(columnsFilled, foundationsBlank);
+                    }
+                }
+                    /*if(foundationsAreComplete(foundationsBlank)){
+                        setMessage(ptrMessage, "You beat the game!");
+                        printBoard(columnsFilled, foundationsBlank);
+                    }*/
+                } else {
+                    setMessage(ptrMessage, "This move is not allowed.");
+                }
+            } else { setMessage(ptrMessage, "Invalid syntax."); }
 
-                    } else {
-                        setMessage(ptrMessage, "This move is not allowed.");
-                    }
-                } else { setMessage(ptrMessage, "Invalid syntax."); }
-        }
     } // end while loop
 }
 
