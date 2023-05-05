@@ -16,7 +16,7 @@ Card* createDeck(char fileName[]) {
     //char* abs_path = fileName;
 
     /* Load Card labels from file */
-    FILE* fpointer = fopen(fileName, "rt"); // creates a pointer to the read file
+    FILE* fpointer = fopen(abs_path, "rt"); // creates a pointer to the read file
     //FILE* fpointer = fopen(abs_path, "rt"); // creates a pointer to the read file
     char cardLabels[CARD_COUNT][LABEL_SIZE];
 

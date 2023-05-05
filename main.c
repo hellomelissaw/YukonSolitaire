@@ -82,7 +82,12 @@ int main() {
     //printDeck(createDeck("defaultDeckOfFile.txt"));
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\YukonSolitaire\\defaultDeckOfFile.txt");
+#ifdef _WIN32
     Card *head = createDeck("..\\defaultDeckOfFile.txt");
+#else
+    Card *head = createDeck("defaultDeckOfFile.txt");
+#endif
+
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
     Pile **columnsFilled = setColumnLists(head);
     Pile **foundationsBlank = setFoundationLists();
