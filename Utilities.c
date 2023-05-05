@@ -53,24 +53,9 @@ char* getAbs_path(char fileName[]) {
     chdir(cwd);
     return abs_path;
 #endif
-    //free(abs_path);
-    //return abs_path;
-
 
 }
 
-
-void PrintMessage() {
-    char *message = "First message";
-    char **messagePtr = &message;
-    printf("%s", message);
-
-    char *newMessage = malloc(100);
-
-    strcpy(newMessage, "Second message");
-    setMessage(messagePtr, newMessage);
-    printf("%s", message);
-}
 
 void setMessage(char** messagePtr, char* message) {
     char *newMessage = malloc(100);
@@ -78,21 +63,3 @@ void setMessage(char** messagePtr, char* message) {
     (*messagePtr) = newMessage;
 }
 
-
-
-
-
-/*
-/// FUNCTION TO GET THE ABSOLUTE PATH TO ANY GIVEN FILE
-/// \param fileName char array of the name of the file to find the path to
-/// \return pointer
-char* getAbs_path(char fileName[]) {
-    char cwd[PATH_MAX];
-    getcwd(cwd, sizeof(cwd));
-
-    chdir(".."); // go to parent dir to get absolute file path from project's parent directory
-    char* abs_path = (char *)  realpath(fileName, NULL);
-    chdir(cwd);
-
-    return abs_path;
-}*/

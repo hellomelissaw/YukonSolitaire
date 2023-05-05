@@ -84,7 +84,7 @@ int main() {
 
                     case 'S':
                         if (input[1] == 'W'){
-
+                        // INDSÆT KODE FOR SHOW CARDS 'SW' HER
                         }
                         else if (input[1] == 'I'){
                             if (head != NULL) {
@@ -105,7 +105,7 @@ int main() {
                         setMessage(ptrMessage, "Command not found.");
                 }
                 break;// break setup phase
-                // checks if the syntax of the input is valid for moving a/many card(s)
+
 
             case PLAY:
                 switch (input[0]) {
