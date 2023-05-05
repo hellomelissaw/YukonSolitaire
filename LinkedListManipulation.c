@@ -312,10 +312,11 @@ void undoLastMove(MoveList **moveList){
     (*moveList)->tail = lastMove->prev;
     if ((*moveList)->tail != NULL) {
         (*moveList)->tail->next = NULL;
+        //lastMove->next = NULL;
     } else {
         (*moveList)->head = NULL;
     }
-
+    lastMove->next = NULL; // set next to NULL before removing from the list
     Pile* src = lastMove->src;
     Pile* dest = lastMove->dest;
     char rank = lastMove->rank;
