@@ -15,7 +15,7 @@ int main() {
     Pile **foundationsBlank = NULL;
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
     //Pile **foundationsBlank = setTestFoundations();
-    char *message = " ";
+    char *message = "Welcome to Yukon Solitaire. You are in the STARTUP phase. Type CMD to get a list of commands";
     char **ptrMessage = &message;
     char* input = malloc(sizeof (char) * 9);
     MoveList *moveList = NULL;
@@ -52,6 +52,7 @@ int main() {
 
                     case 'P':
                         phase = PLAY;
+                        setMessage(ptrMessage, "PLAY phase started. TYPE CMD for a list of available commands.");
                         break;
 
                     case 'L':
@@ -60,11 +61,11 @@ int main() {
                             length = strlen(str);
 
                             // if (length == 1) {
-#ifdef _WIN32
+                            #ifdef _WIN32
                             head = createDeck("..\\defaultDeckOfFile.txt");
-#else
+                            #else
                             head = createDeck("defaultDeckOfFile.txt");
-#endif
+                            #endif
                             columnsFilled = setColumnLists(head);
                             foundationsBlank = setFoundationLists();
                             //load_DefaultDeckLDCommand(ptrMessage);
@@ -77,21 +78,22 @@ int main() {
                         }
                         break;
 
-                    case 'SI':
-                        if (head != NULL) {
-                            shuffleInterweave(13, head);
-                        } else {
-                            setMessage(ptrMessage, "Please load a deck first with command LD.");
+                    case 'S':
+                        if (input[1] == 'I'){
+                            if (head != NULL) {
+                                shuffleInterweave(13, head);
+                            } else {
+                                setMessage(ptrMessage, "Please load a deck first with command LD.");
+                            }
+                         } else if (input[1] == 'R'){
+                            if (head != NULL) {
+                                shuffleRandom(head);
+                            } else {
+                                setMessage(ptrMessage, "Please load a deck first with command LD.");
+                            }
                         }
                         break;
 
-                    case 'SR':
-                        if (head != NULL) {
-                            shuffleRandom(head);
-                        } else {
-                            setMessage(ptrMessage, "Please load a deck first with command LD.");
-                        }
-                        break;
                     default:
                         setMessage(ptrMessage, "Command not found.");
                 }
@@ -100,6 +102,15 @@ int main() {
 
             case PLAY:
                 switch (input[0]) {
+                    case 'Q':
+                        if(input[1] == 'Q'){
+                            exit(0);
+                        } else {
+                            phase = SETUP;
+                            setMessage(ptrMessage,
+                                       "You are back to the STARTUP phase. Type CMD for a list of available commands.");
+                        }
+                        break;
                     case 'C':
                     case 'F':
                         if (head != NULL) {
@@ -179,15 +190,10 @@ int main() {
                                     default:
                                         validInput = false;
                                 }
+
                                 if (validInput && moveIsAllowed) {
                                     moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
                                     AddMove(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMoveList);
-                                    /*Move *current = moveList->head;
-                                    while(current != NULL){
-                                        printf("%c %c ->\n",current->rank, current->suit);
-                                        current=current->next;
-
-                                    }*/
 
                                 }
 
@@ -203,10 +209,7 @@ int main() {
                                         printBoard(columnsFilled, foundationsBlank);
                                     }
                                 }
-                                /*if(foundationsAreComplete(foundationsBlank)){
-                                    setMessage(ptrMessage, "You beat the game!");
-                                    printBoard(columnsFilled, foundationsBlank);
-                                }*/
+
                             } else {
                                 setMessage(ptrMessage, "Invalid syntax.");
                             }
