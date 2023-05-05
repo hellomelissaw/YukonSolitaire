@@ -78,9 +78,10 @@ bool file_exists(const char *filename) {
 }
 
 
-int load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
+Card * load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
+    Card* head = NULL;
     char c;
-    char count;
+    int count = 0;
     char countFileLine;
     filename[strcspn(filename, "\n")] = '\0';
     char* abs_path = getAbs_path(filename);
@@ -92,7 +93,8 @@ int load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
                 count++;
             }
         }
-        if (countFileLine == 52) {
+        count++;
+        if (count == 52) {
             char line[3]; // allocate space for each line
             while (fgets(line, sizeof(line), file)) {
                 if (strlen(line) == 2) {
@@ -100,11 +102,13 @@ int load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
                 }
             }
             fclose(file);
+            head = createDeck(filename);
+            setMessage(ptrMessage,"Custom file is accepted.");
         } else {
             setMessage(ptrMessage, "The file does not have 52 cards");
         }
 
     } else
         setMessage(ptrMessage, "The file doesnt exist");
-    return 0;
+    return head;
 }

@@ -8,5 +8,5 @@
 int is_valid_card(char* rank, char* suit);
 Card* load_DefaultDeckLDCommand(char** ptrMessage);
 bool file_exists(const char *filename);
-int load_SpecificFileIntoDeck(char *filename, char** ptrMessage);
+Card * load_SpecificFileIntoDeck(char *filename, char** ptrMessage);
 #endif //YUKONSOLITAIRE_LOADDECK_H

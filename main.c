@@ -18,6 +18,8 @@ int main() {
     char *message = "Welcome to Yukon Solitaire. You are in the STARTUP phase. Type CMD to get a list of commands";
     char **ptrMessage = &message;
     char* input = malloc(sizeof(char) * 100);
+    char* command = malloc(sizeof(char) * 10);
+    char* option = malloc(sizeof(char) * 90);
     MoveList *moveList = NULL;
     MoveList **ptrMoveList = &moveList;
 
@@ -45,8 +47,6 @@ int main() {
         int length;
         enum moveType mt;
         enum moveType *ptrMt = &mt;
-        char command[10];
-        char option[90];
 
         fgets(input, 100, stdin);
         //scanf("%s", input);
@@ -60,6 +60,9 @@ int main() {
                 switch (command[0]) {
                     case 'Q':
                         if (command[1] == 'Q') {
+                            free(input);
+                            free(command);
+                            free(option);
                             exit(0); //return
                         }
                         break;
@@ -77,7 +80,7 @@ int main() {
                         break;
 
                     case 'L':
-                        if (command[1] == 'D' && command[2] == '\0') {
+                        if (command[1] == 'D' && option[0] == '\0') {
                             //fgets(str, 100, stdin);
                             length = strlen(input);
                             #ifdef _WIN32
@@ -85,13 +88,13 @@ int main() {
                             #else
                             head = load_DefaultDeckLDCommand(ptrMessage);
                             #endif
-                             } else if (option[0] != '\0') {
+                             } else {
 
                                  //strcpy(result, str + 1);
                                  //printf("Result: %s\n", result);
-                                 load_SpecificFileIntoDeck(input, ptrMessage);
+                                 head = load_SpecificFileIntoDeck(option, ptrMessage);
 
-                             } else { setMessage(ptrMessage, "Invalid syntax.");}
+                             }
                         break;
 
                     case 'S':
@@ -263,6 +266,7 @@ int main() {
                 printf("Invalid phase.");
 
         } // end phase switch case
+
     } // end while loop
 }
 
