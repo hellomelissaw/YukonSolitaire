@@ -32,7 +32,7 @@ Pile** setFoundationLists() {
 Pile** setColumnLists (Card* head) {
     Card** ptrHead = &head;
     Pile** columns = malloc(7 * sizeof(Pile*));
-
+    int hiddenCounter = 1;
     for (int i = 0 ; i < COLUMN_COUNT ; i++)
         columns[i] = createPile(COLUMN);
 
@@ -40,11 +40,14 @@ Pile** setColumnLists (Card* head) {
     int rowStartCounter = 0;
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = rowStart[rowStartCounter]; j < COLUMN_COUNT; j++) {
+            if(j >= hiddenCounter)
+                setVisibility(ptrHead, false);
 
-                insertAtTail(ptrHead, &columns[j]->head, &columns[j]->tail);
+            insertAtTail(ptrHead, &columns[j]->head, &columns[j]->tail);
 
         }
         rowStartCounter++;
+        hiddenCounter++;
     }
 
     return columns;
