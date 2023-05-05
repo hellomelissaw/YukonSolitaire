@@ -5,7 +5,10 @@
 #ifndef YUKONSOLITAIRE_MAIN_H
 #define YUKONSOLITAIRE_MAIN_H
 #include <stdbool.h>
-
+enum phase {
+    SETUP,
+    PLAY
+};
 
 bool validColumnRange(char in);
 bool validFoundationRange(char in);

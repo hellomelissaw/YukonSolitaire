@@ -21,9 +21,10 @@ int main() {
     MoveList *moveList = NULL;
     MoveList **ptrMoveList = &moveList;
 
+    enum phase phase = SETUP;
 
     while (1) {
-        if(head == NULL) {
+        if (head == NULL) {
             printEmptyBoard();
             printUserConsole(ptrMessage);
         } else {
@@ -39,159 +40,191 @@ int main() {
         enum moveType *ptrMt = &mt;
 
         scanf("%s", input);
+        switch (phase) {
+            case SETUP:
+                switch (input[0]) {
+                    case 'Q':
+                        if (!strcmp(input, "QQ")) {
+                            exit(0); //return
+                        }
+                        break;
 
-        switch (input[0]) {
-            case 'Q':
-                if (!strcmp(input, "QQ")) {
-                    exit(0); //return
+
+                    case 'P':
+                        phase = PLAY;
+                        break;
+
+                    case 'L':
+                        if (!strcmp(input, "LD")) {
+                            //fgets(str, 100, stdin);
+                            length = strlen(str);
+
+                            // if (length == 1) {
+#ifdef _WIN32
+                            head = createDeck("..\\defaultDeckOfFile.txt");
+#else
+                            head = createDeck("defaultDeckOfFile.txt");
+#endif
+                            columnsFilled = setColumnLists(head);
+                            foundationsBlank = setFoundationLists();
+                            //load_DefaultDeckLDCommand(ptrMessage);
+
+                            /* } else if (length > 1) {
+                                 //strcpy(result, str + 1);
+                                 //printf("Result: %s\n", result);
+                                 load_SpecificFileIntoDeck(result, ptrMessage);
+                             }*/
+                        }
+                        break;
+
+                    case 'SI':
+                        if (head != NULL) {
+                            shuffleInterweave(13, head);
+                        } else {
+                            setMessage(ptrMessage, "Please load a deck first with command LD.");
+                        }
+                        break;
+
+                    case 'SR':
+                        if (head != NULL) {
+                            shuffleRandom(head);
+                        } else {
+                            setMessage(ptrMessage, "Please load a deck first with command LD.");
+                        }
+                        break;
+                    default:
+                        setMessage(ptrMessage, "Command not found.");
                 }
-                break;
-
-            case 'L':
-                if (!strcmp(input, "LD")) {
-                    //fgets(str, 100, stdin);
-                    length = strlen(str);
-
-                   // if (length == 1) {
-                        #ifdef _WIN32
-                        head = createDeck("..\\defaultDeckOfFile.txt");
-                        #else
-                        head = createDeck("defaultDeckOfFile.txt");
-                        #endif
-                        columnsFilled = setColumnLists(head);
-                        foundationsBlank = setFoundationLists();
-                        //load_DefaultDeckLDCommand(ptrMessage);
-
-                   /* } else if (length > 1) {
-                        //strcpy(result, str + 1);
-                        //printf("Result: %s\n", result);
-                        load_SpecificFileIntoDeck(result, ptrMessage);
-                    }*/
-                }
-                break;
+                break;// break setup phase
                 // checks if the syntax of the input is valid for moving a/many card(s)
-            case 'C':
-            case 'F':
-                if(head != NULL) {
-                    if (validMoveSyntax(input, ptrMt)) {
-                        bool validInput = true;
-                        int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
-                        int destIndex;
-                        char srcCardRank;
-                        char srcCardSuit;
-                        Pile **ptrSrc;
-                        Pile **ptrDest;
-                        bool moveIsAllowed = false;
 
-                        switch (mt) {
-                            case PILE_TO_COL:
-                                if (validInputFromColumnPileToTail(input)) {
-                                    destIndex = input[8] - 49;
-                                    srcCardRank = input[3];
-                                    srcCardSuit = input[4];
-                                    ptrSrc = &columnsFilled[srcIndex];
-                                    ptrDest = &columnsFilled[destIndex];
-                                    if (validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)) {
-                                        moveIsAllowed = true;
-                                    } else {
-                                        setMessage(ptrMessage, "Move is not allowed.");
+            case PLAY:
+                switch (input[0]) {
+                    case 'C':
+                    case 'F':
+                        if (head != NULL) {
+                            if (validMoveSyntax(input, ptrMt)) {
+                                bool validInput = true;
+                                int srcIndex = input[1] - 49; // column number from ascii to decimal - 1
+                                int destIndex;
+                                char srcCardRank;
+                                char srcCardSuit;
+                                Pile **ptrSrc;
+                                Pile **ptrDest;
+                                bool moveIsAllowed = false;
+
+                                switch (mt) {
+                                    case PILE_TO_COL:
+                                        if (validInputFromColumnPileToTail(input)) {
+                                            destIndex = input[8] - 49;
+                                            srcCardRank = input[3];
+                                            srcCardSuit = input[4];
+                                            ptrSrc = &columnsFilled[srcIndex];
+                                            ptrDest = &columnsFilled[destIndex];
+                                            if (validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)) {
+                                                moveIsAllowed = true;
+                                            } else {
+                                                setMessage(ptrMessage, "Move is not allowed.");
+                                            }
+
+                                        }
+                                        break;
+
+                                    case COL_TO_COL:
+                                        if (validInputFromTailToTail(input)) {
+                                            destIndex = input[5] - 49;
+                                            srcCardRank = columnsFilled[srcIndex]->tail->rank;
+                                            srcCardSuit = columnsFilled[srcIndex]->tail->suit;
+                                            ptrSrc = &columnsFilled[srcIndex];
+                                            ptrDest = &columnsFilled[destIndex];
+                                            if (validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)) {
+                                                moveIsAllowed = true;
+                                            } else {
+                                                setMessage(ptrMessage, "Move is not allowed.");
+                                            }
+
+                                        }
+                                        break;
+
+                                    case COL_TO_FOUND:
+                                        if (validInputFromTailToFoundation(input)) {
+                                            destIndex = input[5] - 49;
+                                            srcCardRank = columnsFilled[srcIndex]->tail->rank;
+                                            srcCardSuit = columnsFilled[srcIndex]->tail->suit;
+                                            ptrSrc = &columnsFilled[srcIndex];
+                                            ptrDest = &foundationsBlank[destIndex];
+                                            Card *destTail = foundationsBlank[destIndex]->tail;
+
+                                            if (validateMoveToFoundation(srcCardRank, srcCardSuit, &destTail,
+                                                                         ptrMessage)) {
+                                                moveIsAllowed = true;
+                                            } else { setMessage(ptrMessage, "Move is not allowed."); }
+
+                                        }
+                                        break;
+
+                                    case FOUND_TO_COL:
+                                        if (validInputFromTailToFoundation(input)) {
+                                            destIndex = input[5] - 49;
+                                            srcCardRank = foundationsBlank[srcIndex]->tail->rank;
+                                            srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
+                                            ptrSrc = &foundationsBlank[srcIndex];
+                                            ptrDest = &columnsFilled[destIndex];
+                                            if (validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)) {
+                                                moveIsAllowed = true;
+                                            } else { setMessage(ptrMessage, "Move is not allowed."); }
+                                        }
+                                        break;
+
+                                    default:
+                                        validInput = false;
+                                }
+                                if (validInput && moveIsAllowed) {
+                                    moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
+                                    AddMove(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMoveList);
+                                    /*Move *current = moveList->head;
+                                    while(current != NULL){
+                                        printf("%c %c ->\n",current->rank, current->suit);
+                                        current=current->next;
+
+                                    }*/
+
+                                }
+
+                                if (foundationsBlank[0]->head != NULL && foundationsBlank[1]->head != NULL &&
+                                    foundationsBlank[2]->head != NULL && foundationsBlank[3]->head != NULL) {
+                                    bool foundationsComplete = (foundationsBlank[0]->tail->rank == 'K' &&
+                                                                foundationsBlank[1]->tail->rank == 'K' &&
+                                                                foundationsBlank[2]->tail->rank == 'K' &&
+                                                                foundationsBlank[3]->tail->rank == 'K');
+                                    if (foundationsComplete) {
+                                        setMessage(ptrMessage, "You beat the game!");
+                                        printf("\n");
+                                        printBoard(columnsFilled, foundationsBlank);
                                     }
-
                                 }
-                                break;
-
-                            case COL_TO_COL:
-                                if (validInputFromTailToTail(input)) {
-                                    destIndex = input[5] - 49;
-                                    srcCardRank = columnsFilled[srcIndex]->tail->rank;
-                                    srcCardSuit = columnsFilled[srcIndex]->tail->suit;
-                                    ptrSrc = &columnsFilled[srcIndex];
-                                    ptrDest = &columnsFilled[destIndex];
-                                    if (validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)) {
-                                        moveIsAllowed = true;
-                                    } else {
-                                        setMessage(ptrMessage, "Move is not allowed.");
-                                    }
-
-                                }
-                                break;
-
-                            case COL_TO_FOUND:
-                                if (validInputFromTailToFoundation(input)) {
-                                    destIndex = input[5] - 49;
-                                    srcCardRank = columnsFilled[srcIndex]->tail->rank;
-                                    srcCardSuit = columnsFilled[srcIndex]->tail->suit;
-                                    ptrSrc = &columnsFilled[srcIndex];
-                                    ptrDest = &foundationsBlank[destIndex];
-                                    Card *destTail = foundationsBlank[destIndex]->tail;
-
-                                    if (validateMoveToFoundation(srcCardRank, srcCardSuit, &destTail, ptrMessage)) {
-                                        moveIsAllowed = true;
-                                    } else { setMessage(ptrMessage, "Move is not allowed."); }
-
-                                }
-                                break;
-
-                            case FOUND_TO_COL:
-                                if (validInputFromTailToFoundation(input)) {
-                                    destIndex = input[5] - 49;
-                                    srcCardRank = foundationsBlank[srcIndex]->tail->rank;
-                                    srcCardSuit = foundationsBlank[srcIndex]->tail->suit;
-                                    ptrSrc = &foundationsBlank[srcIndex];
-                                    ptrDest = &columnsFilled[destIndex];
-                                    if (validateMoveToColumn(srcCardRank, ptrDest, ptrMessage)) {
-                                        moveIsAllowed = true;
-                                    } else { setMessage(ptrMessage, "Move is not allowed."); }
-                                }
-                                break;
-
-                            default:
-                                validInput = false;
-                        }
-                        if (validInput && moveIsAllowed) {
-                            moveCards(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMessage);
-                            AddMove(ptrSrc, ptrDest, srcCardRank, srcCardSuit, ptrMoveList);
-                            /*Move *current = moveList->head;
-                            while(current != NULL){
-                                printf("%c %c ->\n",current->rank, current->suit);
-                                current=current->next;
-
-                            }*/
-
-                        }
-
-                        if (foundationsBlank[0]->head != NULL && foundationsBlank[1]->head != NULL &&
-                            foundationsBlank[2]->head != NULL && foundationsBlank[3]->head != NULL) {
-                            bool foundationsComplete = (foundationsBlank[0]->tail->rank == 'K' &&
-                                                        foundationsBlank[1]->tail->rank == 'K' &&
-                                                        foundationsBlank[2]->tail->rank == 'K' &&
-                                                        foundationsBlank[3]->tail->rank == 'K');
-                            if (foundationsComplete) {
-                                setMessage(ptrMessage, "You beat the game!");
-                                printf("\n");
-                                printBoard(columnsFilled, foundationsBlank);
+                                /*if(foundationsAreComplete(foundationsBlank)){
+                                    setMessage(ptrMessage, "You beat the game!");
+                                    printBoard(columnsFilled, foundationsBlank);
+                                }*/
+                            } else {
+                                setMessage(ptrMessage, "Invalid syntax.");
                             }
-                        }
-                        /*if(foundationsAreComplete(foundationsBlank)){
-                            setMessage(ptrMessage, "You beat the game!");
-                            printBoard(columnsFilled, foundationsBlank);
-                        }*/
-                    } else {
-                        setMessage(ptrMessage, "Invalid syntax.");
-                    }
-                } else { setMessage(ptrMessage, "Please load a deck first with command LD.");}
-                break;
+                        } else { setMessage(ptrMessage, "Please load a deck first with command LD."); }
+                        break;
 
-            case 'U' :
-                undoLastMove(ptrMoveList, ptrMessage);
-                break;
+                    case 'U' :
+                        undoLastMove(ptrMoveList, ptrMessage);
+                        break;
 
+                    default:
+                        setMessage(ptrMessage, "Unknown command.");
+                        break; // break play phase
+                }
             default:
-                setMessage(ptrMessage, "Unknown command.");
-        }
+                printf("Invalid phase.");
 
-
-
+        } // end phase switch case
     } // end while loop
 }
 
