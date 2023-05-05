@@ -10,6 +10,7 @@
 Pile** setColumnLists (Card* head);
 Pile** setFoundationLists();
 void printBoard(Pile **columnsFilled, Pile **foundationsBlank);
+void printEmptyBoard();
 void printFoundationLists(Pile** foundations);
 void isVisible (bool isVisible);
 bool foundationsAreComplete(Pile** foundations);

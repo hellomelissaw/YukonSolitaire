@@ -301,6 +301,7 @@ void undoLastMove(MoveList **moveList, char** ptrMessage){
     } else {
         // to traverse the list backwards to undo moves
         Move *lastMove = (*moveList)->tail;
+
         (*moveList)->tail = lastMove->prev;
         if ((*moveList)->tail != NULL) {
             (*moveList)->tail->next = NULL;

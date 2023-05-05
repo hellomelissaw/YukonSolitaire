@@ -54,6 +54,7 @@ int load_DefaultDeckLDCommand(char** ptrMessage) {
         return -1;
     }
 
+
     // printBoard(abspath);
     fclose(fp);
     return 0;
