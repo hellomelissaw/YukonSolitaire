@@ -65,7 +65,7 @@ void setMessage(char** messagePtr, char* message) {
 
 void printCommands(enum phase currentPhase, char **ptrMessage) {
     if(currentPhase == SETUP) {
-        setMessage(ptrMessage,"The available commands in SETUP are:\n- LD to load default deck\n- SR to randomly shuffle loaded deck\n- SI to bridge-shuffle loaded deck\n- P to start the game\n- QQ to quit the game\n"
+        setMessage(ptrMessage,"The available commands in SETUP are:\n- LD to load default deck\n- SW to show all cards in loaded deck\n- SR to randomly shuffle loaded deck\n- SI to bridge-shuffle loaded deck\n- P to start the game\n- QQ to quit the game\n"
         );
 
     } else if (currentPhase == PLAY) {
