@@ -122,6 +122,7 @@ void printEmptyBoard() {
 
 void displayLoadedDeck(bool hidden, Card* head) {
     Card* current = head;
+    int fcount = 0;
     printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
     for(int i = 0 ; i < ROW_COUNT; i++) {
         for(int j = 0 ; j < COLUMN_COUNT ; j++){
@@ -137,6 +138,11 @@ void displayLoadedDeck(bool hidden, Card* head) {
                 current = current->next;
 
             }
+
+        }
+        if(i % 2 == 0 && fcount < FOUNDATION_COUNT){
+            printf("[]\tF%d", fcount + 1);
+            fcount++;
         }
 
         printf("\n");

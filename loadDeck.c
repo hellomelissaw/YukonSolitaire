@@ -54,7 +54,12 @@ Card* load_DefaultDeckLDCommand(char** ptrMessage) {
 
     } else {
         setMessage(ptrMessage, "Deck loaded successfully.");
+        #ifdef _WIN32
+        head = createDeck("..\\defaultDeckOfFile.txt");
+        #else
         head = createDeck("defaultDeckOfFile.txt");
+        #endif
+
     }
 
 
@@ -102,7 +107,17 @@ Card * load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
                 }
             }
             fclose(file);
+        #ifdef _WIN32
+            char filenameWindows[90];
+            char* filename = "untitled.txt";
+            char* db_backslash = "..\\";
+            snprintf(filenameWindows, sizeof(filenameWindows), "%s%s", db_backslash, filename);
+            //printf("%s", filenameWindows);
+            head = createDeck(filenameWindows);
+            #else
             head = createDeck(filename);
+            #endif
+
             setMessage(ptrMessage,"Custom file is accepted.");
         } else {
             setMessage(ptrMessage, "The file does not have 52 cards");

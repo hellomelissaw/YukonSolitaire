@@ -83,11 +83,8 @@ int main() {
                         if (command[1] == 'D' && option[0] == '\0') {
                             //fgets(str, 100, stdin);
                             length = strlen(input);
-                            #ifdef _WIN32
-                            head = createDeck("..\\defaultDeckOfFile.txt");
-                            #else
                             head = load_DefaultDeckLDCommand(ptrMessage);
-                            #endif
+
                              } else {
 
                                  //strcpy(result, str + 1);
