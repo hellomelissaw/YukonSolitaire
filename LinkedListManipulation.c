@@ -260,7 +260,7 @@ void AddMove (Pile **src , Pile **dest , char rank , char suit, MoveList **moveL
 
 }
 void undoLastMove(MoveList **moveList, char** ptrMessage){
-    if((*moveList) == NULL) {
+    if((*moveList)->head == NULL) {
         setMessage(ptrMessage, "Nothing to undo! ");
     } else {
         // to traverse the list backwards to undo moves
