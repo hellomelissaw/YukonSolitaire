@@ -31,12 +31,13 @@ void insertAtTail(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail) 
 /// INSERTS THE CURRENT HEAD OF ONE DECK AT THE HEAD OF ANOTHER DECK
 /// \param ptr_DestHead pointer containing the mem adr of the pointer to head deck to be inserted TO
 /// \param ptr_SrcHead pointer containing the mem adr of the pointer to head deck to be inserted FROM
-void insertAtHead(Card **ptr_SrcHead, Card **ptr_DestHead) {
-    Card* tempPointer = (*ptr_SrcHead)->next; // saves the pointer to the pointer pointing to the next card after head1
+void insertAtHead(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail) {
+    Card* tempPointer = (*ptr_SrcHead)->next; // saves the pointer to the pointer pointing to the next card after SrcHead
 
     if(*ptr_DestHead == NULL) { // checks if the pointer pointing to the destination head card is NULL
         *ptr_DestHead = *ptr_SrcHead;
         (*ptr_DestHead)->next = NULL;
+        *ptr_DestTail = *ptr_SrcHead;
 
     } else {
         (*ptr_SrcHead)->next = *ptr_DestHead;
@@ -133,9 +134,10 @@ bool validateMoveToFoundation(char srcRank, char srcSuit, Card** foundationTail,
 }
 
 /// FUNCTION TO VALIDATE THAT MOVING A/MANY CARDS TO ANOTHER COLUMN FOLLOWS THE RULES
-/// \param src pointer pointing to the card to be moved
-/// \param destColumn pointer to a pointer that points to the Pile that the card should be moved to
-/// \return true if valid, false if invalid
+/// \param srcRank char of the rank of the card to be moved
+/// \param destColumn pointer to the pointer of the destination Pile
+/// \param ptrMessage pointer to the char array that contains the message to display in user console
+/// \return true if valid move, false if not valid
 bool validateMoveToColumn(char srcRank, Pile **destColumn, char **ptrMessage) {
     char expectedRank;
     if ((*destColumn)->head == NULL) {
@@ -145,8 +147,11 @@ bool validateMoveToColumn(char srcRank, Pile **destColumn, char **ptrMessage) {
             expectedRank = '2';
 
         } else if ((*destColumn)->tail->rank >= 50 &&
-                   (*destColumn)->tail->rank <= 57) { // using ascii values of char to check condition
+                   (*destColumn)->tail->rank < 57) { // using ascii values of char to check condition from rank 2 to 8
             expectedRank = (*destColumn)->tail->rank + 1;
+
+        } else if ((*destColumn)->tail->rank == '9') {
+            expectedRank = 'T';
 
         } else if ((*destColumn)->tail->rank == 'T') {
             expectedRank = 'J';

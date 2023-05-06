@@ -7,6 +7,9 @@
 
 // Hey girl hey
 int main() {
+    //testInsertAtHeadInsertAtTail();
+    //testInsertAtTail(140);
+    //testMoving10To9();
     //printDeck(createDeck("defaultDeckOfFile.txt"));
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\YukonSolitaire\\defaultDeckOfFile.txt");
@@ -69,7 +72,7 @@ int main() {
 
 
                     case 'P':
-                        if(head == NULL) {
+                        if (head == NULL) {
                             setMessage(ptrMessage, "Please load a deck before starting the game.");
                         } else {
                             columnsFilled = setColumnLists(head);
@@ -83,43 +86,49 @@ int main() {
                         if (command[1] == 'D' && option[0] == '\0') {
                             //fgets(str, 100, stdin);
                             length = strlen(input);
-                            #ifdef _WIN32
-                            head = createDeck("..\\defaultDeckOfFile.txt");
-                            #else
                             head = load_DefaultDeckLDCommand(ptrMessage);
-                            #endif
-                             } else {
 
-                                 //strcpy(result, str + 1);
-                                 //printf("Result: %s\n", result);
-                                 head = load_SpecificFileIntoDeck(option, ptrMessage);
+                        } else {
 
-                             }
+                            //strcpy(result, str + 1);
+                            //printf("Result: %s\n", result);
+                            head = load_SpecificFileIntoDeck(option, ptrMessage);
+
+                        }
                         break;
 
                     case 'S':
-                        if (command[1] == 'W'){
-                            if(head != NULL){
-                                isHidden = false;
-                                setMessage(ptrMessage, "Here is the deck you've loaded.");
-                            } else {
-                                setMessage(ptrMessage, "Please load a deck first with command LD.");
-                            }
+                        if (head != NULL) {
+                            switch (command[1]) {
+                                case 'W':
+                                    isHidden = false;
+                                    setMessage(ptrMessage, "Here is the deck you've loaded.");
+                               break;
 
+                                case 'I': {
+                                    Card *tempHead = NULL;
+                                    if (option[0] != '\0') {
+                                        int optionInt = atoi(option); // a to i, ascii to integer
+                                        tempHead = shuffleInterweave(optionInt, head);
+                                    } else {
+                                        tempHead = shuffleInterweave(26, head); // if no option, split down the middle
+                                    }
+                                    head = tempHead;
+                                    setMessage(ptrMessage, "Here is your deck, bridge-shuffled.");
+                                    break;
+                                }
 
-                        } else if (command[1] == 'I'){
-                            if (head != NULL) {
-                                shuffleInterweave(13, head);
-                            } else {
-                                setMessage(ptrMessage, "Please load a deck first with command LD.");
+                                case 'R': {
+                                    Card *tempHead = NULL;
+                                    tempHead = shuffleRandom(head);
+                                    head = tempHead;
+                                    setMessage(ptrMessage, "Here is your deck, shuffled randomly.");
+                                    break;
+                                }
+
+                                default: setMessage(ptrMessage, "Invalid shuffle command");
                             }
-                         } else if (command[1] == 'R'){
-                            if (head != NULL) {
-                                shuffleRandom(head);
-                            } else {
-                                setMessage(ptrMessage, "Please load a deck first with command LD.");
-                            }
-                        }
+                } else { setMessage(ptrMessage, "Please load a deck first with command LD."); }
                         break;
 
                     case 'C':

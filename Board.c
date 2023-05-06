@@ -73,10 +73,12 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
     }
 
-    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n\n");
+    bool isNext = true;
+    int rowNum = 0;
 
-    for (int i = 0; i < ROW_COUNT; i++) {
-
+while(isNext){
+        isNext = false;
         for (int j = 0; j < COLUMN_COUNT; j++) {
             Card *current = currentCards[j];
                 if (current == NULL) {
@@ -87,12 +89,14 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
                     printf("%s\t", current->view);
 
                     currentCards[j] = current->next;
-
+                    if(currentCards[j] != NULL) {
+                        isNext = true;
+                    }
                 }
 
             }
-            //int rowNumber = i%2;
-            if (i % 2 == 0 && counterFoundation < FOUNDATION_COUNT) {
+
+            if (rowNum % 2 == 0 && counterFoundation < FOUNDATION_COUNT) {
                 if (foundationTop[counterFoundation] == NULL) {
                     printf("[]\tF%d", counterFoundation + 1);
                 } else {
@@ -102,14 +106,14 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
             }
 
-       // hiddenCounter++;
+       rowNum++;
         printf("\n");
     }
 
 }
 
 void printEmptyBoard() {
-    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n\n");
     printf("\t\t\t\t\t\t\t [] F1\n");
     printf("\t\t\t\t\t\t\t\t\t\t\n");
     printf("\t\t\t\t\t\t\t [] F2\n");
@@ -122,7 +126,8 @@ void printEmptyBoard() {
 
 void displayLoadedDeck(bool hidden, Card* head) {
     Card* current = head;
-    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    int fcount = 0;
+    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n\n");
     for(int i = 0 ; i < ROW_COUNT; i++) {
         for(int j = 0 ; j < COLUMN_COUNT ; j++){
             if(current == NULL){
@@ -137,6 +142,11 @@ void displayLoadedDeck(bool hidden, Card* head) {
                 current = current->next;
 
             }
+
+        }
+        if(i % 2 == 0 && fcount < FOUNDATION_COUNT){
+            printf("[]\tF%d", fcount + 1);
+            fcount++;
         }
 
         printf("\n");

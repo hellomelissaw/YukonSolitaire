@@ -7,7 +7,7 @@
 
 
 void insertAtTail(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail);
-void insertAtHead(Card **ptr_SrcHead, Card **ptr_DestHead);
+void insertAtHead(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail);
 void insertBetween(Card **ptr_SrcHead, Card **ptr_DestHead, Card **ptr_DestTail, int numNodesToTraverse);
 void setNewTail(Pile** columnToModify, Card** newTail);
 bool validateMoveToFoundation(char srcRank, char srcSuit, Card** foundationTail, char** ptrMessage);
