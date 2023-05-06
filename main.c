@@ -106,7 +106,13 @@ int main() {
 
                         } else if (command[1] == 'I'){
                             if (head != NULL) {
-                                Card* tempHead = shuffleInterweave(13,head);
+                                Card* tempHead = NULL;
+                                if(option[0] != '\0'){
+                                    int optionInt = atoi(option); // a to i, ascii to integer
+                                    tempHead = shuffleInterweave(optionInt,head);
+                                } else {
+                                    tempHead = shuffleInterweave(26, head); // if no option, split down the middle
+                                }
                                 head = tempHead;
                                 setMessage(ptrMessage, "Here is your deck, bridge-shuffled.");
                             } else {
