@@ -46,4 +46,25 @@ void testInsertAtHeadInsertAtTail() {
     }
 }
 
+void testMoving10To9 () {
+    char* testMessage = "Testing moving 10 to 9";
+    Pile* testpile1 = createPile(COLUMN);
+    Pile* testpile2 = createPile(COLUMN);
+
+    Card* TWOS = createCard('2', 'S');
+    Card* THREEH = createCard('3', 'H');
+    Card* TS = createCard('T', 'S');
+    Card* NH = createCard('9', 'H');
+
+    testpile1->head = THREEH;
+    testpile2->head = TWOS;
+
+    testpile1->tail = NH;
+    testpile2->tail = TS;
+
+    bool valid = validateMoveToColumn(testpile2->tail->rank, &testpile1, &testMessage);
+    printf("Testing moving 10 to 9: \nExpected : 1, Actual: %d\n\n", valid);
+    if(valid){ moveCards(&testpile2, &testpile1, 'T', 'S', &testMessage);}
+}
+
 

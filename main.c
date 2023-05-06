@@ -9,6 +9,7 @@
 int main() {
     //testInsertAtHeadInsertAtTail();
     //testInsertAtTail(140);
+    testMoving10To9();
     //printDeck(createDeck("defaultDeckOfFile.txt"));
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
     //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\YukonSolitaire\\defaultDeckOfFile.txt");

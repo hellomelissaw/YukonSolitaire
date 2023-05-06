@@ -134,9 +134,10 @@ bool validateMoveToFoundation(char srcRank, char srcSuit, Card** foundationTail,
 }
 
 /// FUNCTION TO VALIDATE THAT MOVING A/MANY CARDS TO ANOTHER COLUMN FOLLOWS THE RULES
-/// \param src pointer pointing to the card to be moved
-/// \param destColumn pointer to a pointer that points to the Pile that the card should be moved to
-/// \return true if valid, false if invalid
+/// \param srcRank char of the rank of the card to be moved
+/// \param destColumn pointer to the pointer of the destination Pile
+/// \param ptrMessage pointer to the char array that contains the message to display in user console
+/// \return true if valid move, false if not valid
 bool validateMoveToColumn(char srcRank, Pile **destColumn, char **ptrMessage) {
     char expectedRank;
     if ((*destColumn)->head == NULL) {
@@ -146,8 +147,11 @@ bool validateMoveToColumn(char srcRank, Pile **destColumn, char **ptrMessage) {
             expectedRank = '2';
 
         } else if ((*destColumn)->tail->rank >= 50 &&
-                   (*destColumn)->tail->rank <= 57) { // using ascii values of char to check condition
+                   (*destColumn)->tail->rank < 57) { // using ascii values of char to check condition from rank 2 to 8
             expectedRank = (*destColumn)->tail->rank + 1;
+
+        } else if ((*destColumn)->tail->rank == '9') {
+            expectedRank = 'T';
 
         } else if ((*destColumn)->tail->rank == 'T') {
             expectedRank = 'J';
