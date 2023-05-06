@@ -41,23 +41,26 @@ int is_valid_card(char* rank, char* suit) {
 }
 // Function to load a deck of cards from a file or create a new unshuffled deck if no filename is given
 
-int load_DefaultDeckLDCommand(char** ptrMessage) {
+Card* load_DefaultDeckLDCommand(char** ptrMessage) {
     FILE *fp;
     char str[100];
-
+    Card* head = NULL;
     /* opening file for reading */
 
-    char* abspath = getAbs_path("defaultDeckOfCards");
+    char* abspath = getAbs_path("defaultDeckOfFile.txt");
     fp = fopen(abspath, "r");
     if (fp == NULL) {
         setMessage(ptrMessage, "Error opening file");
-        return -1;
+
+    } else {
+        setMessage(ptrMessage, "Deck loaded successfully.");
+        head = createDeck("defaultDeckOfFile.txt");
     }
 
 
     // printBoard(abspath);
     fclose(fp);
-    return 0;
+    return head;
 
 }
 // return true if the file specified by the filename exists
@@ -75,9 +78,10 @@ bool file_exists(const char *filename) {
 }
 
 
-int load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
+Card * load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
+    Card* head = NULL;
     char c;
-    char count;
+    int count = 0;
     char countFileLine;
     filename[strcspn(filename, "\n")] = '\0';
     char* abs_path = getAbs_path(filename);
@@ -89,7 +93,8 @@ int load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
                 count++;
             }
         }
-        if (countFileLine == 52) {
+        count++;
+        if (count == 52) {
             char line[3]; // allocate space for each line
             while (fgets(line, sizeof(line), file)) {
                 if (strlen(line) == 2) {
@@ -97,11 +102,13 @@ int load_SpecificFileIntoDeck(char *filename, char** ptrMessage) {
                 }
             }
             fclose(file);
+            head = createDeck(filename);
+            setMessage(ptrMessage,"Custom file is accepted.");
         } else {
             setMessage(ptrMessage, "The file does not have 52 cards");
         }
 
     } else
         setMessage(ptrMessage, "The file doesnt exist");
-    return 0;
+    return head;
 }

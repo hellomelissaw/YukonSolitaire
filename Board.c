@@ -16,10 +16,14 @@
 /// \return pointer to the Pile array
 Pile** setFoundationLists() {
     Pile** foundations = malloc(4 * sizeof(Pile*));
+
     for (int i = 0 ; i < FOUNDATION_COUNT ; i++) {
         foundations[i] = createPile(FOUNDATION);
+
     }
+
     return foundations;
+
 }
 
 /// SETS THE LINKED LISTS REPRESENTING THE 7 COLUMNS AT THE START OF THE GAME
@@ -28,7 +32,7 @@ Pile** setFoundationLists() {
 Pile** setColumnLists (Card* head) {
     Card** ptrHead = &head;
     Pile** columns = malloc(7 * sizeof(Pile*));
-
+    int hiddenCounter = 1;
     for (int i = 0 ; i < COLUMN_COUNT ; i++)
         columns[i] = createPile(COLUMN);
 
@@ -36,11 +40,16 @@ Pile** setColumnLists (Card* head) {
     int rowStartCounter = 0;
     for (int i = 0; i < ROW_COUNT; i++) {
         for (int j = rowStart[rowStartCounter]; j < COLUMN_COUNT; j++) {
+            if(j >= hiddenCounter)
+                setVisibility(ptrHead, false);
+            else
+                setVisibility(ptrHead, true);
 
-                insertAtTail(ptrHead, &columns[j]->head, &columns[j]->tail);
+            insertAtTail(ptrHead, &columns[j]->head, &columns[j]->tail);
 
         }
         rowStartCounter++;
+        hiddenCounter++;
     }
 
     return columns;
@@ -64,19 +73,23 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 
     }
 
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
 
-    int offset;
-    //int hiddenCounter = 1;
     for (int i = 0; i < ROW_COUNT; i++) {
+
         for (int j = 0; j < COLUMN_COUNT; j++) {
             Card *current = currentCards[j];
                 if (current == NULL) {
                     printf("\t"); // if there is no card in the current column, for the current row, make a tab space
+
                 } else {
+
                     printf("%s\t", current->view);
+
                     currentCards[j] = current->next;
+
                 }
+
             }
             //int rowNumber = i%2;
             if (i % 2 == 0 && counterFoundation < FOUNDATION_COUNT) {
@@ -86,6 +99,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
                     printf("%s\tF%d", foundationTop[counterFoundation]->view, counterFoundation + 1);
                 }
                 counterFoundation++;
+
             }
 
        // hiddenCounter++;
@@ -95,7 +109,7 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
 }
 
 void printEmptyBoard() {
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
     printf("\t\t\t\t\t\t\t [] F1\n");
     printf("\t\t\t\t\t\t\t\t\t\t\n");
     printf("\t\t\t\t\t\t\t [] F2\n");
@@ -104,6 +118,31 @@ void printEmptyBoard() {
     printf("\t\t\t\t\t\t\t\t\t\t\n");
     printf("\t\t\t\t\t\t\t [] F4\n");
 
+}
+
+void displayLoadedDeck(bool hidden, Card* head) {
+    Card* current = head;
+    printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n");
+    for(int i = 0 ; i < ROW_COUNT; i++) {
+        for(int j = 0 ; j < COLUMN_COUNT ; j++){
+            if(current == NULL){
+                break;
+            } else {
+                if(hidden)
+                    setVisibility(&current, false);
+                else
+                    setVisibility(&current, true);
+
+                printf("%s\t", current->view);
+                current = current->next;
+
+            }
+        }
+
+        printf("\n");
+        if(current == NULL) break;
+
+    }
 }
 bool foundationsAreComplete(Pile ** foundations) {
     for(int f = 0 ; f < FOUNDATION_COUNT ; f++) {

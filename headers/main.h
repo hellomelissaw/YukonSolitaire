@@ -6,7 +6,6 @@
 #define YUKONSOLITAIRE_MAIN_H
 #include <stdbool.h>
 
-
 bool validColumnRange(char in);
 bool validFoundationRange(char in);
 bool validRank(char in);

@@ -195,52 +195,25 @@ void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMov
      if(newTail != NULL || (tempHead->rank == cardToBeMovedRank && tempHead->suit == cardToBeMovedSuit)) {
          switch((*dest)->type){
              case COLUMN:
-                 //if (validateMoveToColumn(tempHead, dest, ptrMessage)) {
                      while (tempHead != NULL) {
                          insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
                      }
                      setNewTail(src, &newTail);
                      setMessage(ptrMessage, "Move successful.");
 
-                // } else {setMessage(ptrMessage, "Could not move card.");}
                  break;
 
              case FOUNDATION:
-                // if (validateMoveToFoundation(&tempHead, &(*dest)->tail, ptrMessage)) {
+
                      insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
                      setNewTail(src, &newTail);
                      setMessage(ptrMessage, "Move successful.");
 
-                // } else {
-                 //    setMessage(ptrMessage, "Could not move card.");
-               //  }
                  break;
              default:  setMessage(ptrMessage, "Invalid Pile type.");
 
          }
-         /*
-         if ((*dest)->type == COLUMN) {
-             if (validateMoveToColumn(tempHead, dest, ptrMessage)) {
-                 while (tempHead != NULL) {
-                     insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
-                 }
-             }
 
-         } else if ((*dest)->type == FOUNDATION) {
-             if (validateMoveToFoundation(&tempHead, &(*dest)->head, ptrMessage)) {
-                 insertAtTail(&tempHead, &(*dest)->head, &(*dest)->tail);
-                 setNewTail(src, newTail);
-                 setMessage(ptrMessage, "Move successful.");
-
-             } else {
-                 setMessage(ptrMessage, "Could not move card.");
-             }
-
-         } else {
-             setMessage(ptrMessage, "Invalid Pile type.");
-
-         }
-          */
      } else {
          setMessage(ptrMessage, "Card not found in given column.");
      }
@@ -278,21 +251,6 @@ void AddMove (Pile **src , Pile **dest , char rank , char suit, MoveList **moveL
     (*moveList)->tail = newMove;// the pointer ptr_DestTail should now be pointing to the same as ptr_SrcHead
 
     (*moveList)->tail->next = NULL;
-    /*if((*moveList)->head == NULL){
-        (*moveList)->head = newMove;
-
-    } else {
-
-    }
-    //Move *prev = NULL;
-    //Move *current = (*moveList)->tail; // a pointer to the first move in the list
-    // if the list is empty, add the new move before current
-    if (current == NULL)
-        (*moveList)->tail = newMove;
-    else{
-        (*moveList)->tail->next = newMove;
-    }
-    newMove->next = NULL;*/
 
 }
 void undoLastMove(MoveList **moveList, char** ptrMessage){
@@ -317,24 +275,6 @@ void undoLastMove(MoveList **moveList, char** ptrMessage){
         moveCards(&dest, &src, rank, suit, ptrMessage);
     }
 }
- /*void *AddMove( MoveList* moveList , Pile *src , Pile *dest , char rank , char suit){
-   Move *newMove = (Move*) malloc(sizeof (Move));
-   //Move **head = &moveList;
-     newMove->src = src;
-     newMove->dest = dest;
-     newMove->rank = rank;
-     newMove->suit = suit;
-     newMove->prev = moveList->tail;
-     newMove->next = NULL;
-
-     // if the list is empty
-     if(moveList->head == NULL)
-         moveList->head = newMove;
-     while((*moveList).tail != NULL){
-         moveList->tail->next = newMove;
-     }
-     moveList->tail = newMove;
-}*/
 
 
 
