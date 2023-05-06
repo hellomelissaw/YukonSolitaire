@@ -112,7 +112,7 @@ Card* shuffleRandom(Card* head) {
             insertAtTail(ptrUnshuffledHead, ptrShuffledHead, ptrShuffledTail);
 
         } else if(picker == 2) {
-            insertAtHead(ptrUnshuffledHead, ptrShuffledHead);
+            insertAtHead(ptrUnshuffledHead, ptrShuffledHead, ptrShuffledTail);
 
         } else if (picker == 3) {
             if(i < 3) {
