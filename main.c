@@ -106,13 +106,17 @@ int main() {
 
                         } else if (command[1] == 'I'){
                             if (head != NULL) {
-                                shuffleInterweave(13, head);
+                                Card* tempHead = shuffleInterweave(13,head);
+                                head = tempHead;
+                                setMessage(ptrMessage, "Here is your deck, bridge-shuffled.");
                             } else {
                                 setMessage(ptrMessage, "Please load a deck first with command LD.");
                             }
                          } else if (command[1] == 'R'){
                             if (head != NULL) {
-                                shuffleRandom(head);
+                                Card* tempHead = shuffleRandom(head);
+                                head = tempHead;
+                                setMessage(ptrMessage, "Here is your deck, shuffled randomly.");
                             } else {
                                 setMessage(ptrMessage, "Please load a deck first with command LD.");
                             }
