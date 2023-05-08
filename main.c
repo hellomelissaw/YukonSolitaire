@@ -42,6 +42,7 @@ int main() {
     /////////////////////////////////
     //testEdgeCaseInputsValidColumnRange();
     //testEdgeCasesValidFoundationRange();
-    testValidRank();
+    //testValidRank();
+    testValidSuit();
 
 }

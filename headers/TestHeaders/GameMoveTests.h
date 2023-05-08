@@ -7,4 +7,5 @@
 void testEdgeCaseInputsValidColumnRange();
 void testEdgeCasesValidFoundationRange();
 void testValidRank();
+void testValidSuit();
 #endif //YUKONSOLITAIRE_GAMEMOVETESTS_H
