@@ -4,7 +4,8 @@
 
 #include "headers/AllHeaders.h"
 
-void testInsertAtTail(int repeats) {
+void testShuffleRandom5Cards(int repeats) {
+    printf("\n\nRandomly shuffling 5 cards:\n");
     Card* head = createCard('8', 'H');
     head->next = createCard('K', 'D');
     head->next->next = createCard('4', 'H');
@@ -32,7 +33,6 @@ void testInsertAtHeadInsertAtTail() {
     head->next->next = createCard('4', 'H');
     head->next->next->next = NULL;
 
-    printf("\n");
     Card* destHead = NULL;
     Card* destTail = NULL;
     insertAtHead(&head, &destHead, &destTail);
@@ -40,13 +40,14 @@ void testInsertAtHeadInsertAtTail() {
     insertAtTail(&head, &destHead, &destTail);
 
     Card *current = destHead;
+    printf("Test insert card at head twice then at tail\nExpected: KD 8H 4H, Actual: ");
     while (current != NULL) {
         printf("%c%c ", current->rank, current->suit);
         current = current->next;
     }
 }
 
-void testMoving10To9 () {
+void testValidationMovingTenToNine () {
     char* testMessage = "Testing moving 10 to 9";
     Pile* testpile1 = createPile(COLUMN);
     Pile* testpile2 = createPile(COLUMN);
@@ -63,8 +64,99 @@ void testMoving10To9 () {
     testpile2->tail = TS;
 
     bool valid = validateMoveToColumn(testpile2->tail->rank, &testpile1, &testMessage);
-    printf("Testing moving 10 to 9: \nExpected : 1, Actual: %d\n\n", valid);
-    if(valid){ moveCards(&testpile2, &testpile1, 'T', 'S', &testMessage);}
+    printf("\nTesting validation of moving 10 to 9: \nExpected : 1 (true = 1), Actual: %d\n\n", valid);
+
 }
+
+//
+// Created by Watson on 2023-04-24.
+//
+//#include <ctest.h>
+#include "headers/AllHeaders.h"
+
+void moveFirstCardToFoundationTest() {
+    Pile** foundationPiles = setFoundationLists();
+    Card* ac = createCard('A', 'C');
+    if(validateMoveToFoundation(ac->rank, ac->suit, &foundationPiles[0]->tail, NULL)) {
+      insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
+    }
+
+    printf("\n\nTesting moving AC to an empty foundation pile: \nExpected: AC, Actual: %c%c", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
+
+}
+
+
+void move2CToFoundatationTest() {
+    char *message = " ";
+    char **messagePtr = &message;
+    Pile** foundationPiles = setFoundationLists();
+    //printFoundationLists(foundationPiles);
+    Card* ac = createCard('A', 'C');
+    Card* twoc = createCard('2', 'C');
+    /*if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail, messagePtr)) {
+        insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
+    }
+    if(validateMoveToFoundation(&twoc, &foundationPiles[0]->tail,messagePtr)) {
+        insertAtTail(&twoc, &foundationPiles[0]->head, &foundationPiles[0]->tail);
+    }*/
+
+    printf("The new tail after testing insertion of AC at the start of Foundation pile should be AC. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
+    printf("The new tail after testing insertion of 2C after AC should be 2C. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
+
+
+}
+
+void move3CToFoundatationTest() {
+    char *message = " ";
+    char **messagePtr = &message;
+    Pile** foundationPiles = setFoundationLists();
+    //printFoundationLists(foundationPiles);
+    Card* ac = createCard('A', 'C');
+    Card* twoc = createCard('2', 'C');
+    Card* threec = createCard('3', 'C');
+    /*if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail,messagePtr)) {
+        insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
+    }
+    if(validateMoveToFoundation(&twoc, &foundationPiles[0]->tail,messagePtr)) {
+        insertAtTail(&twoc, &foundationPiles[0]->head, &foundationPiles[0]->tail);
+    }
+    if(validateMoveToFoundation(&threec, &foundationPiles[0]->tail,messagePtr)) {
+        insertAtTail(&threec, &foundationPiles[0]->head, &foundationPiles[0]->tail);
+    }*/
+
+    // printf("The new tail after testing insertion of AC at the start of Foundation pile should be AC. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
+    //printf("The new tail after testing insertion of 2C after AC should be 2C. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
+    printf("The new tail after testing insertion of 3C after 2C should be 3C. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
+
+
+}
+
+void testMove2Cn3CToColumnWithAS(){
+    char *message = " ";
+    char **messagePtr = &message;
+    Card* as = createCard('A', 'S');
+    Card* ac = createCard('A', 'C');
+    Card* twoc = createCard('2', 'C');
+    Card* threec = createCard('3', 'C');
+    Pile* testColumn1 = createPile(COLUMN);
+    Pile* testColumn2 = createPile(COLUMN);
+    insertAtTail(&ac, &testColumn1->head, &testColumn1->tail);
+    insertAtTail(&twoc, &testColumn1->head, &testColumn1->tail);
+    insertAtTail(&threec, &testColumn1->head, &testColumn1->tail);
+    insertAtTail(&as, &testColumn2->head, &testColumn2->tail);
+    printf("testColumn1 tail before move expected 3C, actual : %c%c\n", testColumn1->tail->rank, testColumn1->tail->suit);
+    printf("testColumn2 tail before move expected AS, actual : %c%c\n", testColumn2->tail->rank, testColumn2->tail->suit);
+
+    moveCards(&testColumn1, &testColumn2, '2', 0, 0);
+
+    printf("testColumn1 new tail expected: AC, actual: %c%c\n", testColumn1->tail->rank, testColumn1->tail->suit);
+    printf("testColumn1 head expected after move: AC, actual: %c%c\n", testColumn1->head->rank, testColumn1->head->suit);
+    printf("testColumn2 tail after move expected 3C, actual : %c%c\n", testColumn2->tail->rank, testColumn2->tail->suit);
+
+}
+
+
+
+
 
 

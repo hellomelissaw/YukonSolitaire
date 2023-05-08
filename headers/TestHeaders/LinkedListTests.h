@@ -4,7 +4,11 @@
 
 #ifndef YUKONSOLITAIRE_LINKEDLISTTESTS_H
 #define YUKONSOLITAIRE_LINKEDLISTTESTS_H
-void testInsertAtTail(int repeats);
+void testShuffleRandom5Cards(int repeats);
 void testInsertAtHeadInsertAtTail();
-void testMoving10To9();
+void testValidationMovingTenToNine();
+void moveFirstCardToFoundationTest();
+void move2CToFoundatationTest();
+void move3CToFoundatationTest();
+void testMove2Cn3CToColumnWithAS();
 #endif //YUKONSOLITAIRE_LINKEDLISTTESTS_H

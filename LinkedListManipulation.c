@@ -89,9 +89,11 @@ void setNewTail(Pile** columnToModify, Card** newTail) {
 
 
 /// FUNCTION TO VALIDATE, THAT MOVING A CARD A FOUNDATION PILE FOLLOWS THE RULES OF THE GAME
-/// \param cardToBeMoved pointer to a pointer that points to the card that should be moved
-/// \param foundationTail pointer to a pointer that points to the card sitting at the top of the foundation pile
-/// \return true if valid, false if invalid
+/// \param srcRank rank of the card to be moved
+/// \param srcSuit suit of the card to be moved
+/// \param foundationTail last card on the foundation pile
+/// \param ptrMessage pointer to the char array containing the message to display in user console
+/// \return
 bool validateMoveToFoundation(char srcRank, char srcSuit, Card** foundationTail, char** ptrMessage) {
 
     if(*foundationTail == NULL) {
