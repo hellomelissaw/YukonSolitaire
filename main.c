@@ -10,17 +10,16 @@ int main() {
     //testInsertAtHeadInsertAtTail();
     //testShuffleRandom5Cards(5);
 
-    //createDeck("unshuffledCards.txt");
+    Card *testDeck = load_DefaultDeckLDCommand(NULL);
     //printDeck(shuffleInterweave(13, createDeck("unshuffledCards.txt")));
 
     ///////////////////////////////////////////////////////////////////////////////
-    // TEST CREATION OF COLUMNS (need to get headers to work before it works again)
+    // TEST CREATION OF COLUMNS
     ///////////////////////////////////////////////////////////////////////////////
 
-    /*Card *testDeck = createDeck("unshuffledcards.txt");
     Pile **firstColumn = setColumnLists(testDeck);
     Pile **foundations = setFoundationLists();
-    printBoard(firstColumn, foundations);*/
+    printBoard(firstColumn, foundations);
 
     //////////////////////
     // TEST MOVING CARDS
@@ -31,9 +30,7 @@ int main() {
 
      //move2CToFoundationTest();
 
-    testMove2CAnd3CToColumnWithAS();
-
-    // testAccessingNextCard();
+    // testMove2CAnd3CToColumnWithAS();
 
 
 }
