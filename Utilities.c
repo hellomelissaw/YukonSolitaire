@@ -58,9 +58,11 @@ char* getAbs_path(char fileName[]) {
 
 
 void setMessage(char** messagePtr, char* message) {
-    char *newMessage = malloc(100);
-    strcpy(newMessage, message);
-    (*messagePtr) = newMessage;
+    if(messagePtr != NULL) {
+        char *newMessage = malloc(100);
+        strcpy(newMessage, message);
+        (*messagePtr) = newMessage;
+    }
 }
 
 void printCommands(enum phase currentPhase, char **ptrMessage) {

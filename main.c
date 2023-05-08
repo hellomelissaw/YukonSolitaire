@@ -23,6 +23,7 @@ int main() {
     char* input = malloc(sizeof(char) * 100);
     char* command = malloc(sizeof(char) * 10);
     char* option = malloc(sizeof(char) * 90);
+    char* chosenFile = malloc(sizeof(char) * 90);
     MoveList *moveList = NULL;
     MoveList **ptrMoveList = &moveList;
 
@@ -87,13 +88,14 @@ int main() {
                             //fgets(str, 100, stdin);
                             length = strlen(input);
                             head = load_DefaultDeckLDCommand(ptrMessage);
+                            chosenFile = "defaultDeckOfFile.txt";
 
                         } else {
 
                             //strcpy(result, str + 1);
                             //printf("Result: %s\n", result);
                             head = load_SpecificFileIntoDeck(option, ptrMessage);
-
+                            chosenFile = option;
                         }
                         break;
 
@@ -102,7 +104,7 @@ int main() {
                             switch (command[1]) {
                                 case 'W':
                                     isHidden = false;
-                                    setMessage(ptrMessage, "Here is the deck you've loaded.");
+                                    setMessage(ptrMessage, "Here is the deck that is loaded.");
                                     break;
 
                                 case 'I': {
@@ -151,6 +153,7 @@ int main() {
                         if (command[1] == 'Q') {
                             exit(0);
                         } else {
+                            head = load_SpecificFileIntoDeck(chosenFile, NULL);
                             phase = SETUP;
                             setMessage(ptrMessage,
                                        "You are back to the STARTUP phase. Type CMD for a list of available commands.");
