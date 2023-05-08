@@ -88,6 +88,9 @@ bool validInputFromTailToFoundation(char* input) {
 
 
 bool validInputFromColumnPileToTail(char* input) {
+    if(input[0] != 'C' || input[7] != 'C')
+        return false;
+
     if(validColumnRange(input[1])){
         if(validRank(input[3])){
             if(validSuit(input[4])){

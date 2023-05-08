@@ -65,5 +65,9 @@ void testValidInputFromTailToTail(){
     printf("Input C1->R2: Expected: 0 (false), Actual: %d\n", validInputFromTailToTail("C1->R2"));
 
 }
-/*bool validInputFromColumnPileToTail(char* in);
-bool validMoveSyntax(char* input, enum moveType *ptr);*/
+void testValidInputFromColumnPileToTail(){
+    printf("Input C1:QS->C2: Expected: 1 (true), Actual: %d\n", validInputFromColumnPileToTail("C1:QS->C2"));
+    printf("Input F1:QS->C2: Expected: 0 (false), Actual: %d\n", validInputFromColumnPileToTail("F1:QS->C2"));
+    printf("Input C1:QS->F2: Expected: 0 (false), Actual: %d\n", validInputFromColumnPileToTail("C1:QS->F2"));
+
+}

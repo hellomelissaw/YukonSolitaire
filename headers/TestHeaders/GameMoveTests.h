@@ -10,4 +10,6 @@ void testValidRank();
 void testValidSuit();
 void testValidInputFromTailToFoundation();
 void testValidInputFromTailToTail();
+void testValidInputFromColumnPileToTail();
+void testValidMoveSyntax();
 #endif //YUKONSOLITAIRE_GAMEMOVETESTS_H
