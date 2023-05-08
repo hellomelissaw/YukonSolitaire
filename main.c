@@ -29,9 +29,9 @@ int main() {
 
     //moveFirstCardToFoundationTest();
 
-     move2CToFoundatationTest();
+     move2CToFoundationTest();
 
-    // move3CToFoundatationTest();
+    // move3CToFoundationTest();
 
     // testMove2Cn3CToColumnWithAS();
 
