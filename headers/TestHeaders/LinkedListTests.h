@@ -8,7 +8,7 @@ void testShuffleRandom5Cards(int repeats);
 void testInsertAtHeadInsertAtTail();
 void testValidationMovingTenToNine();
 void moveFirstCardToFoundationTest();
-void move2CToFoundatationTest();
-void move3CToFoundatationTest();
+void move2CToFoundationTest();
+void move3CToFoundationTest();
 void testMove2Cn3CToColumnWithAS();
 #endif //YUKONSOLITAIRE_LINKEDLISTTESTS_H
