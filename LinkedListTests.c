@@ -102,34 +102,7 @@ void move2CToFoundationTest() {
 
 }
 
-void move3CToFoundationTest() {
-    char *message = " ";
-    char **messagePtr = &message;
-    Pile** foundationPiles = setFoundationLists();
-    //printFoundationLists(foundationPiles);
-    Card* ac = createCard('A', 'C');
-    Card* twoc = createCard('2', 'C');
-    Card* threec = createCard('3', 'C');
-    /*if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail,messagePtr)) {
-        insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
-    }
-    if(validateMoveToFoundation(&twoc, &foundationPiles[0]->tail,messagePtr)) {
-        insertAtTail(&twoc, &foundationPiles[0]->head, &foundationPiles[0]->tail);
-    }
-    if(validateMoveToFoundation(&threec, &foundationPiles[0]->tail,messagePtr)) {
-        insertAtTail(&threec, &foundationPiles[0]->head, &foundationPiles[0]->tail);
-    }*/
-
-    // printf("The new tail after testing insertion of AC at the start of Foundation pile should be AC. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
-    //printf("The new tail after testing insertion of 2C after AC should be 2C. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
-    printf("The new tail after testing insertion of 3C after 2C should be 3C. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
-
-
-}
-
-void testMove2Cn3CToColumnWithAS(){
-    char *message = " ";
-    char **messagePtr = &message;
+void testMove2CAnd3CToColumnWithAS(){
     Card* as = createCard('A', 'S');
     Card* ac = createCard('A', 'C');
     Card* twoc = createCard('2', 'C');
@@ -143,7 +116,7 @@ void testMove2Cn3CToColumnWithAS(){
     printf("testColumn1 tail before move expected 3C, actual : %c%c\n", testColumn1->tail->rank, testColumn1->tail->suit);
     printf("testColumn2 tail before move expected AS, actual : %c%c\n", testColumn2->tail->rank, testColumn2->tail->suit);
 
-    moveCards(&testColumn1, &testColumn2, '2', 0, 0);
+    moveCards(&testColumn1, &testColumn2, '2', 'C', NULL);
 
     printf("testColumn1 new tail expected: AC, actual: %c%c\n", testColumn1->tail->rank, testColumn1->tail->suit);
     printf("testColumn1 head expected after move: AC, actual: %c%c\n", testColumn1->head->rank, testColumn1->head->suit);

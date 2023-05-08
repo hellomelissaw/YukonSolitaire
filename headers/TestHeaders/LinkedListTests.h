@@ -10,5 +10,5 @@ void testValidationMovingTenToNine();
 void moveFirstCardToFoundationTest();
 void move2CToFoundationTest();
 void move3CToFoundationTest();
-void testMove2Cn3CToColumnWithAS();
+void testMove2CAnd3CToColumnWithAS();
 #endif //YUKONSOLITAIRE_LINKEDLISTTESTS_H

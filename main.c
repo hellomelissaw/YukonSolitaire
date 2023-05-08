@@ -25,15 +25,13 @@ int main() {
     //////////////////////
     // TEST MOVING CARDS
     //////////////////////
-   // testValidationMovingTenToNine();
+   //testValidationMovingTenToNine();
 
     //moveFirstCardToFoundationTest();
 
-     move2CToFoundationTest();
+     //move2CToFoundationTest();
 
-    // move3CToFoundationTest();
-
-    // testMove2Cn3CToColumnWithAS();
+    testMove2CAnd3CToColumnWithAS();
 
     // testAccessingNextCard();
 
