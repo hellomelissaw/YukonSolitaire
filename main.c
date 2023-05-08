@@ -7,30 +7,39 @@
 
 // Hey girl hey
 int main() {
-    //testInsertAtHeadInsertAtTail();
-    //testShuffleRandom5Cards(5);
 
-    Card *testDeck = load_DefaultDeckLDCommand(NULL);
-    //printDeck(shuffleInterweave(13, createDeck("unshuffledCards.txt")));
+    //Card *testDeck = load_DefaultDeckLDCommand(NULL);
 
     ///////////////////////////////////////////////////////////////////////////////
     // TEST CREATION OF COLUMNS
     ///////////////////////////////////////////////////////////////////////////////
 
-    Pile **firstColumn = setColumnLists(testDeck);
+    /*Pile **firstColumn = setColumnLists(testDeck);
     Pile **foundations = setFoundationLists();
-    printBoard(firstColumn, foundations);
+    printBoard(firstColumn, foundations);*/
 
     //////////////////////
     // TEST MOVING CARDS
     //////////////////////
-   //testValidationMovingTenToNine();
+    //testInsertAtHeadInsertAtTail();
+
+    //testValidationMovingTenToNine();
 
     //moveFirstCardToFoundationTest();
 
-     //move2CToFoundationTest();
+    //move2CToFoundationTest();
 
     // testMove2CAnd3CToColumnWithAS();
 
+
+    //////////////////////
+    // SHUFFLING DECK
+    //////////////////////
+    //testShuffleRandom5Cards(5);
+
+    /////////////////////////////////
+    // VALIDATION FUNCTION TESTS
+    /////////////////////////////////
+    testEdgeCaseInputsValidColumnRange();
 
 }

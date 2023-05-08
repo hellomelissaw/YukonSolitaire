@@ -68,12 +68,6 @@ void testValidationMovingTenToNine () {
 
 }
 
-//
-// Created by Watson on 2023-04-24.
-//
-//#include <ctest.h>
-#include "headers/AllHeaders.h"
-
 void moveFirstCardToFoundationTest() {
     Pile** foundationPiles = setFoundationLists();
     Card* ac = createCard('A', 'C');
