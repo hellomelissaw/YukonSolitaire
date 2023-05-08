@@ -112,7 +112,6 @@ bool validateMoveToFoundation(char srcRank, char srcSuit, Card** foundationTail,
         } else {
 
             char requiredRank = rankOrder[12];
-            printf("required rank before for loop: %c", requiredRank);
             for(int i = 0 ; i < 12 ; i++) {
                 if((*foundationTail)->rank == rankOrder[i]){
                     requiredRank = rankOrder[i+1];
@@ -187,10 +186,12 @@ bool validateMoveToColumn(char srcRank, Pile **destColumn, char **ptrMessage) {
     }
 }
 
-/// FUNCTION TO MOVE MANY CARD(S) TO A COLUMN
-/// \param src pointer to a pointer that points to Pile of cards to be moved
-/// \param dest pointer to a pointer, pointing to the destination Pile (column)
+/// FUNCTION TO MOVE A/MANY CARD(S) FROM ONE PILE TO ANOTHER
+/// \param src pile the card(s) is coming from
+/// \param dest pile the card(s) should be moved to
 /// \param cardToBeMovedRank rank of the card to be moved
+/// \param cardToBeMovedSuit suit of the card to be moved
+/// \param ptrMessage pointer to the char array containing the message to be displayed on user console
 void moveCards(Pile **src, Pile **dest, char cardToBeMovedRank, char cardToBeMovedSuit, char **ptrMessage) {
     Card* tempHead = (*src)->head;
     Card* newTail = NULL;
