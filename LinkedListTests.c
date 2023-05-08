@@ -86,27 +86,23 @@ void moveFirstCardToFoundationTest() {
 }
 
 
-void move2CToFoundatationTest() {
-    char *message = " ";
-    char **messagePtr = &message;
+void move2CToFoundationTest() {
     Pile** foundationPiles = setFoundationLists();
-    //printFoundationLists(foundationPiles);
     Card* ac = createCard('A', 'C');
     Card* twoc = createCard('2', 'C');
-    /*if(validateMoveToFoundation(&ac, &foundationPiles[0]->tail, messagePtr)) {
+    if(validateMoveToFoundation(ac->rank, ac->suit, &foundationPiles[0]->tail, NULL)) {
         insertAtTail(&ac, &foundationPiles[0]->head, &foundationPiles[0]->tail);
     }
-    if(validateMoveToFoundation(&twoc, &foundationPiles[0]->tail,messagePtr)) {
+    if(validateMoveToFoundation(twoc->rank, twoc->suit, &foundationPiles[0]->tail,NULL)) {
         insertAtTail(&twoc, &foundationPiles[0]->head, &foundationPiles[0]->tail);
-    }*/
+    }
 
-    printf("The new tail after testing insertion of AC at the start of Foundation pile should be AC. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
-    printf("The new tail after testing insertion of 2C after AC should be 2C. \n The actual card is : %c%c\n", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
-
+    printf("\n\nTesting moving AC to an empty foundation pile: \nExpected: AC, Actual: %c%c", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
+    printf("\n\nTesting moving 2C to foundation pile containing AC: \nExpected: 2C, Actual: %c%c", foundationPiles[0]->tail->rank, foundationPiles[0]->tail->suit);
 
 }
 
-void move3CToFoundatationTest() {
+void move3CToFoundationTest() {
     char *message = " ";
     char **messagePtr = &message;
     Pile** foundationPiles = setFoundationLists();

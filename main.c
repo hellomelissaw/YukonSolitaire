@@ -27,9 +27,9 @@ int main() {
     //////////////////////
    // testValidationMovingTenToNine();
 
-    moveFirstCardToFoundationTest();
+    //moveFirstCardToFoundationTest();
 
-    // move2CToFoundatationTest();
+     move2CToFoundatationTest();
 
     // move3CToFoundatationTest();
 
