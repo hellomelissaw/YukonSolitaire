@@ -40,6 +40,8 @@ int main() {
     /////////////////////////////////
     // VALIDATION FUNCTION TESTS
     /////////////////////////////////
-    testEdgeCaseInputsValidColumnRange();
+    //testEdgeCaseInputsValidColumnRange();
+    //testEdgeCasesValidFoundationRange();
+    testValidRank();
 
 }
