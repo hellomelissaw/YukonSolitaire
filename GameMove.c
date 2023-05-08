@@ -58,6 +58,9 @@ bool validMoveSyntax(char* input, enum moveType *ptr) {
 }
 
 bool validInputFromTailToTail(char* input) {
+    if(input[0] != 'C' || input[4] != 'C')
+        return false;
+
     if(validColumnRange(input[1])){
         if(validColumnRange(input[5]))
             return true;
@@ -70,6 +73,9 @@ bool validInputFromTailToTail(char* input) {
 }
 
 bool validInputFromTailToFoundation(char* input) {
+    if(input[0] != 'C' || input[4] != 'F')
+        return false;
+
     if(validColumnRange(input[1])){
         if(validFoundationRange(input[5]))
             return true;

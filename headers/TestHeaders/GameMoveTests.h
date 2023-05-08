@@ -8,4 +8,6 @@ void testEdgeCaseInputsValidColumnRange();
 void testEdgeCasesValidFoundationRange();
 void testValidRank();
 void testValidSuit();
+void testValidInputFromTailToFoundation();
+void testValidInputFromTailToTail();
 #endif //YUKONSOLITAIRE_GAMEMOVETESTS_H

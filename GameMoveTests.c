@@ -52,8 +52,18 @@ void testValidSuit(){
 
 
 }
-/*
-bool validInputFromTailToFoundation(char* in);
-bool validInputFromTailToTail(char* in);
-bool validInputFromColumnPileToTail(char* in);
+
+void testValidInputFromTailToFoundation(){
+    printf("Input C1->F1: Expected: 1 (true), Actual: %d\n", validInputFromTailToFoundation("C1->F1"));
+    printf("Input B1->F1: Expected: 0 (false), Actual: %d\n", validInputFromTailToFoundation("B1->F1"));
+    printf("Input C1->R1: Expected: 0 (false), Actual: %d\n", validInputFromTailToFoundation("C1->R1"));
+
+}
+void testValidInputFromTailToTail(){
+    printf("Input C1->C7: Expected: 1 (true), Actual: %d\n", validInputFromTailToTail("C1->C7"));
+    printf("Input B1->C2: Expected: 0 (false), Actual: %d\n", validInputFromTailToTail("B1->C2"));
+    printf("Input C1->R2: Expected: 0 (false), Actual: %d\n", validInputFromTailToTail("C1->R2"));
+
+}
+/*bool validInputFromColumnPileToTail(char* in);
 bool validMoveSyntax(char* input, enum moveType *ptr);*/
