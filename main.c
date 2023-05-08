@@ -23,7 +23,7 @@ int main() {
     char* input = malloc(sizeof(char) * 100);
     char* command = malloc(sizeof(char) * 10);
     char* option = malloc(sizeof(char) * 90);
-    char* chosenFile = malloc(sizeof(char) * 90);
+    char* chosenFile = NULL;
     MoveList *moveList = NULL;
     MoveList **ptrMoveList = &moveList;
 
@@ -88,7 +88,6 @@ int main() {
                             //fgets(str, 100, stdin);
                             length = strlen(input);
                             head = load_DefaultDeckLDCommand(ptrMessage);
-                            chosenFile = "defaultDeckOfFile.txt";
 
                         } else {
 
@@ -153,7 +152,11 @@ int main() {
                         if (command[1] == 'Q') {
                             exit(0);
                         } else {
-                            head = load_SpecificFileIntoDeck(chosenFile, NULL);
+                            if(chosenFile == NULL)
+                                head = load_DefaultDeckLDCommand(NULL);
+                            else
+                                head = load_SpecificFileIntoDeck(chosenFile, NULL);
+
                             phase = SETUP;
                             setMessage(ptrMessage,
                                        "You are back to the STARTUP phase. Type CMD for a list of available commands.");
