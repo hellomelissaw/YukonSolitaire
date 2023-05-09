@@ -14,23 +14,17 @@ Card* createDeck(char fileName[]) {
     //char* abs_path1 = getAbs_path(fileName);
     char* abs_path = getAbs_path(fileName);
     //char* abs_path = fileName;
-
     /* Load Card labels from file */
     FILE* fpointer = fopen(abs_path, "rt"); // creates a pointer to the read file
     //FILE* fpointer = fopen(abs_path, "rt"); // creates a pointer to the read file
     char cardLabels[CARD_COUNT][LABEL_SIZE];
-
-
     //printf("%s",fileName);
     for (int i = 0 ; i < CARD_COUNT ; i++) {
         fgets(cardLabels[i], LABEL_SIZE, fpointer); // gets line i of txt file and populates the char array in cardLabels[i]
     }
     fclose(fpointer);
-
-
     /* Add values from the cardLabels array to the array of cards */
     Pile* newDeck = createPile(DECK);
-
     for(int i = 0 ; i < CARD_COUNT ; i ++) // get the rank and suit from line i of the file and pass as argument to createCard func
     {
         char rank = cardLabels[i][0];

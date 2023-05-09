@@ -64,7 +64,6 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
     Pile** foundations = foundationsBlank;
     Card *foundationTop[FOUNDATION_COUNT];
     int counterFoundation = 0;
-
     // creates an array of Card pointers out of each column Pile head Card
     // in order to keep track of which row we're printing
     for (int i = 0; i < COLUMN_COUNT; i++){
@@ -73,7 +72,6 @@ void printBoard(Pile **columnsFilled, Pile **foundationsBlank) {
             foundationTop[i] = foundations[i]->tail;
 
     }
-
     printf("\n\nC1\tC2\tC3\tC4\tC5\tC6\tC7\n\n");
     bool isNext = true;
     int rowNum = 0;
@@ -141,18 +139,14 @@ void displayLoadedDeck(bool hidden, Card* head) {
 
                 printf("%s\t", current->view);
                 current = current->next;
-
             }
-
         }
         if(i % 2 == 0 && fcount < FOUNDATION_COUNT){
             printf("[]\tF%d", fcount + 1);
             fcount++;
         }
-
         printf("\n");
         if(current == NULL) break;
-
     }
 }
 bool foundationsAreComplete(Pile ** foundations) {
