@@ -77,8 +77,9 @@ void printCommands(enum phase currentPhase, char **ptrMessage) {
         char* CtoF = "- Cx->Fy to move a card from the bottom of a column to a foundation pile, where x is source column number and y is foundation number (fx C1->F1)\n";
         char* PtoC = "- Cx:RS->Cy to move a set of card to another column, where x is the column number, R is the rank and S the suit of the card to be moved and y the destination number (fx C3:7H->C2)\n";
         char* quit = "- Q to quit the game and return to the SETUP page\n";
+        char* undo = "- U to undo last move.\n";
         char* quitquit = "- QQ to quit the game completely.\n";
-        snprintf(commands, sizeof(commands), "%s%s%s%s%s%s", intro, CtoC, CtoF, PtoC, quit, quitquit);
+        snprintf(commands, sizeof(commands), "%s%s%s%s%s%s%s", intro, CtoC, CtoF, PtoC, quit, undo, quitquit);
         setMessage(ptrMessage, commands);
     } else {
         setMessage(ptrMessage, "Invalid phase.");
