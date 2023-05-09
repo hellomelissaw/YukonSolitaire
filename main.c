@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "headers/AllHeaders.h"
+#include "headers/TestHeaders/AllTestHeaders.h"
 
 // Hey girl hey
 int main() {

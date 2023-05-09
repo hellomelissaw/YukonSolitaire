@@ -68,6 +68,27 @@ void testValidationMovingTenToNine () {
 
 }
 
+void testValidationMoving2To3() {
+    char* testMessage = "Testing moving 9 to 10";
+    Pile* testpile1 = createPile(COLUMN);
+    Pile* testpile2 = createPile(COLUMN);
+
+    Card* TWOS = createCard('2', 'S');
+    Card* THREEH = createCard('3', 'H');
+    Card* TS = createCard('T', 'S');
+    Card* NH = createCard('9', 'H');
+
+    testpile1->head = NH;
+    testpile2->head = TS;
+
+    testpile1->tail = THREEH;
+    testpile2->tail = TWOS;
+
+    bool valid = validateMoveToColumn(testpile2->tail->rank, &testpile1, &testMessage);
+    printf("\nTesting validation of moving 9 to 10: \nExpected : 0 (false = 0), Actual: %d\n\n", valid);
+
+}
+
 void moveFirstCardToFoundationTest() {
     Pile** foundationPiles = setFoundationLists();
     Card* ac = createCard('A', 'C');
@@ -117,28 +138,3 @@ void testMove2CAnd3CToColumnWithAS(){
     printf("testColumn2 tail after move expected 3C, actual : %c%c\n", testColumn2->tail->rank, testColumn2->tail->suit);
 
 }
-
-void testValidationMoving2To3() {
-    char* testMessage = "Testing moving 9 to 10";
-    Pile* testpile1 = createPile(COLUMN);
-    Pile* testpile2 = createPile(COLUMN);
-
-    Card* TWOS = createCard('2', 'S');
-    Card* THREEH = createCard('3', 'H');
-    Card* TS = createCard('T', 'S');
-    Card* NH = createCard('9', 'H');
-
-    testpile1->head = NH;
-    testpile2->head = TS;
-
-    testpile1->tail = THREEH;
-    testpile2->tail = TWOS;
-
-    bool valid = validateMoveToColumn(testpile2->tail->rank, &testpile1, &testMessage);
-    printf("\nTesting validation of moving 9 to 10: \nExpected : 0 (false = 0), Actual: %d\n\n", valid);
-
-}
-
-
-
-
