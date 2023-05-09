@@ -20,10 +20,6 @@
 #include "Shuffle.h"
 #include "Utilities.h"
 #include "Pile.h"
-#include "TestHeaders/testPrintMessage.h"
-#include "TestHeaders/moveTests.h"
-#include "TestHeaders/LinkedListTests.h"
-
 #include "main.h"
 
 #endif //YUKONSOLITAIRE_ALLHEADERS_H
