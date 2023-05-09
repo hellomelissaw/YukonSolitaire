@@ -30,7 +30,8 @@ Pile** setFoundationLists() {
 /// \param head pointer to the head of the deck to load onto the board
 /// \return pointer to the array of Pile pointers
 Pile** setColumnLists (Card* head) {
-    Card** ptrHead = &head;
+    Card* tempHead = head;
+    Card** ptrHead = &tempHead;
     Pile** columns = malloc(7 * sizeof(Pile*));
     int hiddenCounter = 1;
     for (int i = 0 ; i < COLUMN_COUNT ; i++)
