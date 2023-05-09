@@ -14,7 +14,7 @@ int main();
 bool validInputFromTailToFoundation(char* in);
 bool validInputFromTailToTail(char* in);
 bool validInputFromColumnPileToTail(char* in);
-void printUserConsole(char** ptrCurrentMsg);
+void printUserConsole(char **ptrCurrentMsg, char **input);
 bool validMoveSyntax(char* input, enum moveType *ptr);
 
 #endif //YUKONSOLITAIRE_MAIN_H

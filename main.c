@@ -30,6 +30,7 @@ int main() {
     enum phase phase = SETUP;
     bool isHidden = true;
 
+
     while (1) {
         if (head == NULL) {
             printEmptyBoard();
@@ -42,7 +43,7 @@ int main() {
 
         }
 
-        printUserConsole(ptrMessage);
+        printUserConsole(ptrMessage, &input);
 
 
         //char input[9];
@@ -289,12 +290,10 @@ int main() {
     } // end while loop
 }
 
-void printUserConsole(char** ptrCurrentMsg) {
-    printf("LAST command; \n"); //add func
-    printf("Message: %s\n", *ptrCurrentMsg); //add func
-    //printf("Message: \n"); //add func
-    printf("INPUT >");
-
+void printUserConsole(char** ptrCurrentMsg, char** input) {
+    printf("LAST command: %s\n", *input);
+    printf("Message: %s\n", *ptrCurrentMsg);
+    printf("INPUT > ");
 }
 
 /*
