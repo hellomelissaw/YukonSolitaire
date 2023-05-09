@@ -7,17 +7,9 @@
 
 // Hey girl hey
 int main() {
-    //testInsertAtHeadInsertAtTail();
-    //testInsertAtTail(140);
-    //testMoving10To9();
-    //printDeck(createDeck("defaultDeckOfFile.txt"));
-    //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
-    //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\YukonSolitaire\\defaultDeckOfFile.txt");
     Card* head = NULL;
     Pile **columnsFilled = NULL;
     Pile **foundationsBlank = NULL;
-    //Card *head = createDeck("C:\\Users\\Bruger\\Desktop\\DTU\\Machine Oriented programing\\YukonSolitaire\\defaultDeckOfFile.txt");
-    //Pile **foundationsBlank = setTestFoundations();
     char *message = "Welcome to Yukon Solitaire. You are in the STARTUP phase. Type CMD to get a list of commands";
     char **ptrMessage = &message;
     char* input = malloc(sizeof(char) * 100);
@@ -296,6 +288,7 @@ int main() {
 }
 
 void printUserConsole(char** ptrCurrentMsg, char** input) {
+    (*input)[strcspn((*input), "\n")] = '\0';
     printf("LAST command: %s\n", *input);
     printf("Message: %s\n", *ptrCurrentMsg);
     printf("INPUT > ");
