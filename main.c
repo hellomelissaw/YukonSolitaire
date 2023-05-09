@@ -276,6 +276,11 @@ int main() {
                         undoLastMove(ptrMoveList, ptrMessage);
                         break;
 
+                    case 'S' :
+                        saveDeck(columnsFilled, foundationsBlank);
+                        setMessage(ptrMessage, "Game saved.");
+                        break;
+
                     default:
                         setMessage(ptrMessage, "Unknown command.");
 
