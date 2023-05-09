@@ -29,8 +29,8 @@ int main() {
 
     //move2CToFoundationTest();
 
-    // testMove2CAnd3CToColumnWithAS();
-
+    //testMove2CAnd3CToColumnWithAS();
+    testValidationMovingNineToTen();
 
     //////////////////////
     // SHUFFLING DECK

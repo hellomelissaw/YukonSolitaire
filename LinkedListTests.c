@@ -118,7 +118,26 @@ void testMove2CAnd3CToColumnWithAS(){
 
 }
 
+void testValidationMovingNineToTen() {
+    char* testMessage = "Testing moving 9 to 10";
+    Pile* testpile1 = createPile(COLUMN);
+    Pile* testpile2 = createPile(COLUMN);
 
+    Card* TWOS = createCard('2', 'S');
+    Card* THREEH = createCard('3', 'H');
+    Card* TS = createCard('T', 'S');
+    Card* NH = createCard('9', 'H');
+
+    testpile1->head = THREEH;
+    testpile2->head = TWOS;
+
+    testpile1->tail = NH;
+    testpile2->tail = TS;
+
+    bool valid = validateMoveToColumn(testpile1->tail->rank, &testpile2, &testMessage);
+    printf("\nTesting validation of moving 9 to 10: \nExpected : 0 (false = 0), Actual: %d\n\n", valid);
+
+}
 
 
 
