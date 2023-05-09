@@ -1,5 +1,4 @@
-//#include "Shuffle.c"
-#include <stdio.h>
+/include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -37,8 +36,6 @@ int main() {
 
         printUserConsole(ptrMessage, &input);
 
-
-        //char input[9];
         char str[100];
         char result[100];
         int length;
@@ -46,10 +43,8 @@ int main() {
         enum moveType *ptrMt = &mt;
 
         fgets(input, 100, stdin);
-        //scanf("%s", input);
         sscanf(input,  "%s %s", command, option);
-       // printf("Command is: %s\n", command);
-       // printf("Option is: %s\n", option);
+
         fflush(stdin);
 
         switch (phase) {
@@ -261,8 +256,7 @@ int main() {
                         } else {
                             setMessage(ptrMessage, "Invalid syntax.");
                         }
-                        //  } else { setMessage(ptrMessage, "Please load a deck first with command LD."); }
-                        break;
+                       break;
 
                     case 'U' :
                         undoLastMove(ptrMoveList, ptrMessage);
@@ -293,41 +287,3 @@ void printUserConsole(char** ptrCurrentMsg, char** input) {
     printf("Message: %s\n", *ptrCurrentMsg);
     printf("INPUT > ");
 }
-
-/*
-
-    //createDeck("unshuffledCards.txt");
-    //printDeck(shuffleInterweave(13, createDeck("unshuffledCards.txt")));
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // TEST CREATION OF COLUMNS (need to get headers to work before it works again)
-    ///////////////////////////////////////////////////////////////////////////////
-
-    Card* testDeck = createDeck("unshuffledcards.txt");
-    Pile** firstColumn = setColumnLists(testDeck);
-    Pile** foundations = setFoundationLists();
-    printBoard(firstColumn,foundations);
-
-    //////////////////////
-    // TEST MOVING CARDS
-    //////////////////////
-    moveFirstCardToFoundatationTest();
-
-    // move2CToFoundatationTest();
-
-    // move3CToFoundatationTest();
-
-    // testMove2Cn3CToColumnWithAS();
-
-    // testAccessingNextCard();
-
-    ///////////////////
-    // TEST SHUFFLE
-    ///////////////////
-
-    Card* testDeck = createDeck("unshuffledCards.txt");
-    //shuffleRandom(testDeck);
-    shuffleInterweave(45, testDeck);
-    printDeck(testDeck);*
-}
-*/
