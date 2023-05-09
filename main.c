@@ -1,4 +1,4 @@
-/include <stdio.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -51,6 +51,9 @@ int main() {
             case SETUP: {
                 switch (command[0]) {
                     case 'Q':
+                        if(command[1] == '\0'){
+                            setMessage(ptrMessage, "Already in SETUP phase.");
+                        }
                         if (command[1] == 'Q') {
                             free(input);
                             free(command);
@@ -79,8 +82,6 @@ int main() {
 
                         } else {
 
-                            //strcpy(result, str + 1);
-                            //printf("Result: %s\n", result);
                             head = load_SpecificFileIntoDeck(option, ptrMessage);
                             chosenFile = option;
                         }
@@ -138,6 +139,30 @@ int main() {
                 switch (command[0]) {
                     case 'Q':
                         if (command[1] == 'Q') {
+                            if(head != NULL){
+                                for(int i = 0 ; i < FOUNDATION_COUNT ; i++){
+
+                                    while(foundationsBlank[i]->tail != NULL){
+                                        Card* temp = foundationsBlank[i]->head->next;
+                                        free(foundationsBlank[i]->head);
+                                        foundationsBlank[i]->head = temp;
+
+                                    }
+                                }
+
+                                for(int j = 0 ; j < FOUNDATION_COUNT ; j++){
+
+                                    while(columnsFilled[j]->tail != NULL){
+                                        Card* temp = columnsFilled[j]->head->next;
+                                        free(columnsFilled[j]->head);
+                                        columnsFilled[j]->head = temp;
+
+                                    }
+                                }
+                            }
+                            free(input);
+                            free(command);
+                            free(option);
                             exit(0);
                         } else {
                             if(chosenFile == NULL)
