@@ -1,5 +1,5 @@
 //
-// Created by Admin on 28/04/2023.
+// Created by Sabirin on 28/04/2023.
 //
 #include "Card.h"
 #ifndef YUKONSOLITAIRE_LINKEDLISTMANIPULATION_H

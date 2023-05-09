@@ -20,8 +20,6 @@
 #include "Shuffle.h"
 #include "Utilities.h"
 #include "Pile.h"
-#include "TestHeaders/LinkedListTests.h"
-#include "TestHeaders/GameMoveTests.h"
 #include "main.h"
 
 #endif //YUKONSOLITAIRE_ALLHEADERS_H
