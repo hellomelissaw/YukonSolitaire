@@ -139,31 +139,11 @@ int main() {
                 switch (command[0]) {
                     case 'Q':
                         if (command[1] == 'Q') {
-                            if(head != NULL){
-                                for(int i = 0 ; i < FOUNDATION_COUNT ; i++){
-
-                                    while(foundationsBlank[i]->tail != NULL){
-                                        Card* temp = foundationsBlank[i]->head->next;
-                                        free(foundationsBlank[i]->head);
-                                        foundationsBlank[i]->head = temp;
-
-                                    }
-                                }
-
-                                for(int j = 0 ; j < FOUNDATION_COUNT ; j++){
-
-                                    while(columnsFilled[j]->tail != NULL){
-                                        Card* temp = columnsFilled[j]->head->next;
-                                        free(columnsFilled[j]->head);
-                                        columnsFilled[j]->head = temp;
-
-                                    }
-                                }
-                            }
                             free(input);
                             free(command);
                             free(option);
                             exit(0);
+
                         } else {
                             if(chosenFile == NULL)
                                 head = load_DefaultDeckLDCommand(NULL);
