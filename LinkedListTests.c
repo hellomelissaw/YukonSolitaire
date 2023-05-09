@@ -85,7 +85,7 @@ void testValidationMoving2To3() {
     testpile2->tail = TWOS;
 
     bool valid = validateMoveToColumn(testpile2->tail->rank, &testpile1, &testMessage);
-    printf("\nTesting validation of moving 9 to 10: \nExpected : 0 (false = 0), Actual: %d\n\n", valid);
+    printf("\nTesting validation of moving 2 to 3: \nExpected : 0 (false = 0), Actual: %d\n\n", valid);
 
 }
 
