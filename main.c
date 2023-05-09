@@ -30,7 +30,7 @@ int main() {
     //move2CToFoundationTest();
 
     //testMove2CAnd3CToColumnWithAS();
-    testValidationMovingNineToTen();
+     testValidationMoving2To3();
 
     //////////////////////
     // SHUFFLING DECK
