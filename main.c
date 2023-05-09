@@ -31,7 +31,8 @@ int main() {
     //move2CToFoundationTest();
 
     //testMove2CAnd3CToColumnWithAS();
-     testValidationMoving2To3();
+
+    //testValidationMoving2To3();
 
     //////////////////////
     // SHUFFLING DECK
@@ -48,5 +49,10 @@ int main() {
     //testValidInputFromTailToFoundation();
     //testValidInputFromTailToTail();
     //testValidInputFromColumnPileToTail();
+
+    /////////////////////////////////
+    // LOAD DECK.
+    /////////////////////////////////
+    //loadDeckTest();
 
 }
